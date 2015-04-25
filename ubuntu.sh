@@ -32,6 +32,7 @@ pre
 firewall
 disablenet
 disablemnt
+disablemod
 systemdconf
 journalctl
 timesyncd
@@ -50,7 +51,6 @@ password
 cron
 ctrlaltdel
 auditd
-kernelmodule
 aide
 rhosts
 users
