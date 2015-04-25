@@ -11,7 +11,7 @@
 FW_ADMIN="192.168.1.71"
 SSH_GRPS="sudo"
 FW_POLICY="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/net/firewall"
-FW_SERVICE="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/hardening/config/firewall.service"
+FW_SERVICE="https://raw.githubusercontent.com/konstruktoid/hardening/master/config/firewall.service"
 SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf"
 AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules"
 VERBOSE="Y"
