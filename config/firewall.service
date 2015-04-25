@@ -1,0 +1,10 @@
+[Unit]
+Description=Skeleton firewall
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/firewall
+
+[Install]
+WantedBy=multi-user.target
