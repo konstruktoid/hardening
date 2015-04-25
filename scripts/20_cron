@@ -1,0 +1,17 @@
+function cron {
+  echo "[$i] Cron and at"
+
+  $SUDO rm /etc/cron.deny 2> /dev/null
+  $SUDO rm /etc/at.deny 2> /dev/null
+
+  $SUDO bash -c "echo root > /etc/cron.allow"
+  $SUDO bash -c "echo root > /etc/at.allow"
+
+  $SUDO chown root:root /etc/cron*
+  $SUDO chmod og-rwx /etc/cron*
+
+  $SUDO chown root:root /etc/at*
+  $SUDO chmod og-rwx /etc/at*
+
+  ((i++))
+}
