@@ -1,7 +1,0 @@
-function adduser {
-	echo "[$i] Adduser / Useradd"
-	$SUDO sed -i 's/DSHELL=.*/DSHELL=\/bin\/false/' /etc/adduser.conf
-	$SUDO sed -i 's/SHELL=.*/SHELL=\/bin\/false/' /etc/default/useradd
-	$SUDO sed -i 's/^# INACTIVE=.*/INACTIVE=35/' /etc/default/useradd
-	((i++))
-}

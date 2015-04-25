@@ -1,6 +1,0 @@
-function cron {
-	echo "[$i] Cron and at"
-	$SUDO bash -c "echo root > /etc/cron.allow"
-	$SUDO bash -c "echo root > /etc/at.allow"
-	((i++))
-}

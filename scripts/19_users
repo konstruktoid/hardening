@@ -1,8 +1,0 @@
-function users {
-	echo "[$i] Remove users"
-	for users in games gnats irc news uucp;
-	do
-        	sudo userdel -r $users 2> /dev/null
-	done
-	((i++))
-}
