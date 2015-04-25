@@ -1,0 +1,16 @@
+function disablenet {
+  echo "[$i] Disable misc network protocols"
+
+  CNF="/etc/modprobe.d/disablenet.conf"
+  NET="dccp sctp rds tipc"
+  for disable in $NET;
+    do
+      if ! grep -q $disable $CNF 2> /dev/null;
+        then
+          $SUDO bash -c "echo install $disable /bin/true >> $CNF"
+      fi
+  done
+
+  ((i++))
+}
+
