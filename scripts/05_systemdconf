@@ -1,0 +1,12 @@
+function systemdconf {
+  echo "[$i] systemd system.conf"
+
+  $SUDO sed -i 's/^#DumpCore=yes/DumpCore=no/' /etc/systemd/system.conf
+  $SUDO sed -i 's/^#CrashShell=no/CrashShell=no/' /etc/systemd/system.conf
+  $SUDO sed -i 's/^#DefaultLimitCORE=/DefaultLimitCORE=0/' /etc/systemd/system.conf
+  $SUDO sed -i 's/^#DefaultLimitNOFILE=/DefaultLimitNOFILE=100/' /etc/systemd/system.conf
+  $SUDO sed -i 's/^#DefaultLimitNPROC=/DefaultLimitNPROC=100/' /etc/systemd/system.conf
+  $SUDO systemctl daemon-reload
+
+  ((i++))
+}
