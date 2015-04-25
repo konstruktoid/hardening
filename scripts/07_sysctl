@@ -1,0 +1,6 @@
+function sysctl {
+	echo "[$i] /etc/sysctl.conf"
+	$SUDO bash -c "curl -s $SYSCTL_CONF > /etc/sysctl.conf"
+	$SUDO service procps start
+	((i++))
+}

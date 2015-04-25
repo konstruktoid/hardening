@@ -1,0 +1,7 @@
+function limitsconf {
+	echo "[$i] /etc/security/limits.conf"
+	$SUDO sed -i 's/^# End of file*//' /etc/security/limits.conf
+	$SUDO bash -c "echo * hard maxlogins 10 >> /etc/security/limits.conf"
+	$SUDO bash -c "echo * hard core 0$'\n'* soft nproc 100$'\n'* hard nproc 150$'\n\n'# End of file >> /etc/security/limits.conf"
+	((i++))
+}

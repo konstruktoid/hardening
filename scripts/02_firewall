@@ -1,0 +1,16 @@
+function firewall {
+	echo "!! FIX CAT !!"
+	echo "[$i] Installing firewall."
+	$SUDO bash -c "cat $FW_SERVICE > /lib/systemd/system/firewall.service"
+	$SUDO bash -c "curl -s $FW_POLICY > /etc/init.d/firewall"
+	$SUDO sed -i "s/ADMIN=\"127.0.0.1\"/ADMIN=\"$FW_ADMIN\"/" /etc/init.d/firewall
+	$SUDO chmod u+x /etc/init.d/firewall
+	$SUDO systemctl reenable firewall.service
+	$SUDO systemctl start firewall.service
+	
+	if [[ $VERBOSE == "Y" ]];
+                then
+			$SUDO systemctl status firewall.service
+	fi
+	((i++))
+}

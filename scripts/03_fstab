@@ -1,0 +1,8 @@
+function fstab {
+	echo "[$i] /etc/fstab"
+	$SUDO bash -c "echo tmpfs /tmp tmpfs defaults,nosuid,nodev,mode=1777,size=100M 0 0 >> /etc/fstab"
+	$SUDO bash -c "echo /tmp /var/tmp tmpfs defaults,nosuid,nodev,bind,mode=1777,size=100M 0 0 >> /etc/fstab"
+	$SUDO sed -i '/floppy/d' /etc/fstab
+	$SUDO mount -a
+	((i++))
+}

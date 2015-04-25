@@ -1,0 +1,54 @@
+function pre {
+	RINPUT=`openssl rand -hex 3`
+
+	if [[ $VERBOSE == "Y" ]];
+        	then
+                	APTFLAGS="--assume-yes"
+        	else
+                	APTFLAGS="--quiet=2 --assume-yes"
+	fi
+
+	APT="aptitude $APTFLAGS"
+
+	if [[ $CHANGEME == "" ]];
+        	then
+                	echo "Please read the code".
+                	echo
+                	exit
+	fi
+
+	if ! [[ `id | grep sudo` || `id -u` = '0' ]];
+        	then
+                	echo "Not root and not in the sudo group. Exiting."
+                	echo
+                	exit
+	fi
+
+	if [[ `id -u` = '0' ]];
+        	then
+                	SUDO=''
+        	else
+                	SUDO='sudo'
+	fi
+
+	if ! [[ `lsb_release -i |grep 'Ubuntu'` ]];
+        	then
+                	echo "Ubuntu only. Exiting."
+                	echo
+                	exit
+	fi
+
+	echo -n "If you understand what this script will do, please write $RINPUT here: "
+	read INPUT
+
+	if ! [[ "$INPUT" == "$RINPUT" ]];
+        	then
+                	echo "Turing test failed. Exiting."
+                	echo
+                	exit
+        	else
+                	echo "Let it begin."
+	fi
+
+	i="0"
+}

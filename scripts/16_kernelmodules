@@ -1,0 +1,9 @@
+function kernelmodule {
+	echo "[$i] Blacklisting kernel modules"
+	$SUDO bash -c "echo >> /etc/modprobe.d/blacklist.conf"
+	for mod in dccp sctp rds tipc net-pf-31 bluetooth usb-storage;
+	do
+        	$SUDO bash -c "echo install $mod /bin/false >> /etc/modprobe.d/blacklist.conf"
+	done
+	((i++))
+}

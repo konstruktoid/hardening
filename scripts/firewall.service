@@ -1,0 +1,10 @@
+[Unit]
+Description=Skeleton firewall
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/init.d/firewall
+
+[Install]
+WantedBy=multi-user.target
