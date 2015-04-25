@@ -1,0 +1,8 @@
+function ctrlaltdel {
+  echo "[$i] Ctrl-alt-delete"
+
+  $SUDO systemctl mask ctrl-alt-del.target
+  $SUDO systemctl status ctrl-alt-del.target
+
+  ((i++))
+}
