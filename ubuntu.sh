@@ -8,13 +8,13 @@
 # https://help.ubuntu.com/community/StricterDefaults
 #
 
-FW_ADMIN="192.168.1.71"
+FW_ADMIN="127.0.0.1"
 SSH_GRPS="sudo"
 SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf"
 AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules"
 NTPSERVERPOOL="0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org"
-VERBOSE="Y"
-CHANGEME="ad" # Add something just to verify that you actually glanced the code
+VERBOSE="N"
+CHANGEME="" # Add something just to verify that you actually glanced the code
 
 clear
 
