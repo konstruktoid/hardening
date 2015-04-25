@@ -5,7 +5,7 @@ function firewall {
   $SUDO sed -i "s/ADMIN=\"127.0.0.1\"/ADMIN=\"$FW_ADMIN\"/" /sbin/firewall
   $SUDO chmod u+x /sbin/firewall
   $SUDO systemctl reenable firewall.service
-  $SUDO systemctl start firewall.service
+  $SUDO systemctl restart firewall.service
 
   if [[ $VERBOSE == "Y" ]];
     then
