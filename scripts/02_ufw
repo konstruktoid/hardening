@@ -1,0 +1,15 @@
+function firewall {
+  echo "[$i] ufw."
+
+  $SUDO ufw --force enable
+  $SUDO ufw allow log from $FW_ADMIN port 22
+
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status ufw.service
+      $SUDO ufw status verbose
+      echo
+  fi
+
+  ((i++))
+}
