@@ -54,7 +54,7 @@ auditd
 aide
 rhosts
 users
-aptget_clean
+aptgetclean
 suid
 aide_post
 checkreboot
