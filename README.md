@@ -25,8 +25,8 @@ Change the configuration options and last but not least run the script.
 ##Configuration options
 FW_ADMIN="192.168.2.100" *The IP address that will be able to connect with SSH.*  
 SSH_GRPS="sudo" *Which group the users have to be member of in order to acess via SSH.*  
-FW_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/net/firewall.conf" *Skeleton firewall configuration*  
-FW_POLICY="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/net/firewall" *Skeleton firewall configuration*  
+FW_SERVICE="https://raw.githubusercontent.com/konstruktoid/hardening/master/config/firewall.service" *Skeleton firewall unit*  
+FW_POLICY="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/net/firewall" *Skeleton firewall*  
 SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf " *Stricter sysctl settings*  
 AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules" *Auditd rules*    
 VERBOSE="N" *If you want all the details or not*     
