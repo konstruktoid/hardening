@@ -5,8 +5,9 @@ Systemd required.
 
 ## Howto
 Start the installation of the server.    
-Pick language, keyboard layout, timezone and so on as you usually would.
-Partition the system:    
+Pick language, keyboard layout, timezone and so on as you usually would.  
+
+### Partition the system  
 /    
 /boot (rw)    
 /home (rw,nosuid,nodev)    
