@@ -57,6 +57,7 @@ users
 aptget_clean
 suid
 aide_post
+aide_timer
 checkreboot
 
 echo
