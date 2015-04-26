@@ -10,5 +10,11 @@ function sshdconfig {
   $SUDO bash -c "echo Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc >> /etc/ssh/sshd_config"
   $SUDO systemctl restart sshd.service
 
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status sshd.service
+    echo
+  fi
+
   ((i++))
 }
