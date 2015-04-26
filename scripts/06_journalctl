@@ -5,5 +5,11 @@ function journalctl {
   $SUDO sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
   $SUDO systemctl restart systemd-journald
 
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status systemd-journald
+    echo
+  fi
+
   ((i++))
 }
