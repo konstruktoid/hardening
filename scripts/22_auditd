@@ -7,5 +7,11 @@ function auditd {
   $SUDO update-grub 2> /dev/null
   $SUDO systemctl restart auditd.service
 
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status auditd.service
+    echo
+  fi
+
   ((i++))
 }
