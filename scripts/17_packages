@@ -10,4 +10,6 @@ function packages {
   $SUDO bash -c "echo postfix postfix/mailname string `hostname -f` | debconf-set-selections"
 
   $SUDO $APT install aide-common apparmor-profiles auditd haveged libpam-cracklib libpam-tmpdir openssh-server postfix $VM
+
+  ((i++))
 }
