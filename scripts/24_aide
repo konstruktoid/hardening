@@ -20,6 +20,7 @@ function aide_timer {
 
   $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /lib/systemd/system/aidecheck.service
   $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.timer > /lib/systemd/system/aidecheck.timer
+  $SUDO chmod 0644 /lib/systemd/system/aidecheck.*
   $SUDO systemctl enable aidecheck.timer
   $SUDO systemctl start aidecheck.timer
   $SUDO systemctl daemon-reload
