@@ -8,7 +8,7 @@ function fstab {
 
   $SUDO sed -i '/[[:space:]]\/tmp[[:space:]]/d' /etc/fstab
   $SUDO sed -i '/^\/tmp/d' /etc/fstab
-  $SUDO bash -c "echo tmpfs /tmp tmpfs defaults,nosuid,nodev,noexec,mode=1777,size=100M 0 0 >> /etc/fstab"
+  $SUDO bash -c "echo tmpfs /tmp tmpfs defaults,nosuid,nodev,mode=1777,size=100M 0 0 >> /etc/fstab"
   $SUDO bash -c "echo /tmp /var/tmp none bind 0 0 >> /etc/fstab"
   $SUDO sed -i '/floppy/d' /etc/fstab
 
