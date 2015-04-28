@@ -1,5 +1,5 @@
 function firewall {
-  echo "[$i] ufw."
+  echo "[$i] Enable ufw"
 
   $SUDO sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
   $SUDO ufw --force enable
