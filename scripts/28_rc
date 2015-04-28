@@ -1,5 +1,5 @@
 function rc {
-  echo "[$i] rc umask"
+  echo "[$i] /etc/init.d/rc"
 
   $SUDO sed -i 's/umask 022/umask 027/g' /etc/init.d/rc
 

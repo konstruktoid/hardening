@@ -1,5 +1,5 @@
 function hosts {
-  echo "[$i] /etc/hosts.*"
+  echo "[$i] /etc/hosts.allow and /etc/hosts.deny"
 
   $SUDO bash -c "echo sshd : ALL : ALLOW$'\n'ALL: LOCAL, 127.0.0.1 > /etc/hosts.allow"
   $SUDO bash -c "echo ALL: PARANOID > /etc/hosts.deny"

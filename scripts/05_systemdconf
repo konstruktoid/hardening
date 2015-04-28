@@ -1,5 +1,5 @@
 function systemdconf {
-  echo "[$i] systemd system.conf"
+  echo "[$i] Systemd/system.conf and Systemd/user.conf"
 
   $SUDO sed -i 's/^#DumpCore=yes/DumpCore=no/' /etc/systemd/system.conf
   $SUDO sed -i 's/^#CrashShell=no/CrashShell=no/' /etc/systemd/system.conf
@@ -15,3 +15,4 @@ function systemdconf {
 
   ((i++))
 }
+

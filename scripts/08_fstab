@@ -1,5 +1,5 @@
 function fstab {
-  echo "[$i] /etc/fstab"
+  echo "[$i] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
   for t in `mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}'`;
     do

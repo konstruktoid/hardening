@@ -1,5 +1,5 @@
 function journalctl {
-  echo "[$i] journalctl"
+  echo "[$i] Systemd/journald.conf"
 
   $SUDO sed -i 's/^#Storage=auto/Storage=persistent/' /etc/systemd/journald.conf
   $SUDO sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf

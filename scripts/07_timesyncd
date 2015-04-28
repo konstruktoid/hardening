@@ -1,5 +1,5 @@
 function timesyncd {
-  echo "[$i] timesyncd"
+  echo "[$i] Systemd/journald.conf"
 
   LATENCY="50"
   SERVERS="4"

@@ -1,5 +1,5 @@
 function prelink {
-  echo "[$i] /etc/fstab"
+  echo "[$i] Prelink"
 
   if dpkg -l | grep prelink 1> /dev/null;
     then

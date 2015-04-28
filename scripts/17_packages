@@ -1,5 +1,5 @@
 function packages {
-  echo "[$i] Installing base packages."
+  echo "[$i] Installing base packages"
 
   if [[ `$SUDO dmidecode -q --type system | grep -i vmware` ]];
     then

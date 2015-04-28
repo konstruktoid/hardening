@@ -1,5 +1,5 @@
 function rootaccess {
-  echo "[$i] Root access"
+  echo "[$i] /etc/hosts.allow and /etc/hosts.deny"
 
   $SUDO sed -i 's/^#+ : root : 127.0.0.1/+ : root : 127.0.0.1/' /etc/security/access.conf
   $SUDO bash -c "echo console > /etc/securetty"

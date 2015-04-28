@@ -1,11 +1,11 @@
 function aptget {
-  echo "[$i] Updating the package index files from their sources."
+  echo "[$i] Updating the package index files from their sources"
 
   $SUDO $APT update
 
   ((i++))
 
-  echo "[$i] Upgrading installed packages."
+  echo "[$i] Upgrading installed packages"
 
   $SUDO $APT upgrade
 
@@ -13,7 +13,7 @@ function aptget {
 }
 
 function aptget_clean {
-  echo "[$i] Cleaning."
+  echo "[$i] Removing unused packages"
 
   $SUDO $APT clean
   $SUDO $APT autoclean
