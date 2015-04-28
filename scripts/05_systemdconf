@@ -6,6 +6,11 @@ function systemdconf {
   $SUDO sed -i 's/^#DefaultLimitCORE=/DefaultLimitCORE=0/' /etc/systemd/system.conf
   $SUDO sed -i 's/^#DefaultLimitNOFILE=/DefaultLimitNOFILE=100/' /etc/systemd/system.conf
   $SUDO sed -i 's/^#DefaultLimitNPROC=/DefaultLimitNPROC=100/' /etc/systemd/system.conf
+
+  $SUDO sed -i 's/^#DefaultLimitCORE=/DefaultLimitCORE=0/' /etc/systemd/user.conf
+  $SUDO sed -i 's/^#DefaultLimitNOFILE=/DefaultLimitNOFILE=100/' /etc/systemd/user.conf
+  $SUDO sed -i 's/^#DefaultLimitNPROC=/DefaultLimitNPROC=100/' /etc/systemd/user.conf
+
   $SUDO systemctl daemon-reload
 
   ((i++))
