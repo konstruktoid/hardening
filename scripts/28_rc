@@ -1,0 +1,8 @@
+function rc {
+  echo "[$i] rc umask"
+
+  $SUDO sed -i 's/umask 022/umask 027/g' /etc/init.d/rc
+
+  ((i++))
+
+}
