@@ -18,10 +18,10 @@ function aide_post {
 function aide_timer {
   echo "[$i] Enable daily Aide check"
 
-  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /lib/systemd/system/aidecheck.service
-  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.timer > /lib/systemd/system/aidecheck.timer
-  $SUDO chmod 0644 /lib/systemd/system/aidecheck.*
-  $SUDO systemctl enable aidecheck.timer
+  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /etc/systemd/system/aidecheck.service
+  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.timer > /etc/systemd/system/aidecheck.timer
+  $SUDO chmod 0644 /etc/systemd/system/aidecheck.*
+  $SUDO systemctl reenable aidecheck.timer
   $SUDO systemctl start aidecheck.timer
   $SUDO systemctl daemon-reload
 
