@@ -56,6 +56,8 @@ rhosts
 users
 aptget_clean
 suid
+rc
+aa_enforce
 aide_post
 aide_timer
 checkreboot
