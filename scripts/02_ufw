@@ -3,7 +3,7 @@ function firewall {
 
   $SUDO sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
   $SUDO ufw --force enable
-  $SUDO ufw allow log from $FW_ADMIN port 22
+  $SUDO ufw allow log from $FW_ADMIN to any port 22 proto tcp
 
   if [[ $VERBOSE == "Y" ]];
     then
