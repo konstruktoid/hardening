@@ -13,5 +13,14 @@ function cron {
   $SUDO chown root:root /etc/at*
   $SUDO chmod og-rwx /etc/at*
 
+  $SUDO systemctl mask atd.service
+  $SUDO systemctl daemon-reload
+  
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status atd.service
+    echo
+  fi
+  
   ((i++))
 }
