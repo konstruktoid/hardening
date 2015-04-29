@@ -1,5 +1,5 @@
 # Hardening Ubuntu. Systemd edition.  
-A quick way to harden a Ubuntu server.   
+A quick way to make a Ubuntu server a bit more secure.   
 Tested on Ubuntu 15.04.  
 Systemd required.  
 
@@ -18,13 +18,15 @@ swap
 
 Note that ```/tmp``` and ```/var/tmp``` will be added automatically by the script.
 
+### Login, set a Grub2 password, configure and run ubuntu.sh
 Do not add any packages.    
-Log in.     
+Log in.    
+Select a Grub2 password (using ```grub-mkpasswd-pbkdf2```).  
 Download the script using ```git clone https://github.com/konstruktoid/hardening.git```.   
 Change the configuration options and last but not least run the script.    
 
 ##Configuration options
-```FW_ADMIN="192.168.2.100"```  The IP address that will be able to connect with SSH.  
+```FW_ADMIN="127.0.0.1"```  The IP address that will be able to connect with SSH.  
 ```SSH_GRPS="sudo"``` Which group the users have to be member of in order to acess via SSH.  
 ```SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf"``` Stricter sysctl settings  
 ```AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules"``` Auditd rules  
