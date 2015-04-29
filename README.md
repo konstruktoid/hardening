@@ -1,5 +1,5 @@
 # Hardening Ubuntu. Systemd edition.  
-This is pre-alpha work-in-progress, but will be a simple way to harden a Ubuntu server.   
+A quick way to harden a Ubuntu server.   
 Tested on Ubuntu 15.04.  
 Systemd required.  
 
@@ -16,11 +16,11 @@ swap
 /var/log (rw,nosuid,nodev,noexec)    
 /var/log/audit (rw,nosuid,nodev,noexec)   
 
-Note that /tmp and /var/tmp will be added automatically by the script.
+Note that ```/tmp``` and ```/var/tmp``` will be added automatically by the script.
 
 Do not add any packages.    
 Log in.     
-Download the script.     
+Download the script using ```git clone https://github.com/konstruktoid/hardening.git```.   
 Change the configuration options and last but not least run the script.    
 
 ##Configuration options
