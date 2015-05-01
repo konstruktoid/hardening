@@ -60,5 +60,11 @@ function timesyncd {
       echo "Configuration saved to $TMPCONF."
   fi
 
+  if [[ $VERBOSE == "Y" ]];
+    then
+      $SUDO systemctl status systemd-timesyncd
+      echo
+  fi
+  
   ((i++))
 }
