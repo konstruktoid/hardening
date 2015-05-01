@@ -64,6 +64,7 @@ Change the configuration options and last but not least run the script.
 ```aptget_clean``` Remove unused packages  
 ```suid``` Remove suid bits 
 ```rc``` /etc/init.d/rc  
+```path``` Modify paths
 ```aa_enforce``` Enforce apparmor profiles  
 ```aide_post``` Create Aide db  
 ```aide_timer``` Enable daily Aide check  
