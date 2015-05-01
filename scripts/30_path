@@ -1,0 +1,11 @@
+function path {
+  echo "[$i] Modifying paths"
+
+  $SUDO sed -i 's/PATH=.*/PATH=\"\/usr\/local\/bin:\/usr\/bin:\/bin"/' /etc/environment
+  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/initpath.sh > /etc/profile.d/initpath.sh
+
+  $SUDO chown root:root /etc/profile.d/initpath.sh
+  $SUDO chmod 0644 /etc/profile.d/initpath.sh
+
+  ((i++))
+}
