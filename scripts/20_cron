@@ -14,6 +14,7 @@ function cron {
   $SUDO chmod og-rwx /etc/at*
 
   $SUDO systemctl mask atd.service
+  $SUDO systemctl stop atd.service
   $SUDO systemctl daemon-reload
   
   if [[ $VERBOSE == "Y" ]];
