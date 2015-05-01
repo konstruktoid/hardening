@@ -52,7 +52,7 @@ Change the configuration options and last but not least run the script.
 ```limitsconf``` /etc/security/limits.conf  
 ```adduser``` /etc/adduser.conf and /etc/default/useradd  
 ```rootaccess``` /etc/security/access.conf and /etc/securetty  
-```packages``` Installing base packages
+```packages``` Installing base packages   
 ```sshdconfig``` /etc/ssh/sshd_config  
 ```password``` /etc/pam.d/common-password and /etc/pam.d/common-auth  
 ```cron``` /etc/cron and /etc/at  
