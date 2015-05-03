@@ -62,7 +62,7 @@ Change the configuration options and last but not least run the script.
 ```rhosts``` .rhosts  
 ```users``` Remove users  
 ```aptget_clean``` Remove unused packages  
-```suid``` Remove suid bits 
+```suid``` Remove suid bits  
 ```rc``` /etc/init.d/rc  
 ```path``` Modify paths  
 ```aa_enforce``` Enforce apparmor profiles  
