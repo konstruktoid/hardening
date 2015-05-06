@@ -3,7 +3,7 @@ function users {
 
   for users in games gnats irc list news uucp;
     do
-      sudo userdel -r $users 2> /dev/null
+      $SUDO userdel -r $users 2> /dev/null
   done
 
   ((i++))
