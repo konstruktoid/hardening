@@ -40,6 +40,7 @@ Change the configuration options and last but not least run the script, ```sudo 
 ```disablenet``` Disable misc network protocols  
 ```disablemnt``` Disable misc file systems  
 ```disablemod``` Disable misc kernel modules  
+```resolvedconf``` Systemd/resolved.conf  
 ```systemdconf``` Systemd/system.conf and Systemd/user.conf  
 ```journalctl``` Systemd/journald.conf  
 ```timesyncd``` Systemd/timesyncd.conf  
@@ -48,6 +49,7 @@ Change the configuration options and last but not least run the script, ```sudo 
 ```aptget``` Updating the package index and upgrading installed packages  
 ```hosts``` /etc/hosts.allow and /etc/hosts.deny  
 ```logindefs``` /etc/login.defs  
+```logindconf``` Systemd/logind.conf   
 ```sysctl``` /etc/sysctl.conf  
 ```limitsconf``` /etc/security/limits.conf  
 ```adduser``` /etc/adduser.conf and /etc/default/useradd  
