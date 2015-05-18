@@ -1,6 +1,6 @@
 # Hardening Ubuntu. Systemd edition.  
 A quick way to make a Ubuntu server a bit more secure.   
-Tested on Ubuntu 15.04.  
+Tested on ```Ubuntu 15.04``` and ```15.10 Ubuntu Wily Werewolf (development branch)```   
 Systemd required.  
 
 ## Howto
@@ -12,7 +12,7 @@ Pick language, keyboard layout, timezone and so on as you usually would.
 /boot (rw)    
 /home (rw,nosuid,nodev)    
 swap    
-/var     
+/var      
 /var/log (rw,nosuid,nodev,noexec)    
 /var/log/audit (rw,nosuid,nodev,noexec)   
 
@@ -23,7 +23,7 @@ Do not add any packages.
 Log in.    
 Select a Grub2 password (using ```grub-mkpasswd-pbkdf2```).  
 Download the script using ```git clone https://github.com/konstruktoid/hardening.git```.   
-Change the configuration options and last but not least run the script.    
+Change the configuration options and last but not least run the script, ```sudo bash ubuntu.sh```.      
 
 ##Configuration options
 ```FW_ADMIN="127.0.0.1"```  The IP address that will be able to connect with SSH.  
