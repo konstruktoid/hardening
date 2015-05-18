@@ -1,0 +1,11 @@
+function resolvedconf {
+  echo "[$i] Systemd/resolved.conf"
+
+  dnsarray=( `grep nameserver /etc/resolv.conf | sed 's/nameserver//g'` )
+  dnslist=${dnsarray[@]}
+
+  $SUDO sed -i "s/^#DNS=.*/DNS=$dnslist/" /etc/systemd/resolved.conf
+  $SUDO systemctl daemon-reload
+
+  ((i++))
+}
