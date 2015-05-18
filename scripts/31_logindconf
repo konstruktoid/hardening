@@ -1,0 +1,13 @@
+function logindconf {
+  echo "[$i] Systemd/logind.conf"
+
+  $SUDO sed -i 's/^#KillUserProcesses=no/KillUserProcesses=1/' /etc/systemd/logind.conf
+  $SUDO sed -i 's/^#KillExcludeUsers=root/KillExcludeUsers=root/' /etc/systemd/logind.conf
+  $SUDO sed -i 's/^#IdleAction=ignore/IdleAction=lock/' /etc/systemd/logind.conf
+  $SUDO sed -i 's/^#IdleActionSec=30min/IdleActionSec=15min/' /etc/systemd/logind.conf
+  $SUDO sed -i 's/^#RemoveIPC=yes/RemoveIPC=yes/' /etc/systemd/logind.conf
+
+  $SUDO systemctl daemon-reload
+
+  ((i++))
+}
