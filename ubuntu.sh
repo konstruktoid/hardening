@@ -34,6 +34,8 @@ disablenet
 disablemnt
 disablemod
 systemdconf
+resolvedconf
+logindconf
 journalctl
 timesyncd
 fstab
