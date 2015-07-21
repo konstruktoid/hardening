@@ -1,7 +1,7 @@
 function sshdconfig {
   echo "[$i] /etc/ssh/sshd_config"
 
-  $SUDO cp /etc/ssh/sshd_config /etc/ssh/sshd_config-$(date +%s)
+  $SUDO cp /etc/ssh/sshd_config /etc/ssh/sshd_config-"$(date +%s)"
 
   $SUDO bash -c "echo $'\n'## Groups allowed to connect$'\n'AllowGroups $SSH_GRPS >> /etc/ssh/sshd_config"
   $SUDO sed -i 's/^LoginGraceTime.*/LoginGraceTime 20/' /etc/ssh/sshd_config
