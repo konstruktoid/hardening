@@ -4,7 +4,7 @@ function auditd {
   $SUDO sed -i 's/^space_left_action =.*/space_left_action = email/' /etc/audit/auditd.conf
   $SUDO sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="audit=1"/' /etc/default/grub
   $SUDO bash -c "curl -s $AUDITD_RULES > /etc/audit/audit.rules"
-  $SUDO sed -i "s/arch=b64/arch=`uname -m`/g" /etc/audit/audit.rules
+  $SUDO sed -i "s/arch=b64/arch=$(uname -m)/g" /etc/audit/audit.rules
   $SUDO update-grub 2> /dev/null
   $SUDO systemctl restart auditd.service
 
