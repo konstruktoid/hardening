@@ -5,7 +5,7 @@ function disablemnt {
   FS="cramfs freevxfs jffs2 hfs hfsplus squashfs udf"
   for disable in $FS;
     do
-      if ! grep -q $disable $CNF 2> /dev/null;
+      if ! grep -q "$disable" $CNF 2> /dev/null;
         then
           $SUDO bash -c "echo install $disable /bin/true >> $CNF"
       fi
