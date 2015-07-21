@@ -1,34 +1,33 @@
 function timesyncd {
   echo "[$i] Systemd/timesyncd.conf"
-
   LATENCY="50"
   SERVERS="4"
   APPLY="YES"
   CONF="/etc/systemd/timesyncd.conf"
   SERVERARRAY=()
   FALLBACKARRAY=()
-  TMPCONF=`mktemp --tmpdir ntpconf.XXXXX`
+  TMPCONF=$(mktemp --tmpdir ntpconf.XXXXX)
 
-  echo "[Time]" > $TMPCONF
+  echo "[Time]" > "$TMPCONF"
 
-  if ! [[ `find /bin/ping -perm -4000` ]];
+  if ! [[ $(find /bin/ping -perm -4000) ]];
     then
       PONG="$SUDO ping -c2"
     else
       PONG="ping -c2"
   fi
 
-  for s in `dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}'`;
+  for s in $(dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}');
     do
-      if [[  $NUMSERV -ge $SERVERS ]];
+      if [[ $NUMSERV -ge $SERVERS ]];
         then
           break
       fi
-      PINGSERV=`$PONG $s | grep 'rtt min/avg/max/mdev' |awk -F "/" '{printf "%.0f\n",$6}'`
+      PINGSERV=$($PONG "$s" | grep 'rtt min/avg/max/mdev' | awk -F "/" '{printf "%.0f\n",$6}')
       if [[ $PINGSERV -gt "1" && $PINGSERV -lt "$LATENCY" ]];
         then
-          OKSERV=`nslookup $s|grep "name = "|awk '{print $4}'|sed 's/.$//'`
-            if [[ $OKSERV && $NUMSERV -lt $SERVERS && ! (( $(grep "$OKSERV" $TMPCONF) )) ]];
+          OKSERV=$(nslookup "$s"|grep "name = " | awk '{print $4}'|sed 's/.$//')
+            if [[ $OKSERV && $NUMSERV -lt $SERVERS && ! (( $(grep "$OKSERV" "$TMPCONF") )) ]];
               then
                 echo "$OKSERV has latency < $LATENCY"
                 SERVERARRAY+=("$OKSERV")
@@ -48,14 +47,14 @@ function timesyncd {
       fi
     done
 
-  echo "NTP=${SERVERARRAY[@]}" >> $TMPCONF
-  echo "FallbackNTP=${FALLBACKARRAY[@]}" >> $TMPCONF
+  echo "NTP=${SERVERARRAY[@]}" >> "$TMPCONF"
+  echo "FallbackNTP=${FALLBACKARRAY[@]}" >> "$TMPCONF"
 
   if [[ $APPLY = "YES" ]];
     then
       $SUDO bash -c "cat $TMPCONF > $CONF"
       $SUDO systemctl restart systemd-timesyncd
-      rm $TMPCONF
+      rm "$TMPCONF"
     else
       echo "Configuration saved to $TMPCONF."
   fi
@@ -68,3 +67,4 @@ function timesyncd {
   
   ((i++))
 }
+
