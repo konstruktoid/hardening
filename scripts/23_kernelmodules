@@ -5,7 +5,7 @@ function disablemod {
   MOD="net-pf-31 bluetooth usb-storage"
   for disable in $MOD;
     do
-      if ! grep -q $disable $CNF 2> /dev/null;
+      if ! grep -q "$disable" $CNF 2> /dev/null;
         then
           $SUDO bash -c "echo install $disable /bin/true >> $CNF"
       fi
