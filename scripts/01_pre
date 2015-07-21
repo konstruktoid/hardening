@@ -1,5 +1,5 @@
 function pre {
-  RINPUT=`openssl rand -hex 3`
+  RINPUT=$(openssl rand -hex 3)
 
   if [[ $VERBOSE == "Y" ]];
     then
@@ -17,21 +17,23 @@ function pre {
       exit
   fi
 
-  if ! [[ `id | grep sudo` || `id -u` = '0' ]];
+
+  ID=$(id -u)
+  if ! id | grep sudo || echo "x$ID" = "x0";
     then
       echo "Not root and not in the sudo group. Exiting."
       echo
       exit
   fi
 
-  if [[ `id -u` = '0' ]];
+  if echo "x$ID" = "x0";
     then
       SUDO=''
     else
       SUDO='sudo'
   fi
 
-  if ! [[ `lsb_release -i |grep 'Ubuntu'` ]];
+  if ! lsb_release -i | grep 'Ubuntu';
     then
       echo "Ubuntu only. Exiting."
       echo
