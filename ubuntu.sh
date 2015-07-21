@@ -18,14 +18,14 @@ CHANGEME="" # Add something just to verify that you actually glanced the code
 
 clear
 
-if ! [ -x "`which systemctl`" ]
+if ! [ -x "$(which systemctl)" ]
   then
     echo "systemctl required. Exiting."
     exit
 fi
 
-for s in `ls -1d ./scripts/[0-9_]*`; do
-  . $s
+for s in $(ls -1d ./scripts/[0-9_]*); do
+  . "$s"
 done
 
 pre
