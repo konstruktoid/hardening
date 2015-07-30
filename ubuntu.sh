@@ -24,8 +24,10 @@ if ! [ -x "$(which systemctl)" ]
     exit
 fi
 
-for s in $(ls -1d ./scripts/[0-9_]*); do
-  . "$s"
+
+for s in ./scripts/[0-9_]*; do
+  [[ -e $s ]] || break
+  echo "$s"
 done
 
 pre
