@@ -1,4 +1,4 @@
-function timesyncd {
+function f_timesyncd {
   echo "[$i] Systemd/timesyncd.conf"
   LATENCY="50"
   SERVERS="4"

@@ -1,4 +1,4 @@
-function disablenet {
+function f_disablenet {
   echo "[$i] Disable misc network protocols"
 
   CNF="/etc/modprobe.d/disablenet.conf"

@@ -1,4 +1,4 @@
-function prelink {
+function f_prelink {
   echo "[$i] Prelink"
 
   if dpkg -l | grep prelink 1> /dev/null;

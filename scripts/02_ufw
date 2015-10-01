@@ -1,4 +1,4 @@
-function firewall {
+function f_firewall {
   echo "[$i] Enable ufw"
 
   $SUDO sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw

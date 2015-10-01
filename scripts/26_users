@@ -1,4 +1,4 @@
-function users {
+function f_users {
   echo "[$i] Remove users"
 
   for users in games gnats irc list news uucp;

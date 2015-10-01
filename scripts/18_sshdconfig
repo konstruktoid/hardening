@@ -1,4 +1,4 @@
-function sshdconfig {
+function f_sshdconfig {
   echo "[$i] /etc/ssh/sshd_config"
 
   $SUDO cp /etc/ssh/sshd_config /etc/ssh/sshd_config-"$(date +%s)"

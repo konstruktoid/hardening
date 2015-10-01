@@ -1,4 +1,4 @@
-function logindefs {
+function f_logindefs {
   echo "[$i] /etc/login.defs"
 
   $SUDO sed -i 's/^LOG_OK_LOGINS.*/LOG_OK_LOGINS\t\tyes/' /etc/login.defs

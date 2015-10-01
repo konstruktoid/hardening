@@ -1,4 +1,4 @@
-function auditd {
+function f_auditd {
   echo "[$i] Auditd"
 
   $SUDO sed -i 's/^space_left_action =.*/space_left_action = email/' /etc/audit/auditd.conf

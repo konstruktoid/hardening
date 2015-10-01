@@ -1,4 +1,4 @@
-function limitsconf {
+function f_limitsconf {
   echo "[$i] /etc/security/limits.conf"
 
   $SUDO sed -i 's/^# End of file*//' /etc/security/limits.conf

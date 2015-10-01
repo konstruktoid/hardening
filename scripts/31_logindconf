@@ -1,4 +1,4 @@
-function logindconf {
+function f_logindconf {
   echo "[$i] Systemd/logind.conf"
 
   $SUDO sed -i 's/^#KillUserProcesses=no/KillUserProcesses=1/' /etc/systemd/logind.conf

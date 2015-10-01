@@ -1,4 +1,4 @@
-function rc {
+function f_rc {
   echo "[$i] /etc/init.d/rc"
 
   $SUDO sed -i 's/umask 022/umask 027/g' /etc/init.d/rc

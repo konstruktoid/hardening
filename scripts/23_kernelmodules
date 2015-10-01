@@ -1,4 +1,4 @@
-function disablemod {
+function f_disablemod {
   echo "[$i] Disable misc kernel modules"
 
   CNF="/etc/modprobe.d/disablemod.conf"

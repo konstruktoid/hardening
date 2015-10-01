@@ -1,4 +1,4 @@
-function cron {
+function f_cron {
   echo "[$i] /etc/cron and /etc/at"
 
   $SUDO rm /etc/cron.deny 2> /dev/null

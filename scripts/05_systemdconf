@@ -1,4 +1,4 @@
-function systemdconf {
+function f_systemdconf {
   echo "[$i] Systemd/system.conf and Systemd/user.conf"
 
   $SUDO sed -i 's/^#DumpCore=yes/DumpCore=no/' /etc/systemd/system.conf

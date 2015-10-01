@@ -1,4 +1,4 @@
-function path {
+function f_path {
   echo "[$i] Modifying paths"
 
   $SUDO sed -i 's/PATH=.*/PATH=\"\/usr\/local\/bin:\/usr\/bin:\/bin"/' /etc/environment

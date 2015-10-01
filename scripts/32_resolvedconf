@@ -1,4 +1,4 @@
-function resolvedconf {
+function f_resolvedconf {
   echo "[$i] Systemd/resolved.conf"
 
   dnsarray=( $(grep nameserver /etc/resolv.conf | sed 's/nameserver//g') )

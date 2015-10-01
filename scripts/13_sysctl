@@ -1,4 +1,4 @@
-function sysctl {
+function f_sysctl {
   echo "[$i] /etc/sysctl.conf"
 
   $SUDO bash -c "curl -s $SYSCTL_CONF > /etc/sysctl.conf"

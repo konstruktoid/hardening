@@ -1,4 +1,4 @@
-function journalctl {
+function f_journalctl {
   echo "[$i] Systemd/journald.conf"
 
   $SUDO sed -i 's/^#Storage=auto/Storage=persistent/' /etc/systemd/journald.conf

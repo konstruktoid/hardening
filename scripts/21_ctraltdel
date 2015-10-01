@@ -1,4 +1,4 @@
-function ctrlaltdel {
+function f_ctrlaltdel {
   echo "[$i] Ctrl-alt-delete"
 
   $SUDO systemctl mask ctrl-alt-del.target

@@ -1,4 +1,4 @@
-function rhosts {
+function f_rhosts {
   echo "[$i] .rhosts"
 
   for dir in $(awk -F ":" '{print $6}' /etc/passwd);

@@ -1,4 +1,4 @@
-function disablemnt {
+function f_disablemnt {
   echo "[$i] Disable misc file systems"
 
   CNF="/etc/modprobe.d/disablemnt.conf"

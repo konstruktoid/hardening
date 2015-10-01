@@ -1,4 +1,4 @@
-function aide {
+function f_aide {
   echo "[$i] Aide"
 
   $SUDO sed -i 's/^Checksums =.*/Checksums = sha512/' /etc/aide/aide.conf
@@ -6,7 +6,7 @@ function aide {
   ((i++))
 }
 
-function aide_post {
+function f_aide_post {
   echo "[$i] Running Aide, this will take a while"
 
   $SUDO aideinit --yes
@@ -15,7 +15,7 @@ function aide_post {
   ((i++))
 }
 
-function aide_timer {
+function f_aide_timer {
   echo "[$i] Enable daily Aide check"
 
   $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /etc/systemd/system/aidecheck.service
