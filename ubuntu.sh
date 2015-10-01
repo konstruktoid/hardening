@@ -24,47 +24,46 @@ if ! [ -x "$(which systemctl)" ]
     exit
 fi
 
-
 for s in ./scripts/[0-9_]*; do
   [[ -e $s ]] || break
-  echo "$s"
+  source "$s"
 done
 
-pre
-firewall
-disablenet
-disablemnt
-disablemod
-systemdconf
-resolvedconf
-logindconf
-journalctl
-timesyncd
-fstab
-prelink
-aptget
-hosts
-logindefs
-sysctl
-limitsconf
-adduser
-rootaccess
-packages
-sshdconfig
-password
-cron
-ctrlaltdel
-auditd
-aide
-rhosts
-users
-aptget_clean
-suid
-rc
-path
-aa_enforce
-aide_post
-aide_timer
-checkreboot
+f_pre
+f_firewall
+f_disablenet
+f_disablemnt
+f_disablemod
+f_systemdconf
+f_resolvedconf
+f_logindconf
+f_journalctl
+f_timesyncd
+f_fstab
+f_prelink
+f_aptget
+f_hosts
+f_logindefs
+f_sysctl
+f_limitsconf
+f_adduser
+f_rootaccess
+f_packages
+f_sshdconfig
+f_password
+f_cron
+f_ctrlaltdel
+f_auditd
+f_aide
+f_rhosts
+f_users
+f_aptget_clean
+f_suid
+f_rc
+f_path
+f_aa_enforce
+f_aide_post
+f_aide_timer
+f_checkreboot
 
 echo
