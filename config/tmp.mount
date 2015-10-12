@@ -1,0 +1,12 @@
+# /etc/systemd/system/default.target.wants/tmp.mount -> ../tmp.mount
+
+[Unit]
+Description=Temporary Directory
+Documentation=man:hier(7)
+Before=local-fs.target
+
+[Mount]
+What=tmpfs
+Where=/tmp
+Type=tmpfs
+Options=mode=1777,strictatime,nosuid,nodev
