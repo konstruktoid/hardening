@@ -1,7 +1,7 @@
 function f_aide {
   echo "[$i] Aide"
 
-  $SUDO sed -i 's/^Checksums =.*/Checksums = sha512/' /etc/aide/aide.conf
+   sed -i 's/^Checksums =.*/Checksums = sha512/' /etc/aide/aide.conf
 
   ((i++))
 }
@@ -9,8 +9,8 @@ function f_aide {
 function f_aide_post {
   echo "[$i] Running Aide, this will take a while"
 
-  $SUDO aideinit --yes
-  $SUDO cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+   aideinit --yes
+   cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
 
   ((i++))
 }
@@ -18,12 +18,12 @@ function f_aide_post {
 function f_aide_timer {
   echo "[$i] Enable daily Aide check"
 
-  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /etc/systemd/system/aidecheck.service
-  $SUDO curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.timer > /etc/systemd/system/aidecheck.timer
-  $SUDO chmod 0644 /etc/systemd/system/aidecheck.*
-  $SUDO systemctl reenable aidecheck.timer
-  $SUDO systemctl start aidecheck.timer
-  $SUDO systemctl daemon-reload
+   curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.service > /etc/systemd/system/aidecheck.service
+   curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/aidecheck.timer > /etc/systemd/system/aidecheck.timer
+   chmod 0644 /etc/systemd/system/aidecheck.*
+   systemctl reenable aidecheck.timer
+   systemctl start aidecheck.timer
+   systemctl daemon-reload
 
   ((i++))
 }

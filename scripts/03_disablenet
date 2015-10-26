@@ -7,7 +7,7 @@ function f_disablenet {
     do
       if ! grep -q "$disable" $CNF 2> /dev/null;
         then
-          $SUDO bash -c "echo install $disable /bin/true >> $CNF"
+          echo "install $disable /bin/true" >> $CNF
       fi
   done
 

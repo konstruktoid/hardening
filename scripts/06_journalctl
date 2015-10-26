@@ -1,13 +1,13 @@
 function f_journalctl {
   echo "[$i] Systemd/journald.conf"
 
-  $SUDO sed -i 's/^#Storage=auto/Storage=persistent/' /etc/systemd/journald.conf
-  $SUDO sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
-  $SUDO systemctl restart systemd-journald
+  sed -i 's/^#Storage=auto/Storage=persistent/' /etc/systemd/journald.conf
+  sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
+  systemctl restart systemd-journald
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status systemd-journald
+      systemctl status systemd-journald
     echo
   fi
 

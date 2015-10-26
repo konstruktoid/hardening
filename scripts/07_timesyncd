@@ -10,12 +10,7 @@ function f_timesyncd {
 
   echo "[Time]" > "$TMPCONF"
 
-  if ! [[ $(find /bin/ping -perm -4000) ]];
-    then
-      PONG="$SUDO ping -c2"
-    else
-      PONG="ping -c2"
-  fi
+  PONG="ping -c2"
 
   for s in $(dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}');
     do
@@ -52,8 +47,8 @@ function f_timesyncd {
 
   if [[ $APPLY = "YES" ]];
     then
-      $SUDO bash -c "cat $TMPCONF > $CONF"
-      $SUDO systemctl restart systemd-timesyncd
+       cat "$TMPCONF" > $CONF
+       systemctl restart systemd-timesyncd
       rm "$TMPCONF"
     else
       echo "Configuration saved to $TMPCONF."
@@ -61,10 +56,10 @@ function f_timesyncd {
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status systemd-timesyncd
+      systemctl status systemd-timesyncd
       echo
   fi
-  
+
   ((i++))
 }
 

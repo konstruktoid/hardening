@@ -7,7 +7,7 @@ function f_disablemod {
     do
       if ! grep -q "$disable" $CNF 2> /dev/null;
         then
-          $SUDO bash -c "echo install $disable /bin/true >> $CNF"
+           bash -c "echo install $disable /bin/true >> $CNF"
       fi
   done
 

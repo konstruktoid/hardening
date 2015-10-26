@@ -1,11 +1,11 @@
 function f_ctrlaltdel {
   echo "[$i] Ctrl-alt-delete"
 
-  $SUDO systemctl mask ctrl-alt-del.target
+   systemctl mask ctrl-alt-del.target
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status ctrl-alt-del.target
+       systemctl status ctrl-alt-del.target
       echo
   fi
 

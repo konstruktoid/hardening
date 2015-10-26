@@ -24,13 +24,6 @@ function f_pre {
       exit
   fi
 
-  if [ $EUID -eq 0 ];
-    then
-      SUDO=''
-    else
-      SUDO='sudo'
-  fi
-
   if ! lsb_release -i | grep 'Ubuntu';
     then
       echo "Ubuntu only. Exiting."
