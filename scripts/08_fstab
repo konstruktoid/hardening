@@ -13,17 +13,16 @@ function f_fstab {
 
     sed -i '/[[:space:]]\/tmp[[:space:]]/d' /etc/fstab
 
-    cp /etc/systemd/system/tmp.mount /etc/systemd/system/
+    ln -s /etc/systemd/system/tmp.mount /etc/systemd/system/default.target.wants/tmp.mount
     sed -i 's/Options=.*/Options=mode=1777,strictatime,nodev,nosuid/' /etc/systemd/system/tmp.mount
 
     cp /etc/systemd/system/tmp.mount /etc/systemd/system/var-tmp.mount
     sed -i 's/\/tmp/\/var\/tmp/g' /etc/systemd/system/var-tmp.mount
+    ln -s /etc/systemd/system/var-tmp.mount /etc/systemd/system/default.target.wants/var-tmp.mount
 
     chmod 0644 /etc/systemd/system/tmp.mount
     chmod 0644 /etc/systemd/system/var-tmp.mount
 
-    systemctl reenable tmp.mount
-    systemctl reenable var-tmp.mount
     systemctl daemon-reload
   else
     echo '/etc/systemd/system/tmp.mount was not found.'
