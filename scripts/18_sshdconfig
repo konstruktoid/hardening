@@ -1,25 +1,25 @@
 function f_sshdconfig {
   echo "[$i] /etc/ssh/sshd_config"
 
-  $SUDO cp /etc/ssh/sshd_config /etc/ssh/sshd_config-"$(date +%s)"
+   cp /etc/ssh/sshd_config /etc/ssh/sshd_config-"$(date +%s)"
 
-  $SUDO bash -c "echo $'\n'## Groups allowed to connect$'\n'AllowGroups $SSH_GRPS >> /etc/ssh/sshd_config"
-  $SUDO sed -i 's/^LoginGraceTime.*/LoginGraceTime 20/' /etc/ssh/sshd_config
-  $SUDO sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-  $SUDO sed -i 's/^KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' /etc/ssh/sshd_config
-  $SUDO sed -i 's/^UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' /etc/ssh/sshd_config
-  $SUDO sed -i 's/^LogLevel.*/LogLevel VERBOSE/' /etc/ssh/sshd_config
-  $SUDO bash -c "echo ClientAliveInterval 900 >> /etc/ssh/sshd_config"
-  $SUDO bash -c "echo ClientAliveCountMax 0 >> /etc/ssh/sshd_config"
-  $SUDO bash -c "echo PermitUserEnvironment no >> /etc/ssh/sshd_config"
-  $SUDO bash -c "echo KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256 >> /etc/ssh/sshd_config"
-  $SUDO bash -c "echo Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr >> /etc/ssh/sshd_config"
-  $SUDO bash -c "echo Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256 >> /etc/ssh/sshd_config"
-  $SUDO systemctl restart sshd.service
+   bash -c "echo $'\n'## Groups allowed to connect$'\n'AllowGroups $SSH_GRPS >> /etc/ssh/sshd_config"
+   sed -i 's/^LoginGraceTime.*/LoginGraceTime 20/' /etc/ssh/sshd_config
+   sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+   sed -i 's/^KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' /etc/ssh/sshd_config
+   sed -i 's/^UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' /etc/ssh/sshd_config
+   sed -i 's/^LogLevel.*/LogLevel VERBOSE/' /etc/ssh/sshd_config
+   bash -c "echo ClientAliveInterval 900 >> /etc/ssh/sshd_config"
+   bash -c "echo ClientAliveCountMax 0 >> /etc/ssh/sshd_config"
+   bash -c "echo PermitUserEnvironment no >> /etc/ssh/sshd_config"
+   bash -c "echo KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256 >> /etc/ssh/sshd_config"
+   bash -c "echo Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr >> /etc/ssh/sshd_config"
+   bash -c "echo Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256 >> /etc/ssh/sshd_config"
+   systemctl restart sshd.service
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status sshd.service
+       systemctl status sshd.service
     echo
   fi
 

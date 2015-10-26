@@ -1,25 +1,25 @@
 function f_cron {
   echo "[$i] /etc/cron and /etc/at"
 
-  $SUDO rm /etc/cron.deny 2> /dev/null
-  $SUDO rm /etc/at.deny 2> /dev/null
+   rm /etc/cron.deny 2> /dev/null
+   rm /etc/at.deny 2> /dev/null
 
-  $SUDO bash -c "echo root > /etc/cron.allow"
-  $SUDO bash -c "echo root > /etc/at.allow"
+   bash -c "echo root > /etc/cron.allow"
+   bash -c "echo root > /etc/at.allow"
 
-  $SUDO chown root:root /etc/cron*
-  $SUDO chmod og-rwx /etc/cron*
+   chown root:root /etc/cron*
+   chmod og-rwx /etc/cron*
 
-  $SUDO chown root:root /etc/at*
-  $SUDO chmod og-rwx /etc/at*
+   chown root:root /etc/at*
+   chmod og-rwx /etc/at*
 
-  $SUDO systemctl mask atd.service
-  $SUDO systemctl stop atd.service
-  $SUDO systemctl daemon-reload
+   systemctl mask atd.service
+   systemctl stop atd.service
+   systemctl daemon-reload
   
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status atd.service
+       systemctl status atd.service
     echo
   fi
   

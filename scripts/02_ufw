@@ -1,14 +1,14 @@
 function f_firewall {
   echo "[$i] Enable ufw"
 
-  $SUDO sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
-  $SUDO ufw --force enable
-  $SUDO ufw allow log from "$FW_ADMIN" to any port 22 proto tcp
+  sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
+  ufw --force enable
+  ufw allow log from "$FW_ADMIN" to any port 22 proto tcp
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status ufw.service
-      $SUDO ufw status verbose
+      systemctl status ufw.service
+      ufw status verbose
       echo
   fi
 

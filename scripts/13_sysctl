@@ -1,12 +1,12 @@
 function f_sysctl {
   echo "[$i] /etc/sysctl.conf"
 
-  $SUDO bash -c "curl -s $SYSCTL_CONF > /etc/sysctl.conf"
-  $SUDO systemctl restart systemd-sysctl
+  curl -s "$SYSCTL_CONF" > /etc/sysctl.conf
+  systemctl restart systemd-sysctl
 
   if [[ $VERBOSE == "Y" ]];
     then
-      $SUDO systemctl status systemd-sysctl
+      systemctl status systemd-sysctl
     echo
   fi
 

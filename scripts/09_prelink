@@ -3,8 +3,8 @@ function f_prelink {
 
   if dpkg -l | grep prelink 1> /dev/null;
     then
-      $SUDO "$(which prelink)" -ua 2> /dev/null
-      $SUDO "$APT" purge prelink
+      "$(which prelink)" -ua 2> /dev/null
+      "$APT" purge prelink
   fi
 
   ((i++))
