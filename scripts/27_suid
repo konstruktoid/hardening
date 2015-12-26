@@ -5,14 +5,14 @@ function f_suid {
   do
     oct=$(stat -c "%a" $p |sed 's/^4/0/')
     ug=$(stat -c "%U %G" $p)
-     dpkg-statoverride --remove $p 2> /dev/null
-     dpkg-statoverride --add "$ug" "$oct" $p 2> /dev/null
-     chmod -s $p
+    dpkg-statoverride --remove $p 2> /dev/null
+    dpkg-statoverride --add "$ug" "$oct" $p 2> /dev/null
+    chmod -s $p
   done
 
   for SHELL in $(cat /etc/shells); do
     if [ -x "$SHELL" ]; then
-       chmod -s "$SHELL"
+      chmod -s "$SHELL"
     fi
   done
 
