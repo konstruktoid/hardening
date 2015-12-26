@@ -4,8 +4,8 @@ function f_cron {
    rm /etc/cron.deny 2> /dev/null
    rm /etc/at.deny 2> /dev/null
 
-   bash -c "echo root > /etc/cron.allow"
-   bash -c "echo root > /etc/at.allow"
+   echo 'root' > /etc/cron.allow
+   echo 'root' > /etc/at.allow
 
    chown root:root /etc/cron*
    chmod og-rwx /etc/cron*
@@ -16,12 +16,12 @@ function f_cron {
    systemctl mask atd.service
    systemctl stop atd.service
    systemctl daemon-reload
-  
+
   if [[ $VERBOSE == "Y" ]];
     then
        systemctl status atd.service
     echo
   fi
-  
+
   ((i++))
 }
