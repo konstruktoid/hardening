@@ -1,7 +1,7 @@
 function f_ctrlaltdel {
   echo "[$i] Ctrl-alt-delete"
 
-   systemctl mask ctrl-alt-del.target
+  systemctl mask ctrl-alt-del.target
 
   if [[ $VERBOSE == "Y" ]];
     then
