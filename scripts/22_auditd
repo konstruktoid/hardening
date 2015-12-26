@@ -8,9 +8,8 @@ function f_auditd {
   update-grub 2> /dev/null
   systemctl restart auditd.service
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status auditd.service
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status auditd.service
     echo
   fi
 

@@ -3,10 +3,9 @@ function f_ctrlaltdel {
 
   systemctl mask ctrl-alt-del.target
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status ctrl-alt-del.target
-      echo
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status ctrl-alt-del.target
+    echo
   fi
 
   ((i++))

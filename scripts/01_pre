@@ -1,46 +1,41 @@
 function f_pre {
   RINPUT=$(openssl rand -hex 3)
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-      APTFLAGS='-y'
-    else
-      APTFLAGS='-qq -y'
+  if [[ $VERBOSE == "Y" ]]; then
+    APTFLAGS='-y'
+  else
+    APTFLAGS='-qq -y'
   fi
 
   APT="apt-get $APTFLAGS"
 
-  if [[ $CHANGEME == "" ]];
-    then
-      echo "Please read the code".
-      echo
-      exit
+  if [[ $CHANGEME == "" ]]; then
+    echo "Please read the code".
+    echo
+    exit
   fi
 
-  if [ $EUID -ne 0 ];
-    then
-      echo "Not root and not in the sudo group. Exiting."
-      echo
-      exit
+  if [ $EUID -ne 0 ]; then
+    echo "Not root and not in the sudo group. Exiting."
+    echo
+    exit
   fi
 
-  if ! lsb_release -i | grep 'Ubuntu';
-    then
-      echo "Ubuntu only. Exiting."
-      echo
-      exit
+  if ! lsb_release -i | grep 'Ubuntu'; then
+    echo "Ubuntu only. Exiting."
+    echo
+    exit
   fi
 
   echo -n "If you understand what this script will do, please write $RINPUT here: "
   read INPUT
 
-  if ! [[ "$INPUT" == "$RINPUT" ]];
-    then
-      echo "Turing test failed. Exiting."
-      echo
-      exit
-    else
-     echo "Let it begin."
+  if ! [[ "$INPUT" == "$RINPUT" ]]; then
+    echo "Turing test failed. Exiting."
+    echo
+    exit
+  else
+    echo "Let it begin."
   fi
 
   i="0"

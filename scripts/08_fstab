@@ -6,8 +6,7 @@ function f_fstab {
   if [ -e /etc/systemd/system/tmp.mount ]; then
     sed -i '/^\/tmp/d' /etc/fstab
 
-    for t in $(mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}');
-    do
+    for t in $(mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}'); do
       umount "$t"
     done
 

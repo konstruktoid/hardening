@@ -5,11 +5,10 @@ function f_firewall {
   ufw --force enable
   ufw allow log from "$FW_ADMIN" to any port 22 proto tcp
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-      systemctl status ufw.service
-      ufw status verbose
-      echo
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status ufw.service
+    ufw status verbose
+    echo
   fi
 
   ((i++))

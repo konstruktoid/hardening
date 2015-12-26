@@ -4,8 +4,8 @@ function f_resolvedconf {
   dnsarray=( $(grep nameserver /etc/resolv.conf | sed 's/nameserver//g') )
   dnslist=${dnsarray[@]}
 
-   sed -i "s/^#DNS=.*/DNS=$dnslist/" /etc/systemd/resolved.conf
-   systemctl daemon-reload
+  sed -i "s/^#DNS=.*/DNS=$dnslist/" /etc/systemd/resolved.conf
+  systemctl daemon-reload
 
   ((i++))
 }

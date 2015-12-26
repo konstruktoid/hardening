@@ -3,12 +3,10 @@ function f_disablenet {
 
   CNF="/etc/modprobe.d/disablenet.conf"
   NET="dccp sctp rds tipc"
-  for disable in $NET;
-    do
-      if ! grep -q "$disable" $CNF 2> /dev/null;
-        then
-          echo "install $disable /bin/true" >> $CNF
-      fi
+  for disable in $NET; do
+    if ! grep -q "$disable" $CNF 2> /dev/null; then
+      echo "install $disable /bin/true" >> $CNF
+    fi
   done
 
   ((i++))

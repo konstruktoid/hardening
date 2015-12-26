@@ -5,9 +5,8 @@ function f_journalctl {
   sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
   systemctl restart systemd-journald
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-      systemctl status systemd-journald
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status systemd-journald
     echo
   fi
 

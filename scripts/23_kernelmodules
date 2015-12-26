@@ -3,12 +3,10 @@ function f_disablemod {
 
   CNF="/etc/modprobe.d/disablemod.conf"
   MOD="net-pf-31 bluetooth usb-storage"
-  for disable in $MOD;
-    do
-      if ! grep -q "$disable" $CNF 2> /dev/null;
-        then
-          echo "install $disable /bin/true" >> $CNF
-      fi
+  for disable in $MOD; do
+    if ! grep -q "$disable" $CNF 2> /dev/null; then
+      echo "install $disable /bin/true" >> $CNF
+    fi
   done
 
   ((i++))

@@ -4,9 +4,8 @@ function f_sysctl {
   curl -s "$SYSCTL_CONF" > /etc/sysctl.conf
   systemctl restart systemd-sysctl
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-      systemctl status systemd-sysctl
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status systemd-sysctl
     echo
   fi
 

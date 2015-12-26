@@ -17,9 +17,8 @@ function f_cron {
    systemctl stop atd.service
    systemctl daemon-reload
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status atd.service
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status atd.service
     echo
   fi
 

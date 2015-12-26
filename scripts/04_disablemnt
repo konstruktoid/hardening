@@ -3,12 +3,10 @@ function f_disablemnt {
 
   CNF="/etc/modprobe.d/disablemnt.conf"
   FS="cramfs freevxfs jffs2 hfs hfsplus squashfs udf"
-  for disable in $FS;
-    do
-      if ! grep -q "$disable" $CNF 2> /dev/null;
-        then
-          echo "install $disable /bin/true" >> $CNF
-      fi
+  for disable in $FS; do
+    if ! grep -q "$disable" $CNF 2> /dev/null; then
+      echo "install $disable /bin/true" >> $CNF
+    fi
   done
 
   ((i++))
