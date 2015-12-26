@@ -1,8 +1,8 @@
 function f_rootaccess {
   echo "[$i] /etc/hosts.allow and /etc/hosts.deny"
 
-   sed -i 's/^#+ : root : 127.0.0.1/+ : root : 127.0.0.1/' /etc/security/access.conf
-   bash -c "echo console > /etc/securetty"
+  sed -i 's/^#+ : root : 127.0.0.1/+ : root : 127.0.0.1/' /etc/security/access.conf
+  echo "console" > /etc/securetty
 
   ((i++))
 }
