@@ -17,8 +17,6 @@ CHANGEME="" # Add something just to verify that you actually glanced the code
 
 clear
 
-set -e
-
 if ! [ -x "$(which systemctl)" ]
   then
     echo "systemctl required. Exiting."
