@@ -1,5 +1,4 @@
-#!/usr/bin/env bash -e
-# konstruktoid.net
+#!/usr/bin/env bash
 #
 # Documentation:
 # https://github.com/konstruktoid/hardening
@@ -17,6 +16,8 @@ VERBOSE="N"
 CHANGEME="" # Add something just to verify that you actually glanced the code
 
 clear
+
+set -e
 
 if ! [ -x "$(which systemctl)" ]
   then
