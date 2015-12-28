@@ -48,6 +48,7 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_rkhunter
 f_sshdconfig
 f_password
 f_cron

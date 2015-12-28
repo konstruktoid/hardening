@@ -57,6 +57,7 @@ Change the configuration options in the `ubuntu.sh` file and last but not least 
 `adduser` /etc/adduser.conf and /etc/default/useradd  
 `rootaccess` /etc/security/access.conf and /etc/securetty  
 `packages` Installing base packages   
+`rkhunter` Configures rkhunter
 `sshdconfig` /etc/ssh/sshd_config  
 `password` /etc/pam.d/common-password and /etc/pam.d/common-auth  
 `cron` /etc/cron and /etc/at  
