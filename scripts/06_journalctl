@@ -1,8 +1,12 @@
 function f_journalctl {
   echo "[$i] Systemd/journald.conf"
 
-  sed -i 's/^#Storage=auto/Storage=persistent/' /etc/systemd/journald.conf
-  sed -i 's/^#ForwardToSyslog=yes/ForwardToSyslog=yes/' /etc/systemd/journald.conf
+  JOURNALDCONF='/etc/systemd/journald.conf'
+
+  sed -i 's/^#Storage=.*/Storage=persistent/' "$JOURNALDCONF"
+  sed -i 's/^#ForwardToSyslog=.*/ForwardToSyslog=yes/' "$JOURNALDCONF"
+  sed -i 's/^#Compress=.*/Compress=yes/' "$JOURNALDCONF"
+
   systemctl restart systemd-journald
 
   if [[ $VERBOSE == "Y" ]]; then
