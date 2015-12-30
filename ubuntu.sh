@@ -42,6 +42,7 @@ f_fstab
 f_prelink
 f_aptget
 f_hosts
+f_issue
 f_logindefs
 f_sysctl
 f_limitsconf

@@ -50,6 +50,7 @@ Change the configuration options in the `ubuntu.sh` file and last but not least 
 `prelink` Prelink  
 `aptget` Updating the package index and upgrading installed packages  
 `hosts` /etc/hosts.allow and /etc/hosts.deny  
+`issue` Add message to /etc/issue, /etc/issue.net, /etc/motd  
 `logindefs` /etc/login.defs  
 `logindconf` Systemd/logind.conf   
 `sysctl` /etc/sysctl.conf  
