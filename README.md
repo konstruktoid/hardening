@@ -32,6 +32,7 @@ Change the configuration options in the `ubuntu.sh` file and last but not least 
 `SSH_GRPS="sudo"` Which group the users have to be member of in order to acess via SSH.  
 `SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf"` Stricter sysctl settings.  
 `AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules"` Auditd rules.  
+`LOGROTATE_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/logrotate.conf"` Logrotate settings.  
 `NTPSERVERPOOL="0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org"` NTP server pool.  
 `VERBOSE="N"` If you want all the details or not.  
 `CHANGEME=""` Add something just to verify that you actually glanced the code.  
@@ -44,7 +45,7 @@ Change the configuration options in the `ubuntu.sh` file and last but not least 
 `disablemod` Disable misc kernel modules  
 `resolvedconf` Systemd/resolved.conf  
 `systemdconf` Systemd/system.conf and Systemd/user.conf  
-`journalctl` Systemd/journald.conf  
+`journalctl` Systemd/journald.conf and logrotate.conf  
 `timesyncd` Systemd/timesyncd.conf  
 `fstab` /etc/fstab, system/tmp.mount and system/var-tmp.mount  
 `prelink` Prelink  
@@ -52,13 +53,13 @@ Change the configuration options in the `ubuntu.sh` file and last but not least 
 `hosts` /etc/hosts.allow and /etc/hosts.deny  
 `issue` Add message to /etc/issue, /etc/issue.net, /etc/motd  
 `logindefs` /etc/login.defs  
-`logindconf` Systemd/logind.conf   
+`logindconf` Systemd/logind.conf  
 `sysctl` /etc/sysctl.conf  
 `limitsconf` /etc/security/limits.conf  
 `adduser` /etc/adduser.conf and /etc/default/useradd  
 `rootaccess` /etc/security/access.conf and /etc/securetty  
-`packages` Installing base packages   
-`rkhunter` Configures rkhunter
+`packages` Installing base packages  
+`rkhunter` Configures rkhunter  
 `sshdconfig` /etc/ssh/sshd_config  
 `password` /etc/pam.d/common-password and /etc/pam.d/common-auth  
 `cron` /etc/cron and /etc/at  
