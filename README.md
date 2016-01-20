@@ -18,7 +18,7 @@ swap
 /var/log/audit (rw,nosuid,nodev,noexec)
 ```
 
-Note that `/tmp` and `/var/tmp` will be added automatically by the script, if `/etc/systemd/system/tmp.mount` exists.  
+Note that `/tmp` and `/var/tmp` will be added automatically by the script.  
 
 ### Login, set a Grub2 password, configure and run ubuntu.sh
 Do not add any packages.    
