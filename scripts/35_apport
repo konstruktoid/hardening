@@ -1,0 +1,7 @@
+function f_apport {
+  echo "[$i] disable apport"
+
+  sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
+
+  ((i++))
+}
