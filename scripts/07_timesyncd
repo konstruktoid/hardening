@@ -8,6 +8,10 @@ function f_timesyncd {
   FALLBACKARRAY=()
   TMPCONF=$(mktemp --tmpdir ntpconf.XXXXX)
 
+  if [[ -z "$NTPSERVERPOOL" ]]; then
+    NTPSERVERPOOL="0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org"
+  fi
+
   echo "[Time]" > "$TMPCONF"
 
   PONG="ping -c2"
@@ -29,13 +33,19 @@ function f_timesyncd {
   done
 
   for l in $NTPSERVERPOOL; do
-    if [[ $FALLBACKSERV -lt "2" ]]; then
+    if [[ $FALLBACKSERV -le "2" ]]; then
       FALLBACKARRAY+=("$l")
       ((FALLBACKSERV++))
     else
       break
     fi
   done
+
+  if [[ ${#SERVERARRAY[@]} -le "2" ]]; then
+    for s in $(echo "$NTPSERVERPOOL" | awk '{print $(NF-1),$NF}'); do
+      SERVERARRAY+=("$s")
+    done
+  fi
 
   echo "NTP=${SERVERARRAY[@]}" >> "$TMPCONF"
   echo "FallbackNTP=${FALLBACKARRAY[@]}" >> "$TMPCONF"
@@ -55,4 +65,3 @@ function f_timesyncd {
 
   ((i++))
 }
-
