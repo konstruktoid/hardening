@@ -27,16 +27,5 @@ function f_pre {
     exit
   fi
 
-  echo -n "If you understand what this script will do, please write $RINPUT here: "
-  read INPUT
-
-  if ! [[ "$INPUT" == "$RINPUT" ]]; then
-    echo "Turing test failed. Exiting."
-    echo
-    exit
-  else
-    echo "Let it begin."
-  fi
-
   i="0"
 }
