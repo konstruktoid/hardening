@@ -1,6 +1,16 @@
 function f_firewall {
   echo "[$i] Enable ufw"
 
+  if ! test -f /etc/default/ufw; then
+    echo '/etc/default/ufw does not exist.'
+
+    if ! dpkg -l | grep ufw 2> /dev/null 1>&2; then
+      echo 'ufw package is not installed.'
+    fi
+
+    return
+  fi
+
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
   ufw --force enable
   ufw allow log from "$FW_ADMIN" to any port 22 proto tcp
