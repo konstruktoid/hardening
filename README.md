@@ -1,6 +1,6 @@
 # Hardening Ubuntu. Systemd edition.  
 A quick way to make a Ubuntu server a bit more secure.
-Tested on `15.04` and `15.10 Ubuntu Wily Werewolf`, but this is a work in progress. It may break everything.  
+Tested on `15.04`, `15.10 Ubuntu Wily Werewolf` and `16.04 Xenial Xerus (development branch)`, but this is a work in progress. It may break everything.  
 Systemd required.  
 
 ## Howto
