@@ -1,21 +1,23 @@
 function f_cron {
   echo "[$i] /etc/cron and /etc/at"
 
-   rm /etc/cron.deny 2> /dev/null
-   rm /etc/at.deny 2> /dev/null
+  rm /etc/cron.deny 2> /dev/null
+  rm /etc/at.deny 2> /dev/null
 
-   echo 'root' > /etc/cron.allow
-   echo 'root' > /etc/at.allow
+  echo 'root' > /etc/cron.allow
+  echo 'root' > /etc/at.allow
 
-   chown root:root /etc/cron*
-   chmod og-rwx /etc/cron*
+  chown root:root /etc/cron*
+  chmod og-rwx /etc/cron*
 
-   chown root:root /etc/at*
-   chmod og-rwx /etc/at*
+  chown root:root /etc/at*
+  chmod og-rwx /etc/at*
 
-   systemctl mask atd.service
-   systemctl stop atd.service
-   systemctl daemon-reload
+  systemctl mask atd.service
+  systemctl stop atd.service
+  systemctl daemon-reload
+
+  sed -i 's/^#cron./cron./' /etc/rsyslog.d/50-default.conf
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status atd.service
