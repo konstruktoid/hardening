@@ -79,6 +79,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `checkreboot` Check if reboot is required
 
 ##Recommended reading:  
+[Draft Red Hat 7 STIG Version 1, Release 0.1](http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx)  
 [CIS Ubuntu 14.04 LTS Server Benchmark v1.0.0](https://benchmarks.cisecurity.org/downloads/show-single/?file=ubuntu1404.100)  
 https://wiki.ubuntu.com/Security/Features  
 https://help.ubuntu.com/community/StricterDefaults  
