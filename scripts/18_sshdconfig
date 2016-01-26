@@ -15,7 +15,7 @@ function f_sshdconfig {
   fi
 
   if ! grep -q "ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveInterval 900" >> "$SSHDFILE"
+    echo "ClientAliveInterval 600" >> "$SSHDFILE"
   fi
 
   if ! grep -q "ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
