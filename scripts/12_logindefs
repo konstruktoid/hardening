@@ -3,7 +3,7 @@ function f_logindefs {
 
   LOGINDEFS='/etc/login.defs'
 
-  sed -i 's/^LOG_OK_LOGINS.*/LOG_OK_LOGINS\t\tyes/' "$LOGINDEFS"
+  sed -i 's/^.*LOG_OK_LOGINS.*/LOG_OK_LOGINS\t\tyes/' "$LOGINDEFS"
   sed -i 's/^UMASK.*/UMASK\t\t077/' "$LOGINDEFS"
   sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS\t\t1/' "$LOGINDEFS"
   sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS\t\t30/' "$LOGINDEFS"
