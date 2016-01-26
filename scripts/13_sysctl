@@ -9,6 +9,9 @@ function f_sysctl {
     echo "net.ipv6.conf.$i.accept_ra_rtr_pref = 0" >> /etc/sysctl.conf
   done
 
+  echo 1048576 > /sys/module/nf_conntrack/parameters/hashsize
+
+  chmod 0600 /etc/sysctl.conf
   systemctl restart systemd-sysctl
 
   if [[ $VERBOSE == "Y" ]]; then
