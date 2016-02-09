@@ -5,6 +5,7 @@ function f_auditd {
   sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="audit=1"/' /etc/default/grub
   curl -s "$AUDITD_RULES" > /etc/audit/audit.rules
   sed -i "s/arch=b64/arch=$(uname -m)/g" /etc/audit/audit.rules
+  cp /etc/audit/audit.rules /etc/audit/rules.d/hardening.rules
   update-grub 2> /dev/null
   systemctl restart auditd.service
 
