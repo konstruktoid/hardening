@@ -79,6 +79,9 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `aide_timer` Enable daily Aide check  
 `checkreboot` Check if reboot is required
 
+## Ansible
+If you're using Ansible, a playbook with most of the above functions impletemeted is available in my Ansible repository [konstruktoid/Ansible](https://github.com/konstruktoid/Ansible).
+
 ##Recommended reading:  
 [Draft Red Hat 7 STIG Version 1, Release 0.1](http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx)  
 [CIS Ubuntu 14.04 LTS Server Benchmark v1.0.0](https://benchmarks.cisecurity.org/downloads/show-single/?file=ubuntu1404.100)  
