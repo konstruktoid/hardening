@@ -85,7 +85,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `checkreboot` Check if reboot is required
 
 == Ansible
-If you're using Ansible, a playbook with most of the above functions impletemeted is available in my Ansible repository [konstruktoid/Ansible](https://github.com/konstruktoid/Ansible).
+If you're using Ansible, a playbook with most of the above functions impletemeted is available in my Ansible repository https://github.com/konstruktoid/Ansible[konstruktoid/Ansible].
 
 == Recommended reading
 http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
