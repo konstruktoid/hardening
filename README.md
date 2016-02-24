@@ -69,6 +69,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `aide` Aide  
 `rhosts` .rhosts  
 `users` Remove users  
+`lockroot` Lock root user account  
 `aptget_clean` Remove unused packages  
 `suid` Remove suid bits  
 `rc` /etc/init.d/rc  
