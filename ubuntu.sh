@@ -44,6 +44,7 @@ f_auditd
 f_aide
 f_rhosts
 f_users
+f_lockroot
 f_aptget_clean
 f_suid
 f_rc
