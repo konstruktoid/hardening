@@ -13,7 +13,10 @@ function f_firewall {
 
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
   ufw --force enable
-  ufw allow log from "$FW_ADMIN" to any port 22 proto tcp
+
+  for admin in $FW_ADMIN; do
+    ufw allow log from "$admin" to any port 22 proto tcp
+  done
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status ufw.service
