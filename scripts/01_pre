@@ -1,5 +1,7 @@
 function f_pre {
-  RINPUT=$(openssl rand -hex 3)
+
+  export TERM=linux
+  export DEBIAN_FRONTEND=noninteractive
 
   if [[ $VERBOSE == "Y" ]]; then
     APTFLAGS='-y'
