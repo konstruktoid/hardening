@@ -4,6 +4,7 @@ function f_sshdconfig {
   SSHDFILE='/etc/ssh/sshd_config'
   cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
 
+  sed -i 's/^X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
   sed -i 's/^LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
   sed -i 's/^KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
