@@ -26,5 +26,10 @@ function f_aide_timer {
   systemctl start aidecheck.timer
   systemctl daemon-reload
 
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status aidecheck.timer --no-pager
+    echo
+  fi
+
   ((i++))
 }
