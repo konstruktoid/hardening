@@ -4,7 +4,7 @@ function f_ctrlaltdel {
   systemctl mask ctrl-alt-del.target
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status ctrl-alt-del.target
+    systemctl status ctrl-alt-del.target --no-pager
     echo
   fi
 

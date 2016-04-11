@@ -59,7 +59,7 @@ function f_timesyncd {
   fi
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status systemd-timesyncd
+    systemctl status systemd-timesyncd --no-pager
     echo
   fi
 

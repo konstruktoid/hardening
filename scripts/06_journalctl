@@ -12,7 +12,7 @@ function f_journalctl {
   systemctl restart systemd-journald
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status systemd-journald
+    systemctl status systemd-journald --no-pager
     echo
   fi
 

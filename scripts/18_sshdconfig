@@ -42,7 +42,7 @@ function f_sshdconfig {
 
   if [[ $VERBOSE == "Y" ]];
     then
-       systemctl status sshd.service
+       systemctl status sshd.service --no-pager
     echo
   fi
 

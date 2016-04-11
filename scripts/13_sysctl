@@ -15,7 +15,7 @@ function f_sysctl {
   systemctl restart systemd-sysctl
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status systemd-sysctl
+    systemctl status systemd-sysctl --no-pager
     echo
   fi
 

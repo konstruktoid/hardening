@@ -10,7 +10,7 @@ function f_auditd {
   systemctl restart auditd.service
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status auditd.service
+    systemctl status auditd.service --no-pager
     echo
   fi
 

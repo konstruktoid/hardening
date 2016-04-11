@@ -20,7 +20,7 @@ function f_cron {
   sed -i 's/^#cron./cron./' /etc/rsyslog.d/50-default.conf
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status atd.service
+    systemctl status atd.service --no-pager
     echo
   fi
 

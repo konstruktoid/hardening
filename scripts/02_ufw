@@ -19,7 +19,7 @@ function f_firewall {
   done
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status ufw.service
+    systemctl status ufw.service --no-pager
     ufw status verbose
     echo
   fi
