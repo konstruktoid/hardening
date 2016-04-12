@@ -12,7 +12,7 @@ function f_resolvedconf {
   systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status resolvconf.service
+    systemctl status resolvconf.service --no-pager
     echo
   fi
 
