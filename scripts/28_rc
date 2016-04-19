@@ -1,7 +1,11 @@
-function f_rc {
-  echo "[$i] /etc/init.d/rc"
+function f_umask {
+  echo "[$i] umask"
 
   sed -i 's/umask 022/umask 027/g' /etc/init.d/rc
+
+  if ! grep -q -i "umask" "/etc/profile" 2> /dev/null; then
+    echo "umask 027" >> /etc/profile
+  fi
 
   ((i++))
 
