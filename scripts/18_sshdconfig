@@ -9,14 +9,18 @@ function f_sshdconfig {
   sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
   sed -i 's/^KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
   sed -i 's/^UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
-  sed -i 's/^LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
+  sed -i 's/^LogLevel.*/LogLevel INFO/' "$SSHDFILE"
 
   if ! grep -q "AllowGroups" "$SSHDFILE" 2> /dev/null; then
     echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
   fi
 
+  if ! grep -q "MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
+    echo "MaxAuthTries 4" >> "$SSHDFILE"
+  fi
+
   if ! grep -q "ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveInterval 600" >> "$SSHDFILE"
+    echo "ClientAliveInterval 300" >> "$SSHDFILE"
   fi
 
   if ! grep -q "ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
