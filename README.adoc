@@ -77,7 +77,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `lockroot` Lock root user account +
 `aptget_clean` Remove unused packages +
 `suid` Remove suid bits +
-`rc` /etc/init.d/rc +
+`umask` Set umask +
 `path` Modify paths +
 `aa_enforce` Enforce apparmor profiles +
 `aide_post` Create Aide db +
@@ -88,6 +88,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 If you're using Ansible, a playbook with most of the above functions impletemeted is available in my Ansible repository https://github.com/konstruktoid/Ansible[konstruktoid/Ansible].
 
 == Recommended reading
+https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100] +
 http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
 https://benchmarks.cisecurity.org/downloads/show-single/?file=ubuntu1404.100[CIS Ubuntu 14.04 LTS Server Benchmark v1.0.0] +
 https://wiki.ubuntu.com/Security/Features +

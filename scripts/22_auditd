@@ -10,6 +10,8 @@ function f_auditd {
   sed -i "s/arch=b64/arch=$(uname -m)/g" /etc/audit/audit.rules
   cp /etc/audit/audit.rules /etc/audit/rules.d/hardening.rules
   update-grub 2> /dev/null
+
+  systemctl enable auditd
   systemctl restart auditd.service
 
   if [[ $VERBOSE == "Y" ]]; then
