@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source ./ubuntu.cfg
 
 clear
