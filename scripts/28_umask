@@ -7,6 +7,10 @@ function f_umask {
     echo "umask 027" >> /etc/profile
   fi
 
+  if ! grep -q -i "umask" "/etc/bash.bashrc" 2> /dev/null; then
+    echo "umask 027" >> /etc/bash.bashrc
+  fi
+
   ((i++))
 
 }
