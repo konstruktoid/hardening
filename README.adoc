@@ -5,9 +5,9 @@ A quick way to make a Ubuntu server a bit more secure.
 
 Tested on `15.10 Ubuntu Wily Werewolf` and `16.04 Xenial Xerus`. Systemd required.
 
-If you're just interested in the security focused systemd configuration, it's available as https://github.com/konstruktoid/hardening/blob/master/systemd.adoc[separate document].
+If you're just interested in the security focused systemd configuration, it's available as a https://github.com/konstruktoid/hardening/blob/master/systemd.adoc[separate document].
 
-WARNING: This is a work in progress. It may break everything.
+NOTE: This is a constant work in progress.
 
 == Howto
 Start the installation of the server. +
