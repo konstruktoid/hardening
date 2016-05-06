@@ -1,0 +1,199 @@
+= Security focused systemd configuration
+:icons: font
+
+https://www.freedesktop.org/wiki/Software/systemd/[systemd] configuration examples.
+
+== Documentation
+https://github.com/konstruktoid/hardening[Hardening Ubuntu. Systemd edition.] +
+http://0pointer.de/blog/projects/security.html[systemd for Administrators, Part XII: Securing Your Services] +
+https://github.com/systemd/systemd[systemd upstream]
+
+== Logging
+
+=== /etc/systemd/journald.conf
+See https://www.freedesktop.org/software/systemd/man/journald.conf.html[journald.conf].
+
+[source,shell]
+----
+[Journal]
+Compress=yes // <1>
+ForwardToSyslog=yes // <2>
+Storage=persistent // <3>
+----
+
+<1> "data objects that shall be stored in the journal and are larger than a certain threshold are compressed before they are written to the file system."
+<2> "log messages received by the journal daemon shall be forwarded to a traditional syslog daemon"
+<3> "data will be stored preferably on disk, i.e. below the /var/log/journal hierarchy (which is created if needed), with a fallback to /run/log/journal (which is created if needed), during early boot and if the disk is not writable."
+
+== Mounts
+
+See https://www.freedesktop.org/software/systemd/man/systemd.mount.html[systemd.mount].
+
+=== /etc/systemd/system/tmp.mount
+[source,shell]
+----
+[Unit]
+Description=Temporary Directory
+Documentation=man:hier(7)
+Before=local-fs.target
+
+[Mount]
+What=tmpfs // <1>
+Where=/tmp // <2>
+Type=tmpfs // <3>
+Options=mode=1777,strictatime,nodev,nosuid // <4><5>
+----
+
+<1> "an absolute path of a device node, file or other resource to mount."
+<2> "an absolute path of a directory of the mount point."
+<3> "a string for the file system type."
+<4> "options to use when mounting."
+<5> add `noexec` if possible.
+
+=== /etc/systemd/system/var-tmp.mount
+[source,shell]
+----
+[Unit]
+Description=Temporary Directory
+Documentation=man:hier(7)
+Before=local-fs.target
+
+[Mount]
+What=tmpfs
+Where=/var/tmp
+Type=tmpfs
+Options=mode=1777,strictatime,nodev,nosuid // <1>
+----
+
+<1> add `noexec` if possible.
+
+== System
+
+=== /etc/systemd/resolved.conf
+
+See https://www.freedesktop.org/software/systemd/man/resolved.conf.html[resolved.conf].
+
+[source,shell]
+----
+[Resolve]
+DNS=127.0.0.1 // <1>
+FallbackDNS=8.8.8.8 8.8.4.4 // <2>
+DNSSEC=allow-downgrade // <3>
+----
+
+<1> "space-separated list of IPv4 and IPv6 addresses to use as system DNS servers."
+<2> "space-separated list of IPv4 and IPv6 addresses to use as the fallback DNS servers."
+<3> "If set to "allow-downgrade" DNSSEC validation is attempted, but if the server does not support DNSSEC properly, DNSSEC mode is automatically disabled." Should be set to `true` if possible.
+
+=== /etc/systemd/system.conf
+See https://www.freedesktop.org/software/systemd/man/systemd-system.conf.html[system.conf] and https://www.freedesktop.org/software/systemd/man/systemd.html[systemd, init].
+
+[source,shell]
+----
+[Manager]
+DumpCore=no // <1>
+CrashShell=no // <2>
+DefaultLimitCORE=0 // <3>
+DefaultLimitNOFILE=100 // <4>
+DefaultLimitNPROC=100 // <5>
+----
+<1> "If `yes`, the systemd manager (PID 1) dumps core when it crashes. Otherwise, no core dump is created."
+<2> "If `yes`, the system manager (PID 1) spawns a shell when it crashes, after a 10s delay. Otherwise, no shell is spawned."
+<3> Don't allow daemons to core dump.
+<4> Default limit for number of open files.
+<5> Default limit for number of processes.
+
+=== /etc/systemd/timesyncd.conf
+
+See https://www.freedesktop.org/software/systemd/man/timesyncd.conf.html[timesyncd.conf].
+
+[source,shell]
+----
+[Time]
+NTP=0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org // <1>
+FallbackNTP=2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org // <2>
+----
+
+<1> "space-separated list of NTP server host names or IP addresses."
+<2> "space-separated list of NTP server host names or IP addresses to be used as the fallback NTP servers."
+
+== Users
+
+=== /etc/systemd/logind.conf
+
+See https://www.freedesktop.org/software/systemd/man/logind.conf.html[logind.conf].
+
+[source,shell]
+----
+[Login]
+KillUserProcesses=1 // <1>
+KillExcludeUsers=root // <2>
+IdleAction=lock // <3>
+IdleActionSec=15min // <4>
+RemoveIPC=yes // <5>
+----
+
+<1> "the processes of a user should be killed when the user completely logs out (i.e. after the user's last session ended)."
+<2> "Processes of users listed in `KillExcludeUsers=` are excluded from being killed."
+<3> "the action to take when the system is idle."
+<4> "the delay after which the action configured in `IdleAction=` (see above) is taken after the system is idle."
+<5> "the user may not consume IPC resources after the last of the user's sessions terminated."
+
+=== /etc/systemd/user.conf
+
+See https://www.freedesktop.org/software/systemd/man/systemd-user.conf.html[systemd-user.conf].
+
+[source,shell]
+----
+[Manager]
+DefaultLimitCORE=0 // <1>
+DefaultLimitNOFILE=100 // <2>
+DefaultLimitNPROC=100 // <3>
+CapabilityBoundingSet=~CAP_SYS_PTRACE // <4>
+----
+
+<1> Don't allow core dumps.
+<2> Default limit for number of open files.
+<3> Default limit for number of processes.
+<4> "capabilities to include in the capability bounding set." See http://man7.org/linux/man-pages/man7/capabilities.7.html[capabilities(7)].
+
+== .service example
+
+See http://0pointer.de/public/systemd-man/systemd.exec.html[systemd.exec].
+
+=== /etc/systemd/system/nginx.service
+
+[source,shell]
+----
+[Unit]
+Description=A high performance web server and a reverse proxy server
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
+TimeoutStopSec=5
+KillMode=mixed
+PrivateTmp=yes // <1>
+ProtectSystem=full // <2>
+ProtectHome=true // <3>
+NoNewPrivileges=true // <4>
+ReadOnlyDirectories=/var/www/html // <5>
+CapabilityBoundingSet=~CAP_SYS_PTRACE // <6>
+PrivateDevices=true // <7>
+
+[Install]
+WantedBy=multi-user.target
+----
+
+<1> "sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
+<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too."
+<3> "If true, the directories /home, /root and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead."
+<4> "If true, ensures that the service process and all its children can never gain new privileges."
+<5> "Directories listed in ReadOnlyDirectories= are accessible for reading only, writing will be refused even if the usual file access controls would permit this."
+<6> "Controls which capabilities to include in the capability bounding set for the executed process."
+<7> "If true, sets up a new /dev namespace for the executed processes and only adds API pseudo devices such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY subsystem) to it"
