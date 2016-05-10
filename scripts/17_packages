@@ -12,8 +12,11 @@ function f_packages {
   echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
   echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 
-  PACKAGES="acct aide-common apparmor-profiles apparmor-utils auditd haveged libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter"
-  $APT install $PACKAGES $VM --no-install-recommends
+  PACKAGES="acct aide-common apparmor-profiles apparmor-utils auditd haveged libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter $VM"
+
+  for deb in $PACKAGES; do
+       $APT install --no-install-recommends $deb
+  done
 
   ((i++))
 }
