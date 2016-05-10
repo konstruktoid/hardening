@@ -4,12 +4,13 @@ function f_sshdconfig {
   SSHDFILE='/etc/ssh/sshd_config'
   cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
 
-  sed -i 's/^X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
-  sed -i 's/^LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
-  sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
-  sed -i 's/^KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
-  sed -i 's/^UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
-  sed -i 's/^LogLevel.*/LogLevel INFO/' "$SSHDFILE"
+  sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
+  sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
+  sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
+  sed -i 's/.*KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
+  sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
+  sed -i 's/.*LogLevel.*/LogLevel INFO/' "$SSHDFILE"
+  sed -i 's/.*UseLogin.*/UseLogin no/' "$SSHDFILE"
 
   if ! grep -q "AllowGroups" "$SSHDFILE" 2> /dev/null; then
     echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
