@@ -3,7 +3,8 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `15.10 Ubuntu Wily Werewolf` and `16.04 Xenial Xerus`. Systemd required.
+Tested on `15.10 Ubuntu Wily Werewolf`, `16.04 Xenial Xerus` and `16.10 Yakkety Yak (development branch)`. +
+Systemd required.
 
 If you're just interested in the security focused systemd configuration, it's available as a https://github.com/konstruktoid/hardening/blob/master/systemd.adoc[separate document].
 
@@ -84,6 +85,7 @@ Change the configuration options in the `ubuntu.cfg` file and last but not least
 `aa_enforce` Enforce apparmor profiles +
 `aide_post` Create Aide db +
 `aide_timer` Enable daily Aide check +
+`systemddelta` systemd-delta +
 `checkreboot` Check if reboot is required
 
 == Ansible
