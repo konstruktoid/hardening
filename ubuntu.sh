@@ -54,6 +54,7 @@ f_path
 f_aa_enforce
 f_aide_post
 f_aide_timer
+f_systemddelta
 f_checkreboot
 
 echo
