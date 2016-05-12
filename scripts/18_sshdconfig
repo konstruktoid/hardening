@@ -1,16 +1,21 @@
+# https://github.com/mozilla/wikimo_opsec/blob/master/Security/Guidelines/OpenSSH.mediawiki#Modern_OpenSSH_67
+
 function f_sshdconfig {
   echo "[$i] /etc/ssh/sshd_config"
 
   SSHDFILE='/etc/ssh/sshd_config'
   cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
 
+  sed -i '/HostKey.*ssh_host_dsa_key.*/d' "$SSHDFILE"
   sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
   sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
   sed -i 's/.*KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
   sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
-  sed -i 's/.*LogLevel.*/LogLevel INFO/' "$SSHDFILE"
+  sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
   sed -i 's/.*UseLogin.*/UseLogin no/' "$SSHDFILE"
+  sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
+  sed -i 's/.*Subsystem sftp.*/Subsystem sftp \/usr\/lib\/ssh\/sftp-server -f AUTHPRIV -l INFO/' "$SSHDFILE"
 
   if ! grep -q "AllowGroups" "$SSHDFILE" 2> /dev/null; then
     echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
