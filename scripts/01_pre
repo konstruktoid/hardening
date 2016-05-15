@@ -12,21 +12,21 @@ function f_pre {
   APT="apt-get $APTFLAGS"
 
   if [[ $CHANGEME == "" ]]; then
-    echo "Please read the code".
+    echo "Please read the code. Exiting."
     echo
-    exit
+    exit 1
   fi
 
   if [ $EUID -ne 0 ]; then
-    echo "Not root and not in the sudo group. Exiting."
+    echo "Not root or not enough privileges. Exiting."
     echo
-    exit
+    exit 1
   fi
 
   if ! lsb_release -i | grep 'Ubuntu'; then
     echo "Ubuntu only. Exiting."
     echo
-    exit
+    exit 1
   fi
 
   i="0"
