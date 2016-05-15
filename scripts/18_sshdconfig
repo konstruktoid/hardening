@@ -49,6 +49,14 @@ function f_sshdconfig {
     echo 'Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256' >> "$SSHDFILE"
   fi
 
+  if ! grep -q "MaxSessions" "$SSHDFILE" 2> /dev/null; then
+    echo "MaxSessions 2" >> "$SSHDFILE"
+  fi
+
+  if ! grep -q "UseDNS" "$SSHDFILE" 2> /dev/null; then
+    echo "UseDNS yes" >> "$SSHDFILE"
+  fi
+
   systemctl restart sshd.service
 
   if [[ $VERBOSE == "Y" ]];
