@@ -1,14 +1,19 @@
 #!/bin/bash
 
-source ./ubuntu.cfg
-
-clear
+if ! ps -p $$ | grep -i bash; then
+       echo "Sorry, this script requires bash."
+       exit 1
+fi
 
 if ! [ -x "$(which systemctl)" ]
   then
     echo "systemctl required. Exiting."
-    exit
+    exit 1
 fi
+
+clear
+
+source ./ubuntu.cfg
 
 for s in ./scripts/[0-9_]*; do
   [[ -e $s ]] || break
