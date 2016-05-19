@@ -36,14 +36,53 @@ Download the script using `git clone https://github.com/konstruktoid/hardening.g
 Change the configuration options in the `ubuntu.cfg` file and last but not least run the script, `sudo bash ubuntu.sh`. +
 
 == Configuration options
-`FW_ADMIN="127.0.0.1"` The IP address that will be able to connect with SSH. +
-`SSH_GRPS="sudo"` Which group the users have to be member of in order to acess via SSH. +
-`SYSCTL_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/sysctl.conf"` Stricter sysctl settings. +
-`AUDITD_RULES="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/audit.rules"` Auditd rules. +
-`LOGROTATE_CONF="https://raw.githubusercontent.com/konstruktoid/ubuntu-conf/master/misc/logrotate.conf"` Logrotate settings. +
-`NTPSERVERPOOL="0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org"` NTP server pool. +
-`VERBOSE="N"` If you want all the details or not. +
-`CHANGEME=""` Add something just to verify that you actually glanced the code. +
+[source,shell]
+----
+FW_ADMIN='127.0.0.1' // <1>
+SSH_GRPS='sudo' // <2>
+SYSCTL_CONF='https://raw.githubusercontent.com/konstruktoid/hardening/master/misc/sysctl.conf' // <3>
+AUDITD_RULES='https://raw.githubusercontent.com/konstruktoid/hardening/master/misc/audit.rules' // <4>
+LOGROTATE_CONF='https://raw.githubusercontent.com/konstruktoid/hardening/master/misc/logrotate.conf' // <5>
+NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <6>
+VERBOSE='N' // <7>
+CHANGEME='' // <8>
+
+# Configuration files
+ADDUSER='/etc/adduser.conf'
+AUDITDCONF='/etc/audit/auditd.conf'
+AUDITRULES='/etc/audit/rules.d/hardening.rules'
+COMMONPASSWD='/etc/pam.d/common-password'
+COMMONACCOUNT='/etc/pam.d/common-account'
+COMMONAUTH='/etc/pam.d/common-auth'
+DEFAULTGRUB='/etc/default/grub'
+DISABLEMNT='/etc/modprobe.d/disablemnt.conf'
+DISABLEMOD='/etc/modprobe.d/disablemod.conf'
+DISABLENET='/etc/modprobe.d/disablenet.conf'
+JOURNALDCONF='/etc/systemd/journald.conf'
+LIMITSCONF='/etc/security/limits.conf'
+LOGINDCONF='/etc/systemd/logind.conf'
+LOGINDEFS='/etc/login.defs'
+LOGROTATE='/etc/logrotate.conf'
+PAMLOGIN='/etc/pam.d/login'
+RESOLVEDCONF='/etc/systemd/resolved.conf'
+RKHUNTERCONF='/etc/default/rkhunter'
+SECURITYACCESS='/etc/security/access.conf'
+SSHDFILE='/etc/ssh/sshd_config'
+SYSCTL='/etc/sysctl.conf'
+SYSTEMCONF='/etc/systemd/system.conf'
+TIMESYNCD='/etc/systemd/timesyncd.conf'
+UFWDEFAULT='/etc/default/ufw'
+USERADD='/etc/default/useradd'
+USERCONF='/etc/systemd/user.conf'
+----
+<1> The IP addresses that will be able to connect with SSH.
+<2> Which group the users have to be member of in order to acess via SSH.
+<3> Stricter sysctl settings.
+<4> Auditd rules.
+<5> Logrotate settings.
+<6> NTP server pool.
+<7> If you want all the details or not.
+<8> Add something just to verify that you actually glanced the code.
 
 === Function list
 `pre` Script setup +
