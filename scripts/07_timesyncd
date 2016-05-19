@@ -3,7 +3,7 @@ function f_timesyncd {
   LATENCY="50"
   SERVERS="4"
   APPLY="YES"
-  CONF="/etc/systemd/timesyncd.conf"
+  CONF="$TIMESYNCD"
   SERVERARRAY=()
   FALLBACKARRAY=()
   TMPCONF=$(mktemp --tmpdir ntpconf.XXXXX)

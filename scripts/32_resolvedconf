@@ -1,8 +1,6 @@
 function f_resolvedconf {
   echo "[$i] Systemd/resolved.conf"
 
-  RESOLVEDCONF="/etc/systemd/resolved.conf"
-
   dnsarray=( $(grep nameserver /etc/resolv.conf | sed 's/nameserver//g') )
   dnslist=${dnsarray[@]}
 

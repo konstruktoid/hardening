@@ -1,7 +1,5 @@
 function f_limitsconf {
-  echo "[$i] /etc/security/limits.conf"
-
-  LIMITSCONF='/etc/security/limits.conf'
+  echo "[$i] $LIMITSCONF"
 
   sed -i 's/^# End of file*//' "$LIMITSCONF"
   echo "* hard maxlogins 10" >> "$LIMITSCONF"

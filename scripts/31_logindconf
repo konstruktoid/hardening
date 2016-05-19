@@ -1,8 +1,6 @@
 function f_logindconf {
   echo "[$i] Systemd/logind.conf"
 
-  LOGINDCONF='/etc/systemd/logind.conf'
-
   sed -i 's/^#KillUserProcesses=no/KillUserProcesses=1/' "$LOGINDCONF"
   sed -i 's/^#KillExcludeUsers=root/KillExcludeUsers=root/' "$LOGINDCONF"
   sed -i 's/^#IdleAction=ignore/IdleAction=lock/' "$LOGINDCONF"

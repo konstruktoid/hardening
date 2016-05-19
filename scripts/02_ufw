@@ -1,8 +1,8 @@
 function f_firewall {
   echo "[$i] Enable ufw"
 
-  if ! test -f /etc/default/ufw; then
-    echo '/etc/default/ufw does not exist.'
+  if ! test -f $UFWDEFAULT; then
+    echo "$UFWDEFAULT does not exist."
 
     if ! dpkg -l | grep ufw 2> /dev/null 1>&2; then
       echo 'ufw package is not installed.'

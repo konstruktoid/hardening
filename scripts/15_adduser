@@ -1,9 +1,9 @@
 function f_adduser {
   echo "[$i] adduser.conf and default/useradd"
 
-  sed -i 's/DSHELL=.*/DSHELL=\/bin\/false/' /etc/adduser.conf
-  sed -i 's/SHELL=.*/SHELL=\/bin\/false/' /etc/default/useradd
-  sed -i 's/^# INACTIVE=.*/INACTIVE=35/' /etc/default/useradd
+  sed -i 's/DSHELL=.*/DSHELL=\/bin\/false/' "$ADDUSER"
+  sed -i 's/SHELL=.*/SHELL=\/bin\/false/' "$USERADD"
+  sed -i 's/^# INACTIVE=.*/INACTIVE=35/' "$USERADD"
 
   ((i++))
 }

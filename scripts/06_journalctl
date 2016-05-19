@@ -1,9 +1,7 @@
 function f_journalctl {
   echo "[$i] Systemd/journald.conf and logrotate.conf"
 
-  JOURNALDCONF='/etc/systemd/journald.conf'
-
-  curl -s "$LOGROTATE_CONF" > /etc/logrotate.conf
+  curl -s "$LOGROTATE_CONF" > "$LOGROTATE"
 
   sed -i 's/^#Storage=.*/Storage=persistent/' "$JOURNALDCONF"
   sed -i 's/^#ForwardToSyslog=.*/ForwardToSyslog=yes/' "$JOURNALDCONF"

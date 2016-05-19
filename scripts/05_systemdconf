@@ -1,9 +1,6 @@
 function f_systemdconf {
   echo "[$i] Systemd/system.conf and Systemd/user.conf"
 
-  SYSTEMCONF='/etc/systemd/system.conf'
-  USERCONF='/etc/systemd/user.conf'
-
   sed -i 's/^#DumpCore=.*/DumpCore=no/' "$SYSTEMCONF"
   sed -i 's/^#CrashShell=.*/CrashShell=no/' "$SYSTEMCONF"
   sed -i 's/^#DefaultLimitCORE=.*/DefaultLimitCORE=0/' "$SYSTEMCONF"

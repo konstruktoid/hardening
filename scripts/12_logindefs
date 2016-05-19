@@ -1,8 +1,6 @@
 function f_logindefs {
   echo "[$i] /etc/login.defs"
 
-  LOGINDEFS='/etc/login.defs'
-
   sed -i 's/^.*LOG_OK_LOGINS.*/LOG_OK_LOGINS\t\tyes/' "$LOGINDEFS"
   sed -i 's/^UMASK.*/UMASK\t\t077/' "$LOGINDEFS"
   sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS\t\t7/' "$LOGINDEFS"
