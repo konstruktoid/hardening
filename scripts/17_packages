@@ -15,7 +15,7 @@ function f_packages {
   PACKAGES="acct aide-common apparmor-profiles apparmor-utils auditd debsums haveged libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter $VM"
 
   for deb in $PACKAGES; do
-       $APT install --no-install-recommends $deb
+       $APT install --no-install-recommends "$deb"
   done
 
   ((i++))

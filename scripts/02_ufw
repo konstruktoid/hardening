@@ -1,7 +1,7 @@
 function f_firewall {
   echo "[$i] Enable ufw"
 
-  if ! test -f $UFWDEFAULT; then
+  if ! test -f "$UFWDEFAULT"; then
     echo "$UFWDEFAULT does not exist."
 
     if ! dpkg -l | grep ufw 2> /dev/null 1>&2; then
@@ -11,7 +11,7 @@ function f_firewall {
     return
   fi
 
-  sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' /etc/default/ufw
+  sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' "$UFWDEFAULT"
   ufw --force enable
 
   for admin in $FW_ADMIN; do

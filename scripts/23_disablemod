@@ -3,7 +3,7 @@ function f_disablemod {
 
   MOD="bluetooth firewire-core net-pf-31 soundcore thunderbolt usb-midi usb-storage"
   for disable in $MOD; do
-    if ! grep -q "$disable" $DISABLEMOD 2> /dev/null; then
+    if ! grep -q "$disable" "$DISABLEMOD" 2> /dev/null; then
       echo "install $disable /bin/true" >> "$DISABLEMOD"
     fi
   done

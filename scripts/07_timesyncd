@@ -51,7 +51,7 @@ function f_timesyncd {
   echo "FallbackNTP=${FALLBACKARRAY[@]}" >> "$TMPCONF"
 
   if [[ $APPLY = "YES" ]]; then
-    cat "$TMPCONF" > $CONF
+    cat "$TMPCONF" > "$CONF"
     systemctl restart systemd-timesyncd
     rm "$TMPCONF"
   else
