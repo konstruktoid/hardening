@@ -8,7 +8,7 @@ Systemd required.
 
 If you're just interested in the security focused systemd configuration, it's available as a https://github.com/konstruktoid/hardening/blob/master/systemd.adoc[separate document].
 
-NOTE: This is a constant work in progress.
+NOTE: This is a constant work in progress. Make sure you understand what it does. Read the code.
 
 == Howto
 Start the installation of the server. +
