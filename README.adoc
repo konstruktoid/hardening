@@ -129,7 +129,7 @@ USERCONF='/etc/systemd/user.conf'
 `checkreboot` Check if reboot is required
 
 == Tests
-There are approximately 160 https://github.com/sstephenson/bats[bats tests] for most of the above settings available in the link:tests/[tests directory].
+There are approximately 160 https://github.com/sstephenson/bats[Bats tests] for most of the above settings available in the link:tests/[tests directory].
 [source,shell]
 ----
 git clone https://github.com/konstruktoid/hardening.git
