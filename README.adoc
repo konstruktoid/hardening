@@ -127,6 +127,9 @@ USERCONF='/etc/systemd/user.conf'
 `systemddelta` systemd-delta +
 `checkreboot` Check if reboot is required
 
+== Tests
+There are approximately 160 https://github.com/sstephenson/bats[bats tests] for most of the above settings available in the link:tests/[tests directory]
+
 == Ansible
 If you're using Ansible, a playbook with most of the above functions implemented is available in my Ansible repository https://github.com/konstruktoid/Ansible[konstruktoid/Ansible].
 
