@@ -7,22 +7,22 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify KillExcludeUsers=root in $LOGINDCONF" {
+@test "Verify KillExcludeUsers in $LOGINDCONF" {
   run bash -c "grep '^KillExcludeUsers=root$' $LOGINDCONF"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify IdleAction=lock in $LOGINDCONF" {
+@test "Verify IdleAction in $LOGINDCONF" {
   run bash -c "grep '^IdleAction=lock$' $LOGINDCONF"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify IdleActionSec=15min in $LOGINDCONF" {
+@test "Verify IdleActionSec in $LOGINDCONF" {
   run bash -c "grep '^IdleActionSec=15min$' $LOGINDCONF"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify RemoveIPC=yes in $LOGINDCONF" {
+@test "Verify RemoveIPC in $LOGINDCONF" {
   run bash -c "grep '^RemoveIPC=yes$' $LOGINDCONF"
   [ "$status" -eq 0 ]
 }
