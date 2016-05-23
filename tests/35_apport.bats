@@ -2,7 +2,7 @@
 
 load test_helper
 
-@test "Verify that apport is disabled" {
+@test "Verify that apport is disabled in /etc/default/apport" {
   run bash -c "grep '^enabled=0$' /etc/default/apport"
   [ "$status" -eq 0 ]
 }
