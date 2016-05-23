@@ -28,6 +28,6 @@ load test_helper
 }
 
 @test "Verify cron logging is enabled" {
-  run bash -c "grep '^cron.\*.*/var/log/cron.log' /etc/rsyslog.d/50-default.conf"
+  run bash -c "grep '^cron.\*.*/var/log/cron.log$' /etc/rsyslog.d/50-default.conf"
   [ "$status" -eq 0 ]
 }
