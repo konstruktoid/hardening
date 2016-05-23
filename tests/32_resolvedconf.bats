@@ -16,3 +16,8 @@ load test_helper
   run bash -c "grep '^DNSSEC=...' $RESOLVEDCONF"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that nss-resolve is present in /etc/nsswitch.conf" {
+  run bash -c "grep '^hosts:.*files.*resolve' /etc/nsswitch.conf"
+  [ "$status" -eq 0 ]
+}
