@@ -2,7 +2,7 @@
 
 load test_helper
 
-@test "Verify that ssh_host_dsa_key isn't present in $SSHDFILE " {
+@test "Ensure that ssh_host_dsa_key isn't present in $SSHDFILE " {
   run bash -c "grep ssh_host_dsa_key $SSHDFILE"
   [ "$status" -eq 1 ]
 }
@@ -12,32 +12,32 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify LoginGraceTime 20 in $SSHDFILE " {
+@test "Verify LoginGraceTime in $SSHDFILE " {
   run bash -c "grep '^LoginGraceTime 20$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify PermitRootLogin no in $SSHDFILE " {
+@test "Verify PermitRootLogin in $SSHDFILE " {
   run bash -c "grep '^PermitRootLogin no$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify KeyRegenerationInterval 1800 in $SSHDFILE " {
+@test "Verify KeyRegenerationInterval in $SSHDFILE " {
   run bash -c "grep '^KeyRegenerationInterval 1800$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify UsePrivilegeSeparation sandbox in $SSHDFILE " {
+@test "Verify UsePrivilegeSeparation in $SSHDFILE " {
   run bash -c "grep '^UsePrivilegeSeparation sandbox$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify LogLevel VERBOSE in $SSHDFILE " {
+@test "Verify LogLevel in $SSHDFILE " {
   run bash -c "grep '^LogLevel VERBOSE$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify UseLogin no in $SSHDFILE " {
+@test "Verify UseLogin in $SSHDFILE " {
   run bash -c "grep '^UseLogin no$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
@@ -52,27 +52,27 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify MaxAuthTries 4 in $SSHDFILE " {
+@test "Verify MaxAuthTries in $SSHDFILE " {
   run bash -c "grep '^MaxAuthTries 4$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify ClientAliveInterval 300 in $SSHDFILE " {
+@test "Verify ClientAliveInterval in $SSHDFILE " {
   run bash -c "grep '^ClientAliveInterval 300$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify ClientAliveCountMax 0 in $SSHDFILE " {
+@test "Verify ClientAliveCountMax in $SSHDFILE " {
   run bash -c "grep '^ClientAliveCountMax 0$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify PermitUserEnvironment no in $SSHDFILE " {
+@test "Verify PermitUserEnvironment in $SSHDFILE " {
   run bash -c "grep '^PermitUserEnvironment no$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify KexAlgorithms no in $SSHDFILE " {
+@test "Verify KexAlgorithms in $SSHDFILE " {
   run bash -c "grep '^KexAlgorithms curve25519-sha256@libssh.org' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
@@ -87,12 +87,12 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify MaxSessions 2 in $SSHDFILE " {
+@test "Verify MaxSessions in $SSHDFILE " {
   run bash -c "grep '^MaxSessions 2$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify UseDNS yes in $SSHDFILE " {
+@test "Verify UseDNS in $SSHDFILE " {
   run bash -c "grep '^UseDNS yes$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
