@@ -13,6 +13,6 @@ load test_helper
 }
 
 @test "Verify that UFW uses $SYSCTL in $UFWDEFAULT" {
-  run bash -c "grep '^IPT_SYSCTL=/etc/sysctl.conf$' $UFWDEFAULT"
+  run bash -c "grep \"^IPT_SYSCTL=$SYSCTL$\" $UFWDEFAULT"
   [ "$status" -eq 0 ]
 }
