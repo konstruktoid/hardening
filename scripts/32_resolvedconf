@@ -6,7 +6,7 @@ function f_resolvedconf {
 
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"
-  sed -i '/^hosts:/ s/dns/resolve/' /etc/nsswitch.conf
+  sed -i '/^hosts:/ s/files dns/files resolve dns/' /etc/nsswitch.conf
 
   systemctl daemon-reload
 
