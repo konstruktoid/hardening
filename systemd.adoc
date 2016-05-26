@@ -25,6 +25,17 @@ Storage=persistent // <3>
 <2> "log messages received by the journal daemon shall be forwarded to a traditional syslog daemon"
 <3> "data will be stored preferably on disk, i.e. below the /var/log/journal hierarchy (which is created if needed), with a fallback to /run/log/journal (which is created if needed), during early boot and if the disk is not writable."
 
+=== /etc/systemd/coredump.conf
+See https://www.freedesktop.org/software/systemd/man/coredump.conf.html[coredump.conf].
+
+[source,shell]
+----
+[Coredump]
+Storage=none // <1>
+----
+
+<1> "When "none", the core dumps will be logged but not stored permanently."
+
 == Mounts
 
 See https://www.freedesktop.org/software/systemd/man/systemd.mount.html[systemd.mount].
