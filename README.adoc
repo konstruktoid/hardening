@@ -95,6 +95,7 @@ USERCONF='/etc/systemd/user.conf'
 `systemdconf` Systemd/system.conf and Systemd/user.conf +
 `journalctl` Systemd/journald.conf and logrotate.conf +
 `timesyncd` Systemd/timesyncd.conf +
+`coredump` Systemd/coredump.conf +
 `fstab` /etc/fstab, system/tmp.mount and system/var-tmp.mount +
 `prelink` Prelink +
 `aptget` Updating the package index and upgrading installed packages +
