@@ -15,6 +15,15 @@ isMasked() {
   fi
 }
 
+isLocked() {
+  isLocked=$(passwd -S "$1" | awk '{print $2}')
+  if [[ "$isLocked" = "L" ]]; then
+    exit 0
+  else
+    exit 1
+  fi
+}
+
 oneEntry() {
   grepWord="$1"
   grepFile="$2"
