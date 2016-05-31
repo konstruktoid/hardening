@@ -222,8 +222,8 @@ load test_helper
 	[ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.eth0.accept_ra_rtr_pref in $SYSCTL" {
-	run bash -c "grep '^net.ipv6.conf.eth0.accept_ra_rtr_pref.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.*.accept_ra_rtr_pref in $SYSCTL" {
+	run bash -c "grep '^net.ipv6.conf.*.accept_ra_rtr_pref.*0$' $SYSCTL"
 	[ "$status" -eq 0 ]
 }
 
