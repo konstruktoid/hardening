@@ -132,6 +132,11 @@ load test_helper
 	[ "$status" -eq 0 ]
 }
 
+@test "Verify net.ipv4.tcp_challenge_ack_limit in $SYSCTL" {
+  ack_limit_result=$(grep '^net.ipv4.tcp_challenge_ack_limit.*' $SYSCTL | awk '{print $NF >= 1000}')
+  [ $ack_limit_result -eq 1 ]
+}
+
 @test "Verify net.ipv4.tcp_max_syn_backlog in $SYSCTL" {
 	run bash -c "grep '^net.ipv4.tcp_max_syn_backlog.*2048$' $SYSCTL"
 	[ "$status" -eq 0 ]
