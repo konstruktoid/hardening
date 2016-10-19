@@ -27,6 +27,11 @@ load test_helper
 	[ "$status" -eq 0 ]
 }
 
+@test "Verify kernel.modules_disabled in $SYSCTL" {
+	run bash -c "grep '^kernel.modules_disabled.*1$' $SYSCTL"
+	[ "$status" -eq 0 ]
+}
+
 @test "Verify kernel.panic in $SYSCTL" {
 	run bash -c "grep '^kernel.panic.*60$' $SYSCTL"
 	[ "$status" -eq 0 ]
