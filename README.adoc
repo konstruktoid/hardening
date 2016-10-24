@@ -7,7 +7,8 @@ Tested on `15.10 Ubuntu Wily Werewolf`, `16.04 Xenial Xerus` and `16.10 Yakkety 
 Systemd required.
 
 If you're just interested in the security focused systemd configuration, it's available as a link:systemd.adoc[separate document]. +
-If you're interested in testing your host settings, you'll find the link:README.adoc#tests[instructions here].
+If you're interested in testing your host settings, you'll find the link:README.adoc#tests[instructions here]. +
+If you're using Ansible, a playbook with most of the above functions implemented is available in my Ansible repository https://github.com/konstruktoid/Ansible[konstruktoid/Ansible].
 
 NOTE: This is a constant work in progress. Make sure you understand what it does. Read the code.
 
@@ -131,15 +132,13 @@ USERCONF='/etc/systemd/user.conf'
 
 == Tests
 There are approximately 275 https://github.com/sstephenson/bats[Bats tests] for most of the above settings available in the link:tests/[tests directory].
+
 [source,shell]
 ----
 git clone https://github.com/konstruktoid/hardening.git
 cd tests/
 sudo bats .
 ----
-
-== Ansible
-If you're using Ansible, a playbook with most of the above functions implemented is available in my Ansible repository https://github.com/konstruktoid/Ansible[konstruktoid/Ansible].
 
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
