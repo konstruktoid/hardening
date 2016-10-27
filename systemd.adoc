@@ -128,6 +128,60 @@ FallbackNTP=2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org // <2>
 <1> "space-separated list of NTP server host names or IP addresses."
 <2> "space-separated list of NTP server host names or IP addresses to be used as the fallback NTP servers."
 
+== Unit configuration
+
+See http://0pointer.de/public/systemd-man/systemd.exec.html[systemd.exec].
+
+[source,shell]
+----
+PrivateTmp= // <1>
+ProtectSystem= // <2>
+ProtectHome= // <3>
+NoNewPrivileges= // <4>
+ReadWriteDirectories=, ReadOnlyDirectories=, InaccessibleDirectories= // <5>
+CapabilityBoundingSet= // <6>
+PrivateDevices= // <7>
+User=, Group= // <8>
+----
+
+<1> "sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
+<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too."
+<3> "If true, the directories /home, /root and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead."
+<4> "If true, ensures that the service process and all its children can never gain new privileges."
+<5> "Sets up a new file system namespace for executed processes."
+<6> "Controls which capabilities to include in the capability bounding set for the executed process."
+<7> "If true, sets up a new /dev namespace for the executed processes and only adds API pseudo devices such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY subsystem) to it"
+<8> "Sets the Unix user or group that the processes are executed as, respectively"
+
+=== /etc/systemd/system/nginx.service example
+
+[source,shell]
+----
+[Unit]
+Description=A high performance web server and a reverse proxy server
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
+ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
+ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
+TimeoutStopSec=5
+KillMode=mixed
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+ReadOnlyDirectories=/var/www/html
+CapabilityBoundingSet=~CAP_SYS_PTRACE
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target
+----
+
 == Users
 
 === /etc/systemd/logind.conf
@@ -168,43 +222,3 @@ CapabilityBoundingSet=~CAP_SYS_PTRACE // <4>
 <3> Default limit for number of processes.
 <4> "capabilities to include in the capability bounding set." See http://man7.org/linux/man-pages/man7/capabilities.7.html[capabilities(7)].
 
-== .service example
-
-See http://0pointer.de/public/systemd-man/systemd.exec.html[systemd.exec].
-
-=== /etc/systemd/system/nginx.service
-
-[source,shell]
-----
-[Unit]
-Description=A high performance web server and a reverse proxy server
-After=network.target
-
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
-ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
-ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
-ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
-TimeoutStopSec=5
-KillMode=mixed
-PrivateTmp=yes // <1>
-ProtectSystem=full // <2>
-ProtectHome=true // <3>
-NoNewPrivileges=true // <4>
-ReadOnlyDirectories=/var/www/html // <5>
-CapabilityBoundingSet=~CAP_SYS_PTRACE // <6>
-PrivateDevices=true // <7>
-
-[Install]
-WantedBy=multi-user.target
-----
-
-<1> "sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
-<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too."
-<3> "If true, the directories /home, /root and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead."
-<4> "If true, ensures that the service process and all its children can never gain new privileges."
-<5> "Directories listed in ReadOnlyDirectories= are accessible for reading only, writing will be refused even if the usual file access controls would permit this."
-<6> "Controls which capabilities to include in the capability bounding set for the executed process."
-<7> "If true, sets up a new /dev namespace for the executed processes and only adds API pseudo devices such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY subsystem) to it"
