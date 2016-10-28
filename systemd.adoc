@@ -1,7 +1,8 @@
 = Security focused systemd configuration
 :icons: font
 
-https://www.freedesktop.org/wiki/Software/systemd/[systemd] configuration examples.
+https://www.freedesktop.org/wiki/Software/systemd/[systemd] configuration
+examples, hopefully making your server and services a bit more secure.
 
 == Documentation
 https://github.com/konstruktoid/hardening[Hardening Ubuntu. Systemd edition.] +
