@@ -308,7 +308,7 @@ load test_helper
 }
 
 @test "Verify /etc/sudoers in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/sudoers -p rw' $AUDITRULES"
+  run bash -c " grep -P '^-w /etc/sudoers -p .?w' $AUDITRULES"
   [ "$status" -eq 0 ]
 }
 
