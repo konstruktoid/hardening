@@ -7,8 +7,8 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Verify that X11Forwarding is disabled in $SSHDFILE " {
-  run bash -c "grep '^X11Forwarding no$' $SSHDFILE"
+@test "Verify that X11Forwarding is enabled in $SSHDFILE " {
+  run bash -c "grep '^X11Forwarding yes$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
