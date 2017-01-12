@@ -12,6 +12,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify UFW default deny policy" {
+  run bash -c "ufw status verbose | grep 'deny (incoming)'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that UFW uses $SYSCTL in $UFWDEFAULT" {
   run bash -c "grep \"^IPT_SYSCTL=$SYSCTL$\" $UFWDEFAULT"
   [ "$status" -eq 0 ]
