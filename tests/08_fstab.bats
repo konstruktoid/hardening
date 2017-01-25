@@ -105,3 +105,23 @@ load test_helper
   run bash -c "grep '[[:space:]]/var/log[[:space:]].*noexec.*' /proc/mounts"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that /proc is mounted with nodev" {
+  run bash -c "grep '[[:space:]]/proc[[:space:]].*nodev.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /proc is mounted with nosuid" {
+  run bash -c "grep '[[:space:]]/proc[[:space:]].*nosuid.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /proc is mounted with noexec" {
+  run bash -c "grep '[[:space:]]/proc[[:space:]].*noexec.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /proc is mounted with hidepid" {
+  run bash -c "grep '[[:space:]]/proc[[:space:]].*hidepid=.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}

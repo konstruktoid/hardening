@@ -5,6 +5,10 @@ function f_fstab {
 
   sed -i '/floppy/d' /etc/fstab
 
+  if ! grep -i '/proc' /etc/fstab 2>/dev/null 1>&2; then
+    echo 'none /proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2 0 0' >> /etc/fstab
+  fi
+
   if [ -e /etc/systemd/system/tmp.mount ]; then
     sed -i '/^\/tmp/d' /etc/fstab
 
