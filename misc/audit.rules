@@ -1,56 +1,66 @@
-## Based on:
-## https://github.com/gds-operations/puppet-auditd/blob/master/templates/audit.rules.begin.fragment.erb 
-## RHEL 6 Security Technical Implementation Guide
+# https://github.com/konstruktoid/ansible-role-hardening/blob/master/templates/etc/audit/rules.d/hardening.rules.j2
+# https://github.com/konstruktoid/Ansible/blob/master/roles/docker/templates/audit.rules.j2
+# https://github.com/gds-operations/puppet-auditd/tree/master/templates
 
-## Remove any existing rules
+# Remove any existing rules
 -D
 
-## Buffer Size
+# Buffer Size
 -b 8192
 
-## Failure Mode
+# Ignore errors
+-i
+
+# Failure Mode
 -f 2
 
-## Audit the audit logs 
+# Audit the audit logs
 -w /var/log/audit/ -k auditlog
 
-## Auditd configuration
+# Auditd configuration
 -w /etc/audit/ -p wa -k auditconfig
 -w /etc/libaudit.conf -p wa -k auditconfig
 -w /etc/audisp/ -p wa -k audispconfig
 
-## Monitor for use of audit management tools
+# Monitor for use of audit management tools
 -w /sbin/auditctl -p x -k audittools
 -w /sbin/auditd -p x -k audittools
 
-## Monitor AppArmor configuration changes
+# Monitor AppArmor configuration changes
 -w /etc/apparmor/ -p wa -k apparmor
 -w /etc/apparmor.d/ -p wa -k apparmor
 
-## Monitor usage of AppArmor tools
+# Monitor usage of AppArmor tools
 -w /sbin/apparmor_parser -p x -k apparmor_tools
 -w /usr/sbin/aa-complain -p x -k apparmor_tools
 -w /usr/sbin/aa-disable -p x -k apparmor_tools
 -w /usr/sbin/aa-enforce -p x -k apparmor_tools
 
-## Monitor Systemd configuration changes
+# Monitor Systemd configuration changes
 -w /etc/systemd/ -p wa -k systemd
 -w /lib/systemd/ -p wa -k systemd
 
-## Monitor usage of systemd tools
+# Monitor usage of systemd tools
 -w /bin/systemctl -p x -k systemd_tools
--w /bin/journalctl -p x -k systemd_tools 
+-w /bin/journalctl -p x -k systemd_tools
 
-## Special files
+# Special files
 -a always,exit -F arch=b64 -S mknod -S mknodat -k specialfiles
+-a always,exit -F arch=b32 -S mknod -S mknodat -k specialfiles
 
-## Mount operations
--a always,exit -F arch=b64 -S mount -S umount2 -k mount 
+# Mount operations
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -F key=export
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -F key=export
 
-## Changes to the time
--a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k time
+# Changes to the time
+-a always,exit -F arch=b64 -S settimeofday -k audit_time_rules
+-a always,exit -F arch=b64 -S adjtimex -k audit_time_rules
+-a always,exit -F arch=b64 -S clock_settime -k audit_time_rules
+-a always,exit -F arch=b32 -S settimeofday -k audit_time_rules
+-a always,exit -F arch=b32 -S adjtimex -k audit_time_rules
+-a always,exit -F arch=b32 -S clock_settime -k audit_time_rules
 
-## Cron configuration & scheduled jobs
+# Cron configuration & scheduled jobs
 -w /etc/cron.allow -p wa -k cron
 -w /etc/cron.deny -p wa -k cron
 -w /etc/cron.d/ -p wa -k cron
@@ -61,17 +71,20 @@
 -w /etc/crontab -p wa -k cron
 -w /var/spool/cron/crontabs/ -k cron
 
-## User, group, password databases
--w /etc/group -p wa -k etcgroup
--w /etc/passwd -p wa -k etcpasswd
--w /etc/gshadow -k etcgroup
--w /etc/shadow -k etcpasswd
--w /etc/security/opasswd -k opasswd
+# User, group, password databases
+-w /etc/group -p wa -k audit_rules_usergroup_modification
+-w /etc/passwd -p wa -k audit_rules_usergroup_modification
+-w /etc/gshadow -p wa -k audit_rules_usergroup_modification
+-w /etc/shadow -p wa -k audit_rules_usergroup_modification
+-w /etc/security/opasswd -p wa -k audit_rules_usergroup_modification
 
-## Monitor usage of passwd
+# MAC-policy
+-w /etc/selinux/ -p wa -k MAC-policy
+
+# Monitor usage of passwd
 -w /usr/bin/passwd -p x -k passwd_modification
 
-## Monitor for use of tools to change group identifiers
+# Monitor for use of tools to change group identifiers
 -w /usr/sbin/groupadd -p x -k group_modification
 -w /usr/sbin/groupmod -p x -k group_modification
 -w /usr/sbin/addgroup -p x -k group_modification
@@ -79,98 +92,221 @@
 -w /usr/sbin/usermod -p x -k user_modification
 -w /usr/sbin/adduser -p x -k user_modification
 
-## Monitor module tools
+# Monitor module tools
 -w /sbin/insmod -p x -k modules
 -w /sbin/rmmod -p x -k modules
 -w /sbin/modprobe -p x -k modules
+-w /usr/sbin/insmod -p x -k modules
+-w /usr/sbin/rmmod -p x -k modules
+-w /usr/sbin/modprobe -p x -k modules
 
-## Login configuration and information
+# Login configuration and information
 -w /etc/login.defs -p wa -k login
 -w /etc/securetty -p wa -k login
 -w /var/log/faillog -p wa -k login
+-w /var/run/faillock/ -p wa -k logins
 -w /var/log/lastlog -p wa -k login
 -w /var/log/tallylog -p wa -k login
 
-## Network configuration
--w /etc/hosts -p wa -k hosts
--w /etc/network/ -p wa -k network
+# Network configuration
+-w /etc/hosts -p wa -k audit_rules_networkconfig_modification
+-w /etc/network/ -p wa -k audit_rules_networkconfig_modification
+-w /etc/sysconfig/network -p wa -k audit_rules_networkconfig_modification
 
-## System startup scripts
+# System startup scripts
 -w /etc/inittab -p wa -k init
 -w /etc/init.d/ -p wa -k init
 -w /etc/init/ -p wa -k init
 
-## Library search paths
+# Library search paths
 -w /etc/ld.so.conf -p wa -k libpath
 
-## Local time zone
+# Local time zone
 -w /etc/localtime -p wa -k localtime
 
-## Time zone configuration
--w /etc/timezone -p wa -k timezone
+# Time zone configuration
+-w /etc/timezone -p wa -k audit_time_ruleszone
 
-## Kernel parameters
+# Kernel parameters
 -w /etc/sysctl.conf -p wa -k sysctl
 
-## Modprobe configuration
+# Modprobe configuration
 -w /etc/modprobe.conf -p wa -k modprobe
 -w /etc/modprobe.d/ -p wa -k modprobe
 -w /etc/modules -p wa -k modprobe
 
-# Module manipulations.
--a always,exit -F arch=b64 -S init_module -S delete_module -k modules
+# Module manipulations
+-a always,exit -F arch=b64 -S init_module -S delete_module -F key=modules
+-a always,exit -F arch=b64 -S init_module -F key=modules
+-a always,exit -F arch=b32 -S init_module -S delete_module -F key=modules
+-a always,exit -F arch=b32 -S init_module -F key=modules
 
-## PAM configuration
+# File deletions
+-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b64 -S unlink -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b64 -S rename -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b64 -S renameat -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -S unlink -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -S rename -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -S renameat -F auid>=1000 -F auid!=4294967295 -F key=delete
+
+# PAM configuration
 -w /etc/pam.d/ -p wa -k pam
 -w /etc/security/limits.conf -p wa -k pam
 -w /etc/security/pam_env.conf -p wa -k pam
 -w /etc/security/namespace.conf -p wa -k pam
 -w /etc/security/namespace.init -p wa -k pam
 
-## Postfix configuration
+# Postfix configuration
 -w /etc/aliases -p wa -k mail
 -w /etc/postfix/ -p wa -k mail
 
-## SSH configuration
+# SSH configuration
 -w /etc/ssh/sshd_config -k sshd
 
-## Changes to hostname
--a exit,always -F arch=b64 -S sethostname -k hostname
+# Changes to hostname
+-a always,exit -F arch=b64 -S sethostname -S setdomainname -k audit_rules_networkconfig_modification
+-a always,exit -F arch=b32 -S sethostname -S setdomainname -k audit_rules_networkconfig_modification
 
-## Changes to issue
--w /etc/issue -p wa -k etcissue
--w /etc/issue.net -p wa -k etcissue
+# Changes to issue
+-w /etc/issue -p wa -k audit_rules_networkconfig_modification
+-w /etc/issue.net -p wa -k audit_rules_networkconfig_modification
 
-## Capture all failures to access on critical elements
--a exit,always -F arch=b64 -S open -F dir=/etc -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/bin -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/sbin -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/usr/bin -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/usr/sbin -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/var -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/home -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/root -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/srv -F success=0 -k unauthedfileaccess
--a exit,always -F arch=b64 -S open -F dir=/tmp -F success=0 -k unauthedfileaccess
+# Capture all unauthorized file accesses
+-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S open -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S open -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
 
-## Monitor for use of process ID change (switching accounts) applications
--w /bin/su -p x -k priv_esc
--w /usr/bin/sudo -p x -k priv_esc
--w /etc/sudoers -p rw -k priv_esc
+# Capture all failures to access on critical elements
+-a exit,always -F arch=b64 -S open -F dir=/etc -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/bin -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/sbin -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/usr/bin -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/usr/sbin -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/var -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/home -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/root -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/srv -F success=0 -k access
+-a exit,always -F arch=b64 -S open -F dir=/tmp -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/etc -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/bin -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/sbin -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/usr/bin -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/usr/sbin -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/var -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/home -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/root -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/srv -F success=0 -k access
+-a exit,always -F arch=b32 -S open -F dir=/tmp -F success=0 -k access
 
-## Monitor usage of commands to change power state
+# Monitor for use of process ID change (switching accounts) applications
+-w /bin/su -p x -k actions
+-w /usr/bin/sudo -p x -k actions
+-w /etc/sudoers -p aw -k actions
+
+# Monitor usage of commands to change power state
 -w /sbin/shutdown -p x -k power
 -w /sbin/poweroff -p x -k power
 -w /sbin/reboot -p x -k power
 -w /sbin/halt -p x -k power
 
-## Monitor admins accessing user files.
+# Monitor admins accessing user files.
 -a always,exit -F dir=/home/ -F uid=0 -C auid!=obj_uid -k admin_user_home
 
-## Monitor changes and executions in /tmp and /var/tmp.
+# Monitor changes and executions in /tmp and /var/tmp.
 -w /tmp/ -p wxa -k tmp
 -w /var/tmp/ -p wxa -k tmp
 
-## Make the configuration immutable
--e 2
+# Permissions
+-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
+-a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
 
+# Use of privileged commands
+-a always,exit -F path=/usr/bin/cgexec -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/bin/chfn -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/bin/pkexec -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/screen -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/bin/sudoedit -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/userhelper -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/wall -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/bin/write -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/sbin/postdrop -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/sbin/postqueue -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/sbin/restorecon -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/sbin/semanage -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/sbin/setsebool -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+-a always,exit -F path=/usr/sbin/usernetct -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged-priv_change
+-a always,exit -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+
+# Docker
+-w /etc/default/docker -k docker
+-w /etc/docker -k docker
+-w /etc/sysconfig/docker -k docker
+-w /etc/sysconfig/docker-network -k docker
+-w /etc/sysconfig/docker-registry -k docker
+-w /etc/sysconfig/docker-storage -k docker
+-w /etc/systemd/system/docker-registry.service -k docker
+-w /etc/systemd/system/docker.service -k docker
+-w /lib/systemd/system/docker-registry.service -k docker
+-w /lib/systemd/system/docker.service -k docker
+-w /lib/systemd/system/docker.socket -k docker
+-w /usr/bin/docker-containerd-ctr -k docker
+-w /usr/bin/docker-containerd -k docker
+-w /usr/bin/docker-containerd-shim -k docker
+-w /usr/bin/docker -k docker
+-w /usr/bin/docker-runc -k docker
+-w /usr/lib/systemd/system/docker-registry.service -k docker
+-w /usr/lib/systemd/system/docker.service -k docker
+-w /var/lib/docker -k docker
+-w /var/run/docker.sock -k docker
+
+# Make the configuration immutable
+-e 2
