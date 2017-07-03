@@ -42,7 +42,9 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_postfix
 f_apport
+f_motdnews
 f_rkhunter
 f_sshdconfig
 f_password
