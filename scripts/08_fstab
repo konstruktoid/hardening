@@ -1,7 +1,7 @@
 function f_fstab {
   echo "[$i] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
-  curl -s https://raw.githubusercontent.com/konstruktoid/hardening/master/config/tmp.mount > /etc/systemd/system/tmp.mount
+  cp ./config/tmp.mount /etc/systemd/system/tmp.mount
 
   sed -i '/floppy/d' /etc/fstab
 

@@ -1,7 +1,7 @@
 function f_sysctl {
   echo "[$i] $SYSCTL"
 
-  curl -s "$SYSCTL_CONF" > "$SYSCTL"
+  cp "$SYSCTL_CONF" "$SYSCTL"
 
   sed -i '/net.ipv6.conf.eth0.accept_ra_rtr_pref/d' "$SYSCTL"
 
