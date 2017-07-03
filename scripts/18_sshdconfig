@@ -16,44 +16,52 @@ function f_sshdconfig {
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
   sed -i 's/.*Subsystem sftp.*/Subsystem sftp \/usr\/lib\/ssh\/sftp-server -f AUTHPRIV -l INFO/' "$SSHDFILE"
 
-  if ! grep -q "AllowGroups" "$SSHDFILE" 2> /dev/null; then
+  echo "" >> "$SSHDFILE"
+
+  if ! grep -q "^AllowGroups" "$SSHDFILE" 2> /dev/null; then
     echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
   fi
 
-  if ! grep -q "MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxAuthTries 4" >> "$SSHDFILE"
+  if ! grep -q "^MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
+    echo "MaxAuthTries 2" >> "$SSHDFILE"
+    else
+    sed -i 's/MaxAuthTries.*/MaxAuthTries 2/' "$SSHDFILE"
   fi
 
-  if ! grep -q "ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
     echo "ClientAliveInterval 300" >> "$SSHDFILE"
   fi
 
-  if ! grep -q "ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
     echo "ClientAliveCountMax 0" >> "$SSHDFILE"
   fi
 
-  if ! grep -q "PermitUserEnvironment" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^PermitUserEnvironment" "$SSHDFILE" 2> /dev/null; then
     echo "PermitUserEnvironment no" >> "$SSHDFILE"
   fi
 
-  if ! grep -q "KexAlgorithms" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^KexAlgorithms" "$SSHDFILE" 2> /dev/null; then
     echo 'KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256' >> "$SSHDFILE"
   fi
 
-  if ! grep -q "Ciphers" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^Ciphers" "$SSHDFILE" 2> /dev/null; then
     echo 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr' >> "$SSHDFILE"
   fi
 
-  if ! grep -q "Macs" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^Macs" "$SSHDFILE" 2> /dev/null; then
     echo 'Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256' >> "$SSHDFILE"
   fi
 
-  if ! grep -q "MaxSessions" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
     echo "MaxSessions 2" >> "$SSHDFILE"
+    else
+    sed -i 's/MaxSessions.*/MaxSessions 2/' "$SSHDFILE"
   fi
 
-  if ! grep -q "UseDNS" "$SSHDFILE" 2> /dev/null; then
+  if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
     echo "UseDNS yes" >> "$SSHDFILE"
+    else
+    sed -i 's/UseDNS.*/UseDNS yes/' "$SSHDFILE"
   fi
 
   systemctl restart sshd.service
