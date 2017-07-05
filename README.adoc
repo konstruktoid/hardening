@@ -89,6 +89,8 @@ USERCONF='/etc/systemd/user.conf'
 <7> If you want all the details or not.
 <8> Add something just to verify that you actually glanced the code.
 
+== Functions
+
 === Function list
 
 ==== 01_pre
