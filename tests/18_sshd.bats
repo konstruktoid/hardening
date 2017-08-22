@@ -53,7 +53,7 @@ load test_helper
 }
 
 @test "Verify MaxAuthTries in $SSHDFILE " {
-  run bash -c "grep '^MaxAuthTries 4$' $SSHDFILE"
+  run bash -c "grep '^MaxAuthTries .$' $SSHDFILE"
   [ "$status" -eq 0 ]
 }
 
