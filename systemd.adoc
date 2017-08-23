@@ -108,12 +108,14 @@ CrashShell=no // <2>
 DefaultLimitCORE=0 // <3>
 DefaultLimitNOFILE=100 // <4>
 DefaultLimitNPROC=100 // <5>
+CtrlAltDelBurstAction=none // <6>
 ----
 <1> "If `yes`, the systemd manager (PID 1) dumps core when it crashes. Otherwise, no core dump is created."
 <2> "If `yes`, the system manager (PID 1) spawns a shell when it crashes, after a 10s delay. Otherwise, no shell is spawned."
 <3> Don't allow daemons to core dump.
 <4> Default limit for number of open files.
 <5> Default limit for number of processes.
+<6> Defines what action will be performed if user presses Ctrl-Alt-Delete more than 7 times in 2s.
 
 === /etc/systemd/timesyncd.conf
 
