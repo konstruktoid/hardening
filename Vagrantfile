@@ -19,4 +19,12 @@ Vagrant.configure("2") do |config|
     zesty.vm.network "private_network", ip:"10.7.8.43"
     zesty.vm.hostname = "zesty"
   end
+
+  config.vm.define "artful" do |artful|
+    artful.vm.box = "ubuntu/artful64"
+    artful.ssh.insert_key = true
+    artful.vm.network "private_network", ip:"10.7.8.44"
+    artful.vm.hostname = "artful"
+  end
+
 end
