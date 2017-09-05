@@ -1,11 +1,11 @@
 function f_packages {
   echo "[$i] Installing base packages"
 
-  if dmidecode -q --type system | grep -i vmware; then
+  if dmesg | grep -i -E "dmi.*vmware"; then
     VM="open-vm-tools"
   fi
 
-  if dmidecode -q --type system | grep -i virtualbox; then
+  if dmesg | grep -i -E "dmi.*virtualbox"; then
     VM="virtualbox-guest-dkms virtualbox-guest-utils"
   fi
 
