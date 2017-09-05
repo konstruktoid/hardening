@@ -5,8 +5,8 @@ function f_sysctl {
 
   sed -i '/net.ipv6.conf.eth0.accept_ra_rtr_pref/d' "$SYSCTL"
 
-  for i in $(arp -n -a | awk '{print $NF}' | sort | uniq); do
-    echo "net.ipv6.conf.$i.accept_ra_rtr_pref = 0" >> "$SYSCTL"
+  for n in $(arp -n -a | awk '{print $NF}' | sort | uniq); do
+    echo "net.ipv6.conf.$n.accept_ra_rtr_pref = 0" >> "$SYSCTL"
   done
 
   echo 1048576 > /sys/module/nf_conntrack/parameters/hashsize

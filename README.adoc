@@ -3,7 +3,8 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `16.04 Xenial Xerus`, `16.10 Yakkety Yak` and `17.04 Zesty Zapus`.
+Tested on `16.04 Xenial Xerus`, `16.10 Yakkety Yak`, `17.04 Zesty Zapus`
+and `17.10 Artful Aardvark (development branch)`.
 
 Systemd required.
 
@@ -162,7 +163,7 @@ Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd` `deb
 `haveged` `libpam-cracklib` `libpam-tmpdir` `openssh-server` `postfix` `rkhunter`.
 
 ==== 18_sshdconfig
-Configure the `SSH`-daemon.
+Configure the `OpenSSH`-daemon.
 
 ==== 19_password
 Configure `pam_cracklib.so` and `pam_tally.so`.
