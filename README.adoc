@@ -303,7 +303,7 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 275 https://github.com/sstephenson/bats[Bats tests] for most of the above settings available in the link:tests/[tests directory].
+There are approximately 400 https://github.com/sstephenson/bats[Bats tests] for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
 ----
