@@ -7,6 +7,11 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Ensure a floppy isn't mounted" {
+  run bash -c "grep floppy /proc/mounts"
+  [ "$status" -eq 1 ]
+}
+
 @test "Ensure /tmp isn't present in /etc/fstab" {
   run bash -c "grep -e '[[:space:]]/tmp[[:space:]]' /etc/fstab"
   [ "$status" -eq 1 ]
