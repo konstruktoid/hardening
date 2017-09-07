@@ -107,8 +107,8 @@ load test_helper
 	[ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.rp_filter= in $SYSCTL" {
-	run bash -c "grep '^net.ipv4.conf.default.rp_filter=.*1$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.rp_filter in $SYSCTL" {
+	run bash -c "grep '^net.ipv4.conf.default.rp_filter.*1$' $SYSCTL"
 	[ "$status" -eq 0 ]
 }
 
