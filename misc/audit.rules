@@ -226,7 +226,8 @@
 # Monitor for use of process ID change (switching accounts) applications
 -w /bin/su -p x -k actions
 -w /usr/bin/sudo -p x -k actions
--w /etc/sudoers -p aw -k actions
+-w /etc/sudoers -p wa -k actions
+-w /etc/sudoers.d -p wa -k actions
 
 # Monitor usage of commands to change power state
 -w /sbin/shutdown -p x -k power
