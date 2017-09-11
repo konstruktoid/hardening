@@ -2,8 +2,24 @@
 
 source ../ubuntu.cfg
 
+auditctlRuntime() {
+  if which auditctl; then
+    auditctl -l | grep -E "$1"
+  else
+    exit 1
+  fi
+}
+
 fragmentPath() {
-  systemctl show -p FragmentPath "$1" | sed 's/.*=//'
+  if [ -f "$(systemctl show -p FragmentPath "$1" | sed 's/.*=//')" ]; then
+    systemctl show -p FragmentPath "$1" | sed 's/.*=//'
+  else
+    exit 1
+  fi
+}
+
+gotSGid() {
+  ls -l "$1" | awk '{print $1}' | grep -q 's'
 }
 
 isMasked() {
@@ -37,6 +53,10 @@ oneEntry() {
   grep "$grepWord" "$grepFile"
 }
 
-gotSGid() {
-  ls -l $1 | awk '{print $1}' | grep -q 's'
+sshdConfig() {
+  sshd -T | grep -i "$1"
+}
+
+sysctlRuntime() {
+  sysctl --all | grep -i "$1"
 }
