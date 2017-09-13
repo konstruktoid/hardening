@@ -81,8 +81,8 @@ UFWDEFAULT='/etc/default/ufw'
 USERADD='/etc/default/useradd'
 USERCONF='/etc/systemd/user.conf'
 ----
-<1> The IP addresses that will be able to connect with SSH.
-<2> Which group the users have to be member of in order to acess via SSH.
+<1> The IP addresses that will be able to connect with SSH, separated by spaces.
+<2> Which group the users have to be member of in order to acess via SSH, separated by spaces.
 <3> Stricter sysctl settings.
 <4> Auditd rules.
 <5> Logrotate settings.
