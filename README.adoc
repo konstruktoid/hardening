@@ -186,7 +186,7 @@ Configure `auditd`, use `$AUDITD_RULES`.
 ==== 23_disablemod
 CCE-27327-6, CCE-27277-3
 
-Disable `bluetooth` `firewire-core` `n_hdlc` `net-pf-31` `soundcore`
+Disable `bluetooth` `bnep` `btusb` `firewire-core` `n_hdlc` `net-pf-31` `soundcore`
 `thunderbolt` `usb-midi` `usb-storage` kernel modules.
 
 ==== 24_aide
