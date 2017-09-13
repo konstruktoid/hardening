@@ -7,6 +7,16 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that kernel module bnep is disabled" {
+  run bash -c "grep 'install bnep /bin/true' $DISABLEMOD"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that kernel module btusb is disabled" {
+  run bash -c "grep 'install btusb /bin/true' $DISABLEMOD"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that kernel module firewire-core is disabled" {
   run bash -c "grep 'install firewire-core /bin/true' $DISABLEMOD"
   [ "$status" -eq 0 ]
