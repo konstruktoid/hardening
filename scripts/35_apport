@@ -1,5 +1,5 @@
 function f_apport {
-  echo "[$i] disable apport"
+  echo "[$i] Disable apport"
 
   sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
   systemctl mask apport.service

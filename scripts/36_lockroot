@@ -1,5 +1,5 @@
 function f_lockroot {
-  echo "[$i] lock root account"
+  echo "[$i] Lock root account"
 
   usermod -L root
 

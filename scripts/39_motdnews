@@ -1,6 +1,6 @@
 function f_motdnews {
   if test -f /etc/default/motd-news; then
-    echo "[$i] disable motd-news"
+    echo "[$i] Disable motd-news"
     sed -i 's/ENABLED=.*/ENABLED=0/' /etc/default/motd-news
     systemctl disable motd-news.timer
 
