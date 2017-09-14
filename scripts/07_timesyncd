@@ -58,8 +58,15 @@ function f_timesyncd {
     echo "Configuration saved to $TMPCONF."
   fi
 
+  if ! [[ -z "$TIMEDATECTL" ]]; then
+    echo "Setting time zone to $TIMEDATECTL"
+    timedatectl set-timezone "$TIMEDATECTL"
+  fi
+
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status systemd-timesyncd --no-pager
+    echo
+    timedatectl
     echo
   fi
 
