@@ -16,7 +16,6 @@ function f_aide_post {
   echo "[$i] Running Aide, this will take a while"
 
   aideinit --yes
-  cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
 
   ((i++))
 }
