@@ -1,7 +1,13 @@
 function f_aide {
-  echo "[$i] Aide"
+  echo "[$i] Aide configuration"
 
-  sed -i 's/^Checksums =.*/Checksums = sha512/' /etc/aide/aide.conf
+  if ! grep -R -E '^!/var/lib/lxcfs/cgroup$' /etc/aide/*; then
+    echo '!/var/lib/lxcfs/cgroup' > /etc/aide/aide.conf.d/70_aide_lxcfs
+  fi
+
+  if ! grep -R -E '^!/var/lib/docker$' /etc/aide/*; then
+    echo '!/var/lib/docker' > /etc/aide/aide.conf.d/70_aide_docker
+  fi
 
   ((i++))
 }
