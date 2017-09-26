@@ -61,3 +61,13 @@ load test_helper
   run bash -c "dpkg -l | grep ^ii.*rkhunter"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that vlock is installed" {
+  run bash -c "dpkg -l | grep ^ii.*vlock"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that libpam-apparmor is installed" {
+  run bash -c "dpkg -l | grep ^ii.*libpam-apparmor"
+  [ "$status" -eq 0 ]
+}
