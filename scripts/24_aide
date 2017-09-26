@@ -28,7 +28,7 @@ function f_aide_timer {
   chmod 0644 /etc/systemd/system/aidecheck.*
 
   systemctl reenable aidecheck.timer
-  systemctl start aidecheck.timer
+  systemctl restart aidecheck.timer
   systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then
