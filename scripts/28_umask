@@ -13,6 +13,10 @@ function f_umask {
     echo "umask 027" >> /etc/bash.bashrc
   fi
 
-  ((i++))
+  if ! grep -q -i "TMOUT" "/etc/profile.d/*" 2> /dev/null; then
+    echo -e 'TMOUT=900\nreadonly TMOUT\nexport TMOUT' > '/etc/profile.d/autologout.sh'
+    chmod +x /etc/profile.d/autologout.sh
+  fi
 
+  ((i++))
 }
