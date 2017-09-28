@@ -21,3 +21,17 @@ function f_aptget_clean {
 
   ((i++))
 }
+
+function f_aptget_configure {
+  echo "[$i] Configure APT"
+
+  if ! grep '^APT::Get::AllowUnauthenticated' /etc/apt/apt.conf.d/* ; then
+    echo 'APT::Get::AllowUnauthenticated "false";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
+  fi
+
+  if ! grep '^Unattended-Upgrade::Remove-Unused-Dependencies;' /etc/apt/apt.conf.d/50unattended-upgrades; then
+    sed -i 's/.*Unattended-Upgrade::Remove-Unused-Dependencies.*/Unattended-Upgrade::Remove-Unused-Dependencies "true";/' /etc/apt/apt.conf.d/50unattended-upgrades
+  fi
+
+  ((i++))
+}

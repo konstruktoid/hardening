@@ -13,17 +13,22 @@ load test_helper
 }
 
 @test "Verify PASS_MIN_DAYS in $LOGINDEFS" {
-  run bash -c "grep '^PASS_MIN_DAYS.*7$' $LOGINDEFS"
+  run bash -c "grep '^PASS_MIN_DAYS.*1$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify PASS_MAX_DAYS in $LOGINDEFS" {
-  run bash -c "grep '^PASS_MAX_DAYS.*30$' $LOGINDEFS"
+  run bash -c "grep '^PASS_MAX_DAYS.*60$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify DEFAULT_HOME in $LOGINDEFS" {
   run bash -c "grep '^DEFAULT_HOME no$' $LOGINDEFS"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify ENCRYPT_METHOD in $LOGINDEFS" {
+  run bash -c "grep '^ENCRYPT_METHOD SHA512$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 

@@ -143,7 +143,7 @@ load test_helper
 }
 
 @test "Verify net.ipv4.tcp_max_syn_backlog in $SYSCTL" {
-	run bash -c "grep '^net.ipv4.tcp_max_syn_backlog.*2048$' $SYSCTL"
+	run bash -c "grep '^net.ipv4.tcp_max_syn_backlog.*20480$' $SYSCTL"
 	[ "$status" -eq 0 ]
 }
 
@@ -387,7 +387,7 @@ load test_helper
 }
 
 @test "Verify sysctl runtime net.ipv4.tcp_max_syn_backlog" {
-	run sysctlRuntime '^net.ipv4.tcp_max_syn_backlog.*2048$'
+	run sysctlRuntime '^net.ipv4.tcp_max_syn_backlog.*20480$'
 	[ "$status" -eq 0 ]
 }
 

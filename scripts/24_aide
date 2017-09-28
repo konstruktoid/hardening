@@ -1,7 +1,13 @@
 function f_aide {
-  echo "[$i] Aide"
+  echo "[$i] Aide configuration"
 
-  sed -i 's/^Checksums =.*/Checksums = sha512/' /etc/aide/aide.conf
+  if ! grep -R -E '^!/var/lib/lxcfs/cgroup$' /etc/aide/*; then
+    echo '!/var/lib/lxcfs/cgroup' > /etc/aide/aide.conf.d/70_aide_lxcfs
+  fi
+
+  if ! grep -R -E '^!/var/lib/docker$' /etc/aide/*; then
+    echo '!/var/lib/docker' > /etc/aide/aide.conf.d/70_aide_docker
+  fi
 
   ((i++))
 }
@@ -10,7 +16,6 @@ function f_aide_post {
   echo "[$i] Running Aide, this will take a while"
 
   aideinit --yes
-  cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
 
   ((i++))
 }
@@ -23,7 +28,7 @@ function f_aide_timer {
   chmod 0644 /etc/systemd/system/aidecheck.*
 
   systemctl reenable aidecheck.timer
-  systemctl start aidecheck.timer
+  systemctl restart aidecheck.timer
   systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then

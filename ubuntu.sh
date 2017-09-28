@@ -33,6 +33,7 @@ f_timesyncd
 f_coredump
 f_fstab
 f_prelink
+f_aptget_configure
 f_aptget
 f_hosts
 f_issue

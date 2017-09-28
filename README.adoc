@@ -50,8 +50,9 @@ SYSCTL_CONF='./misc/sysctl.conf' // <3>
 AUDITD_RULES='./misc/audit.rules' // <4>
 LOGROTATE_CONF='./misc/logrotate.conf' // <5>
 NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <6>
-VERBOSE='N' // <7>
-CHANGEME='' // <8>
+TIMEDATECTL='' // <7>
+VERBOSE='N' // <8>
+CHANGEME='' // <9>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -87,8 +88,9 @@ USERCONF='/etc/systemd/user.conf'
 <4> Auditd rules.
 <5> Logrotate settings.
 <6> NTP server pool.
-<7> If you want all the details or not.
-<8> Add something just to verify that you actually glanced the code.
+<7> Add a specific time zone or use the system default by leaving it empty.
+<8> If you want all the details or not.
+<9> Add something just to verify that you actually glanced the code.
 
 == Functions
 
@@ -108,7 +110,8 @@ CCE-26828-4, CCE-27106-4
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
 ==== 04_disablemnt
-CCE-80137-3, CCE-80138-1, CCE-80139-9, CCE-80140-7, CCE-80141-5, CCE-80142-3, CCE-80143-1
+CCE-80137-3, CCE-80138-1, CCE-80139-9, CCE-80140-7, CCE-80141-5, CCE-80142-3, CCE-80143-1,
+UBTU-16-010070
 
 Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `squashfs` `udf` `vfat` file systems.
 
@@ -130,7 +133,7 @@ CCE-27078-5
 Undo prelinking, and remove `prelink` package.
 
 === 10_aptget
-CCE-26895-3
+CCE-26895-3, UBTU-16-010010, UBTU-16-010560, UBTU-16-010570
 
 `apt-get` update and upgrade.
 
@@ -140,7 +143,8 @@ V-72315
 `/etc/hosts.allow` and `/etc/hosts.deny` restrictions.
 
 ==== 12_logindefs
-CCE-80205-8
+CCE-80205-8, UBTU-16-010150, UBTU-16-010170, UBTU-16-010190, UBTU-16-010210,
+UBTU-16-010220, UBTU-16-010640
 
 Modify `/etc/login.defs`, e.g. `UMASK`, password age limits and `SHA_CRYPT_MAX_ROUNDS`.
 
@@ -153,19 +157,28 @@ CCE-80169-6, V-72049
 Set hard and soft limits.
 
 ==== 15_adduser
+UBTU-16-010280
+
 Set `/bin/false` as default shell when adding users.
 
 ==== 16_rootaccess
 Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in `/etc/security/access.conf`
 
 ==== 17_packages
+UBTU-16-010050, UBTU-16-010500, UBTU-16-010600
+
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd` `debsums`
-`haveged` `libpam-cracklib` `libpam-tmpdir` `openssh-server` `postfix` `rkhunter`.
+`haveged` `libpam-apparmor` `libpam-cracklib` `libpam-tmpdir` `openssh-server`
+`postfix` `rkhunter` `vlock`.
 
 ==== 18_sshdconfig
 Configure the `OpenSSH`-daemon.
 
 ==== 19_password
+UBTU-16-010090, UBTU-16-010100, UBTU-16-010110, UBTU-16-010120, UBTU-16-010120,
+UBTU-16-010130, UBTU-16-010140, UBTU-16-010180, UBTU-16-010230, UBTU-16-010240,
+UBTU-16-010250, UBTU-16-010290, UBTU-16-010320, UBTU-16-010340
+
 Configure `pam_cracklib.so` and `pam_tally.so`.
 
 ==== 20_cron
@@ -174,23 +187,23 @@ CCE-27323-5, CCE-80345-2
 Allow `root` to use `cron`. Mask `atd`.
 
 ==== 21_ctraltdel
-CCE-27511-5
+CCE-27511-5, UBTU-16-010630
 
 Disable Ctrl-alt-delete.
 
 ==== 22_auditd
-CCE-27407-6
+CCE-27407-6, UBTU-16-020000
 
 Configure `auditd`, use `$AUDITD_RULES`.
 
 ==== 23_disablemod
-CCE-27327-6, CCE-27277-3
+CCE-27327-6, CCE-27277-3, UBTU-16-010580
 
 Disable `bluetooth` `bnep` `btusb` `firewire-core` `n_hdlc` `net-pf-31` `soundcore`
 `thunderbolt` `usb-midi` `usb-storage` kernel modules.
 
 ==== 24_aide
-CCE-27096-7
+CCE-27096-7, UBTU-16-020000, UBTU-16-020010
 
 Configure `aide`.
 
@@ -200,6 +213,8 @@ CCE-27406-8
 Remove `hosts.equiv` and `.rhosts`.
 
 ==== 26_users
+UBTU-16-010650
+
 Remove `games` `gnats` `irc` `list` `news` `uucp` users.
 
 ==== 27_suid
@@ -209,14 +224,18 @@ Remove `suid` bits from `/bin/fusermount` `/bin/mount` `/bin/ping` `/bin/ping6`
 `/usr/bin/pkexec` `/usr/bin/traceroute6.iputils` `/usr/bin/wall` `/usr/sbin/pppd`.
 
 ==== 28_umask
-CCE-80202-5
+CCE-80202-5, UBTU-16-010060
 
 Set `bash` and `/etc/profile` umask.
 
 ==== 29_apparmor
+UBTU-16-010600, UBTU-16-010610, UBTU-16-010620
+
 Enforce present `apparmor` profiles.
 
 ==== 30_path
+UBTU-16-010780
+
 Set `root` path to `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`,
 and user path to `/usr/local/bin:/usr/bin:/bin`.
 
@@ -269,6 +288,7 @@ f_timesyncd
 f_coredump
 f_fstab
 f_prelink
+f_aptget_configure
 f_aptget
 f_hosts
 f_issue
@@ -315,6 +335,7 @@ sudo bats .
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
 http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
+https://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04 STIG Ver 1, Rel 1] +
 https://benchmarks.cisecurity.org/downloads/show-single/?file=ubuntu1404.100[CIS Ubuntu 14.04 LTS Server Benchmark v1.0.0] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
