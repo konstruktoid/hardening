@@ -3,13 +3,15 @@
 function f_sshdconfig {
   echo "[$i] /etc/ssh/sshd_config"
 
+  awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
+  mv /etc/ssh/moduli.tmp /etc/ssh/moduli
+
   cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
 
   sed -i '/HostKey.*ssh_host_dsa_key.*/d' "$SSHDFILE"
   sed -i 's/.*X11Forwarding.*/X11Forwarding yes/' "$SSHDFILE"
   sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
-  sed -i 's/.*KeyRegenerationInterval.*/KeyRegenerationInterval 1800/' "$SSHDFILE"
   sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
   sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
   sed -i 's/.*UseLogin.*/UseLogin no/' "$SSHDFILE"
