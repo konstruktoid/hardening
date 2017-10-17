@@ -96,3 +96,8 @@ load test_helper
   run sshdConfig '^UseDNS yes$'
   [ "$status" -eq 0 ]
 }
+
+@test "Verify moduli sizes" {
+  run bash -c "awk '{print $5}' /etc/ssh/moduli | grep -E '^1...|^2...'"
+  [ "$status" -eq 1 ]
+}
