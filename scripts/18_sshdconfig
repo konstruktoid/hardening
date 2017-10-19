@@ -9,6 +9,8 @@ function f_sshdconfig {
   cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
 
   sed -i '/HostKey.*ssh_host_dsa_key.*/d' "$SSHDFILE"
+  sed -i '/KeyRegenerationInterval.*/d' "$SSHDFILE"
+  sed -i '/ServerKeyBits.*/d' "$SSHDFILE"
   sed -i 's/.*X11Forwarding.*/X11Forwarding yes/' "$SSHDFILE"
   sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
