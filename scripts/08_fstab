@@ -32,8 +32,6 @@ function f_tmp {
   else
     echo '/etc/systemd/system/tmp.mount was not found.'
   fi
-
-  ((i++))
 }
 
 function f_fstab {
@@ -42,39 +40,42 @@ function f_fstab {
 
   read -r -a devices <<< "$(echo $DEVICES | sed 's/\/dev\/s/\/dev\/xv/g')"
 
-  if [ "4" != "${!devices[@]}" ]; then
+  if [ "4" != "${#devices[@]}" ]; then
     "You cannot have more or less than four devices. Exiting."
     echo
     exit 1
   fi
 
-  if lsblk | grep /var; then
+  if ! lsblk | grep /var; then
     systemctl rsyslog stop
 
     mkfs -t ext4 ${devices[0]}
     mkdir /mnt/newvar
     mount ${devices[0]} /mnt/newvar
     cp -apx /var/* /mnt/newvar
+    umount ${devices[0]}
     mv /var /var.old
     mkdir /var
     mount ${devices[0]} /var
     echo "${devices[0]}	/var	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
 
-    if lsblk | grep /var/log; then
+    if ! lsblk | grep /var/log; then
       mkfs -t ext4 ${devices[1]}
       mkdir /mnt/newvarlog
       mount ${devices[1]} /mnt/newvarlog
       cp -apx /var/log/* /mnt/newvarlog
+      umount ${devices[1]}
       mv /var/log /var/log.old
       mkdir /var/log
       mount ${devices[1]} /var/log
       echo "${devices[1]}	/var/log	ext4	rw,relatime,data=ordered  0 0" >> /etc/fstab
 
-      if lsblk | grep /var/log/audit; then
+      if ! lsblk | grep /var/log/audit; then
         mkfs -t ext4 ${devices[2]}
         mkdir /mnt/newvarlogaudit
         mount ${devices[2]} /mnt/newvarlogaudit
         cp -apx /var/log/audit/* /mnt/newvarlogaudit
+        umount ${devices[2]}
         mv /var/log/audit /var/log/audit.old
         mkdir /var/log/audit
         mount ${devices[2]} /var/log/audit
@@ -85,11 +86,12 @@ function f_fstab {
     systemctl start rsyslog
   fi
 
-  if lsblk | grep /home; then
+  if ! lsblk | grep /home; then
     mkfs -t ext4 ${devices[3]}
     mkdir /mnt/newhome
     mount ${devices[3]} /mnt/newhome
     cp -apx /home/* /mnt/newhome
+    umount ${devices[3]}
     mv /home /home.old
     mkdir /home
     mount ${devices[3]} /var
@@ -112,5 +114,7 @@ function f_fstab {
     exit 1
   fi
 
-  rm /etc/fstab.orig
+  #rm /etc/fstab.orig
+
+  ((i++))
 }
