@@ -9,4 +9,4 @@ Before=local-fs.target
 What=tmpfs
 Where=/tmp
 Type=tmpfs
-Options=mode=1777,strictatime,nosuid,nodev
+Options=mode=1777,rw,nosuid,nodev,noexec,relatime

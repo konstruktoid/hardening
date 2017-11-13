@@ -79,7 +79,7 @@ function f_fstab {
     exit 1
   fi
 
-  #rm /etc/fstab.orig
+  rm /etc/fstab.orig
   f_tmp
 
   ((i++))
@@ -114,7 +114,9 @@ function f_tmp {
     chmod 0644 /etc/systemd/system/var-tmp.mount
 
     systemctl daemon-reload
+    systemctl restart tmp.mount var-tmp.mount
   else
     echo '/etc/systemd/system/tmp.mount was not found.'
+    exit 1
   fi
 }
