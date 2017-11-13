@@ -94,7 +94,7 @@ function f_fstab {
     umount ${devices[3]}
     mv /home /home.old
     mkdir /home
-    mount ${devices[3]} /var
+    mount ${devices[3]} /home
     echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
   fi
 
