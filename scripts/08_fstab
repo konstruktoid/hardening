@@ -1,5 +1,5 @@
 function f_fstab {
-  echo "[$i] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
+  echo "[$i] /etc/fstab"
 
   cp /etc/fstab /etc/fstab.orig
 
@@ -68,7 +68,17 @@ function f_fstab {
   rm -rf /mnt/newvarlogaudit
   rm -rf /mnt/newhome
 
-  if [ "$(mount | grep /dev/shm)" != "tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)" ]; then
+  if [ ! echo "$(mount | grep /tmp)" | grep "tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)" ]; then
+    mount -o remount,nodev /dev/shm
+    echo "tmpfs /tmp	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
+  fi
+
+  if [ ! echo "$(mount | grep /var/tmp)" | grep "tmpfs on /var/tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)" ]; then
+    mount -o remount,nodev /dev/shm
+    echo "tmpfs /var/tmp	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
+  fi
+
+  if [ ! echo "$(mount | grep /dev/shm)" | grep "tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)" ]; then
     mount -o remount,nodev /dev/shm
     echo "tmpfs	/dev/shm	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
   fi
@@ -80,43 +90,6 @@ function f_fstab {
   fi
 
   rm /etc/fstab.orig
-  f_tmp
 
   ((i++))
-}
-
-function f_tmp {
-  cp ./config/tmp.mount /etc/systemd/system/tmp.mount
-
-  sed -i '/floppy/d' /etc/fstab
-
-  if ! grep -i '/proc' /etc/fstab 2>/dev/null 1>&2; then
-    echo 'none /proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2 0 0' >> /etc/fstab
-  fi
-
-  if [ -e /etc/systemd/system/tmp.mount ]; then
-    sed -i '/^\/tmp/d' /etc/fstab
-
-    for t in $(mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}'); do
-      umount "$t"
-    done
-
-    sed -i '/[[:space:]]\/tmp[[:space:]]/d' /etc/fstab
-
-    ln -s /etc/systemd/system/tmp.mount /etc/systemd/system/default.target.wants/tmp.mount
-    sed -i 's/Options=.*/Options=mode=1777,strictatime,nodev,nosuid/' /etc/systemd/system/tmp.mount
-
-    cp /etc/systemd/system/tmp.mount /etc/systemd/system/var-tmp.mount
-    sed -i 's/\/tmp/\/var\/tmp/g' /etc/systemd/system/var-tmp.mount
-    ln -s /etc/systemd/system/var-tmp.mount /etc/systemd/system/default.target.wants/var-tmp.mount
-
-    chmod 0644 /etc/systemd/system/tmp.mount
-    chmod 0644 /etc/systemd/system/var-tmp.mount
-
-    systemctl daemon-reload
-    systemctl restart tmp.mount var-tmp.mount
-  else
-    echo '/etc/systemd/system/tmp.mount was not found.'
-    exit 1
-  fi
 }
