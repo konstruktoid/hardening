@@ -29,7 +29,8 @@ load test_helper
 
 @test "Verify that kernel module squashfs is disabled" {
   run bash -c "modprobe -n -v squashfs | grep 'install /bin/true'"
-  [ "$status" -eq 0 ]
+  run bash -c "modprobe -c | grep squashfs | grep 'install /bin/true'"
+  [ "$?" -eq 0 ] || [ "$status" -eq 0 ]
 }
 
 @test "Verify that kernel module udf is disabled" {
@@ -39,5 +40,6 @@ load test_helper
 
 @test "Verify that kernel module vfat is disabled" {
   run bash -c "modprobe -n -v vfat | grep 'install /bin/true'"
-  [ "$status" -eq 0 ]
+  run bash -c "modprobe -c | grep vfat | grep 'install /bin/true'"
+  [ "$?" -eq 0 ] || [ "$status" -eq 0 ]
 }

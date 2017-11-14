@@ -61,6 +61,7 @@ function f_fstab {
     mkdir /home
     mount ${devices[3]} /home
     echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
+    cd ~/
   fi
 
   rm -rf /mnt/newvar
@@ -68,10 +69,12 @@ function f_fstab {
   rm -rf /mnt/newvarlogaudit
   rm -rf /mnt/newhome
 
-  if [ "$(mount | grep /dev/shm)" != "tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)" ]; then
+  if [[ "$(mount | grep /dev/shm)" != *"tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)"* ]]; then
     mount -o remount,nodev /dev/shm
     echo "tmpfs	/dev/shm	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
   fi
+
+  f_tmp
 
   if ! mount -a; then
     echo "You have a problem with your /etc/fstab file. Try again."
@@ -80,7 +83,6 @@ function f_fstab {
   fi
 
   rm /etc/fstab.orig
-  f_tmp
 
   ((i++))
 }
@@ -90,11 +92,8 @@ function f_tmp {
 
   sed -i '/floppy/d' /etc/fstab
 
-  if ! grep -i '/proc' /etc/fstab 2>/dev/null 1>&2; then
-    echo 'none /proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2 0 0' >> /etc/fstab
-  fi
-
   if [ -e /etc/systemd/system/tmp.mount ]; then
+    systemctl disable tmp.mount var-tmp.mount
     sed -i '/^\/tmp/d' /etc/fstab
 
     for t in $(mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}'); do
