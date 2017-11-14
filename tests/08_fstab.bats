@@ -56,7 +56,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /home is a seperate partition" {
+@test "Verify that /home is a separate partition" {
   run bash -c "grep '[[:space:]]/home[[:space:]]' /proc/mounts"
   [ "$status" -eq 0 ]
 }
@@ -71,7 +71,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/log/audit is a seperate partition" {
+@test "Verify that /var/log/audit is a separate partition" {
   run bash -c "grep '[[:space:]]/var/log/audit[[:space:]]' /proc/mounts"
   [ "$status" -eq 0 ]
 }
@@ -91,7 +91,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/log is a seperate partition" {
+@test "Verify that /var/log is a separate partition" {
   run bash -c "grep '[[:space:]]/var/log[[:space:]]' /proc/mounts"
   [ "$status" -eq 0 ]
 }
