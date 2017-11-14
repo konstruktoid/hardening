@@ -21,7 +21,6 @@ function f_fstab {
     umount ${devices[0]}
     mv /var /var.old
     mkdir /var
-    mount ${devices[0]} /var
     echo "${devices[0]}	/var	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
 
     if ! lsblk | grep /var/log; then
@@ -32,7 +31,6 @@ function f_fstab {
       umount ${devices[1]}
       mv /var/log /var/log.old
       mkdir /var/log
-      mount ${devices[1]} /var/log
       echo "${devices[1]}	/var/log	ext4	rw,relatime,data=ordered  0 0" >> /etc/fstab
 
       if ! lsblk | grep /var/log/audit; then
@@ -43,7 +41,6 @@ function f_fstab {
         umount ${devices[2]}
         mv /var/log/audit /var/log/audit.old
         mkdir /var/log/audit
-        mount ${devices[2]} /var/log/audit
         echo "${devices[2]} /var/log/audit	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
       fi
     fi
@@ -59,7 +56,6 @@ function f_fstab {
     umount ${devices[3]}
     mv /home /home.old
     mkdir /home
-    mount ${devices[3]} /home
     echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
     cd ~/
   fi
@@ -70,7 +66,6 @@ function f_fstab {
   rm -rf /mnt/newhome
 
   if [[ "$(mount | grep /dev/shm)" != *"tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)"* ]]; then
-    mount -o remount,nodev /dev/shm
     echo "tmpfs	/dev/shm	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
   fi
 
