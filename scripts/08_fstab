@@ -22,6 +22,7 @@ function f_fstab {
     mv /var /var.old
     mkdir /var
     echo "${devices[0]}	/var	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
+    mount -a
 
     if ! lsblk | grep /var/log; then
       mkfs -t ext4 ${devices[1]}
@@ -32,6 +33,7 @@ function f_fstab {
       mv /var/log /var/log.old
       mkdir /var/log
       echo "${devices[1]}	/var/log	ext4	rw,relatime,data=ordered  0 0" >> /etc/fstab
+      mount -a
 
       if ! lsblk | grep /var/log/audit; then
         mkfs -t ext4 ${devices[2]}
@@ -42,6 +44,7 @@ function f_fstab {
         mv /var/log/audit /var/log/audit.old
         mkdir /var/log/audit
         echo "${devices[2]} /var/log/audit	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
+        mount -a
       fi
     fi
 
@@ -57,6 +60,7 @@ function f_fstab {
     mv /home /home.old
     mkdir /home
     echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
+    mount -a
     cd ~/
   fi
 
@@ -70,12 +74,6 @@ function f_fstab {
   fi
 
   f_tmp
-
-  if ! mount -a; then
-    echo "You have a problem with your /etc/fstab file. Try again."
-    echo
-    exit 1
-  fi
 
   rm /etc/fstab.orig
 
