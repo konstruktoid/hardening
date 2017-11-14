@@ -1,15 +1,93 @@
 function f_fstab {
   echo "[$i] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
+  cp /etc/fstab /etc/fstab.orig
+
+  read -r -a devices <<< "$(echo $DEVICES | sed 's/\/dev\/s/\/dev\/xv/g')"
+
+  if [ "4" != "${#devices[@]}" ]; then
+    "You cannot have more or less than four devices. Exiting."
+    echo
+    exit 1
+  fi
+
+  if ! lsblk | grep /var; then
+    systemctl rsyslog stop
+
+    mkfs -t ext4 ${devices[0]}
+    mkdir /mnt/newvar
+    mount ${devices[0]} /mnt/newvar
+    cp -apx /var/* /mnt/newvar
+    umount ${devices[0]}
+    mv /var /var.old
+    mkdir /var
+    echo "${devices[0]}	/var	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
+    mount -a
+
+    if ! lsblk | grep /var/log; then
+      mkfs -t ext4 ${devices[1]}
+      mkdir /mnt/newvarlog
+      mount ${devices[1]} /mnt/newvarlog
+      cp -apx /var/log/* /mnt/newvarlog
+      umount ${devices[1]}
+      mv /var/log /var/log.old
+      mkdir /var/log
+      echo "${devices[1]}	/var/log	ext4	rw,relatime,data=ordered  0 0" >> /etc/fstab
+      mount -a
+
+      if ! lsblk | grep /var/log/audit; then
+        mkfs -t ext4 ${devices[2]}
+        mkdir /mnt/newvarlogaudit
+        mount ${devices[2]} /mnt/newvarlogaudit
+        cp -apx /var/log/audit/* /mnt/newvarlogaudit
+        umount ${devices[2]}
+        mv /var/log/audit /var/log/audit.old
+        mkdir /var/log/audit
+        echo "${devices[2]} /var/log/audit	ext4	rw,relatime,data=ordered	0 0" >> /etc/fstab
+        mount -a
+      fi
+    fi
+
+    systemctl start rsyslog
+  fi
+
+  if ! lsblk | grep /home; then
+    mkfs -t ext4 ${devices[3]}
+    mkdir /mnt/newhome
+    mount ${devices[3]} /mnt/newhome
+    cp -apx /home/* /mnt/newhome
+    umount ${devices[3]}
+    mv /home /home.old
+    mkdir /home
+    echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
+    mount -a
+    cd ~/MK-CIS-hardening
+  fi
+
+  rm -rf /mnt/newvar
+  rm -rf /mnt/newvarlog
+  rm -rf /mnt/newvarlogaudit
+  rm -rf /mnt/newhome
+
+  if [[ "$(mount | grep /dev/shm)" != *"tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)"* ]]; then
+    echo "tmpfs	/dev/shm	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
+    mount -a
+  fi
+
+  f_tmp
+
+  rm /etc/fstab.orig
+
+  ((i++))
+}
+
+function f_tmp {
   cp ./config/tmp.mount /etc/systemd/system/tmp.mount
 
   sed -i '/floppy/d' /etc/fstab
 
-  if ! grep -i '/proc' /etc/fstab 2>/dev/null 1>&2; then
-    echo 'none /proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2 0 0' >> /etc/fstab
-  fi
-
   if [ -e /etc/systemd/system/tmp.mount ]; then
+    systemctl disable tmp.mount var-tmp.mount
     sed -i '/^\/tmp/d' /etc/fstab
 
     for t in $(mount | grep -e "[[:space:]]/tmp[[:space:]]" -e "[[:space:]]/var/tmp[[:space:]]" | awk '{print $3}'); do
@@ -19,7 +97,7 @@ function f_fstab {
     sed -i '/[[:space:]]\/tmp[[:space:]]/d' /etc/fstab
 
     ln -s /etc/systemd/system/tmp.mount /etc/systemd/system/default.target.wants/tmp.mount
-    sed -i 's/Options=.*/Options=mode=1777,strictatime,nodev,nosuid/' /etc/systemd/system/tmp.mount
+    sed -i 's/Options=.*/Options=mode=1777,nodev,nosuid,noexec,relatime/' /etc/systemd/system/tmp.mount
 
     cp /etc/systemd/system/tmp.mount /etc/systemd/system/var-tmp.mount
     sed -i 's/\/tmp/\/var\/tmp/g' /etc/systemd/system/var-tmp.mount
@@ -29,9 +107,9 @@ function f_fstab {
     chmod 0644 /etc/systemd/system/var-tmp.mount
 
     systemctl daemon-reload
+    systemctl restart tmp.mount var-tmp.mount
   else
     echo '/etc/systemd/system/tmp.mount was not found.'
+    exit 1
   fi
-
-  ((i++))
 }
