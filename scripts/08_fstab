@@ -61,7 +61,7 @@ function f_fstab {
     mkdir /home
     echo "${devices[3]}	/home	ext4	rw,nodev,relatime,data=ordered	0 0" >> /etc/fstab
     mount -a
-    cd ~/
+    cd ~/MK-CIS-hardening
   fi
 
   rm -rf /mnt/newvar
@@ -71,6 +71,7 @@ function f_fstab {
 
   if [[ "$(mount | grep /dev/shm)" != *"tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime)"* ]]; then
     echo "tmpfs	/dev/shm	tmpfs	rw,nosuid,nodev,noexec,relatime	0 0" >> /etc/fstab
+    mount -a
   fi
 
   f_tmp
