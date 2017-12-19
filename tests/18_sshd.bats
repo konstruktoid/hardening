@@ -23,8 +23,8 @@ load test_helper
 }
 
 @test "Verify OpenSSH KeyRegenerationInterval" {
-  run sshdConfig '^KeyRegenerationInterval 1800$'
-  [ "$status" -eq 0 ]
+  run sshdConfig '^KeyRegenerationInterval.*$'
+  [ "$status" -eq 1 ]
 }
 
 @test "Verify OpenSSH UsePrivilegeSeparation" {
@@ -94,5 +94,10 @@ load test_helper
 
 @test "Verify OpenSSH UseDNS" {
   run sshdConfig '^UseDNS yes$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify moduli sizes" {
+  run moduliSize
   [ "$status" -eq 0 ]
 }

@@ -60,3 +60,11 @@ sshdConfig() {
 sysctlRuntime() {
   sysctl --all | grep -i "$1"
 }
+
+moduliSize() {
+ if awk '{print $5}' /etc/ssh/moduli | grep -E -q '^1...|^2...'; then
+   exit 1
+ else
+   exit 0
+ fi
+}
