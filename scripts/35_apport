@@ -3,6 +3,8 @@ function f_apport {
 
   sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
   systemctl mask apport.service
+  systemctl stop apport.service
+  systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status apport.service --no-pager
