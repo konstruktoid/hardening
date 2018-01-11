@@ -3,8 +3,8 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `16.04 Xenial Xerus`, `16.10 Yakkety Yak`, `17.04 Zesty Zapus`,
-`17.10 Artful Aardvark` and `18.04 Bionic Beaver (under development)`.
+Tested on `16.04 Xenial Xerus`, `17.10 Artful Aardvark`
+and `18.04 Bionic Beaver (under development)`.
 
 Systemd required.
 
