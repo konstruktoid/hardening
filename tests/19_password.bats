@@ -28,7 +28,7 @@ load test_helper
 }
 
 @test "Verify pam_tally denies after 5 tries in $COMMONAUTH" {
-  run bash -c "grep '^auth required pam_tally.*[[:space:]]onerr=fail[[:space:]]deny=3' $COMMONAUTH"
+  run bash -c "grep '^auth required pam_tally.*[[:space:]]onerr=fail[[:space:]]deny=5' $COMMONAUTH"
   [ "$status" -eq 0 ]
 }
 
