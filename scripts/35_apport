@@ -1,9 +1,14 @@
 function f_apport {
-  echo "[$i] Disable apport"
+  echo "[$i] Disable apport and popularity-contest"
 
   sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
   systemctl mask apport.service
   systemctl stop apport.service
+
+  if dpkg -l | grep -E '^ii.*popularity-contest' 2>/dev/null 1>&2; then
+    $APT purge popularity-contest
+  fi
+
   systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then
