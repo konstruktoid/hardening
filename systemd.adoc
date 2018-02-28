@@ -89,7 +89,7 @@ See https://www.freedesktop.org/software/systemd/man/resolved.conf.html[resolved
 ----
 [Resolve]
 DNS=127.0.0.1 // <1>
-FallbackDNS=8.8.8.8 8.8.4.4 // <2>
+FallbackDNS=9.9.9.9 185.121.177.177 // <2>
 DNSSEC=allow-downgrade // <3>
 ----
 
