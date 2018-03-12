@@ -19,7 +19,7 @@ function f_sshdconfig {
   sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
   sed -i 's/.*Subsystem sftp.*/Subsystem sftp \/usr\/lib\/ssh\/sftp-server -f AUTHPRIV -l INFO/' "$SSHDFILE"
-  sed -i 's/^#.*Compression.*/Compression yes/' "$SSHDFILE"
+  sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
 
   echo "" >> "$SSHDFILE"
 
