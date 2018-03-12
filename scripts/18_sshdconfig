@@ -12,7 +12,7 @@ function f_sshdconfig {
   sed -i '/KeyRegenerationInterval.*/d' "$SSHDFILE"
   sed -i '/ServerKeyBits.*/d' "$SSHDFILE"
   sed -i '/UseLogin.*/d' "$SSHDFILE"
-  sed -i 's/.*X11Forwarding.*/X11Forwarding yes/' "$SSHDFILE"
+  sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
   sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
   sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
