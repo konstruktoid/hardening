@@ -12,13 +12,14 @@ function f_sshdconfig {
   sed -i '/KeyRegenerationInterval.*/d' "$SSHDFILE"
   sed -i '/ServerKeyBits.*/d' "$SSHDFILE"
   sed -i '/UseLogin.*/d' "$SSHDFILE"
-  sed -i 's/.*X11Forwarding.*/X11Forwarding yes/' "$SSHDFILE"
+  sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
   sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
   sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
   sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
   sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
   sed -i 's/.*Subsystem sftp.*/Subsystem sftp \/usr\/lib\/ssh\/sftp-server -f AUTHPRIV -l INFO/' "$SSHDFILE"
+  sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
 
   echo "" >> "$SSHDFILE"
 
@@ -67,6 +68,10 @@ function f_sshdconfig {
     else
     sed -i 's/UseDNS.*/UseDNS yes/' "$SSHDFILE"
   fi
+
+  cp "$SSHDFILE" /etc/ssh/sshd_config.$(date +%y%m%d)
+  grep -v '#' /etc/ssh/sshd_config.$(date +%y%m%d) | uniq > "$SSHDFILE"
+  rm /etc/ssh/sshd_config.$(date +%y%m%d)
 
   systemctl restart sshd.service
 
