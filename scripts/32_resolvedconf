@@ -2,7 +2,11 @@ function f_resolvedconf {
   echo "[$i] Systemd/resolved.conf"
 
   dnsarray=( $(grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g') )
-  dnslist=${dnsarray[@]}
+  dnslist=${dnsarray[*]}
+
+  if [ ${#dnsarray[@]} -lt 2 ]; then
+    dnslist="$dnslist 1.1.1.1"
+  fi
 
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"
