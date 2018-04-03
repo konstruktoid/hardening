@@ -3,7 +3,7 @@
 source ../ubuntu.cfg
 
 auditctlRuntime() {
-  if which auditctl; then
+  if command -v auditctl; then
     auditctl -l | grep -E "$1"
   else
     exit 1
