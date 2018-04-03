@@ -8,6 +8,12 @@ function f_resolvedconf {
     dnslist="$dnslist 1.1.1.1"
   fi
 
+  sed -i '/^nameserver/d' /etc/resolv.conf
+
+  for n in $dnslist; do
+    echo "nameserver $n" >> /etc/resolv.conf
+  done
+
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"
   sed -i '/^hosts:/ s/files dns/files resolve dns/' /etc/nsswitch.conf
