@@ -42,6 +42,7 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_usbguard
 f_postfix
 f_apport
 f_motdnews

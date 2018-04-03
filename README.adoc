@@ -265,6 +265,9 @@ Disable the `VRFY` command.
 ==== 39_motdnews
 Disable `motd-news`.
 
+==== 40_usbguard
+Configure and install `usbguard`.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -297,6 +300,7 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_usbguard
 f_postfix
 f_apport
 f_motdnews
