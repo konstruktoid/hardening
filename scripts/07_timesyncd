@@ -47,8 +47,8 @@ function f_timesyncd {
     done
   fi
 
-  echo "NTP=${SERVERARRAY[@]}" >> "$TMPCONF"
-  echo "FallbackNTP=${FALLBACKARRAY[@]}" >> "$TMPCONF"
+  echo "NTP=${SERVERARRAY[*]}" >> "$TMPCONF"
+  echo "FallbackNTP=${FALLBACKARRAY[*]}" >> "$TMPCONF"
 
   if [[ $APPLY = "YES" ]]; then
     cat "$TMPCONF" > "$CONF"

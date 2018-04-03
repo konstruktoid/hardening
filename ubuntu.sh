@@ -5,8 +5,7 @@ if ! ps -p $$ | grep -i bash; then
        exit 1
 fi
 
-if ! [ -x "$(command -v systemctl)" ]
-  then
+if ! [ -x "$(command -v systemctl)" ]; then
     echo "systemctl required. Exiting."
     exit 1
 fi
