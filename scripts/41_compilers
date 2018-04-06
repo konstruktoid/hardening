@@ -1,0 +1,18 @@
+function f_restrictcompilers {
+  echo "[$i] Restrict compiler access"
+
+  while read -r x; do
+    if [ -f "$x" ] && [ -x "$x" ]; then
+      if ! test -L "$x"; then
+        chmod 0750 "$x"
+
+        if [[ $VERBOSE == "Y" ]]; then
+          echo "$x"
+        fi
+      fi
+    fi
+  done <<< "$(dpkg-query -L $(dpkg -l | grep compil | awk '{print $2}'))"
+  echo
+
+  ((i++))
+}

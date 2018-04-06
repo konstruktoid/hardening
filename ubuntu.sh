@@ -58,6 +58,7 @@ f_users
 f_lockroot
 f_aptget_clean
 f_suid
+f_restrictcompilers
 f_umask
 f_path
 f_aa_enforce
