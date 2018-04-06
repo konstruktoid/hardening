@@ -15,6 +15,7 @@ function f_resolvedconf {
   done
 
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
+  sed -i "s/^#FallbackDNS=.*/FallbackDNS=9.9.9.9/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"
   sed -i '/^hosts:/ s/files dns/files resolve dns/' /etc/nsswitch.conf
 
