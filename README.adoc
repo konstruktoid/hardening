@@ -265,6 +265,12 @@ Disable the `VRFY` command.
 ==== 39_motdnews
 Disable `motd-news`.
 
+==== 40_usbguard
+Install and configure `usbguard`.
+
+==== 41_compilers
+Restrict compiler access.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -297,6 +303,7 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_usbguard
 f_postfix
 f_apport
 f_motdnews
@@ -312,6 +319,7 @@ f_users
 f_lockroot
 f_aptget_clean
 f_suid
+f_restrictcompilers
 f_umask
 f_path
 f_aa_enforce

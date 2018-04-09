@@ -5,8 +5,7 @@ if ! ps -p $$ | grep -i bash; then
        exit 1
 fi
 
-if ! [ -x "$(which systemctl)" ]
-  then
+if ! [ -x "$(command -v systemctl)" ]; then
     echo "systemctl required. Exiting."
     exit 1
 fi
@@ -43,6 +42,7 @@ f_limitsconf
 f_adduser
 f_rootaccess
 f_packages
+f_usbguard
 f_postfix
 f_apport
 f_motdnews
@@ -58,6 +58,7 @@ f_users
 f_lockroot
 f_aptget_clean
 f_suid
+f_restrictcompilers
 f_umask
 f_path
 f_aa_enforce

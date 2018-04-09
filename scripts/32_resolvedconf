@@ -2,9 +2,20 @@ function f_resolvedconf {
   echo "[$i] Systemd/resolved.conf"
 
   dnsarray=( $(grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g') )
-  dnslist=${dnsarray[@]}
+  dnslist=${dnsarray[*]}
+
+  if [ ${#dnsarray[@]} -lt 2 ]; then
+    dnslist="$dnslist 1.1.1.1"
+  fi
+
+  sed -i '/^nameserver/d' /etc/resolv.conf
+
+  for n in $dnslist; do
+    echo "nameserver $n" >> /etc/resolv.conf
+  done
 
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
+  sed -i "s/^#FallbackDNS=.*/FallbackDNS=9.9.9.9/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"
   sed -i '/^hosts:/ s/files dns/files resolve dns/' /etc/nsswitch.conf
 

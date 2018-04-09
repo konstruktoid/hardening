@@ -8,7 +8,7 @@ load test_helper
 }
 
 @test "Verify OpenSSH X11Forwarding" {
-  run sshdConfig '^X11Forwarding yes$'
+  run sshdConfig '^X11Forwarding no$'
   [ "$status" -eq 0 ]
 }
 
@@ -27,18 +27,8 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Verify OpenSSH UsePrivilegeSeparation" {
-  run sshdConfig '^UsePrivilegeSeparation sandbox$'
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify OpenSSH LogLevel" {
   run sshdConfig '^LogLevel VERBOSE$'
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify OpenSSH UseLogin" {
-  run sshdConfig '^UseLogin no$'
   [ "$status" -eq 0 ]
 }
 
@@ -48,7 +38,7 @@ load test_helper
 }
 
 @test "Verify OpenSSH sftp" {
-  run sshdConfig '^Subsystem sftp /usr/lib/ssh/sftp-server -f AUTHPRIV -l INFO$'
+  run sshdConfig '^Subsystem sftp /usr/lib/openssh/sftp-server -f AUTHPRIV -l INFO$'
   [ "$status" -eq 0 ]
 }
 

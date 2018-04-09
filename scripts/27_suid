@@ -12,11 +12,15 @@ function f_suid {
     fi
   done
 
-  for SHELL in $(cat /etc/shells); do
-    if [ -x "$SHELL" ]; then
-      chmod -s "$SHELL"
+  while read -r suidshells; do
+    if [ -x "$suidshells" ]; then
+      chmod -s "$suidshells"
+
+      if [[ $VERBOSE == "Y" ]]; then
+        echo "$suidshells"
+      fi
     fi
-  done
+  done <<< "$(grep -v '^#' /etc/shells)"
 
   ((i++))
 }
