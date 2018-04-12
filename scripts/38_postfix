@@ -5,9 +5,8 @@ function f_postfix {
 
   systemctl restart postfix.service
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status postfix.service --no-pager
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status postfix.service --no-pager
     echo
   fi
 

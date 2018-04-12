@@ -75,9 +75,8 @@ function f_sshdconfig {
 
   systemctl restart sshd.service
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status sshd.service --no-pager
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status sshd.service --no-pager
     echo
   fi
 
