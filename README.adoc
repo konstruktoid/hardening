@@ -7,13 +7,17 @@ Tested on `17.10 Artful Aardvark` and `18.04 Bionic Beaver (under development)`.
 
 Systemd required.
 
-If you're just interested in the security focused systemd configuration, it's available as a link:systemd.adoc[separate document].
+If you're just interested in the security focused systemd configuration, it's
+available as a link:systemd.adoc[separate document].
 
-If you're interested in testing your host settings, you'll find the link:README.adoc#tests[instructions here].
+If you're interested in testing your host settings, you'll find the
+link:README.adoc#tests[instructions here].
 
-If you're using Ansible, a playbook with most of the above functions implemented is available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
+If you're using Ansible, a playbook with most of the above functions implemented
+is available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
 
-NOTE: This is a constant work in progress. Make sure you understand what it does. `Read the code`.
+NOTE: This is a constant work in progress. Make sure you understand what it
+does. `Read the code`.
 
 == Howto
 Start the installation of the server. +
@@ -38,7 +42,8 @@ Do not add any packages. +
 Log in. +
 Select a Grub2 password (using `grub-mkpasswd-pbkdf2`). +
 Download the script using `git clone https://github.com/konstruktoid/hardening.git`. + 
-Change the configuration options in the `ubuntu.cfg` file and last but not least run the script, `sudo bash ubuntu.sh`. +
+Change the configuration options in the `ubuntu.cfg` file and last but not least
+run the script, `sudo bash ubuntu.sh`. +
 
 == Configuration options
 [source,shell]
@@ -109,13 +114,15 @@ CCE-26828-4, CCE-27106-4
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
 ==== 04_disablemnt
-CCE-80137-3, CCE-80138-1, CCE-80139-9, CCE-80140-7, CCE-80141-5, CCE-80142-3, CCE-80143-1,
-UBTU-16-010070
+CCE-80137-3, CCE-80138-1, CCE-80139-9, CCE-80140-7, CCE-80141-5, CCE-80142-3,
+CCE-80143-1, UBTU-16-010070
 
-Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `squashfs` `udf` `vfat` file systems.
+Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `squashfs` `udf` `vfat` file
+systems.
 
 ==== 05_systemdconf
-Disable coredumps and crashshells, set `DefaultLimitNOFILE` and `DefaultLimitNPROC` to 100.
+Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
+`DefaultLimitNPROC` to 100.
 
 ==== 06_journalctl
 Compress logs, forward to syslog and make log storage persistent.
@@ -124,7 +131,8 @@ Compress logs, forward to syslog and make log storage persistent.
 Add four NTP-servers with a latency < 50ms from `$NTPSERVERPOOL`.
 
 ==== 08_fstab
-Configure `/tmp/` and `/var/tmp/`. Remove floppy drivers from `/etc/fstab` and add `hidepid=2` to `/proc`.
+Configure `/tmp/` and `/var/tmp/`. Remove floppy drivers from `/etc/fstab`
+and add `hidepid=2` to `/proc`.
 
 ==== 09_prelink
 CCE-27078-5
@@ -145,7 +153,8 @@ V-72315
 CCE-80205-8, UBTU-16-010150, UBTU-16-010170, UBTU-16-010190, UBTU-16-010210,
 UBTU-16-010220, UBTU-16-010640
 
-Modify `/etc/login.defs`, e.g. `UMASK`, password age limits and `SHA_CRYPT_MAX_ROUNDS`.
+Modify `/etc/login.defs`, e.g. `UMASK`, password age limits and
+`SHA_CRYPT_MAX_ROUNDS`.
 
 ==== 13_sysctl
 Update `$SYSCTL` with `$SYSCTL_CONF`.
@@ -161,14 +170,18 @@ UBTU-16-010280
 Set `/bin/false` as default shell when adding users.
 
 ==== 16_rootaccess
-Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in `/etc/security/access.conf`
+Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
+`/etc/security/access.conf`.
 
 ==== 17_packages
 UBTU-16-010050, UBTU-16-010500, UBTU-16-010600
 
-Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd` `debsums`
-`haveged` `libpam-apparmor` `libpam-cracklib` `libpam-tmpdir` `openssh-server`
-`postfix` `rkhunter` `vlock`.
+Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
+`debsums` `haveged` `libpam-apparmor` `libpam-cracklib` `libpam-tmpdir`
+`openssh-server` `postfix` `rkhunter` `vlock`.
+
+Removes `avahi*` `beep` `popularity-contest` `rsh*` `talk*` `telnet*` `tftp*`
+`yp-tools` `ypbind` `xinetd`.
 
 ==== 18_sshdconfig
 Configure the `OpenSSH`-daemon.
@@ -198,8 +211,8 @@ Configure `auditd`, use `$AUDITD_RULES`.
 ==== 23_disablemod
 CCE-27327-6, CCE-27277-3, UBTU-16-010580
 
-Disable `bluetooth` `bnep` `btusb` `firewire-core` `n_hdlc` `net-pf-31` `soundcore`
-`thunderbolt` `usb-midi` `usb-storage` kernel modules.
+Disable `bluetooth` `bnep` `btusb` `firewire-core` `n_hdlc` `net-pf-31`
+`pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage` kernel modules.
 
 ==== 24_aide
 CCE-27096-7, UBTU-16-020000, UBTU-16-020010
@@ -220,7 +233,8 @@ Remove `games` `gnats` `irc` `list` `news` `uucp` users.
 Remove `suid` bits from `/bin/fusermount` `/bin/mount` `/bin/ping` `/bin/ping6`
 `/bin/su` `/bin/umount` `/usr/bin/bsd-write` `/usr/bin/chage` `/usr/bin/chfn`
 `/usr/bin/chsh` `/usr/bin/mlocate` `/usr/bin/mtr` `/usr/bin/newgrp`
-`/usr/bin/pkexec` `/usr/bin/traceroute6.iputils` `/usr/bin/wall` `/usr/sbin/pppd`.
+`/usr/bin/pkexec` `/usr/bin/traceroute6.iputils` `/usr/bin/wall`
+`/usr/sbin/pppd`.
 
 ==== 28_umask
 CCE-80202-5, UBTU-16-010060
@@ -302,7 +316,8 @@ f_sysctl
 f_limitsconf
 f_adduser
 f_rootaccess
-f_packages
+f_package_remove
+f_package_install
 f_usbguard
 f_postfix
 f_apport
@@ -330,7 +345,8 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 400 https://github.com/sstephenson/bats[Bats tests] for most of the above settings available in the link:tests/[tests directory].
+There are approximately 400 https://github.com/sstephenson/bats[Bats tests]
+for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
 ----
