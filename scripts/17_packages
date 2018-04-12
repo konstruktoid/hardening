@@ -1,4 +1,4 @@
-function f_packages {
+function f_package_install {
   echo "[$i] Installing base packages"
 
   if dmesg | grep -i -E "dmi.*vmware"; then
@@ -12,11 +12,24 @@ function f_packages {
   echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
   echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 
-  PACKAGES="acct aide-common apparmor-profiles apparmor-utils auditd debsums haveged libpam-apparmor libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter vlock $VM"
+  PACKAGE_INSTALL="acct aide-common apparmor-profiles apparmor-utils auditd debsums haveged libpam-apparmor libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter vlock $VM"
 
-  for deb in $PACKAGES; do
-       $APT install --no-install-recommends "$deb"
+  for deb_install in $PACKAGE_INSTALL; do
+    $APT install --no-install-recommends "$deb_install"
   done
 
   ((i++))
 }
+
+function f_package_remove {
+  echo "[$i] Package removal"
+
+  PACKAGE_REMOVE="avahi* beep popularity-contest rsh* talk* telnet* tftp* yp-tools ypbind xinetd"
+
+  for deb_remove in $PACKAGE_REMOVE; do
+    $APT purge "$deb_remove"
+  done
+
+  ((i++))
+}
+

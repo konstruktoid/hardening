@@ -41,7 +41,8 @@ f_sysctl
 f_limitsconf
 f_adduser
 f_rootaccess
-f_packages
+f_package_remove
+f_package_install
 f_usbguard
 f_postfix
 f_apport
