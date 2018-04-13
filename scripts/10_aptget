@@ -1,29 +1,29 @@
 function f_aptget {
-  echo "[$i] Updating the package index files from their sources"
+  echo "[$SCRIPT_COUNT] Updating the package index files from their sources"
 
   $APT update
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 
-  echo "[$i] Upgrading installed packages"
+  echo "[$SCRIPT_COUNT] Upgrading installed packages"
 
   $APT upgrade
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
 
 function f_aptget_clean {
-  echo "[$i] Removing unused packages"
+  echo "[$SCRIPT_COUNT] Removing unused packages"
 
   $APT clean
   $APT autoclean
   apt-get -qq autoremove
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
 
 function f_aptget_configure {
-  echo "[$i] Configure APT"
+  echo "[$SCRIPT_COUNT] Configure APT"
 
   if ! grep '^APT::Get::AllowUnauthenticated' /etc/apt/apt.conf.d/* ; then
     echo 'APT::Get::AllowUnauthenticated "false";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
@@ -33,5 +33,5 @@ function f_aptget_configure {
     sed -i 's/.*Unattended-Upgrade::Remove-Unused-Dependencies.*/Unattended-Upgrade::Remove-Unused-Dependencies "true";/' /etc/apt/apt.conf.d/50unattended-upgrades
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

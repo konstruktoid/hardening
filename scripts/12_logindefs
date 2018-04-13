@@ -1,5 +1,5 @@
 function f_logindefs {
-  echo "[$i] /etc/login.defs"
+  echo "[$SCRIPT_COUNT] /etc/login.defs"
 
   sed -i 's/^.*LOG_OK_LOGINS.*/LOG_OK_LOGINS\t\tyes/' "$LOGINDEFS"
   sed -i 's/^UMASK.*/UMASK\t\t077/' "$LOGINDEFS"
@@ -10,5 +10,5 @@ function f_logindefs {
   sed -i 's/USERGROUPS_ENAB.*/USERGROUPS_ENAB no/' "$LOGINDEFS"
   sed -i 's/^# SHA_CRYPT_MAX_ROUNDS.*/SHA_CRYPT_MAX_ROUNDS\t\t10000/' "$LOGINDEFS"
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

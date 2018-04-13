@@ -1,5 +1,5 @@
 function f_lockroot {
-  echo "[$i] Lock root account"
+  echo "[$SCRIPT_COUNT] Lock root account"
 
   usermod -L root
 
@@ -8,5 +8,5 @@ function f_lockroot {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

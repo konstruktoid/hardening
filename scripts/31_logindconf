@@ -1,5 +1,5 @@
 function f_logindconf {
-  echo "[$i] Systemd/logind.conf"
+  echo "[$SCRIPT_COUNT] Systemd/logind.conf"
 
   sed -i 's/^#KillUserProcesses=no/KillUserProcesses=1/' "$LOGINDCONF"
   sed -i 's/^#KillExcludeUsers=root/KillExcludeUsers=root/' "$LOGINDCONF"
@@ -9,5 +9,5 @@ function f_logindconf {
 
   systemctl daemon-reload
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

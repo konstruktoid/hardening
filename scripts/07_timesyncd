@@ -70,5 +70,5 @@ function f_timesyncd {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

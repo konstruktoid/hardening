@@ -1,5 +1,5 @@
 function f_apport {
-  echo "[$i] Disable apport and popularity-contest"
+  echo "[$SCRIPT_COUNT] Disable apport and popularity-contest"
 
   sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
   systemctl mask apport.service
@@ -16,5 +16,5 @@ function f_apport {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

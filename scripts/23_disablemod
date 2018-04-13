@@ -1,6 +1,7 @@
 function f_disablemod {
-  echo "[$i] Disable misc kernel modules"
+  echo "[$SCRIPT_COUNT] Disable misc kernel modules"
 
+  local MOD
   MOD="bluetooth bnep btusb firewire-core n_hdlc net-pf-31 pcspkr soundcore thunderbolt usb-midi usb-storage"
   for disable in $MOD; do
     if ! grep -q "$disable" "$DISABLEMOD" 2> /dev/null; then
@@ -8,5 +9,5 @@ function f_disablemod {
     fi
   done
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

@@ -1,5 +1,5 @@
 function f_restrictcompilers {
-  echo "[$i] Restrict compiler access"
+  echo "[$SCRIPT_COUNT] Restrict compiler access"
 
   while read -r x; do
     if [ -f "$x" ] && [ -x "$x" ]; then
@@ -14,5 +14,5 @@ function f_restrictcompilers {
   done <<< "$(dpkg-query -L $(dpkg -l | grep compil | awk '{print $2}'))"
   echo
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

@@ -1,5 +1,5 @@
 function f_limitsconf {
-  echo "[$i] $LIMITSCONF"
+  echo "[$SCRIPT_COUNT] $LIMITSCONF"
 
   sed -i 's/^# End of file*//' "$LIMITSCONF"
   { echo '* hard maxlogins 10'
@@ -14,5 +14,5 @@ function f_limitsconf {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

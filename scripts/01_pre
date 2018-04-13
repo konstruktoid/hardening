@@ -1,4 +1,6 @@
 function f_pre {
+  SCRIPT_COUNT="0"
+  ((SCRIPT_COUNT++))
 
   export TERM=linux
   export DEBIAN_FRONTEND=noninteractive
@@ -29,5 +31,4 @@ function f_pre {
     exit 1
   fi
 
-  i="0"
 }

@@ -1,5 +1,5 @@
 function f_sysctl {
-  echo "[$i] $SYSCTL"
+  echo "[$SCRIPT_COUNT] $SYSCTL"
 
   cp "$SYSCTL_CONF" "$SYSCTL"
 
@@ -21,5 +21,5 @@ function f_sysctl {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

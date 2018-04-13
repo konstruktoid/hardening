@@ -1,5 +1,5 @@
 function f_postfix {
-  echo "[$i] Postfix"
+  echo "[$SCRIPT_COUNT] Postfix"
 
   postconf -e disable_vrfy_command=yes
 
@@ -10,5 +10,5 @@ function f_postfix {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

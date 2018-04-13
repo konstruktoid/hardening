@@ -1,5 +1,8 @@
 function f_resolvedconf {
-  echo "[$i] Systemd/resolved.conf"
+  echo "[$SCRIPT_COUNT] Systemd/resolved.conf"
+
+  local dnsarray
+  local dnslist
 
   dnsarray=( $(grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g') )
   dnslist=${dnsarray[*]}
@@ -26,5 +29,5 @@ function f_resolvedconf {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

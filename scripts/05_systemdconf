@@ -1,5 +1,5 @@
 function f_systemdconf {
-  echo "[$i] Systemd/system.conf and Systemd/user.conf"
+  echo "[$SCRIPT_COUNT] Systemd/system.conf and Systemd/user.conf"
 
   sed -i 's/^#DumpCore=.*/DumpCore=no/' "$SYSTEMCONF"
   sed -i 's/^#CrashShell=.*/CrashShell=no/' "$SYSTEMCONF"
@@ -13,6 +13,6 @@ function f_systemdconf {
 
   systemctl daemon-reload
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
 

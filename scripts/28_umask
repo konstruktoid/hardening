@@ -1,5 +1,5 @@
 function f_umask {
-  echo "[$i] umask"
+  echo "[$SCRIPT_COUNT] umask"
 
   if [ -f /etc/init.d/rc ]; then
     sed -i 's/umask 022/umask 027/g' /etc/init.d/rc
@@ -18,5 +18,5 @@ function f_umask {
     chmod +x /etc/profile.d/autologout.sh
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
