@@ -13,6 +13,9 @@ function f_pre {
 
   APT="apt-get $APTFLAGS"
 
+  readonly APTFLAGS
+  readonly APT
+
   if [[ $CHANGEME == "" ]]; then
     echo "Please read the code. Exiting."
     echo
