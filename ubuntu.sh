@@ -11,62 +11,105 @@ if ! [ -x "$(command -v systemctl)" ]; then
     exit 1
 fi
 
-clear
+function main {
+  clear
 
-source ./ubuntu.cfg
+  source ./ubuntu.cfg
 
-for s in ./scripts/[0-9_]*; do
-  [[ -e $s ]] || break
-  source "$s"
-done
+  readonly FW_ADMIN
+  readonly SSH_GRPS
+  readonly SYSCTL_CONF
+  readonly AUDITD_RULES
+  readonly LOGROTATE_CONF
+  readonly NTPSERVERPOOL
+  readonly TIMEDATECTL
+  readonly VERBOSE
+  readonly CHANGEME
+  readonly ADDUSER
+  readonly AUDITDCONF
+  readonly AUDITRULES
+  readonly COMMONPASSWD
+  readonly COMMONACCOUNT
+  readonly COMMONAUTH
+  readonly COREDUMPCONF
+  readonly DEFAULTGRUB
+  readonly DISABLEMNT
+  readonly DISABLEMOD
+  readonly DISABLENET
+  readonly JOURNALDCONF
+  readonly LIMITSCONF
+  readonly LOGINDCONF
+  readonly LOGINDEFS
+  readonly LOGROTATE
+  readonly PAMLOGIN
+  readonly RESOLVEDCONF
+  readonly RKHUNTERCONF
+  readonly SECURITYACCESS
+  readonly SSHDFILE
+  readonly SYSCTL
+  readonly SYSTEMCONF
+  readonly TIMESYNCD
+  readonly UFWDEFAULT
+  readonly USERADD
+  readonly USERCONF
 
-f_pre
-f_firewall
-f_disablenet
-f_disablemnt
-f_disablemod
-f_systemdconf
-f_resolvedconf
-f_logindconf
-f_journalctl
-f_timesyncd
-f_coredump
-f_fstab
-f_prelink
-f_aptget_configure
-f_aptget
-f_hosts
-f_issue
-f_logindefs
-f_sysctl
-f_limitsconf
-f_adduser
-f_rootaccess
-f_package_remove
-f_package_install
-f_usbguard
-f_postfix
-f_apport
-f_motdnews
-f_rkhunter
-f_sshdconfig
-f_password
-f_cron
-f_ctrlaltdel
-f_auditd
-f_aide
-f_rhosts
-f_users
-f_lockroot
-f_aptget_clean
-f_suid
-f_restrictcompilers
-f_umask
-f_path
-f_aa_enforce
-f_aide_post
-f_aide_timer
-f_systemddelta
-f_checkreboot
+  # shellcheck disable=SC1090
+  for s in ./scripts/[0-9_]*; do
+    [[ -e $s ]] || break
 
-echo
+    source "$s"
+  done
+
+  f_pre
+  f_firewall
+  f_disablenet
+  f_disablemnt
+  f_disablemod
+  f_systemdconf
+  f_resolvedconf
+  f_logindconf
+  f_journalctl
+  f_timesyncd
+  f_coredump
+  f_fstab
+  f_prelink
+  f_aptget_configure
+  f_aptget
+  f_hosts
+  f_issue
+  f_logindefs
+  f_sysctl
+  f_limitsconf
+  f_adduser
+  f_rootaccess
+  f_package_remove
+  f_package_install
+  f_usbguard
+  f_postfix
+  f_apport
+  f_motdnews
+  f_rkhunter
+  f_sshdconfig
+  f_password
+  f_cron
+  f_ctrlaltdel
+  f_auditd
+  f_aide
+  f_rhosts
+  f_users
+  f_lockroot
+  f_aptget_clean
+  f_suid
+  f_restrictcompilers
+  f_umask
+  f_path
+  f_aa_enforce
+  f_aide_post
+  f_aide_timer
+  f_systemddelta
+  f_checkreboot
+
+  echo
+}
+
+main "$@"
