@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Check systemd .service configuration
 # https://github.com/konstruktoid/hardening/blob/master/systemd.adoc
 
