@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=SC2009
 if ! ps -p $$ | grep -i bash; then
        echo "Sorry, this script requires bash."
        exit 1
