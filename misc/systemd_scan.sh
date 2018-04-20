@@ -17,7 +17,7 @@ while read -r service_name; do
   passed_settings=0
   failed_settings=0
 
-  service_fragmentpath="$(systemctl show -p FragmentPath $service_name |\
+  service_fragmentpath="$(systemctl show -p FragmentPath "$service_name" |\
     sed 's/FragmentPath=//g' | awk '{print $NF}')"
 
   if [ -f "$service_fragmentpath" ]; then
@@ -25,7 +25,8 @@ while read -r service_name; do
     echo "    [I] $service_fragmentpath used."
 
     service_configuration_option() {
-      clean_option="$(echo $1 | sed 's/=.*//g')"
+      # shellcheck disable=SC2001
+      clean_option="$(echo "$1" | sed 's/=.*//g')"
       if grep -q -E "$1" "$service_fragmentpath"; then
         echo "    [P] $clean_option is set."
         passed_settings=$((passed_settings +1))
