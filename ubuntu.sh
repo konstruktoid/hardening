@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck disable=SC2009
-if ! ps -p $$ | grep -i bash; then
+if ! ps -p $$ | grep -si bash; then
        echo "Sorry, this script requires bash."
        exit 1
 fi
@@ -13,6 +13,21 @@ fi
 
 function main {
   clear
+
+  if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
+    USERIP="$(w -ih | awk '{print $3}' | head -n1)"
+
+    if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+      ADMINIP="$USERIP"
+    else
+      ADMINIP=""
+    fi
+
+    sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
+    sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$(w -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
+    sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
+    sed -i "s/VERBOSE='N'/VERBOSE='Y'/" ./ubuntu.cfg
+  fi
 
   source ./ubuntu.cfg
 

@@ -56,7 +56,8 @@ LOGROTATE_CONF='./misc/logrotate.conf' // <5>
 NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <6>
 TIMEDATECTL='' // <7>
 VERBOSE='N' // <8>
-CHANGEME='' // <9>
+AUTOFILL='N' // <9>
+CHANGEME='' // <10>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -94,7 +95,8 @@ USERCONF='/etc/systemd/user.conf'
 <6> NTP server pool.
 <7> Add a specific time zone or use the system default by leaving it empty.
 <8> If you want all the details or not.
-<9> Add something just to verify that you actually glanced the code.
+<9> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
+<10> Add something just to verify that you actually glanced the code.
 
 == Functions
 
