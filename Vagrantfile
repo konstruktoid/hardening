@@ -6,6 +6,13 @@ Vagrant.configure("2") do |config|
     xenial.vm.hostname = "xenial"
   end
 
+  config.vm.define "artful" do |artful|
+    artful.vm.box = "bento/ubuntu-17.10"
+    artful.ssh.insert_key = true
+    artful.vm.network "private_network", ip:"10.7.8.43"
+    artful.vm.hostname = "artful"
+  end
+
   config.vm.define "bionic" do |bionic|
     bionic.vm.box = "bento/ubuntu-18.04"
     bionic.ssh.insert_key = true
