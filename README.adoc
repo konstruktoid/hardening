@@ -3,7 +3,7 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `17.10 Artful Aardvark` and `18.04 Bionic Beaver (under development)`.
+Tested on `16.04 Xenial Xerus`, `17.10 Artful Aardvark` and `18.04 Bionic Beaver`.
 
 Systemd required.
 
@@ -361,7 +361,7 @@ sudo bats .
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
 http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
 https://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04 STIG Ver 1, Rel 1] +
-https://benchmarks.cisecurity.org/downloads/show-single/?file=ubuntu1404.100[CIS Ubuntu 14.04 LTS Server Benchmark v1.0.0] +
+https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
 
