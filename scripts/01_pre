@@ -33,5 +33,4 @@ function f_pre {
     echo
     exit 1
   fi
-
 }

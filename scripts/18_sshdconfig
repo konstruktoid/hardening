@@ -29,7 +29,7 @@ function f_sshdconfig {
 
   if ! grep -q "^MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
     echo "MaxAuthTries 2" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/MaxAuthTries.*/MaxAuthTries 2/' "$SSHDFILE"
   fi
 
@@ -59,13 +59,13 @@ function f_sshdconfig {
 
   if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
     echo "MaxSessions 2" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/MaxSessions.*/MaxSessions 2/' "$SSHDFILE"
   fi
 
   if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
     echo "UseDNS yes" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/UseDNS.*/UseDNS yes/' "$SSHDFILE"
   fi
 
