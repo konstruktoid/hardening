@@ -1,5 +1,5 @@
 function f_usbguard {
-  echo "[$i] Enable usbguard"
+  echo "[$SCRIPT_COUNT] Enable usbguard"
 
   $APT install --no-install-recommends usbguard
 
@@ -14,5 +14,5 @@ function f_usbguard {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

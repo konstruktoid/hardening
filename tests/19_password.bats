@@ -22,13 +22,13 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Verify pam_tally is used in $COMMONAUTH" {
-  run bash -c "grep '^auth required pam_tally' $COMMONAUTH"
+@test "Verify pam_tally2 is used in $COMMONAUTH" {
+  run bash -c "grep '^auth required pam_tally2' $COMMONAUTH"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify pam_tally denies after 5 tries in $COMMONAUTH" {
-  run bash -c "grep '^auth required pam_tally.*[[:space:]]onerr=fail[[:space:]]deny=5' $COMMONAUTH"
+@test "Verify pam_tally2 denies after 5 tries in $COMMONAUTH" {
+  run bash -c "grep '^auth required pam_tally2.*[[:space:]]deny=5' $COMMONAUTH"
   [ "$status" -eq 0 ]
 }
 

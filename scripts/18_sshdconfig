@@ -1,7 +1,7 @@
 # https://github.com/mozilla/wikimo_opsec/blob/master/Security/Guidelines/OpenSSH.mediawiki#Modern_OpenSSH_67
 
 function f_sshdconfig {
-  echo "[$i] /etc/ssh/sshd_config"
+  echo "[$SCRIPT_COUNT] /etc/ssh/sshd_config"
 
   awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
   mv /etc/ssh/moduli.tmp /etc/ssh/moduli
@@ -29,7 +29,7 @@ function f_sshdconfig {
 
   if ! grep -q "^MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
     echo "MaxAuthTries 2" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/MaxAuthTries.*/MaxAuthTries 2/' "$SSHDFILE"
   fi
 
@@ -59,13 +59,13 @@ function f_sshdconfig {
 
   if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
     echo "MaxSessions 2" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/MaxSessions.*/MaxSessions 2/' "$SSHDFILE"
   fi
 
   if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
     echo "UseDNS yes" >> "$SSHDFILE"
-    else
+  else
     sed -i 's/UseDNS.*/UseDNS yes/' "$SSHDFILE"
   fi
 
@@ -75,11 +75,10 @@ function f_sshdconfig {
 
   systemctl restart sshd.service
 
-  if [[ $VERBOSE == "Y" ]];
-    then
-       systemctl status sshd.service --no-pager
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status sshd.service --no-pager
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

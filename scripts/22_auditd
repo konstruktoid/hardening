@@ -1,5 +1,5 @@
 function f_auditd {
-  echo "[$i] Auditd"
+  echo "[$SCRIPT_COUNT] Auditd"
 
   sed -i 's/^action_mail_acct =.*/action_mail_acct = root/' "$AUDITDCONF"
   sed -i 's/^admin_space_left_action = .*/admin_space_left_action = halt/' "$AUDITDCONF"
@@ -19,5 +19,5 @@ function f_auditd {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

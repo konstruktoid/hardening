@@ -1,7 +1,7 @@
 function f_coredump {
   if test -f "$COREDUMPCONF"; then
 
-    echo "[$i] Systemd/coredump.conf"
+    echo "[$SCRIPT_COUNT] Systemd/coredump.conf"
     sed -i 's/^#Storage=.*/Storage=none/' "$COREDUMPCONF"
 
     systemctl restart systemd-journald
@@ -11,6 +11,6 @@ function f_coredump {
       echo
     fi
 
-    ((i++))
+    ((SCRIPT_COUNT++))
   fi
 }

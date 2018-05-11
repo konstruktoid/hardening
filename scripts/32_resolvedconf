@@ -1,7 +1,10 @@
 function f_resolvedconf {
-  echo "[$i] Systemd/resolved.conf"
+  echo "[$SCRIPT_COUNT] Systemd/resolved.conf"
 
-  dnsarray=( $(grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g') )
+  local dnsarray
+  local dnslist
+
+  mapfile -t dnsarray < <( grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g' )
   dnslist=${dnsarray[*]}
 
   if [ ${#dnsarray[@]} -lt 2 ]; then
@@ -26,5 +29,5 @@ function f_resolvedconf {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

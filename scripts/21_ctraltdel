@@ -1,5 +1,5 @@
 function f_ctrlaltdel {
-  echo "[$i] Ctrl-alt-delete"
+  echo "[$SCRIPT_COUNT] Ctrl-alt-delete"
 
   systemctl mask ctrl-alt-del.target
 
@@ -10,5 +10,5 @@ function f_ctrlaltdel {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

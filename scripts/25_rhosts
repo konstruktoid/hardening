@@ -1,5 +1,5 @@
 function f_rhosts {
-  echo "[$i] .rhosts"
+  echo "[$SCRIPT_COUNT] .rhosts"
 
   while read -r hostpasswd; do
     find "$hostpasswd" \( -name "hosts.equiv" -o -name ".rhosts" \) -exec rm -f {} \; 2> /dev/null
@@ -14,5 +14,5 @@ function f_rhosts {
     rm /etc/hosts.equiv
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

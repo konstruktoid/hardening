@@ -18,12 +18,12 @@ load test_helper
 }
 
 @test "Verify system DefaultLimitNOFILE in $SYSTEMCONF" {
-  run bash -c "grep '^DefaultLimitNOFILE=100$' $SYSTEMCONF"
+  run bash -c "grep '^DefaultLimitNOFILE=1024$' $SYSTEMCONF"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify system DefaultLimitNPROC in $SYSTEMCONF" {
-  run bash -c "grep '^DefaultLimitNPROC=100$' $SYSTEMCONF"
+  run bash -c "grep '^DefaultLimitNPROC=1024$' $SYSTEMCONF"
   [ "$status" -eq 0 ]
 }
 
@@ -33,11 +33,11 @@ load test_helper
 }
 
 @test "Verify user DefaultLimitNOFILE in $USERCONF" {
-  run bash -c "grep '^DefaultLimitNOFILE=100$' $USERCONF"
+  run bash -c "grep '^DefaultLimitNOFILE=1024$' $USERCONF"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify user DefaultLimitNPROC in $USERCONF" {
-  run bash -c "grep '^DefaultLimitNPROC=100$' $USERCONF"
+  run bash -c "grep '^DefaultLimitNPROC=1024$' $USERCONF"
   [ "$status" -eq 0 ]
 }

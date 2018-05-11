@@ -1,5 +1,5 @@
 function f_journalctl {
-  echo "[$i] Systemd/journald.conf and logrotate.conf"
+  echo "[$SCRIPT_COUNT] Systemd/journald.conf and logrotate.conf"
 
   cp "$LOGROTATE_CONF" "$LOGROTATE"
 
@@ -14,5 +14,5 @@ function f_journalctl {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

@@ -1,4 +1,6 @@
 function f_pre {
+  SCRIPT_COUNT="0"
+  ((SCRIPT_COUNT++))
 
   export TERM=linux
   export DEBIAN_FRONTEND=noninteractive
@@ -10,6 +12,9 @@ function f_pre {
   fi
 
   APT="apt-get $APTFLAGS"
+
+  readonly APTFLAGS
+  readonly APT
 
   if [[ $CHANGEME == "" ]]; then
     echo "Please read the code. Exiting."
@@ -28,6 +33,4 @@ function f_pre {
     echo
     exit 1
   fi
-
-  i="0"
 }

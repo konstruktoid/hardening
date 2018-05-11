@@ -1,5 +1,5 @@
 function f_restrictcompilers {
-  echo "[$i] Restrict compiler access"
+  echo "[$SCRIPT_COUNT] Restrict compiler access"
 
   while read -r x; do
     if [ -f "$x" ] && [ -x "$x" ]; then
@@ -12,7 +12,16 @@ function f_restrictcompilers {
       fi
     fi
   done <<< "$(dpkg-query -L $(dpkg -l | grep compil | awk '{print $2}'))"
+
+  ASCOMP="$(which as)"
+  if [ -f "$ASCOMP" ] && [ -x "$ASCOMP" ]; then
+    chmod 0750 "$(readlink -eq $(which as))"
+
+    if [[ $VERBOSE == "Y" ]]; then
+      readlink -eq "$ASCOMP"
+    fi
+  fi
   echo
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

@@ -1,5 +1,12 @@
 function f_timesyncd {
-  echo "[$i] Systemd/timesyncd.conf"
+  echo "[$SCRIPT_COUNT] Systemd/timesyncd.conf"
+
+  local LATENCY
+  local SERVERS
+  local SERVERARRAY
+  local FALLBACKARRAY
+  local TMPCONF
+
   LATENCY="50"
   SERVERS="4"
   APPLY="YES"
@@ -9,6 +16,7 @@ function f_timesyncd {
   TMPCONF=$(mktemp --tmpdir ntpconf.XXXXX)
 
   if [[ -z "$NTPSERVERPOOL" ]]; then
+    local NTPSERVERPOOL
     NTPSERVERPOOL="0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org"
   fi
 
@@ -16,11 +24,12 @@ function f_timesyncd {
 
   PONG="ping -c2"
 
-  for s in $(dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}'); do
+  while read -r s; do
     if [[ $NUMSERV -ge $SERVERS ]]; then
       break
     fi
 
+    local PINGSERV
     PINGSERV=$($PONG "$s" | grep 'rtt min/avg/max/mdev' | awk -F "/" '{printf "%.0f\n",$6}')
     if [[ $PINGSERV -gt "1" && $PINGSERV -lt "$LATENCY" ]]; then
       OKSERV=$(nslookup "$s"|grep "name = " | awk '{print $4}'|sed 's/.$//')
@@ -30,7 +39,7 @@ function f_timesyncd {
         ((NUMSERV++))
       fi
     fi
-  done
+  done <<< "$(dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}')"
 
   for l in $NTPSERVERPOOL; do
     if [[ $FALLBACKSERV -le "2" ]]; then
@@ -70,5 +79,5 @@ function f_timesyncd {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

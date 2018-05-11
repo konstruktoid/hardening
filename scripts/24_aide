@@ -1,5 +1,5 @@
 function f_aide {
-  echo "[$i] Aide configuration"
+  echo "[$SCRIPT_COUNT] Aide configuration"
 
   if ! grep -R -E '^!/var/lib/lxcfs/cgroup$' /etc/aide/*; then
     echo '!/var/lib/lxcfs/cgroup' > /etc/aide/aide.conf.d/70_aide_lxcfs
@@ -9,19 +9,19 @@ function f_aide {
     echo '!/var/lib/docker' > /etc/aide/aide.conf.d/70_aide_docker
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
 
 function f_aide_post {
-  echo "[$i] Running Aide, this will take a while"
+  echo "[$SCRIPT_COUNT] Running Aide, this will take a while"
 
   aideinit --yes
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }
 
 function f_aide_timer {
-  echo "[$i] Enable daily Aide check"
+  echo "[$SCRIPT_COUNT] Enable daily Aide check"
 
   cp ./config/aidecheck.service /etc/systemd/system/aidecheck.service
   cp ./config/aidecheck.timer /etc/systemd/system/aidecheck.timer
@@ -36,5 +36,5 @@ function f_aide_timer {
     echo
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

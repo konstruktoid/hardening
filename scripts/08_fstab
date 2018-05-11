@@ -1,5 +1,5 @@
 function f_fstab {
-  echo "[$i] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
+  echo "[$SCRIPT_COUNT] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
   cp ./config/tmp.mount /etc/systemd/system/tmp.mount
 
@@ -33,5 +33,5 @@ function f_fstab {
     echo '/etc/systemd/system/tmp.mount was not found.'
   fi
 
-  ((i++))
+  ((SCRIPT_COUNT++))
 }

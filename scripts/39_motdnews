@@ -1,6 +1,6 @@
 function f_motdnews {
   if test -f /etc/default/motd-news; then
-    echo "[$i] Disable motd-news"
+    echo "[$SCRIPT_COUNT] Disable motd-news"
     sed -i 's/ENABLED=.*/ENABLED=0/' /etc/default/motd-news
     systemctl disable motd-news.timer
 
@@ -9,6 +9,6 @@ function f_motdnews {
       echo
     fi
 
-    ((i++))
+    ((SCRIPT_COUNT++))
   fi
 }

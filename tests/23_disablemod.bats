@@ -27,6 +27,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that kernel module pcspkr is disabled" {
+  run bash -c "modprobe -n -v pcspkr | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that kernel module soundcore is disabled" {
   run bash -c "modprobe -n -v soundcore | grep 'install /bin/true'"
   [ "$status" -eq 0 ]

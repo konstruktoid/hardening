@@ -13,11 +13,11 @@ load test_helper
 }
 
 @test "Verify soft nproc in $LIMITSCONF" {
-  run bash -c "grep '^* soft nproc 100$' $LIMITSCONF"
+  run bash -c "grep '^* soft nproc 512$' $LIMITSCONF"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify hard nproc in $LIMITSCONF" {
-  run bash -c "grep '^* hard nproc 150$' $LIMITSCONF"
+  run bash -c "grep '^* hard nproc 1024$' $LIMITSCONF"
   [ "$status" -eq 0 ]
 }
