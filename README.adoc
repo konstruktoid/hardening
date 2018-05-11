@@ -124,7 +124,7 @@ systems.
 
 ==== 05_systemdconf
 Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
-`DefaultLimitNPROC` to 100.
+`DefaultLimitNPROC` to 1024.
 
 ==== 06_journalctl
 Compress logs, forward to syslog and make log storage persistent.
@@ -276,7 +276,7 @@ Lock the `root` user account.
 Disable coredumps with `systemd/coredump.conf`.
 
 ==== 38_postfix
-Disable the `VRFY` command.
+Disable the `VRFY` command and configure `smtpd_banner`.
 
 ==== 39_motdnews
 Disable `motd-news`.
@@ -360,7 +360,6 @@ sudo bats .
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
 http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
-https://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04 STIG Ver 1, Rel 1] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
