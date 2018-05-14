@@ -2,13 +2,13 @@
 
 # shellcheck disable=SC2009
 if ! ps -p $$ | grep -si bash; then
-       echo "Sorry, this script requires bash."
-       exit 1
+  echo "Sorry, this script requires bash."
+  exit 1
 fi
 
 if ! [ -x "$(command -v systemctl)" ]; then
-    echo "systemctl required. Exiting."
-    exit 1
+  echo "systemctl required. Exiting."
+  exit 1
 fi
 
 function main {
