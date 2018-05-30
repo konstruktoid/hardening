@@ -45,7 +45,8 @@ while read -r service_name; do
     SELinuxContext=
     AppArmorProfile=
     LimitNOFILE=
-    LimitNPROC="
+    LimitNPROC=
+    DynamicUser="
 
     while read -r option; do
       service_configuration_option "$option"
