@@ -127,4 +127,7 @@ function main {
   echo
 }
 
-main "$@"
+LOGFILE="hardening-$(hostname --short)-$(date +%y%m%d).log"
+echo "[HARDENING LOG - $(hostname --fqdn) - $(LANG=C date)]" >> "$LOGFILE"
+
+main "$@" | tee -a "$LOGFILE"
