@@ -1,4 +1,4 @@
-# https://github.com/mozilla/wikimo_opsec/blob/master/Security/Guidelines/OpenSSH.mediawiki#Modern_OpenSSH_67
+# https://wiki.mozilla.org/Security/Guidelines/OpenSSH
 
 function f_sshdconfig {
   echo "[$SCRIPT_COUNT] /etc/ssh/sshd_config"
@@ -22,6 +22,18 @@ function f_sshdconfig {
   sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
 
   echo "" >> "$SSHDFILE"
+
+  if ! grep -q "^PrintLastLog" "$SSHDFILE" 2> /dev/null; then
+    echo "PrintLastLog yes" >> "$SSHDFILE"
+  fi
+
+  if ! grep -q "^IgnoreUserKnownHosts" "$SSHDFILE" 2> /dev/null; then
+    echo "IgnoreUserKnownHosts yes" >> "$SSHDFILE"
+  fi
+
+  if ! grep -q "^PermitEmptyPasswords" "$SSHDFILE" 2> /dev/null; then
+    echo "PermitEmptyPasswords no" >> "$SSHDFILE"
+  fi
 
   if ! grep -q "^AllowGroups" "$SSHDFILE" 2> /dev/null; then
     echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
@@ -64,9 +76,9 @@ function f_sshdconfig {
   fi
 
   if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
-    echo "UseDNS yes" >> "$SSHDFILE"
+    echo "UseDNS no" >> "$SSHDFILE"
   else
-    sed -i 's/UseDNS.*/UseDNS yes/' "$SSHDFILE"
+    sed -i 's/UseDNS.*/UseDNS no/' "$SSHDFILE"
   fi
 
   cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"

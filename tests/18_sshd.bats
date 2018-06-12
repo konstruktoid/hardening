@@ -83,7 +83,22 @@ load test_helper
 }
 
 @test "Verify OpenSSH UseDNS" {
-  run sshdConfig '^UseDNS yes$'
+  run sshdConfig '^UseDNS no$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH PrintLastLog" {
+  run sshdConfig '^PrintLastLog yes$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH IgnoreUserKnownHosts" {
+  run sshdConfig '^IgnoreUserKnownHosts yes$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH PermitEmptyPasswords" {
+  run sshdConfig '^PermitEmptyPasswords no$'
   [ "$status" -eq 0 ]
 }
 
