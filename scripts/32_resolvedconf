@@ -4,7 +4,7 @@ function f_resolvedconf {
   local dnsarray
   local dnslist
 
-  mapfile -t dnsarray < <( grep ^nameserver /etc/resolv.conf | sed 's/nameserver//g' )
+  mapfile -t dnsarray < <( grep ^nameserver /etc/resolv.conf | sed 's/^nameserver\s//g' )
   dnslist=${dnsarray[*]}
 
   if [ ${#dnsarray[@]} -lt 2 ]; then
