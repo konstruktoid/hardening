@@ -13,9 +13,9 @@ function f_restrictcompilers {
     fi
   done <<< "$(dpkg-query -L $(dpkg -l | grep compil | awk '{print $2}'))"
 
-  ASCOMP="$(which as)"
+  ASCOMP="$(command -v as)"
   if [ -f "$ASCOMP" ] && [ -x "$ASCOMP" ]; then
-    chmod 0750 "$(readlink -eq $(which as))"
+    chmod 0750 "$(readlink -eq $(command -v as))"
 
     if [[ $VERBOSE == "Y" ]]; then
       readlink -eq "$ASCOMP"
