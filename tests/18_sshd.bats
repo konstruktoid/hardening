@@ -2,7 +2,7 @@
 
 load test_helper
 
-@test "Ensure OpenSSH ssh_host_dsa_key isn't used" {
+@test "Ensure OpenSSH ssh_host_dsa_key is not used" {
   run sshdConfig ssh_host_dsa_key
   [ "$status" -eq 1 ]
 }

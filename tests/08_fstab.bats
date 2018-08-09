@@ -2,22 +2,22 @@
 
 load test_helper
 
-@test "Ensure a floppy isn't present in /etc/fstab" {
+@test "Ensure a floppy is not present in /etc/fstab" {
   run bash -c "grep floppy /etc/fstab"
   [ "$status" -eq 1 ]
 }
 
-@test "Ensure a floppy isn't mounted" {
+@test "Ensure a floppy is not mounted" {
   run bash -c "grep floppy /proc/mounts"
   [ "$status" -eq 1 ]
 }
 
-@test "Ensure /tmp isn't present in /etc/fstab" {
+@test "Ensure /tmp is not present in /etc/fstab" {
   run bash -c "grep -e '[[:space:]]/tmp[[:space:]]' /etc/fstab"
   [ "$status" -eq 1 ]
 }
 
-@test "Ensure /var/tmp isn't present in /etc/fstab" {
+@test "Ensure /var/tmp is not present in /etc/fstab" {
   run bash -c "grep -e '[[:space:]]/var/tmp[[:space:]]' /etc/fstab"
   [ "$status" -eq 1 ]
 }

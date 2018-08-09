@@ -17,7 +17,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Ensure nullok isn't used in $COMMONAUTH" {
+@test "Ensure nullok is not used in $COMMONAUTH" {
   run bash -c "grep 'nullok' $COMMONAUTH"
   [ "$status" -eq 1 ]
 }
