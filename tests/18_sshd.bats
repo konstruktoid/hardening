@@ -7,6 +7,56 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify OpenSSH UsePrivilegeSeparation (Deprecated)" {
+  run sshdConfig UsePrivilegeSeparation
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify OpenSSH Protocol (Deprecated)" {
+  run sshdConfig Protocol
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify OpenSSH RhostsRSAAuthentication (Deprecated)" {
+  run sshdConfig RhostsRSAAuthentication
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify OpenSSH User and Groups access limits" {
+  run bash -c "sshd -T | grep -i -E 'allowgroups|allowusers|denygroups|denyusers'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH IgnoreRhosts" {
+  run sshdConfig '^IgnoreRhosts yes$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH Compression" {
+  run sshdConfig '^Compression no$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH KerberosAuthentication" {
+  run sshdConfig '^KerberosAuthentication no$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH StrictModes" {
+  run sshdConfig '^StrictModes yes$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH GSSAPIAuthentication" {
+  run sshdConfig '^GSSAPIAuthentication no$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH HostbasedAuthentication" {
+  run sshdConfig '^HostbasedAuthentication no$'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify OpenSSH X11Forwarding" {
   run sshdConfig '^X11Forwarding no$'
   [ "$status" -eq 0 ]
