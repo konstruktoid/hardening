@@ -68,3 +68,7 @@ moduliSize() {
    exit 0
  fi
 }
+
+packageInstalled() {
+  dpkg -l | awk '{print $1, $2}' | grep "ii.*$1"
+}
