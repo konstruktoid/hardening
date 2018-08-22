@@ -1,0 +1,15 @@
+# https://github.com/konstruktoid/ansible-role-hardening/blob/master/templates/etc/audit/rules.d/hardening.rules.j2
+# https://github.com/konstruktoid/Ansible/blob/master/roles/docker/templates/audit.rules.j2
+# https://github.com/gds-operations/puppet-auditd/tree/master/templates
+
+# Remove any existing rules
+-D
+
+# Buffer Size
+-b 8192
+
+# Ignore errors
+-i
+
+# Failure Mode
+-f 2

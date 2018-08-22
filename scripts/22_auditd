@@ -6,7 +6,13 @@ function f_auditd {
   sed -i 's/^max_log_file_action =.*/max_log_file_action = keep_logs/' "$AUDITDCONF"
   sed -i 's/^space_left_action =.*/space_left_action = email/' "$AUDITDCONF"
   sed -i 's/^GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="audit=1"/' "$DEFAULTGRUB"
-  cp "$AUDITD_RULES" /etc/audit/audit.rules
+
+  cp "./misc/audit.header" /etc/audit/audit.rules
+  for l in $AUDITD_RULES; do
+    cat "$l" >> /etc/audit/audit.rules
+  done
+  cat "./misc/audit.footer" >> /etc/audit/audit.rules
+
   sed -i "s/arch=b64/arch=$(uname -m)/g" /etc/audit/audit.rules
   cp /etc/audit/audit.rules "$AUDITRULES"
   update-grub 2> /dev/null
