@@ -173,28 +173,6 @@
 -a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
 -a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
 
-# Capture all failures to access on critical elements
--a exit,always -F arch=b64 -S open -F dir=/etc -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/bin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/sbin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/usr/bin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/usr/sbin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/var -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/home -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/root -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/srv -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/tmp -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/etc -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/bin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/sbin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/usr/bin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/usr/sbin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/var -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/home -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/root -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/srv -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/tmp -F success=0 -k access
-
 # Monitor for use of process ID change (switching accounts) applications
 -w /bin/su -p x -k actions
 -w /usr/bin/sudo -p x -k actions
