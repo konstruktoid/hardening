@@ -19,7 +19,7 @@ function f_fstab {
     sed -i '/[[:space:]]\/tmp[[:space:]]/d' /etc/fstab
 
     ln -s /etc/systemd/system/tmp.mount /etc/systemd/system/default.target.wants/tmp.mount
-    sed -i 's/Options=.*/Options=mode=1777,strictatime,nodev,nosuid/' /etc/systemd/system/tmp.mount
+    sed -i 's/Options=.*/Options=mode=1777,strictatime,noexec,nodev,nosuid/' /etc/systemd/system/tmp.mount
 
     cp /etc/systemd/system/tmp.mount /etc/systemd/system/var-tmp.mount
     sed -i 's/\/tmp/\/var\/tmp/g' /etc/systemd/system/var-tmp.mount

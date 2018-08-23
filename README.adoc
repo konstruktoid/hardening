@@ -144,7 +144,7 @@ Undo prelinking, and remove `prelink` package.
 === 10_aptget
 CCE-26895-3, UBTU-16-010010, UBTU-16-010560, UBTU-16-010570
 
-`apt-get` update and upgrade.
+Configure `dpkg` and `apt-get`. `apt-get` update and upgrade.
 
 ==== 11_hosts
 V-72315
@@ -342,6 +342,7 @@ f_path
 f_aa_enforce
 f_aide_post
 f_aide_timer
+f_aptget_noexec
 f_systemddelta
 f_checkreboot
 ----

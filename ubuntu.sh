@@ -121,6 +121,7 @@ function main {
   f_aa_enforce
   f_aide_post
   f_aide_timer
+  f_aptget_noexec
   f_systemddelta
   f_checkreboot
 
