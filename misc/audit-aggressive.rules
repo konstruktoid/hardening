@@ -1,7 +1,3 @@
-# Monitor changes and executions in /tmp and /var/tmp.
--w /tmp/ -p wxa -k tmp
--w /var/tmp/ -p wxa -k tmp
-
 # Monitor admins accessing user files.
 -a always,exit -F dir=/home/ -F uid=0 -C auid!=obj_uid -k admin_user_home
 
