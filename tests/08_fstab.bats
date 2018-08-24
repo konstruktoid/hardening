@@ -44,6 +44,12 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that /tmp is mounted with noexec" {
+  tmpMount=$(fragmentPath tmp.mount)
+  run bash -c "grep '^Options=.*noexec.*' $tmpMount"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that /var/tmp is mounted with nodev" {
   varTmpMount=$(fragmentPath var-tmp.mount)
   run bash -c "grep '^Options=.*nodev.*' $varTmpMount"
@@ -53,6 +59,12 @@ load test_helper
 @test "Verify that /var/tmp is mounted with nosuid" {
   varTmpMount=$(fragmentPath var-tmp.mount)
   run bash -c "grep '^Options=.*nosuid.*' $varTmpMount"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /var/tmp is mounted with noexec" {
+  varTmpMount=$(fragmentPath var-tmp.mount)
+  run bash -c "grep '^Options=.*noexec.*' $varTmpMount"
   [ "$status" -eq 0 ]
 }
 
