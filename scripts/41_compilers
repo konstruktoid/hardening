@@ -1,6 +1,7 @@
 function f_restrictcompilers {
   echo "[$SCRIPT_COUNT] Restrict compiler access"
 
+  # shellcheck disable=2046
   while read -r x; do
     if [ -f "$x" ] && [ -x "$x" ]; then
       if ! test -L "$x"; then
@@ -14,6 +15,7 @@ function f_restrictcompilers {
   done <<< "$(dpkg-query -L $(dpkg -l | grep compil | awk '{print $2}'))"
 
   ASCOMP="$(command -v as)"
+  # shellcheck disable=2046
   if [ -f "$ASCOMP" ] && [ -x "$ASCOMP" ]; then
     chmod 0750 "$(readlink -eq $(command -v as))"
 

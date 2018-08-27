@@ -24,6 +24,7 @@ function f_timesyncd {
 
   PONG="ping -c2"
 
+  # shellcheck disable=2086
   while read -r s; do
     if [[ $NUMSERV -ge $SERVERS ]]; then
       break
@@ -33,6 +34,7 @@ function f_timesyncd {
     PINGSERV=$($PONG "$s" | grep 'rtt min/avg/max/mdev' | awk -F "/" '{printf "%.0f\n",$6}')
     if [[ $PINGSERV -gt "1" && $PINGSERV -lt "$LATENCY" ]]; then
       OKSERV=$(nslookup "$s"|grep "name = " | awk '{print $4}'|sed 's/.$//')
+      # shellcheck disable=2143
       if [[ $OKSERV && $NUMSERV -lt $SERVERS && ! (( $(grep "$OKSERV" "$TMPCONF") )) ]]; then
         echo "$OKSERV has latency < $LATENCY"
         SERVERARRAY+=("$OKSERV")
