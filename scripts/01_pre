@@ -6,9 +6,9 @@ function f_pre {
   export DEBIAN_FRONTEND=noninteractive
 
   if [[ $VERBOSE == "Y" ]]; then
-    APTFLAGS='-y'
+    APTFLAGS='--assume-yes'
   else
-    APTFLAGS='-qq -y'
+    APTFLAGS='-qq --assume-yes'
   fi
 
   APT="apt-get $APTFLAGS"

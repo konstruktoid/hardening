@@ -15,8 +15,7 @@ function f_aptget {
 function f_aptget_clean {
   echo "[$SCRIPT_COUNT] Removing unused packages"
 
-  $APT clean
-  $APT autoclean
+  apt-get -qq clean
   apt-get -qq autoremove
 
   ((SCRIPT_COUNT++))
