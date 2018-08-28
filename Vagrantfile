@@ -1,10 +1,4 @@
 Vagrant.configure("2") do |config|
-  config.vm.define "xenial" do |xenial|
-    xenial.vm.box = "ubuntu/xenial64"
-    xenial.ssh.insert_key = true
-    xenial.vm.network "private_network", ip:"10.7.8.41"
-    xenial.vm.hostname = "xenial"
-  end
 
   config.vm.define "artful" do |artful|
     artful.vm.box = "ubuntu/artful64"
