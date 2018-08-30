@@ -2,9 +2,14 @@
 
 load test_helper
 
-@test "Verify that apport is disabled in /etc/default/apport" {
-  run bash -c "grep '^enabled=0$' /etc/default/apport"
-  [ "$status" -eq 0 ]
+@test "Verify that apport is not installed" {
+  run packageInstalled 'apport'
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify that /etc/default/apport do not exist" {
+  run bash -c "stat /etc/default/apport"
+  [ "$status" -eq 1 ]
 }
 
 @test "Verify that apport is masked" {
