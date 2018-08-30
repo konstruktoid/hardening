@@ -70,5 +70,5 @@ moduliSize() {
 }
 
 packageInstalled() {
-  dpkg -l | awk '{print $1, $2}' | grep "ii.*$1"
+  dpkg -l | awk '{print $1, $2}' | grep "^ii.* $1"
 }
