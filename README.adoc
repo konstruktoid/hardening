@@ -51,7 +51,7 @@ run the script, `sudo bash ubuntu.sh`. +
 FW_ADMIN='127.0.0.1' // <1>
 SSH_GRPS='sudo' // <2>
 SYSCTL_CONF='./misc/sysctl.conf' // <3>
-AUDITD_RULES='./misc/audit.rules' // <4>
+AUDITD_RULES='./misc/audit-base.rules ./misc/audit-aggressive.rules ./misc/audit-docker.rules' // <4>
 LOGROTATE_CONF='./misc/logrotate.conf' // <5>
 NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <6>
 TIMEDATECTL='' // <7>
