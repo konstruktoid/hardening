@@ -1,19 +1,3 @@
-# https://github.com/konstruktoid/ansible-role-hardening/blob/master/templates/etc/audit/rules.d/hardening.rules.j2
-# https://github.com/konstruktoid/Ansible/blob/master/roles/docker/templates/audit.rules.j2
-# https://github.com/gds-operations/puppet-auditd/tree/master/templates
-
-# Remove any existing rules
--D
-
-# Buffer Size
--b 8192
-
-# Ignore errors
--i
-
-# Failure Mode
--f 2
-
 # Audit the audit logs
 -w /var/log/audit/ -k auditlog
 
@@ -141,18 +125,6 @@
 -a always,exit -F arch=b32 -S init_module -S delete_module -F key=modules
 -a always,exit -F arch=b32 -S init_module -F key=modules
 
-# File deletions
--a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S unlink -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rename -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S renameat -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S unlink -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rename -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S renameat -F auid>=1000 -F auid!=4294967295 -F key=delete
-
 # PAM configuration
 -w /etc/pam.d/ -p wa -k pam
 -w /etc/security/limits.conf -p wa -k pam
@@ -201,28 +173,6 @@
 -a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -F key=access
 -a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -F key=access
 
-# Capture all failures to access on critical elements
--a exit,always -F arch=b64 -S open -F dir=/etc -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/bin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/sbin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/usr/bin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/usr/sbin -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/var -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/home -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/root -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/srv -F success=0 -k access
--a exit,always -F arch=b64 -S open -F dir=/tmp -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/etc -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/bin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/sbin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/usr/bin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/usr/sbin -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/var -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/home -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/root -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/srv -F success=0 -k access
--a exit,always -F arch=b32 -S open -F dir=/tmp -F success=0 -k access
-
 # Monitor for use of process ID change (switching accounts) applications
 -w /bin/su -p x -k actions
 -w /usr/bin/sudo -p x -k actions
@@ -234,27 +184,6 @@
 -w /sbin/poweroff -p x -k power
 -w /sbin/reboot -p x -k power
 -w /sbin/halt -p x -k power
-
-# Monitor admins accessing user files.
--a always,exit -F dir=/home/ -F uid=0 -C auid!=obj_uid -k admin_user_home
-
-# Monitor changes and executions in /tmp and /var/tmp.
--w /tmp/ -p wxa -k tmp
--w /var/tmp/ -p wxa -k tmp
-
-# Permissions
--a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
 
 # Use of privileged commands
 -a always,exit -F path=/bin/fusermount -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
@@ -325,29 +254,3 @@
 -a always,exit -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
 -a always,exit -F path=/usr/sbin/usernetct -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
 -a always,exit -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
-
-# Docker
--w /etc/default/docker -k docker
--w /etc/docker -k docker
--w /etc/sysconfig/docker -k docker
--w /etc/sysconfig/docker-network -k docker
--w /etc/sysconfig/docker-registry -k docker
--w /etc/sysconfig/docker-storage -k docker
--w /etc/systemd/system/docker-registry.service -k docker
--w /etc/systemd/system/docker.service -k docker
--w /lib/systemd/system/docker-registry.service -k docker
--w /lib/systemd/system/docker.service -k docker
--w /lib/systemd/system/docker.socket -k docker
--w /usr/bin/docker -k docker
--w /usr/bin/docker-containerd -k docker
--w /usr/bin/docker-containerd-ctr -k docker
--w /usr/bin/docker-containerd-shim -k docker
--w /usr/bin/docker-runc -k docker
--w /usr/bin/dockerd -k docker
--w /usr/lib/systemd/system/docker-registry.service -k docker
--w /usr/lib/systemd/system/docker.service -k docker
--w /var/lib/docker -k docker
--w /var/run/docker.sock -k docker
-
-# Make the configuration immutable
--e 2
