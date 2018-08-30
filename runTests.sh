@@ -26,6 +26,8 @@ wait
 
 for VM in $(vagrant status | grep virtualbox | awk '{print $1}'); do
   vagrant ssh "$VM" -c 'sudo apt-get -y update && sudo apt-get -y install bats && cd ~/hardening/tests && sudo bats . >> ~/bats.log'
+  wait
+  vagrant ssh "$VM" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
 done
 
 wait
