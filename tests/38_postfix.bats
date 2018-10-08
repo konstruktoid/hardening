@@ -3,11 +3,11 @@
 load test_helper
 
 @test "Verify postfix smtpd_banner" {
-  run bash -c "grep -E '^smtpd_banner.*ESMTP$' /etc/postfix/main.cf"
+  run bash -c "postconf | grep '^smtpd_banner = \$myhostname ESMTP$'"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify that postfix disable_vrfy_command is set" {
-  run bash -c "grep '^disable_vrfy_command = yes$' /etc/postfix/main.cf"
+  run bash -c "postconf | grep '^disable_vrfy_command = yes$'"
   [ "$status" -eq 0 ]
 }
