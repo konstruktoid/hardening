@@ -4,6 +4,7 @@ function f_postfix {
   # shellcheck disable=2016
   sed -i 's/^smtpd_banner.*/smtpd_banner = $myhostname ESMTP/' /etc/postfix/main.cf
   postconf -e disable_vrfy_command=yes
+  postconf -e smtpd_banner="\$myhostname ESMTP"
 
   systemctl restart postfix.service
 
