@@ -11,3 +11,8 @@ load test_helper
   run bash -c "postconf | grep '^disable_vrfy_command = yes$'"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that postfix smtpd_client_restrictions is set" {
+  run bash -c "postconf | grep '^smtpd_client_restrictions = permit_mynetworks,reject$'"
+  [ "$status" -eq 0 ]
+}
