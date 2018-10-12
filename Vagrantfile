@@ -20,4 +20,12 @@ Vagrant.configure("2") do |config|
     cosmic.vm.network "private_network", ip:"10.7.8.47"
     cosmic.vm.hostname = "cosmic"
   end
+
+  config.vm.define "basic" do |basic|
+    basic.vm.box = "ubuntu/bionic64"
+    basic.ssh.insert_key = true
+    basic.vm.network "private_network", ip:"10.7.8.49"
+    basic.vm.hostname = "basic"
+  end
+
 end
