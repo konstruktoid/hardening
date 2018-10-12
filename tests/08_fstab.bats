@@ -32,39 +32,69 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /tmp is mounted with nodev" {
+@test "Verify /tmp nodev option" {
   tmpMount=$(fragmentPath tmp.mount)
   run bash -c "grep '^Options=.*nodev.*' $tmpMount"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /tmp is mounted with nosuid" {
+@test "Verify /tmp nosuid option" {
   tmpMount=$(fragmentPath tmp.mount)
   run bash -c "grep '^Options=.*nosuid.*' $tmpMount"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /tmp is mounted with noexec" {
+@test "Verify /tmp noexec option" {
   tmpMount=$(fragmentPath tmp.mount)
   run bash -c "grep '^Options=.*noexec.*' $tmpMount"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/tmp is mounted with nodev" {
+@test "Verify /var/tmp nodev option" {
   varTmpMount=$(fragmentPath var-tmp.mount)
   run bash -c "grep '^Options=.*nodev.*' $varTmpMount"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/tmp is mounted with nosuid" {
+@test "Verify /var/tmp nosuid option" {
   varTmpMount=$(fragmentPath var-tmp.mount)
   run bash -c "grep '^Options=.*nosuid.*' $varTmpMount"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/tmp is mounted with noexec" {
+@test "Verify /var/tmp noexec option" {
   varTmpMount=$(fragmentPath var-tmp.mount)
   run bash -c "grep '^Options=.*noexec.*' $varTmpMount"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /var/tmp is mounted with nodev" {
+  run bash -c "grep '[[:space:]]/var/tmp[[:space:]].*nodev.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /var/tmp is mounted with nosuid" {
+  run bash -c "grep '[[:space:]]/var/tmp[[:space:]].*nosuid.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /var/tmp is mounted with noexec" {
+  run bash -c "grep '[[:space:]]/var/tmp[[:space:]].*noexec.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /tmp is mounted with nodev" {
+  run bash -c "grep '[[:space:]]/tmp[[:space:]].*nodev.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /tmp is mounted with nosuid" {
+  run bash -c "grep '[[:space:]]/tmp[[:space:]].*nosuid.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /tmp is mounted with noexec" {
+  run bash -c "grep '[[:space:]]/tmp[[:space:]].*noexec.*' /proc/mounts"
   [ "$status" -eq 0 ]
 }
 
