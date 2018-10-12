@@ -3,6 +3,11 @@ function f_coredump {
 
     echo "[$SCRIPT_COUNT] Systemd/coredump.conf"
     sed -i 's/^#Storage=.*/Storage=none/' "$COREDUMPCONF"
+    if [ $? != 0 ]
+    then
+      touch "$COREDUMPCONF"
+      echo "Storage=none" > "$COREDUMPCONF"
+    fi
 
     systemctl restart systemd-journald
 

@@ -12,28 +12,7 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Ensure /tmp is not present in /etc/fstab" {
-  run bash -c "grep -e '[[:space:]]/tmp[[:space:]]' /etc/fstab"
-  [ "$status" -eq 1 ]
-}
-
-@test "Ensure /var/tmp is not present in /etc/fstab" {
-  run bash -c "grep -e '[[:space:]]/var/tmp[[:space:]]' /etc/fstab"
-  [ "$status" -eq 1 ]
-}
-
-@test "Verify that tmp.mount is enabled" {
-  run bash -c "systemctl is-enabled tmp.mount"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that var-tmp.mount is enabled" {
-  run bash -c "systemctl is-enabled var-tmp.mount"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify /tmp nodev option" {
-  tmpMount=$(fragmentPath tmp.mount)
+@test "Verify that /tmp is mounted with nodev" {
   run bash -c "grep '^Options=.*nodev.*' $tmpMount"
   [ "$status" -eq 0 ]
 }
@@ -118,38 +97,8 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that /var/log/audit is mounted with nodev" {
-  run bash -c "grep '[[:space:]]/var/log/audit[[:space:]].*nodev.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /var/log/audit is mounted with nosuid" {
-  run bash -c "grep '[[:space:]]/var/log/audit[[:space:]].*nosuid.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /var/log/audit is mounted with noexec" {
-  run bash -c "grep '[[:space:]]/var/log/audit[[:space:]].*noexec.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify that /var/log is a separate partition" {
   run bash -c "grep '[[:space:]]/var/log[[:space:]]' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /var/log is mounted with nodev" {
-  run bash -c "grep '[[:space:]]/var/log[[:space:]].*nodev.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /var/log is mounted with nosuid" {
-  run bash -c "grep '[[:space:]]/var/log[[:space:]].*nosuid.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /var/log is mounted with noexec" {
-  run bash -c "grep '[[:space:]]/var/log[[:space:]].*noexec.*' /proc/mounts"
   [ "$status" -eq 0 ]
 }
 
@@ -165,11 +114,6 @@ load test_helper
 
 @test "Verify that /proc is mounted with noexec" {
   run bash -c "grep '[[:space:]]/proc[[:space:]].*noexec.*' /proc/mounts"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that /proc is mounted with hidepid" {
-  run bash -c "grep '[[:space:]]/proc[[:space:]].*hidepid=.*' /proc/mounts"
   [ "$status" -eq 0 ]
 }
 
