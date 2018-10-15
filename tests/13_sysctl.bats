@@ -63,7 +63,7 @@ load test_helper
 }
 
 @test "Verify kernel.yama.ptrace_scope in $SYSCTL" {
-  run bash -c "grep '^kernel.yama.ptrace_scope.*1$' $SYSCTL"
+  run bash -c "grep '^kernel.yama.ptrace_scope.*2$' $SYSCTL"
   [ "$status" -eq 0 ]
 }
 
@@ -307,7 +307,7 @@ load test_helper
 }
 
 @test "Verify sysctl runtime kernel.yama.ptrace_scope" {
-  run sysctlRuntime '^kernel.yama.ptrace_scope.*1$'
+  run sysctlRuntime '^kernel.yama.ptrace_scope.*2$'
   [ "$status" -eq 0 ]
 }
 
