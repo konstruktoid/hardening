@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if ! command -v shellcheck; then
   exit 1
@@ -12,11 +12,14 @@ if ! command -v vagrant; then
   exit 1
 fi
 
-rm ./*bats.log
+find ./ -name '*bats.log' -exec rm {} \;
 
 vagrant box update --insecure
 vagrant destroy --force
-vagrant up --parallel
+
+grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
+  vagrant up "$v"
+done
 
 wait
 
@@ -43,7 +46,8 @@ done
 
 wait
 
-clear
+echo
+echo "=== Test results"
 
 find ./ -name 'hardening-*-bats.log' -type f | while read -r f; do
   if test -s "$f"; then
@@ -52,3 +56,6 @@ find ./ -name 'hardening-*-bats.log' -type f | while read -r f; do
     echo "$f is empty, a test stage failed."
   fi
 done
+
+echo
+grep -hE '^not ok' hardening-{artful,bionic,cosmic}-*-bats.log | sort -k3n | uniq
