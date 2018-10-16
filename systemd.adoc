@@ -93,11 +93,13 @@ See https://www.freedesktop.org/software/systemd/man/resolved.conf.html[resolved
 DNS=127.0.0.1 // <1>
 FallbackDNS=9.9.9.9 185.121.177.177 // <2>
 DNSSEC=allow-downgrade // <3>
+DNSOverTLS=opportunistic // <4>
 ----
 
 <1> "space-separated list of IPv4 and IPv6 addresses to use as system DNS servers."
 <2> "space-separated list of IPv4 and IPv6 addresses to use as the fallback DNS servers."
 <3> "If set to "allow-downgrade" DNSSEC validation is attempted, but if the server does not support DNSSEC properly, DNSSEC mode is automatically disabled." Should be set to `true` if possible.
+<4> "When set to "opportunistic" DNS request are attempted to send encrypted with DNS-over-TLS."
 
 === /etc/systemd/system.conf
 See https://www.freedesktop.org/software/systemd/man/systemd-system.conf.html[system.conf] and https://www.freedesktop.org/software/systemd/man/systemd.html[systemd, init].
