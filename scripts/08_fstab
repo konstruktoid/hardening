@@ -2,8 +2,27 @@ function f_fstab {
   echo "[$SCRIPT_COUNT] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
   cp ./config/tmp.mount /etc/systemd/system/tmp.mount
+  cp /etc/fstab /etc/fstab.bck
+
+  TMPFSTAB=$(mktemp --tmpdir fstab.XXXXX)
 
   sed -i '/floppy/d' /etc/fstab
+
+  grep -v -E '[[:space:]]/home[[:space:]]|[[:space:]]/var/log[[:space:]]|[[:space:]]/var/log/audit[[:space:]]' /etc/fstab > "$TMPFSTAB"
+
+  if grep -q '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
+    grep '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
+  fi
+
+  if grep -q '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
+    grep '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
+  fi
+
+  if grep -q '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
+    grep '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
+  fi
+
+  cp "$TMPFSTAB" /etc/fstab
 
   if ! grep -i '/run/shm' /etc/fstab 2>/dev/null 1>&2; then
     echo 'none /run/shm tmpfs rw,noexec,nosuid,nodev 0 0' >> /etc/fstab
