@@ -33,9 +33,11 @@ See https://www.freedesktop.org/software/systemd/man/coredump.conf.html[coredump
 ----
 [Coredump]
 Storage=none // <1>
+ProcessSizeMax=0 // <2>
 ----
 
 <1> "When "none", the core dumps will be logged but not stored permanently."
+<2> "Setting Storage=none and ProcessSizeMax=0 disables all coredump handling except for a log entry."
 
 == Mounts
 

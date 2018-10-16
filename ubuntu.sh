@@ -85,7 +85,6 @@ function main {
   f_logindconf
   f_journalctl
   f_timesyncd
-  f_coredump
   f_fstab
   f_prelink
   f_aptget_configure
@@ -99,6 +98,7 @@ function main {
   f_rootaccess
   f_package_remove
   f_package_install
+  f_coredump
   f_usbguard
   f_postfix
   f_apport

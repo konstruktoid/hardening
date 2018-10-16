@@ -15,7 +15,7 @@ function f_package_install {
   echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 
   local PACKAGE_INSTALL
-  PACKAGE_INSTALL="acct aide-common apparmor-profiles apparmor-utils auditd debsums haveged libpam-apparmor libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter vlock $VM"
+  PACKAGE_INSTALL="acct aide-common apparmor-profiles apparmor-utils auditd debsums haveged libpam-apparmor libpam-cracklib libpam-tmpdir openssh-server postfix rkhunter systemd-coredump vlock $VM"
 
   for deb_install in $PACKAGE_INSTALL; do
     $APT install --no-install-recommends "$deb_install"
@@ -28,7 +28,7 @@ function f_package_remove {
   echo "[$SCRIPT_COUNT] Package removal"
 
   local PACKAGE_REMOVE
-  PACKAGE_REMOVE="apport* avahi* beep popularity-contest rsh* talk* telnet* tftp* whoopsie yp-tools ypbind xinetd"
+  PACKAGE_REMOVE="apport* avahi* beep popularity-contest rsh* talk* telnet* tftp* whoopsie xinetd yp-tools ypbind"
 
   for deb_remove in $PACKAGE_REMOVE; do
     $APT purge "$deb_remove"

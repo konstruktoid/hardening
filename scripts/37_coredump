@@ -3,6 +3,7 @@ function f_coredump {
 
     echo "[$SCRIPT_COUNT] Systemd/coredump.conf"
     sed -i 's/^#Storage=.*/Storage=none/' "$COREDUMPCONF"
+    sed -i 's/^#ProcessSizeMax=.*/ProcessSizeMax=0/' "$COREDUMPCONF"
 
     systemctl restart systemd-journald
 
