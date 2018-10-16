@@ -276,7 +276,8 @@ Lock the `root` user account.
 Disable coredumps with `systemd/coredump.conf`.
 
 ==== 38_postfix
-Disable the `VRFY` command and configure `smtpd_banner`.
+Disable the `VRFY` command, configure `smtpd_banner`, `smtpd_client_restrictions`
+and `inet_interfaces`.
 
 ==== 39_motdnews
 Disable `motd-news`.
@@ -306,7 +307,6 @@ f_resolvedconf
 f_logindconf
 f_journalctl
 f_timesyncd
-f_coredump
 f_fstab
 f_prelink
 f_aptget_configure
@@ -320,6 +320,7 @@ f_adduser
 f_rootaccess
 f_package_remove
 f_package_install
+f_coredump
 f_usbguard
 f_postfix
 f_apport
