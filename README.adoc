@@ -3,7 +3,7 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `17.10 Artful Aardvark`, `18.04 Bionic Beaver` and `18.10 Cosmic Cuttlefish (under development)`.
+Tested on `17.10 Artful Aardvark`, `18.04 Bionic Beaver` and `18.10 Cosmic Cuttlefish`.
 
 Systemd required.
 
