@@ -143,7 +143,7 @@ CCE-27078-5
 
 Undo prelinking, and remove `prelink` package.
 
-=== 10_aptget
+==== 10_aptget
 CCE-26895-3, UBTU-16-010010, UBTU-16-010560, UBTU-16-010570
 
 Configure `dpkg` and `apt-get`. `apt-get` update and upgrade.
@@ -210,7 +210,7 @@ Disable Ctrl-alt-delete.
 ==== 22_auditd
 CCE-27407-6, UBTU-16-020000
 
-Configure `auditd`, use `$AUDITD_RULES`.
+Configure `auditd`, use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
 
 ==== 23_disablemod
 CCE-27327-6, CCE-27277-3, UBTU-16-010580
