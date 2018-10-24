@@ -14,6 +14,8 @@ function f_auditd {
   cat "./misc/audit.footer" >> /etc/audit/audit.rules
 
   sed -i "s/arch=b64/arch=$(uname -m)/g" /etc/audit/audit.rules
+  sed -i "s/-f.*/-f $AUDITD_MODE/g" /etc/audit/audit.rules
+
   cp /etc/audit/audit.rules "$AUDITRULES"
   update-grub 2> /dev/null
 
