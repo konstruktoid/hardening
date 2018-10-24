@@ -34,6 +34,7 @@ function main {
   readonly FW_ADMIN
   readonly SSH_GRPS
   readonly SYSCTL_CONF
+  readonly AUDITD_MODE
   readonly AUDITD_RULES
   readonly LOGROTATE_CONF
   readonly NTPSERVERPOOL

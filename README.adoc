@@ -51,13 +51,14 @@ run the script, `sudo bash ubuntu.sh`. +
 FW_ADMIN='127.0.0.1' // <1>
 SSH_GRPS='sudo' // <2>
 SYSCTL_CONF='./misc/sysctl.conf' // <3>
-AUDITD_RULES='./misc/audit-base.rules ./misc/audit-aggressive.rules ./misc/audit-docker.rules' // <4>
-LOGROTATE_CONF='./misc/logrotate.conf' // <5>
-NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <6>
-TIMEDATECTL='' // <7>
-VERBOSE='N' // <8>
-AUTOFILL='N' // <9>
-CHANGEME='' // <10>
+AUDITD_MODE='1' // <4>
+AUDITD_RULES='./misc/audit-base.rules ./misc/audit-aggressive.rules ./misc/audit-docker.rules' // <5>
+LOGROTATE_CONF='./misc/logrotate.conf' // <6>
+NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org 3.ubuntu.pool.ntp.org pool.ntp.org' // <7>
+TIMEDATECTL='' // <8>
+VERBOSE='N' // <9>
+AUTOFILL='N' // <10>
+CHANGEME='' // <11>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -90,13 +91,14 @@ USERCONF='/etc/systemd/user.conf'
 <1> The IP addresses that will be able to connect with SSH, separated by spaces.
 <2> Which group the users have to be member of in order to acess via SSH, separated by spaces.
 <3> Stricter sysctl settings.
-<4> Auditd rules.
-<5> Logrotate settings.
-<6> NTP server pool.
-<7> Add a specific time zone or use the system default by leaving it empty.
-<8> If you want all the details or not.
-<9> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
-<10> Add something just to verify that you actually glanced the code.
+<4> Auditd failure mode. 0=silent 1=printk 2=panic.
+<5> Auditd rules.
+<6> Logrotate settings.
+<7> NTP server pool.
+<8> Add a specific time zone or use the system default by leaving it empty.
+<9> If you want all the details or not.
+<10> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
+<11> Add something just to verify that you actually glanced the code.
 
 == Functions
 
