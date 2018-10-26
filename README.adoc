@@ -188,6 +188,10 @@ Removes `avahi*` `beep` `popularity-contest` `rsh*` `talk*` `telnet*` `tftp*`
 `yp-tools` `ypbind` `xinetd`.
 
 ==== 18_sshdconfig
+CCE-27471-2, CCE-27082-7, CCE-27433-2, CCE-27314-4, CCE-27363-1, CCE-27413-4,
+CCE-80222-3, CCE-80223-1, CCE-80225-6, CCE-80224-9, CCE-27445-6, UBTU-16-030200,
+UBTU-16-030210, UBTU-16-030270, UBTU-16-030350
+
 Configure the `OpenSSH`-daemon.
 
 ==== 19_password
@@ -363,8 +367,9 @@ sudo bats .
 
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
-http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Draft Red Hat 7 STIG Version 1, Release 0.1] +
+http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Red Hat Enterprise Linux 7 Security Technical Implementation Guide Version: 1 Release: 4 ] +
+http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04 LTS Security Technical Implementation Guide Version: 1 Release: 1 ] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
-
+https://www.ncsc.gov.uk/guidance/eud-security-guidance-ubuntu-1804-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
