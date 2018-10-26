@@ -152,6 +152,16 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify OpenSSH MaxStartups" {
+  run sshdConfig '^MaxStartups 10:30:60$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH HostbasedAuthentication" {
+  run sshdConfig '^HostbasedAuthentication no$'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify moduli sizes" {
   run moduliSize
   [ "$status" -eq 0 ]

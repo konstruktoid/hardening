@@ -81,6 +81,24 @@ function f_sshdconfig {
     sed -i 's/UseDNS.*/UseDNS no/' "$SSHDFILE"
   fi
 
+  if ! grep -q "^StrictModes" "$SSHDFILE" 2> /dev/null; then
+    echo "StrictModes yes" >> "$SSHDFILE"
+  else
+    sed -i 's/StrictModes.*/StrictModes yes/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^MaxStartups" "$SSHDFILE" 2> /dev/null; then
+    echo "MaxStartups 10:30:60" >> "$SSHDFILE"
+  else
+    sed -i 's/MaxStartups.*/MaxStartups 10:30:60/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^HostbasedAuthentication" "$SSHDFILE" 2> /dev/null; then
+    echo "HostbasedAuthentication no" >> "$SSHDFILE"
+  else
+    sed -i 's/HostbasedAuthentication.*/HostbasedAuthentication no/' "$SSHDFILE"
+  fi
+
   cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"
   grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | uniq > "$SSHDFILE"
   rm "/etc/ssh/sshd_config.$(date +%y%m%d)"
