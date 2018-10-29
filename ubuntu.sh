@@ -79,7 +79,7 @@ function main {
   f_pre
   f_firewall
   f_disablenet
-  f_disablemnt
+  f_disablefs
   f_disablemod
   f_systemdconf
   f_resolvedconf

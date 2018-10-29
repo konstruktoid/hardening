@@ -2,43 +2,43 @@
 
 load test_helper
 
-@test "Verify that kernel module cramfs is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install cramfs /bin/true' $DISABLEMNT"
+@test "Verify that kernel module cramfs is disabled in $DISABLEFS" {
+  run bash -c "grep 'install cramfs /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module freevxfs is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install freevxfs /bin/true' $DISABLEMNT"
+@test "Verify that kernel module freevxfs is disabled in $DISABLEFS" {
+  run bash -c "grep 'install freevxfs /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module jffs2 is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install jffs2 /bin/true' $DISABLEMNT"
+@test "Verify that kernel module jffs2 is disabled in $DISABLEFS" {
+  run bash -c "grep 'install jffs2 /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module hfs is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install hfs /bin/true' $DISABLEMNT"
+@test "Verify that kernel module hfs is disabled in $DISABLEFS" {
+  run bash -c "grep 'install hfs /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module hfsplus is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install hfsplus /bin/true' $DISABLEMNT"
+@test "Verify that kernel module hfsplus is disabled in $DISABLEFS" {
+  run bash -c "grep 'install hfsplus /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module squashfs is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install squashfs /bin/true' $DISABLEMNT"
+@test "Verify that kernel module squashfs is disabled in $DISABLEFS" {
+  run bash -c "grep 'install squashfs /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module udf is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install udf /bin/true' $DISABLEMNT"
+@test "Verify that kernel module udf is disabled in $DISABLEFS" {
+  run bash -c "grep 'install udf /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module vfat is disabled in $DISABLEMNT" {
-  run bash -c "grep 'install vfat /bin/true' $DISABLEMNT"
+@test "Verify that kernel module vfat is disabled in $DISABLEFS" {
+  run bash -c "grep 'install vfat /bin/true' $DISABLEFS"
   [ "$status" -eq 0 ]
 }
 
