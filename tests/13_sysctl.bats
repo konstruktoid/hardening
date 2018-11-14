@@ -147,6 +147,11 @@ load test_helper
   [ $ack_limit_result -eq 1 ]
 }
 
+@test "Verify net.ipv4.tcp_invalid_ratelimit in $SYSCTL" {
+  run bash -c "grep '^net.ipv4.tcp_invalid_ratelimit.*500$' $SYSCTL"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify net.ipv4.tcp_max_syn_backlog in $SYSCTL" {
   run bash -c "grep '^net.ipv4.tcp_max_syn_backlog.*20480$' $SYSCTL"
   [ "$status" -eq 0 ]
@@ -389,6 +394,11 @@ load test_helper
 @test "Verify sysctl runtime net.ipv4.tcp_challenge_ack_limit" {
   ack_limit_result=$(sysctl --all | grep '^net.ipv4.tcp_challenge_ack_limit.*' | awk '{print $NF >= 1000}')
   [ $ack_limit_result -eq 1 ]
+}
+
+@test "Verify sysctl runtime net.ipv4.tcp_invalid_ratelimit" {
+  run sysctlRuntime '^net.ipv4.tcp_invalid_ratelimit.*500$'
+  [ "$status" -eq 0 ]
 }
 
 @test "Verify sysctl runtime net.ipv4.tcp_max_syn_backlog" {
