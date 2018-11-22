@@ -12,6 +12,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify APT AutomaticRemove" {
+  run bash -c "grep '^APT::Get::AutomaticRemove \"true\";$' /etc/apt/apt.conf.d/*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify APT Install-Recommends" {
   run bash -c "grep '^APT::Install-Recommends \"false\";$' /etc/apt/apt.conf.d/*"
   [ "$status" -eq 0 ]

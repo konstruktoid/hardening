@@ -42,6 +42,12 @@ function f_aptget_configure {
     sed -i 's/.*APT::Install-Recommends.*/APT::Install-Recommends "false";/g' "$(grep -l 'APT::Install-Recommends' /etc/apt/apt.conf.d/*)"
   fi
 
+  if ! grep '^APT::Get::AutomaticRemove' /etc/apt/apt.conf.d/*; then
+    echo 'APT::Get::AutomaticRemove "true";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
+  else
+    sed -i 's/.*APT::Get::AutomaticRemove.*/APT::Get::AutomaticRemove "true";/g' "$(grep -l 'APT::Get::AutomaticRemove' /etc/apt/apt.conf.d/*)"
+  fi
+
   if ! grep '^APT::Install-Suggests' /etc/apt/apt.conf.d/*; then
     echo 'APT::Install-Suggests "false";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
   else
