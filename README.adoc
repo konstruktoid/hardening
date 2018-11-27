@@ -3,7 +3,8 @@
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `17.10 Artful Aardvark`, `18.04 Bionic Beaver` and `18.10 Cosmic Cuttlefish`.
+Tested on `17.10 Artful Aardvark`, `18.04 Bionic Beaver`, `18.10 Cosmic Cuttlefish`
+and `Ubuntu 19.04 (Disco Dingo)`.
 
 Systemd required.
 
@@ -364,6 +365,11 @@ git clone https://github.com/konstruktoid/hardening.git
 cd tests/
 sudo bats .
 ----
+
+=== Test automation
+Running `bash ./runTests.sh` will use https://www.vagrantup.com/[Vagrant] to run
+all above tests and https://github.com/CISOfy/Lynis[Lynis] on all supported Ubuntu
+versions.
 
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
