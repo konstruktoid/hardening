@@ -28,10 +28,10 @@ Vagrant.configure("2") do |config|
     basic.vm.hostname = "basic"
   end
 
-#  config.vm.define "disco" do |disco|
-#    disco.vm.box = "ubuntu/disco64"
-#    disco.ssh.insert_key = true
-#    disco.vm.network "private_network", ip:"10.7.8.51"
-#    disco.vm.hostname = "disco"
-#  end
+  config.vm.define "disco" do |disco|
+    disco.vm.box = "ubuntu/disco64"
+    disco.ssh.insert_key = true
+    disco.vm.network "private_network", ip:"10.7.8.51"
+    disco.vm.hostname = "disco"
+  end
 end
