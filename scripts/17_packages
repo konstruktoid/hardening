@@ -34,7 +34,7 @@ function f_package_remove {
     $APT purge "$deb_remove"
   done
 
-  $APT purge $(dpkg -l | grep "^rc" | awk '{print $2}')
+  $APT purge "$(dpkg -l | grep '^rc' | awk '{print $2}')"
 
   ((SCRIPT_COUNT++))
 }
