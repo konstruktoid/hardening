@@ -12,7 +12,7 @@ if ! command -v vagrant; then
   exit 1
 fi
 
-find ./ -name '*bats.log' -exec rm {} \;
+find ./ -name '*.log' -exec rm {} \;
 
 vagrant box update --insecure
 vagrant destroy --force
@@ -70,7 +70,7 @@ find ./ -name 'hardening-*-lynis.log' -type f | while read -r f; do
 done
 
 echo
-grep -shE '^not ok' hardening-{artful,bionic,cosmic,disco}-*-bats.log | sort -k3n | uniq
+grep -shE '^not ok' hardening-{bionic,cosmic,disco}-*-bats.log | sort -k3n | uniq
 
 echo
-grep -shE 'warning|suggestion' hardening-{artful,bionic,cosmic,disco}-*-lynis.log | sort -r | uniq
+grep -shE 'warning|suggestion' hardening-{bionic,cosmic,disco}-*-lynis.log | sort -r | uniq
