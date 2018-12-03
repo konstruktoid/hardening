@@ -69,7 +69,7 @@ function f_timesyncd {
     echo "Configuration saved to $TMPCONF."
   fi
 
-  if ! [[ -z "$TIMEDATECTL" ]]; then
+  if [[ -n "$TIMEDATECTL" ]]; then
     echo "Setting time zone to $TIMEDATECTL"
     timedatectl set-timezone "$TIMEDATECTL"
   fi
