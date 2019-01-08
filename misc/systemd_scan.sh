@@ -25,7 +25,7 @@ while read -r service_name; do
     echo "    [I] $service_fragmentpath used."
 
     service_configuration_option() {
-      # shellcheck disable=SC2001
+      # shellcheck disable=2001
       clean_option="$(echo "$1" | sed 's/=.*//g')"
       if grep -q -E "$1" "$service_fragmentpath"; then
         echo "    [P] $clean_option is set."

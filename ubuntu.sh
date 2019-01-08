@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC2009
+# shellcheck disable=2009
 if ! ps -p $$ | grep -si bash; then
   echo "Sorry, this script requires bash."
   exit 1
@@ -69,7 +69,7 @@ function main {
   readonly USERADD
   readonly USERCONF
 
-  # shellcheck disable=SC1090
+  # shellcheck disable=1090
   for s in ./scripts/[0-9_]*; do
     [[ -e $s ]] || break
 
