@@ -35,6 +35,8 @@ function f_timesyncd {
     if [[ $PINGSERV -gt "1" && $PINGSERV -lt "$LATENCY" ]]; then
       OKSERV=$(nslookup "$s"|grep "name = " | awk '{print $4}'|sed 's/.$//')
       # shellcheck disable=2143
+      # shellcheck disable=2243
+      # shellcheck disable=2244
       if [[ $OKSERV && $NUMSERV -lt $SERVERS && ! (( $(grep "$OKSERV" "$TMPCONF") )) ]]; then
         echo "$OKSERV has latency < $LATENCY"
         SERVERARRAY+=("$OKSERV")

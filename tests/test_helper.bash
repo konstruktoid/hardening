@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=1091
 source ../ubuntu.cfg
 
 auditctlRuntime() {
