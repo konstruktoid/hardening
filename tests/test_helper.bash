@@ -19,7 +19,7 @@ fragmentPath() {
 }
 
 gotSGid() {
-  ls -l "$1" | awk '{print $1}' | grep -q 's'
+  stat -c %A | grep -q 's'
 }
 
 isMasked() {
@@ -44,7 +44,7 @@ oneEntry() {
   grepWord="$1"
   grepFile="$2"
   maxLines="$3"
-  lineCount=$(cat $grepFile | wc -l)
+  lineCount=$(wc -l "$grepFile")
 
   if [[ $lineCount -gt $maxLines ]]; then
     exit 1
