@@ -236,7 +236,7 @@ Remove `hosts.equiv` and `.rhosts`.
 ==== 26_users
 UBTU-16-010650
 
-Remove `games` `gnats` `irc` `list` `news` `uucp` users.
+Remove `games` `gnats` `irc` `list` `news` `sync` `uucp` users.
 
 ==== 27_suid
 Remove `suid` bits from `/bin/fusermount` `/bin/mount` `/bin/ping` `/bin/ping6`
@@ -356,7 +356,7 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 400 https://github.com/sstephenson/bats[Bats tests]
+There are approximately 450 https://github.com/sstephenson/bats[Bats tests]
 for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
