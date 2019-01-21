@@ -12,328 +12,328 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/audit/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/audit/ -p wa' $AUDITRULES"
+@test "Verify /etc/audit/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/audit/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/libaudit.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/libaudit.conf -p wa' $AUDITRULES"
+@test "Verify /etc/libaudit.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/libaudit.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/audisp/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/audisp/ -p wa' $AUDITRULES"
+@test "Verify /etc/audisp/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/audisp/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/auditctl in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/auditctl -p x' $AUDITRULES"
+@test "Verify /sbin/auditctl in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/auditctl -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/auditd in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/auditd -p x' $AUDITRULES"
+@test "Verify /sbin/auditd in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/auditd -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/apparmor/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/apparmor/ -p wa' $AUDITRULES"
+@test "Verify /etc/apparmor/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/apparmor/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/apparmor.d/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/apparmor.d/ -p wa' $AUDITRULES"
+@test "Verify /etc/apparmor.d/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/apparmor.d/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/apparmor_parser in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/apparmor_parser -p x' $AUDITRULES"
+@test "Verify /sbin/apparmor_parser in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/apparmor_parser -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/aa-complain in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/aa-complain -p x' $AUDITRULES"
+@test "Verify /usr/sbin/aa-complain in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/aa-complain -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/aa-disable in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/aa-disable -p x' $AUDITRULES"
+@test "Verify /usr/sbin/aa-disable in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/aa-disable -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/aa-enforce in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/aa-enforce -p x' $AUDITRULES"
+@test "Verify /usr/sbin/aa-enforce in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/aa-enforce -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/systemd/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/systemd/ -p wa' $AUDITRULES"
+@test "Verify /etc/systemd/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/systemd/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /bin/systemctl in $AUDITRULES" {
-  run bash -c "grep '^-w /bin/systemctl -p x' $AUDITRULES"
+@test "Verify /bin/systemctl in /etc/audit/*" {
+  run bash -c "grep -R '^-w /bin/systemctl -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /bin/journalctl in $AUDITRULES" {
-  run bash -c "grep '^-w /bin/journalctl -p x' $AUDITRULES"
+@test "Verify /bin/journalctl in /etc/audit/*" {
+  run bash -c "grep -R '^-w /bin/journalctl -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.allow in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.allow -p wa' $AUDITRULES"
+@test "Verify /etc/cron.allow in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.allow -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.deny in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.deny -p wa' $AUDITRULES"
+@test "Verify /etc/cron.deny in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.deny -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.d/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.d/ -p wa' $AUDITRULES"
+@test "Verify /etc/cron.d/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.d/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.daily/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.daily/ -p wa' $AUDITRULES"
+@test "Verify /etc/cron.daily/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.daily/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.hourly/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.hourly/ -p wa' $AUDITRULES"
+@test "Verify /etc/cron.hourly/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.hourly/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.monthly/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.monthly/ -p wa' $AUDITRULES"
+@test "Verify /etc/cron.monthly/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.monthly/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/cron.weekly/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/cron.weekly/ -p wa' $AUDITRULES"
+@test "Verify /etc/cron.weekly/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/cron.weekly/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/crontab in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/crontab -p wa' $AUDITRULES"
+@test "Verify /etc/crontab in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/crontab -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/group in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/group -p wa' $AUDITRULES"
+@test "Verify /etc/group in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/group -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/passwd in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/passwd -p wa' $AUDITRULES"
+@test "Verify /etc/passwd in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/passwd -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/bin/passwd in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/bin/passwd -p x' $AUDITRULES"
+@test "Verify /usr/bin/passwd in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/bin/passwd -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/groupadd in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/groupadd -p x' $AUDITRULES"
+@test "Verify /usr/sbin/groupadd in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/groupadd -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/groupmod in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/groupmod -p x' $AUDITRULES"
+@test "Verify /usr/sbin/groupmod in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/groupmod -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/addgroup in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/addgroup -p x' $AUDITRULES"
+@test "Verify /usr/sbin/addgroup in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/addgroup -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/useradd in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/useradd -p x' $AUDITRULES"
+@test "Verify /usr/sbin/useradd in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/useradd -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/usermod in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/usermod -p x' $AUDITRULES"
+@test "Verify /usr/sbin/usermod in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/usermod -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/sbin/adduser in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/sbin/adduser -p x' $AUDITRULES"
+@test "Verify /usr/sbin/adduser in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/sbin/adduser -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/insmod in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/insmod -p x' $AUDITRULES"
+@test "Verify /sbin/insmod in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/insmod -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/rmmod in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/rmmod -p x' $AUDITRULES"
+@test "Verify /sbin/rmmod in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/rmmod -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/modprobe in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/modprobe -p x' $AUDITRULES"
+@test "Verify /sbin/modprobe in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/modprobe -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/login.defs in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/login.defs -p wa' $AUDITRULES"
+@test "Verify /etc/login.defs in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/login.defs -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/securetty in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/securetty -p wa' $AUDITRULES"
+@test "Verify /etc/securetty in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/securetty -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/hosts in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/hosts -p wa' $AUDITRULES"
+@test "Verify /etc/hosts in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/hosts -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/network/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/network/ -p wa' $AUDITRULES"
+@test "Verify /etc/network/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/network/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/inittab in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/inittab -p wa' $AUDITRULES"
+@test "Verify /etc/inittab in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/inittab -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/init.d/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/init.d/ -p wa' $AUDITRULES"
+@test "Verify /etc/init.d/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/init.d/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/init/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/init/ -p wa' $AUDITRULES"
+@test "Verify /etc/init/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/init/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/ld.so.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/ld.so.conf -p wa' $AUDITRULES"
+@test "Verify /etc/ld.so.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/ld.so.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/localtime in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/localtime -p wa' $AUDITRULES"
+@test "Verify /etc/localtime in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/localtime -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/timezone in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/timezone -p wa' $AUDITRULES"
+@test "Verify /etc/timezone in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/timezone -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/sysctl.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/sysctl.conf -p wa' $AUDITRULES"
+@test "Verify /etc/sysctl.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/sysctl.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/modprobe.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/modprobe.conf -p wa' $AUDITRULES"
+@test "Verify /etc/modprobe.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/modprobe.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/modprobe.d/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/modprobe.d/ -p wa' $AUDITRULES"
+@test "Verify /etc/modprobe.d/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/modprobe.d/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/modules in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/modules -p wa' $AUDITRULES"
+@test "Verify /etc/modules in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/modules -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/pam.d/ in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/pam.d/ -p wa' $AUDITRULES"
+@test "Verify /etc/pam.d/ in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/pam.d/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/security/limits.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/security/limits.conf -p wa' $AUDITRULES"
+@test "Verify /etc/security/limits.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/security/limits.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/security/pam_env.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/security/pam_env.conf -p wa' $AUDITRULES"
+@test "Verify /etc/security/pam_env.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/security/pam_env.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/security/namespace.conf in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/security/namespace.conf -p wa' $AUDITRULES"
+@test "Verify /etc/security/namespace.conf in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/security/namespace.conf -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/security/namespace.init in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/security/namespace.init -p wa' $AUDITRULES"
+@test "Verify /etc/security/namespace.init in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/security/namespace.init -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/aliases in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/aliases -p wa' $AUDITRULES"
+@test "Verify /etc/aliases in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/aliases -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/postfix/ in $AUDITRULES" {
-  run bash -c "grep -E '^-w /etc/postfix([^\s]|/[^\s])-p wa' $AUDITRULES"
+@test "Verify /etc/postfix/ in /etc/audit/*" {
+  run bash -c "grep -RE '^-w /etc/postfix([^\s]|/[^\s])-p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/issue in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/issue -p wa' $AUDITRULES"
+@test "Verify /etc/issue in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/issue -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/issue.net in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/issue.net -p wa' $AUDITRULES"
+@test "Verify /etc/issue.net in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/issue.net -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /bin/su in $AUDITRULES" {
-  run bash -c "grep '^-w /bin/su -p x' $AUDITRULES"
+@test "Verify /bin/su in /etc/audit/*" {
+  run bash -c "grep -R '^-w /bin/su -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /usr/bin/sudo in $AUDITRULES" {
-  run bash -c "grep '^-w /usr/bin/sudo -p x' $AUDITRULES"
+@test "Verify /usr/bin/sudo in /etc/audit/*" {
+  run bash -c "grep -R '^-w /usr/bin/sudo -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/sudoers in $AUDITRULES" {
-  run bash -c "grep '^-w /etc/sudoers -p wa' $AUDITRULES"
+@test "Verify /etc/sudoers in /etc/audit/*" {
+  run bash -c "grep -R '^-w /etc/sudoers -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /etc/sudoers.d/ in $AUDITRULES" {
-  run bash -c "grep -E '^-w /etc/sudoers.d([^\s]|/[^\s])-p wa' $AUDITRULES"
+@test "Verify /etc/sudoers.d/ in /etc/audit/*" {
+  run bash -c "grep -RE '^-w /etc/sudoers.d([^\s]|/[^\s])-p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/shutdown in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/shutdown -p x' $AUDITRULES"
+@test "Verify /sbin/shutdown in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/shutdown -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/poweroff in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/poweroff -p x' $AUDITRULES"
+@test "Verify /sbin/poweroff in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/poweroff -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/reboot in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/reboot -p x' $AUDITRULES"
+@test "Verify /sbin/reboot in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/reboot -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify /sbin/halt in $AUDITRULES" {
-  run bash -c "grep '^-w /sbin/halt -p x' $AUDITRULES"
+@test "Verify /sbin/halt in /etc/audit/*" {
+  run bash -c "grep -R '^-w /sbin/halt -p x' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 

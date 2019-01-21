@@ -2,43 +2,43 @@
 
 load test_helper
 
-@test "Verify that kernel module cramfs is disabled in $DISABLEFS" {
-  run bash -c "grep 'install cramfs /bin/true' $DISABLEFS"
+@test "Verify that kernel module cramfs is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install cramfs /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module freevxfs is disabled in $DISABLEFS" {
-  run bash -c "grep 'install freevxfs /bin/true' $DISABLEFS"
+@test "Verify that kernel module freevxfs is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install freevxfs /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module jffs2 is disabled in $DISABLEFS" {
-  run bash -c "grep 'install jffs2 /bin/true' $DISABLEFS"
+@test "Verify that kernel module jffs2 is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install jffs2 /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module hfs is disabled in $DISABLEFS" {
-  run bash -c "grep 'install hfs /bin/true' $DISABLEFS"
+@test "Verify that kernel module hfs is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install hfs /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module hfsplus is disabled in $DISABLEFS" {
-  run bash -c "grep 'install hfsplus /bin/true' $DISABLEFS"
+@test "Verify that kernel module hfsplus is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install hfsplus /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module squashfs is disabled in $DISABLEFS" {
-  run bash -c "grep 'install squashfs /bin/true' $DISABLEFS"
+@test "Verify that kernel module squashfs is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install squashfs /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module udf is disabled in $DISABLEFS" {
-  run bash -c "grep 'install udf /bin/true' $DISABLEFS"
+@test "Verify that kernel module udf is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install udf /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module vfat is disabled in $DISABLEFS" {
-  run bash -c "grep 'install vfat /bin/true' $DISABLEFS"
+@test "Verify that kernel module vfat is disabled in /etc/modprobe.d/*" {
+  run bash -c "grep 'install vfat /bin/true' /etc/modprobe.d/*"
   [ "$status" -eq 0 ]
 }
 

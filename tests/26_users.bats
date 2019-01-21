@@ -25,6 +25,11 @@
   [ "$status" -eq 1 ]
 }
 
+@test "Ensure user sync is removed" {
+  run bash -c "grep '^sync' /etc/passwd"
+  [ "$status" -eq 1 ]
+}
+
 @test "Ensure user uucp is removed" {
   run bash -c "grep '^uucp' /etc/passwd"
   [ "$status" -eq 1 ]

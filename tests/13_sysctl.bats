@@ -2,258 +2,258 @@
 
 load test_helper
 
-@test "Verify fs.protected_hardlinks in $SYSCTL" {
-  run bash -c "grep '^fs.protected_hardlinks.*1$' $SYSCTL"
+@test "Verify fs.protected_hardlinks in /etc/sysctl.*" {
+  run bash -c "grep -R '^fs.protected_hardlinks.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify fs.protected_symlinks in $SYSCTL" {
-  run bash -c "grep '^fs.protected_symlinks.*1$' $SYSCTL"
+@test "Verify fs.protected_symlinks in /etc/sysctl.*" {
+  run bash -c "grep -R '^fs.protected_symlinks.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify fs.suid_dumpable in $SYSCTL" {
-  run bash -c "grep '^fs.suid_dumpable.*0$' $SYSCTL"
+@test "Verify fs.suid_dumpable in /etc/sysctl.*" {
+  run bash -c "grep -R '^fs.suid_dumpable.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.core_uses_pid in $SYSCTL" {
-  run bash -c "grep '^kernel.core_uses_pid.*1$' $SYSCTL"
+@test "Verify kernel.core_uses_pid in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.core_uses_pid.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.dmesg_restrictin $SYSCTL" {
-  run bash -c "grep '^kernel.dmesg_restrict.*1$' $SYSCTL"
+@test "Verify kernel.dmesg_restrictin /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.dmesg_restrict.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.kptr_restrict in $SYSCTL" {
-  run bash -c "grep '^kernel.kptr_restrict.*2$' $SYSCTL"
+@test "Verify kernel.kptr_restrict in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.kptr_restrict.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.modules_disabled in $SYSCTL" {
-  run bash -c "grep '^kernel.modules_disabled.*1$' $SYSCTL"
+@test "Verify kernel.modules_disabled in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.modules_disabled.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.panic in $SYSCTL" {
-  run bash -c "grep '^kernel.panic.*60$' $SYSCTL"
+@test "Verify kernel.panic in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.panic.*60$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.panic_on_oops in $SYSCTL" {
-  run bash -c "grep '^kernel.panic_on_oops.*60$' $SYSCTL"
+@test "Verify kernel.panic_on_oops in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.panic_on_oops.*60$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.perf_event_paranoid in $SYSCTL" {
-  run bash -c "grep '^kernel.perf_event_paranoid.*2$' $SYSCTL"
+@test "Verify kernel.perf_event_paranoid in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.perf_event_paranoid.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.randomize_va_space in $SYSCTL" {
-  run bash -c "grep '^kernel.randomize_va_space.*2$' $SYSCTL"
+@test "Verify kernel.randomize_va_space in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.randomize_va_space.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.sysrq in $SYSCTL" {
-  run bash -c "grep '^kernel.sysrq.*0$' $SYSCTL"
+@test "Verify kernel.sysrq in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.sysrq.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.yama.ptrace_scope in $SYSCTL" {
-  run bash -c "grep '^kernel.yama.ptrace_scope.*2$' $SYSCTL"
+@test "Verify kernel.yama.ptrace_scope in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.yama.ptrace_scope.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.accept_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.accept_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.accept_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.accept_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.accept_source_route in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.accept_source_route.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.accept_source_route in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.accept_source_route.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.log_martians in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.log_martians.*1$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.log_martians in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.log_martians.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.rp_filter in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.rp_filter.*1$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.rp_filter in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.rp_filter.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.secure_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.secure_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.secure_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.secure_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.all.send_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.all.send_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.all.send_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.all.send_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.accept_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.accept_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.accept_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.accept_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.accept_source_route in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.accept_source_route.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.accept_source_route in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.accept_source_route.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.log_martians in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.log_martians.*1$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.log_martians in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.log_martians.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.rp_filter in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.rp_filter.*1$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.rp_filter in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.rp_filter.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.secure_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.secure_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.secure_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.secure_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.conf.default.send_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.conf.default.send_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv4.conf.default.send_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.conf.default.send_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.icmp_echo_ignore_broadcasts in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.icmp_echo_ignore_broadcasts.*1$' $SYSCTL"
+@test "Verify net.ipv4.icmp_echo_ignore_broadcasts in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.icmp_echo_ignore_broadcasts.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.icmp_ignore_bogus_error_responses in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.icmp_ignore_bogus_error_responses.*1$' $SYSCTL"
+@test "Verify net.ipv4.icmp_ignore_bogus_error_responses in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.icmp_ignore_bogus_error_responses.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.ip_forward in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.ip_forward.*0$' $SYSCTL"
+@test "Verify net.ipv4.ip_forward in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.ip_forward.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_challenge_ack_limit in $SYSCTL" {
-  ack_limit_result=$(grep '^net.ipv4.tcp_challenge_ack_limit.*' $SYSCTL | awk '{print $NF >= 1000}')
-  [ $ack_limit_result -eq 1 ]
-}
-
-@test "Verify net.ipv4.tcp_invalid_ratelimit in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_invalid_ratelimit.*500$' $SYSCTL"
+@test "Verify net.ipv4.tcp_challenge_ack_limit in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_challenge_ack_limit.*[0-9][0-9][0-9][0-9][0-9][0-9]$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_max_syn_backlog in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_max_syn_backlog.*20480$' $SYSCTL"
+@test "Verify net.ipv4.tcp_invalid_ratelimit in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_invalid_ratelimit.*500$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_rfc1337 in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_rfc1337.*1$' $SYSCTL"
+@test "Verify net.ipv4.tcp_max_syn_backlog in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_max_syn_backlog.*20480$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_synack_retries in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_synack_retries.*2$' $SYSCTL"
+@test "Verify net.ipv4.tcp_rfc1337 in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_rfc1337.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_syncookies in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_syncookies.*1$' $SYSCTL"
+@test "Verify net.ipv4.tcp_synack_retries in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_synack_retries.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_syn_retries in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_syn_retries.*5$' $SYSCTL"
+@test "Verify net.ipv4.tcp_syncookies in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_syncookies.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_timestamps in $SYSCTL" {
-  run bash -c "grep '^net.ipv4.tcp_timestamps.*0$' $SYSCTL"
+@test "Verify net.ipv4.tcp_syn_retries in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_syn_retries.*5$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.all.use_tempaddr in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.all.use_tempaddr.*2$' $SYSCTL"
+@test "Verify net.ipv4.tcp_timestamps in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv4.tcp_timestamps.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.all.accept_ra in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.all.accept_ra.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.all.use_tempaddr in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.all.use_tempaddr.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.all.accept_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.all.accept_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.all.accept_ra in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.all.accept_ra.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.accept_ra in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.accept_ra.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.all.accept_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.all.accept_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.accept_ra_defrtr in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.accept_ra_defrtr.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.accept_ra in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.accept_ra.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.accept_ra_pinfo in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.accept_ra_pinfo.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.accept_ra_defrtr in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.accept_ra_defrtr.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.accept_redirects in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.accept_redirects.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.accept_ra_pinfo in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.accept_ra_pinfo.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.autoconf in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.autoconf.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.accept_redirects in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.accept_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.dad_transmits in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.dad_transmits.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.autoconf in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.autoconf.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.max_addresses in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.max_addresses.*1$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.dad_transmits in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.dad_transmits.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.router_solicitations in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.router_solicitations.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.max_addresses in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.max_addresses.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.default.use_tempaddr in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.default.use_tempaddr.*2$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.router_solicitations in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.router_solicitations.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv6.conf.*.accept_ra_rtr_pref in $SYSCTL" {
-  run bash -c "grep '^net.ipv6.conf.*.accept_ra_rtr_pref.*0$' $SYSCTL"
+@test "Verify net.ipv6.conf.default.use_tempaddr in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.default.use_tempaddr.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.netfilter.nf_conntrack_max in $SYSCTL" {
-  run bash -c "grep '^net.netfilter.nf_conntrack_max.*2000000$' $SYSCTL"
+@test "Verify net.ipv6.conf.*.accept_ra_rtr_pref in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.*.accept_ra_rtr_pref.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.netfilter.nf_conntrack_tcp_loose in $SYSCTL" {
-  run bash -c "grep '^net.netfilter.nf_conntrack_tcp_loose.*0$' $SYSCTL"
+@test "Verify net.netfilter.nf_conntrack_max in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.netfilter.nf_conntrack_max.*2000000$' /etc/sysctl.*"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify net.netfilter.nf_conntrack_tcp_loose in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.netfilter.nf_conntrack_tcp_loose.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 @test "Verify sysctl runtime fs.protected_hardlinks" {
@@ -392,8 +392,8 @@ load test_helper
 }
 
 @test "Verify sysctl runtime net.ipv4.tcp_challenge_ack_limit" {
-  ack_limit_result=$(sysctl --all | grep '^net.ipv4.tcp_challenge_ack_limit.*' | awk '{print $NF >= 1000}')
-  [ $ack_limit_result -eq 1 ]
+  run bash -c "sysctl --all | grep '^net.ipv4.tcp_challenge_ack_limit.*[0-9][0-9][0-9][0-9][0-9][0-9]$'"
+  [ "$status" -eq 0 ]
 }
 
 @test "Verify sysctl runtime net.ipv4.tcp_invalid_ratelimit" {
