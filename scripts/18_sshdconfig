@@ -18,7 +18,7 @@ function f_sshdconfig {
   sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
   sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
-  sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp \/usr\/lib\/openssh\/sftp-server -f AUTHPRIV -l INFO/' "$SSHDFILE"
+  sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp internal-sftp/' "$SSHDFILE"
   sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
 
   echo "" >> "$SSHDFILE"

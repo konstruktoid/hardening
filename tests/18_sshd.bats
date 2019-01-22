@@ -88,7 +88,7 @@ load test_helper
 }
 
 @test "Verify OpenSSH sftp" {
-  run sshdConfig '^Subsystem sftp /usr/lib/openssh/sftp-server -f AUTHPRIV -l INFO$'
+  run sshdConfig '^Subsystem sftp internal-sftp$'
   [ "$status" -eq 0 ]
 }
 
