@@ -24,6 +24,12 @@ function f_aptget_clean {
 function f_aptget_configure {
   echo "[$SCRIPT_COUNT] Configure APT"
 
+  if ! grep '^Acquire::http::AllowRedirect' /etc/apt/apt.conf.d/* ; then
+    echo 'Acquire::http::AllowRedirect "false";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
+  else
+    sed -i 's/.*Acquire::http::AllowRedirect*/Acquire::http::AllowRedirect "false";/g' "$(grep -l 'Acquire::http::AllowRedirect' /etc/apt/apt.conf.d/*)"
+  fi
+
   if ! grep '^APT::Get::AllowUnauthenticated' /etc/apt/apt.conf.d/* ; then
     echo 'APT::Get::AllowUnauthenticated "false";' >> /etc/apt/apt.conf.d/01-vendor-ubuntu
   else
