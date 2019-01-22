@@ -100,7 +100,7 @@ function f_sshdconfig {
   fi
 
   cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"
-  grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | uniq > "$SSHDFILE"
+  grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | sort | uniq > "$SSHDFILE"
   rm "/etc/ssh/sshd_config.$(date +%y%m%d)"
 
   systemctl restart sshd.service
