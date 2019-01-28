@@ -11,3 +11,8 @@ load test_helper
   run bash -c "grep '^auth required pam_google_authenticator.so.*$' /etc/pam.d/sshd"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify Yubico 2FA in /etc/pam.d/sshd " {
+  run bash -c "grep '^auth required pam_yubico.so.*$' /etc/pam.d/sshd"
+  [ "$status" -eq 0 ]
+}
