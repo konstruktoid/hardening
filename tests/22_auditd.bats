@@ -12,6 +12,10 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify auditd fail code in /etc/audit/*" {
+  run bash -c "grep -R '^\-f [1,2]$' /etc/audit/*"
+  [ "$status" -eq 0 ]
+}
 @test "Verify /etc/audit/ in /etc/audit/*" {
   run bash -c "grep -R '^-w /etc/audit/ -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
@@ -334,6 +338,12 @@ load test_helper
 
 @test "Verify /sbin/halt in /etc/audit/*" {
   run bash -c "grep -R '^-w /sbin/halt -p x' /etc/audit/*"
+  [ "$status" -eq 0 ]
+}
+
+
+@test "Verify auditd runtime fail code" {
+  run bash -c "auditctl -s | grep 'failure [1,2]'"
   [ "$status" -eq 0 ]
 }
 
