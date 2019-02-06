@@ -22,7 +22,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify kernel.dmesg_restrictin /etc/sysctl.*" {
+@test "Verify kernel.dmesg_restrict in /etc/sysctl.*" {
   run bash -c "grep -R '^kernel.dmesg_restrict.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
