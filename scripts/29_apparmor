@@ -1,7 +1,7 @@
 function f_aa_enforce {
   echo "[$SCRIPT_COUNT] Enforce apparmor profiles"
 
-  if ! grep 'pam_apparmor.so order=user,group,default' /etc/pam.d/*; then
+  if ! grep 'session.*pam_apparmor.so order=user,group,default' /etc/pam.d/*; then
     echo 'session optional pam_apparmor.so order=user,group,default' > /etc/pam.d/apparmor
   fi
 
