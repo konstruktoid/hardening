@@ -1,6 +1,14 @@
 function f_apport {
   echo "[$SCRIPT_COUNT] Disable apport and popularity-contest"
 
+  if command -v gsettings 2>/dev/null 1>&2; then
+    gsettings set com.ubuntu.update-notifier show-apport-crashes false
+  fi
+
+  if command -v ubuntu-report 2>/dev/null 1>&2; then
+    ubuntu-report -f send no
+  fi
+
   sed -i 's/enabled=.*/enabled=0/' /etc/default/apport
   systemctl stop apport.service
   systemctl mask apport.service
