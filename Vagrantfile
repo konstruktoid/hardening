@@ -1,6 +1,8 @@
 Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
     v.default_nic_type = "Am79C973"
+    v.memory = 2048
+    v.cpus = 2
   end
 
   config.vm.define "bionic" do |bionic|
