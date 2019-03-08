@@ -1,7 +1,10 @@
 function f_rootaccess {
   echo "[$SCRIPT_COUNT] root access"
 
-  sed -i 's/^#+ : root : 127.0.0.1/+ : root : 127.0.0.1/' "$SECURITYACCESS"
+  if ! grep -E '^+\s:\sroot\s:\s127.0.0.1$|^:root:127.0.0.1' "$SECURITYACCESS"; then
+    sed -i 's/^#.*root.*:.*127.0.0.1$/+:root:127.0.0.1/' "$SECURITYACCESS"
+  fi
+
   echo "console" > /etc/securetty
 
   ((SCRIPT_COUNT++))

@@ -3,7 +3,7 @@
 load test_helper
 
 @test "Verify root in $SECURITYACCESS" {
-  run bash -c "grep '^+ : root : 127.0.0.1$' $SECURITYACCESS"
+  run bash -c "grep '^+:root:127.0.0.1$' $SECURITYACCESS"
   [ "$status" -eq 0 ]
 }
 
