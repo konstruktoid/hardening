@@ -31,5 +31,17 @@ Vagrant.configure("2") do |config|
     disco.ssh.insert_key = true
     disco.vm.network "private_network", ip: "10.7.8.51"
     disco.vm.hostname = "disco"
+
+    config.vm.provider "virtualbox" do |disk01|
+      disco_disk01 = './disco_disk01.vdi'
+      if not File.exists?(disco_disk01)
+        disk01.customize ['createhd', '--filename', disco_disk01, '--variant', 'Standard', '--size', 5 * 1024]
+      end
+      disk01.customize ['storageattach', :id, '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', disco_disk01]
+
+      if ARGV[0] == "up" && ! File.exist?(disco_disk01)
+        disco.vm.provision "shell", path: "createPartitions.sh"
+      end
+    end
   end
 end
