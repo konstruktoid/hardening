@@ -493,4 +493,4 @@ http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
-https://www.ncsc.gov.uk/guidance/eud-security-guidance-ubuntu-1804-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
+https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
