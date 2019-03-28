@@ -378,12 +378,17 @@ versions.
 ├── LICENSE
 ├── README.adoc
 ├── Vagrantfile
+├── action-shellcheck
+│   ├── Dockerfile
+│   ├── README.md
+│   └── entrypoint.sh
 ├── checkScore.sh
 ├── config
 │   ├── aidecheck.service
 │   ├── aidecheck.timer
 │   ├── initpath.sh
 │   └── tmp.mount
+├── createPartitions.sh
 ├── misc
 │   ├── audit-aggressive.rules
 │   ├── audit-base.rules
@@ -396,6 +401,7 @@ versions.
 │   ├── proc_check.sh
 │   ├── sysctl.conf
 │   └── systemd_scan.sh
+├── renovate.json
 ├── runTests.sh
 ├── scripts
 │   ├── 01_pre
