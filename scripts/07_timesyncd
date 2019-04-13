@@ -60,8 +60,11 @@ function f_timesyncd {
     done
   fi
 
-  echo "NTP=${SERVERARRAY[*]}" >> "$TMPCONF"
-  echo "FallbackNTP=${FALLBACKARRAY[*]}" >> "$TMPCONF"
+  {
+    echo "NTP=${SERVERARRAY[*]}"
+    echo "FallbackNTP=${FALLBACKARRAY[*]}"
+    echo "RootDistanceMaxSec=1"
+  } >> "$TMPCONF"
 
   if [[ $APPLY = "YES" ]]; then
     cat "$TMPCONF" > "$CONF"
