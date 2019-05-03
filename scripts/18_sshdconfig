@@ -23,6 +23,10 @@ function f_sshdconfig {
 
   echo "" >> "$SSHDFILE"
 
+  if ! grep -q "^LogLevel" "$SSHDFILE" 2> /dev/null; then
+    echo "LogLevel VERBOSE" >> "$SSHDFILE"
+  fi
+
   if ! grep -q "^PrintLastLog" "$SSHDFILE" 2> /dev/null; then
     echo "PrintLastLog yes" >> "$SSHDFILE"
   fi
