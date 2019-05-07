@@ -56,7 +56,7 @@ wait
 
 echo
 echo "=== Test results"
-
+echo "=== Failed number of tests"
 find ./ -name 'hardening-*-bats.log' -type f | while read -r f; do
   if test -s "$f"; then
     echo "$f: $(grep -c '^not ok' "$f")"
@@ -65,6 +65,8 @@ find ./ -name 'hardening-*-bats.log' -type f | while read -r f; do
   fi
 done
 
+echo
+echo "=== Lynis score"
 find ./ -name 'hardening-*-lynis.log' -type f | while read -r f; do
   if test -s "$f"; then
     echo "$f: $(grep -E 'hardening_index|os_version' "$f")"
@@ -74,6 +76,7 @@ find ./ -name 'hardening-*-lynis.log' -type f | while read -r f; do
 done
 
 echo
+echo " === Failed tests, warnings and suggestions"
 grep -shE '^not ok' hardening-{bionic,cosmic,disco}-*-bats.log | sort -k3n | uniq
 
 echo
