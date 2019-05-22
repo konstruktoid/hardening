@@ -1,5 +1,5 @@
 function f_apport {
-  echo "[$SCRIPT_COUNT] Disable apport and popularity-contest"
+  echo "[$SCRIPT_COUNT] Disable apport, ubuntu-report and popularity-contest"
 
   if command -v gsettings 2>/dev/null 1>&2; then
     gsettings set com.ubuntu.update-notifier show-apport-crashes false
