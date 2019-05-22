@@ -274,7 +274,7 @@ Configure `rkhunter`.
 Update `/etc/issue` `/etc/issue.net` `/etc/motd`.
 
 ==== 35_apport
-Mask `apport.service` and disable `apport`.
+Disable `apport`, `ubuntu-report` and `popularity-contest`.
 
 ==== 36_lockroot
 Lock the `root` user account.
@@ -369,7 +369,7 @@ sudo bats .
 === Test automation
 Running `bash ./runTests.sh` will use https://www.vagrantup.com/[Vagrant] to run
 all above tests and https://github.com/CISOfy/Lynis[Lynis] on all supported Ubuntu
-versions.
+versions. The script will generate link:tests/TESTRESULTS.adoc[TESTRESULTS.adoc].
 
 == Structure
 [source,shell]
