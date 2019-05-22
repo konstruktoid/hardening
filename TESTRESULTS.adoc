@@ -1,0 +1,166 @@
+= Vagrant Ubuntu Test results - Wed May 22 20:55:23 UTC 2019
+:icons: font
+Number of tests: 489
+
+The score is calculated using `100-(100*FAILED_TESTS/TESTS)`.
+
+NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar too those used by your organization.
+
+== System information
+Vagrant 2.2.4
+ubuntu/bionic86 (virtualbox, 20190521.0.0)
+ubuntu/cosmic86 (virtualbox, 20190514.0.1)
+ubuntu/bionic86 (virtualbox, 20190521.0.0)
+ubuntu/disco86 (virtualbox, 20190514.0.1)
+
+== bionic
+* Failed number of tests: 19
+
+* Failed tests:
+not ok 23 Verify that runtime kernel module squashfs is disabled
+not ok 25 Verify that runtime kernel module vfat is disabled
+not ok 59 Verify that /home is a separate partition
+not ok 60 Verify that /home is mounted with nodev
+not ok 61 Verify that /home is mounted with nosuid
+not ok 62 Verify that /var/log/audit is a separate partition
+not ok 63 Verify that /var/log/audit is mounted with nodev
+not ok 64 Verify that /var/log/audit is mounted with nosuid
+not ok 65 Verify that /var/log/audit is mounted with noexec
+not ok 66 Verify that /var/log is a separate partition
+not ok 67 Verify that /var/log is mounted with nodev
+not ok 68 Verify that /var/log is mounted with nosuid
+not ok 69 Verify that /var/log is mounted with noexec
+not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
+not ok 159 Verify sysctl runtime kernel.modules_disabled
+not ok 469 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
+not ok 487 Verify password protected GRUB
+not ok 488 Verify Google 2FA in /etc/pam.d/sshd
+not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+
+* Score: 97
+
+* Lynis score:
+os_version=18.04
+hardening_index=91
+
+* Lynis warnings and suggestions:
+suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowTcpForwarding (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowAgentForwarding (YES --> NO)|-|
+suggestion[]=PKGS-7394|Install package apt-show-versions for patch management purposes|-|-|
+suggestion[]=NETW-3032|Consider running ARP monitoring software (arpwatch,arpon)|-|-|
+suggestion[]=NAME-4028|Check DNS configuration for the dns domain name|-|-|
+suggestion[]=FIRE-4513|Check iptables rules to see which rules are currently not used|-|-|
+suggestion[]=FILE-6310|To decrease the impact of a full /var file system, place /var on a separate partition|-|-|
+suggestion[]=FILE-6310|To decrease the impact of a full /home file system, place /home on a separate partition|-|-|
+suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password)|-|-|
+suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
+suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
+suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+
+== cosmic
+* Failed number of tests: 25
+
+* Failed tests:
+not ok 23 Verify that runtime kernel module squashfs is disabled
+not ok 25 Verify that runtime kernel module vfat is disabled
+not ok 59 Verify that /home is a separate partition
+not ok 60 Verify that /home is mounted with nodev
+not ok 61 Verify that /home is mounted with nosuid
+not ok 62 Verify that /var/log/audit is a separate partition
+not ok 63 Verify that /var/log/audit is mounted with nodev
+not ok 64 Verify that /var/log/audit is mounted with nosuid
+not ok 65 Verify that /var/log/audit is mounted with noexec
+not ok 66 Verify that /var/log is a separate partition
+not ok 67 Verify that /var/log is mounted with nodev
+not ok 68 Verify that /var/log is mounted with nosuid
+not ok 69 Verify that /var/log is mounted with noexec
+not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
+not ok 159 Verify sysctl runtime kernel.modules_disabled
+not ok 432 Ensure user games is removed
+not ok 433 Ensure user gnats is removed
+not ok 434 Ensure user irc is removed
+not ok 435 Ensure user list is removed
+not ok 436 Ensure user news is removed
+not ok 437 Ensure user sync is removed
+not ok 438 Ensure user uucp is removed
+not ok 487 Verify password protected GRUB
+not ok 488 Verify Google 2FA in /etc/pam.d/sshd
+not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+
+* Score: 95
+
+* Lynis score:
+os_version=18.10
+hardening_index=91
+
+* Lynis warnings and suggestions:
+suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowTcpForwarding (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowAgentForwarding (YES --> NO)|-|
+suggestion[]=PKGS-7394|Install package apt-show-versions for patch management purposes|-|-|
+suggestion[]=NETW-3032|Consider running ARP monitoring software (arpwatch,arpon)|-|-|
+suggestion[]=NAME-4028|Check DNS configuration for the dns domain name|-|-|
+suggestion[]=LOGG-2190|Check what deleted files are still in use and why.|-|-|
+suggestion[]=FIRE-4513|Check iptables rules to see which rules are currently not used|-|-|
+suggestion[]=FILE-6310|To decrease the impact of a full /var file system, place /var on a separate partition|-|-|
+suggestion[]=FILE-6310|To decrease the impact of a full /home file system, place /home on a separate partition|-|-|
+suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password)|-|-|
+suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
+suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
+suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+
+== disco
+* Failed number of tests: 14
+
+* Failed tests:
+not ok 23 Verify that runtime kernel module squashfs is disabled
+not ok 25 Verify that runtime kernel module vfat is disabled
+not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
+not ok 159 Verify sysctl runtime kernel.modules_disabled
+not ok 432 Ensure user games is removed
+not ok 433 Ensure user gnats is removed
+not ok 434 Ensure user irc is removed
+not ok 435 Ensure user list is removed
+not ok 436 Ensure user news is removed
+not ok 437 Ensure user sync is removed
+not ok 438 Ensure user uucp is removed
+not ok 487 Verify password protected GRUB
+not ok 488 Verify Google 2FA in /etc/pam.d/sshd
+not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+
+* Score: 98
+
+* Lynis score:
+os_version=19.04
+hardening_index=91
+
+* Lynis warnings and suggestions:
+suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowTcpForwarding (YES --> NO)|-|
+suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowAgentForwarding (YES --> NO)|-|
+suggestion[]=PKGS-7394|Install package apt-show-versions for patch management purposes|-|-|
+suggestion[]=NETW-3032|Consider running ARP monitoring software (arpwatch,arpon)|-|-|
+suggestion[]=NAME-4028|Check DNS configuration for the dns domain name|-|-|
+suggestion[]=LOGG-2190|Check what deleted files are still in use and why.|-|-|
+suggestion[]=FIRE-4513|Check iptables rules to see which rules are currently not used|-|-|
+suggestion[]=FILE-6310|To decrease the impact of a full /var file system, place /var on a separate partition|-|-|
+suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password)|-|-|
+suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
+suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
+suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+
+== standard
+* Failed number of tests: 408
+
+* Score: 17
+
+* Lynis score:
+os_version=18.04
+hardening_index=61
