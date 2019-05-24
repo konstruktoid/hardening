@@ -369,7 +369,7 @@ sudo bats .
 === Test automation
 Running `bash ./runTests.sh` will use https://www.vagrantup.com/[Vagrant] to run
 all above tests and https://github.com/CISOfy/Lynis[Lynis] on all supported Ubuntu
-versions. The script will generate link:tests/TESTRESULTS.adoc[TESTRESULTS.adoc].
+versions. The script will generate link:TESTRESULTS.adoc[TESTRESULTS.adoc].
 
 == Structure
 [source,shell]
@@ -495,8 +495,8 @@ versions. The script will generate link:tests/TESTRESULTS.adoc[TESTRESULTS.adoc]
 
 == Recommended reading
 https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
-http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Red Hat Enterprise Linux 7 Security Technical Implementation Guide Version: 1 Release: 4 ] +
-http://iase.disa.mil/stigs/os/unix-linux/Pages/index.aspx[Canonical Ubuntu 16.04 LTS Security Technical Implementation Guide Version: 1 Release: 1 ] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 16.04 LTS STIG - Ver 1, Rel 2] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG ] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
