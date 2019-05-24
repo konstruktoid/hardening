@@ -1,4 +1,4 @@
-= Vagrant Ubuntu Test results - Wed May 22 20:55:23 UTC 2019
+= Vagrant Ubuntu Test results - Fri May 24 12:36:18 UTC 2019
 :icons: font
 Number of tests: 489
 
@@ -7,16 +7,21 @@ The score is calculated using `100-(100*FAILED_TESTS/TESTS)`.
 NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar too those used by your organization.
 
 == System information
+----
 Vagrant 2.2.4
-ubuntu/bionic86 (virtualbox, 20190521.0.0)
-ubuntu/cosmic86 (virtualbox, 20190514.0.1)
-ubuntu/bionic86 (virtualbox, 20190521.0.0)
+ubuntu/bionic86 (virtualbox, 20190523.0.0)
+ubuntu/cosmic86 (virtualbox, 20190522.0.0)
+ubuntu/bionic86 (virtualbox, 20190523.0.0)
 ubuntu/disco86 (virtualbox, 20190514.0.1)
+----
 
 == bionic
-* Failed number of tests: 19
+----
+Failed number of tests: 19
+----
 
-* Failed tests:
+=== Failed tests:
+----
 not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 59 Verify that /home is a separate partition
@@ -36,14 +41,16 @@ not ok 469 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
 not ok 487 Verify password protected GRUB
 not ok 488 Verify Google 2FA in /etc/pam.d/sshd
 not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+----
+=== Lynis score:
+----
 
-* Score: 97
-
-* Lynis score:
 os_version=18.04
 hardening_index=91
+----
 
-* Lynis warnings and suggestions:
+=== Lynis warnings and suggestions:
+----
 suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
@@ -59,11 +66,17 @@ suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boo
 suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
 suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
 suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+----
+
+=== Score: 97
 
 == cosmic
-* Failed number of tests: 25
+----
+Failed number of tests: 25
+----
 
-* Failed tests:
+=== Failed tests:
+----
 not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 59 Verify that /home is a separate partition
@@ -89,14 +102,16 @@ not ok 438 Ensure user uucp is removed
 not ok 487 Verify password protected GRUB
 not ok 488 Verify Google 2FA in /etc/pam.d/sshd
 not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+----
+=== Lynis score:
+----
 
-* Score: 95
-
-* Lynis score:
 os_version=18.10
 hardening_index=91
+----
 
-* Lynis warnings and suggestions:
+=== Lynis warnings and suggestions:
+----
 suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
@@ -113,11 +128,17 @@ suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boo
 suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
 suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
 suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+----
+
+=== Score: 95
 
 == disco
-* Failed number of tests: 14
+----
+Failed number of tests: 14
+----
 
-* Failed tests:
+=== Failed tests:
+----
 not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
@@ -132,14 +153,16 @@ not ok 438 Ensure user uucp is removed
 not ok 487 Verify password protected GRUB
 not ok 488 Verify Google 2FA in /etc/pam.d/sshd
 not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+----
+=== Lynis score:
+----
 
-* Score: 98
-
-* Lynis score:
 os_version=19.04
 hardening_index=91
+----
 
-* Lynis warnings and suggestions:
+=== Lynis warnings and suggestions:
+----
 suggestion[]=TOOL-5002|Determine if automation tools are present for system management|-|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|TCPKeepAlive (YES --> NO)|-|
 suggestion[]=SSH-7408|Consider hardening SSH configuration|Port (22 --> )|-|
@@ -155,12 +178,17 @@ suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boo
 suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
 suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
 suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
+----
+
+=== Score: 98
 
 == standard
-* Failed number of tests: 408
+=== Failed number of tests: 408
 
-* Score: 17
+=== Score: 17
+=== Lynis score:
+----
 
-* Lynis score:
 os_version=18.04
-hardening_index=61
+hardening_index=66
+----

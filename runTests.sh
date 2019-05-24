@@ -69,11 +69,13 @@ wait
   echo "NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar too those used by your organization."
   echo
   echo "== System information"
+  echo "----"
   vagrant --version
 
   for box in $(grep 'vm.box' Vagrantfile | grep -o '".*"$' | tr -d '"'); do
     vagrant box list | grep -i "${box}" | tail -n1 | sed 's/64.*(/86 \(/g'
   done
+  echo "----"
 
   # Modified VMs
   for VM in $(vagrant status | grep -iE 'running.*virtualbox' |\
@@ -88,35 +90,44 @@ wait
     echo
     echo "== ${VM}"
 
+    echo "----"
     while read -r f; do
       if test -s "${f}"; then
         FAILED_TESTS="$(grep -c '^not ok' "${f}")"
-        echo "* Failed number of tests: ${FAILED_TESTS}"
+        echo "Failed number of tests: ${FAILED_TESTS}"
       else
         echo "$f is empty, a test stage failed."
       fi
     done < <(find ./ -name "*${VM}*bats.log" -type f)
+    echo "----"
 
     echo
-    echo "* Failed tests:"
+    echo "=== Failed tests:"
+    echo "----"
     grep -shE '^not ok' ./*"${VM}"*bats.log | sort -k3n | uniq
+    echo "----"
 
-    echo
-    echo "* Score: $((100-(100*FAILED_TESTS/TESTS)))"
 
+    echo "=== Lynis score:"
+    echo "----"
     find ./ -name "*${VM}*lynis.log" -type f | while read -r f; do
       if test -s "${f}"; then
         echo
-        echo "* Lynis score:"
         grep -E 'hardening_index|os_version' "${f}"
       else
         echo "$f is empty, a test stage failed."
       fi
     done
+    echo "----"
 
     echo
-    echo "* Lynis warnings and suggestions:"
+    echo "=== Lynis warnings and suggestions:"
+    echo "----"
     grep -shE '^warning|^suggestion' ./*"${VM}"*lynis.log | sort -r | uniq
+    echo "----"
+
+    echo
+    echo "=== Score: $((100-(100*FAILED_TESTS/TESTS)))"
   done
 
 
@@ -136,24 +147,26 @@ wait
     while read -r f; do
       if test -s "${f}"; then
         FAILED_TESTS="$(grep -c '^not ok' "${f}")"
-        echo "* Failed number of tests: ${FAILED_TESTS}"
+        echo "=== Failed number of tests: ${FAILED_TESTS}"
       else
         echo "$f is empty, a test stage failed."
       fi
     done < <(find ./ -name "*${VM}*bats.log" -type f)
 
     echo
-    echo "* Score: $((100-(100*FAILED_TESTS/TESTS)))"
+    echo "=== Score: $((100-(100*FAILED_TESTS/TESTS)))"
 
+    echo "=== Lynis score:"
+    echo "----"
     find ./ -name "*${VM}*lynis.log" -type f | while read -r f; do
       if test -s "${f}"; then
         echo
-        echo "* Lynis score:"
         grep -E 'hardening_index|os_version' "${f}"
       else
         echo "$f is empty, a test stage failed."
       fi
     done
+    echo "----"
   done
 } > TESTRESULTS.adoc
 
