@@ -508,7 +508,7 @@ https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-gu
 Do you want to contribute? That's great! Contributions are always welcome,
 no matter how large or small. If you found something odd, feel free to
 https://github.com/konstruktoid/hardening/issues/[submit a new issue],
-improve the code by https://github.com/konstruktoid/hardening/pulls[create a pull request],
-or https://opencollective.com/konstruktoid_hardening#sponsor[sponsor this project].
+improve the code by https://github.com/konstruktoid/hardening/pulls[creating a pull request],
+or by https://opencollective.com/konstruktoid_hardening#sponsor[sponsoring this project].
 
 Logo by https://github.com/reallinfo[reallinfo].
