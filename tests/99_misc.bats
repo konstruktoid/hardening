@@ -2,6 +2,11 @@
 
 load test_helper
 
+@test "Verify NX support is enabled" {
+  run bash -c "grep -Ei 'processor|\snx\s' /proc/cpuinfo"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify password protected GRUB" {
   run bash -c "grep '^password_pbkdf2.*grub\.pbkdf2\.sha512\.' /boot/grub/grub.cfg"
   [ "$status" -eq 0 ]

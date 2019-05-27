@@ -1,6 +1,6 @@
-= Vagrant Ubuntu Test results - Fri May 24 12:36:18 UTC 2019
+= Vagrant Ubuntu Test results - Mon May 27 13:10:37 UTC 2019
 :icons: font
-Number of tests: 489
+Number of tests: 490
 
 The score is calculated using `100-(100*FAILED_TESTS/TESTS)`.
 
@@ -38,9 +38,9 @@ not ok 69 Verify that /var/log is mounted with noexec
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
 not ok 469 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
-not ok 487 Verify password protected GRUB
-not ok 488 Verify Google 2FA in /etc/pam.d/sshd
-not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 488 Verify password protected GRUB
+not ok 489 Verify Google 2FA in /etc/pam.d/sshd
+not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
@@ -99,9 +99,9 @@ not ok 435 Ensure user list is removed
 not ok 436 Ensure user news is removed
 not ok 437 Ensure user sync is removed
 not ok 438 Ensure user uucp is removed
-not ok 487 Verify password protected GRUB
-not ok 488 Verify Google 2FA in /etc/pam.d/sshd
-not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 488 Verify password protected GRUB
+not ok 489 Verify Google 2FA in /etc/pam.d/sshd
+not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
@@ -150,9 +150,9 @@ not ok 435 Ensure user list is removed
 not ok 436 Ensure user news is removed
 not ok 437 Ensure user sync is removed
 not ok 438 Ensure user uucp is removed
-not ok 487 Verify password protected GRUB
-not ok 488 Verify Google 2FA in /etc/pam.d/sshd
-not ok 489 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 488 Verify password protected GRUB
+not ok 489 Verify Google 2FA in /etc/pam.d/sshd
+not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
