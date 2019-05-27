@@ -1,4 +1,4 @@
-= Vagrant Ubuntu Test results - Mon May 27 13:10:37 UTC 2019
+= Vagrant Ubuntu Test results - Mon May 27 22:27:32 UTC 2019
 :icons: font
 Number of tests: 490
 
@@ -17,24 +17,13 @@ ubuntu/disco86 (virtualbox, 20190514.0.1)
 
 == bionic
 ----
-Failed number of tests: 19
+Failed number of tests: 8
 ----
 
 === Failed tests:
 ----
 not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
-not ok 59 Verify that /home is a separate partition
-not ok 60 Verify that /home is mounted with nodev
-not ok 61 Verify that /home is mounted with nosuid
-not ok 62 Verify that /var/log/audit is a separate partition
-not ok 63 Verify that /var/log/audit is mounted with nodev
-not ok 64 Verify that /var/log/audit is mounted with nosuid
-not ok 65 Verify that /var/log/audit is mounted with noexec
-not ok 66 Verify that /var/log is a separate partition
-not ok 67 Verify that /var/log is mounted with nodev
-not ok 68 Verify that /var/log is mounted with nosuid
-not ok 69 Verify that /var/log is mounted with noexec
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
 not ok 469 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
@@ -59,37 +48,26 @@ suggestion[]=SSH-7408|Consider hardening SSH configuration|AllowAgentForwarding 
 suggestion[]=PKGS-7394|Install package apt-show-versions for patch management purposes|-|-|
 suggestion[]=NETW-3032|Consider running ARP monitoring software (arpwatch,arpon)|-|-|
 suggestion[]=NAME-4028|Check DNS configuration for the dns domain name|-|-|
+suggestion[]=LOGG-2190|Check what deleted files are still in use and why.|-|-|
 suggestion[]=FIRE-4513|Check iptables rules to see which rules are currently not used|-|-|
 suggestion[]=FILE-6310|To decrease the impact of a full /var file system, place /var on a separate partition|-|-|
-suggestion[]=FILE-6310|To decrease the impact of a full /home file system, place /home on a separate partition|-|-|
 suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password)|-|-|
 suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
 suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
 suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 ----
 
-=== Score: 97
+=== Score: 99
 
 == cosmic
 ----
-Failed number of tests: 25
+Failed number of tests: 14
 ----
 
 === Failed tests:
 ----
 not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
-not ok 59 Verify that /home is a separate partition
-not ok 60 Verify that /home is mounted with nodev
-not ok 61 Verify that /home is mounted with nosuid
-not ok 62 Verify that /var/log/audit is a separate partition
-not ok 63 Verify that /var/log/audit is mounted with nodev
-not ok 64 Verify that /var/log/audit is mounted with nosuid
-not ok 65 Verify that /var/log/audit is mounted with noexec
-not ok 66 Verify that /var/log is a separate partition
-not ok 67 Verify that /var/log is mounted with nodev
-not ok 68 Verify that /var/log is mounted with nosuid
-not ok 69 Verify that /var/log is mounted with noexec
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
 not ok 432 Ensure user games is removed
@@ -123,14 +101,13 @@ suggestion[]=NAME-4028|Check DNS configuration for the dns domain name|-|-|
 suggestion[]=LOGG-2190|Check what deleted files are still in use and why.|-|-|
 suggestion[]=FIRE-4513|Check iptables rules to see which rules are currently not used|-|-|
 suggestion[]=FILE-6310|To decrease the impact of a full /var file system, place /var on a separate partition|-|-|
-suggestion[]=FILE-6310|To decrease the impact of a full /home file system, place /home on a separate partition|-|-|
 suggestion[]=BOOT-5122|Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password)|-|-|
 suggestion[]=BANN-7130|Add legal banner to /etc/issue.net, to warn unauthorized users|-|-|
 suggestion[]=BANN-7126|Add a legal banner to /etc/issue, to warn unauthorized users|-|-|
 suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 ----
 
-=== Score: 95
+=== Score: 98
 
 == disco
 ----
@@ -183,12 +160,12 @@ suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 === Score: 98
 
 == standard
-=== Failed number of tests: 408
-
-=== Score: 17
+=== Failed number of tests: 406
 === Lynis score:
 ----
 
 os_version=18.04
-hardening_index=66
+hardening_index=67
 ----
+
+=== Score: 18
