@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     bionic.vm.hostname = "bionic"
 
     config.vm.provider "virtualbox" do |disk01|
-      bionic_disk01 = './bionic_disk01.vdi'
+      bionic_disk01 = '/tmp/bionic_disk01.vdi'
       if not File.exists?(bionic_disk01)
         disk01.customize ['createhd', '--filename', bionic_disk01, '--variant', 'Standard', '--size', 5 * 1024]
       end
@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     cosmic.vm.hostname = "cosmic"
 
     config.vm.provider "virtualbox" do |disk01|
-      cosmic_disk01 = './cosmic_disk01.vdi'
+      cosmic_disk01 = '/tmp/cosmic_disk01.vdi'
       if not File.exists?(cosmic_disk01)
         disk01.customize ['createhd', '--filename', cosmic_disk01, '--variant', 'Standard', '--size', 5 * 1024]
       end
@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
     standard.vm.hostname = "standard"
 
     config.vm.provider "virtualbox" do |disk01|
-      standard_disk01 = './standard_disk01.vdi'
+      standard_disk01 = '/tmp/standard_disk01.vdi'
       if not File.exists?(standard_disk01)
         disk01.customize ['createhd', '--filename', standard_disk01, '--variant', 'Standard', '--size', 5 * 1024]
       end
@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
     disco.vm.hostname = "disco"
 
     config.vm.provider "virtualbox" do |disk01|
-      disco_disk01 = './disco_disk01.vdi'
+      disco_disk01 = '/tmp/disco_disk01.vdi'
       if not File.exists?(disco_disk01)
         disk01.customize ['createhd', '--filename', disco_disk01, '--variant', 'Standard', '--size', 5 * 1024]
       end

@@ -157,9 +157,6 @@ wait
       fi
     done < <(find ./ -name "*${VM}*bats.log" -type f)
 
-    echo
-    echo "=== Score: $((100-(100*FAILED_TESTS/TESTS)))"
-
     echo "=== Lynis score:"
     echo "----"
     find ./ -name "*${VM}*lynis.log" -type f | while read -r f; do
@@ -171,6 +168,9 @@ wait
       fi
     done
     echo "----"
+
+    echo
+    echo "=== Score: $((100-(100*FAILED_TESTS/TESTS)))"
   done
 } > TESTRESULTS.adoc
 
