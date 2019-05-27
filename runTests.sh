@@ -12,6 +12,10 @@ if ! command -v vagrant; then
   exit 1
 fi
 
+if ! vagrant validate Vagrantfile; then
+  exit 1
+fi
+
 find ./ -name '*.log' -exec rm {} \;
 
 vagrant box update --insecure
