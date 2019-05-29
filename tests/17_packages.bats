@@ -72,6 +72,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that autofs is not installed" {
+  run packageInstalled 'autofs'
+  [ "$status" -eq 1 ]
+}
+
 @test "Verify that avahi is not installed" {
   run packageInstalled 'avahi'
   [ "$status" -eq 1 ]
