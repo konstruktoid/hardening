@@ -12,6 +12,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that apparmor is installed" {
+  run packageInstalled 'apparmor'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that apparmor-profiles is installed" {
   run packageInstalled 'apparmor-profiles'
   [ "$status" -eq 0 ]
