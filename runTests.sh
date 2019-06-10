@@ -4,7 +4,7 @@ if ! command -v shellcheck; then
   exit 1
 fi
 
-if ! shellcheck -x -s bash -f gcc tests/*.bash scripts/* misc/*.sh ubuntu.sh; then
+if ! shellcheck -x -s bash -f gcc tests/*.bash tests/*.sh scripts/* misc/*.sh ubuntu.sh; then
   exit 1
 fi
 
