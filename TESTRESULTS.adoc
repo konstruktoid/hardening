@@ -1,6 +1,6 @@
-= Vagrant Ubuntu Test results - Mon May 27 22:27:32 UTC 2019
+= Vagrant Ubuntu Test results - Mon Jun 10 12:02:33 UTC 2019
 :icons: font
-Number of tests: 490
+Number of tests: 494
 
 The score is calculated using `100-(100*FAILED_TESTS/TESTS)`.
 
@@ -9,10 +9,10 @@ NOTE: This is a quick test script using Vagrant boxes and some functions may fai
 == System information
 ----
 Vagrant 2.2.4
-ubuntu/bionic86 (virtualbox, 20190523.0.0)
-ubuntu/cosmic86 (virtualbox, 20190522.0.0)
-ubuntu/bionic86 (virtualbox, 20190523.0.0)
-ubuntu/disco86 (virtualbox, 20190514.0.1)
+ubuntu/bionic86 (virtualbox, 20190604.0.0)
+ubuntu/cosmic86 (virtualbox, 20190604.0.0)
+ubuntu/bionic86 (virtualbox, 20190604.0.0)
+ubuntu/disco86 (virtualbox, 20190605.0.0)
 ----
 
 == bionic
@@ -26,10 +26,10 @@ not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
-not ok 469 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
-not ok 488 Verify password protected GRUB
-not ok 489 Verify Google 2FA in /etc/pam.d/sshd
-not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 473 Verify that DNSOverTLS is used in /etc/systemd/resolved.conf
+not ok 492 Verify password protected GRUB
+not ok 493 Verify Google 2FA in /etc/pam.d/sshd
+not ok 494 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
@@ -70,16 +70,16 @@ not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
-not ok 432 Ensure user games is removed
-not ok 433 Ensure user gnats is removed
-not ok 434 Ensure user irc is removed
-not ok 435 Ensure user list is removed
-not ok 436 Ensure user news is removed
-not ok 437 Ensure user sync is removed
-not ok 438 Ensure user uucp is removed
-not ok 488 Verify password protected GRUB
-not ok 489 Verify Google 2FA in /etc/pam.d/sshd
-not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 434 Ensure user games is removed
+not ok 435 Ensure user gnats is removed
+not ok 436 Ensure user irc is removed
+not ok 437 Ensure user list is removed
+not ok 438 Ensure user news is removed
+not ok 439 Ensure user sync is removed
+not ok 440 Ensure user uucp is removed
+not ok 492 Verify password protected GRUB
+not ok 493 Verify Google 2FA in /etc/pam.d/sshd
+not ok 494 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
@@ -120,16 +120,16 @@ not ok 23 Verify that runtime kernel module squashfs is disabled
 not ok 25 Verify that runtime kernel module vfat is disabled
 not ok 109 Verify kernel.modules_disabled in /etc/sysctl.*
 not ok 159 Verify sysctl runtime kernel.modules_disabled
-not ok 432 Ensure user games is removed
-not ok 433 Ensure user gnats is removed
-not ok 434 Ensure user irc is removed
-not ok 435 Ensure user list is removed
-not ok 436 Ensure user news is removed
-not ok 437 Ensure user sync is removed
-not ok 438 Ensure user uucp is removed
-not ok 488 Verify password protected GRUB
-not ok 489 Verify Google 2FA in /etc/pam.d/sshd
-not ok 490 Verify Yubico 2FA in /etc/pam.d/sshd
+not ok 434 Ensure user games is removed
+not ok 435 Ensure user gnats is removed
+not ok 436 Ensure user irc is removed
+not ok 437 Ensure user list is removed
+not ok 438 Ensure user news is removed
+not ok 439 Ensure user sync is removed
+not ok 440 Ensure user uucp is removed
+not ok 492 Verify password protected GRUB
+not ok 493 Verify Google 2FA in /etc/pam.d/sshd
+not ok 494 Verify Yubico 2FA in /etc/pam.d/sshd
 ----
 === Lynis score:
 ----
@@ -165,7 +165,7 @@ suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 ----
 
 os_version=18.04
-hardening_index=67
+hardening_index=62
 ----
 
 === Score: 18
