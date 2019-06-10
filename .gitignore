@@ -1,2 +1,3 @@
 *.log
 *.vdi
+tests/*.adoc

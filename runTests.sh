@@ -70,7 +70,7 @@ wait
   echo
   echo "The score is calculated using \`100-(100*FAILED_TESTS/TESTS)\`."
   echo
-  echo "NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar too those used by your organization."
+  echo "NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar to those used by your organization."
   echo
   echo "== System information"
   echo "----"
