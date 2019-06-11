@@ -22,6 +22,64 @@ is available in my Ansible repository https://github.com/konstruktoid/ansible-ro
 NOTE: This is a constant work in progress. Make sure you understand what it
 does. `Read the code`.
 
+== Index
+.. link:README.adoc#howto[Howto]
+... link:README.adoc#partition-the-system[Partition the system]
+... link:README.adoc#login-set-a-grub2-password-configure-and-run-ubuntush[Login, set a Grub2 password, configure and run ubuntu.sh]
+.. link:README.adoc#configuration-options[Configuration options]
+.. link:README.adoc#functions[Functions]
+... link:README.adoc#function-list[Function list]
+.... link:README.adoc#01_pre[01_pre]
+.... link:README.adoc#02_firewall[02_firewall]
+.... link:README.adoc#03_disablenet[03_disablenet]
+.... link:README.adoc#04_disablemnt[04_disablemnt]
+.... link:README.adoc#05_systemdconf[05_systemdconf]
+.... link:README.adoc#06_journalctl[06_journalctl]
+.... link:README.adoc#07_timesyncd[07_timesyncd]
+.... link:README.adoc#08_fstab[08_fstab]
+.... link:README.adoc#09_prelink[09_prelink]
+.... link:README.adoc#10_aptget[10_aptget]
+.... link:README.adoc#11_hosts[11_hosts]
+.... link:README.adoc#12_logindefs[12_logindefs]
+.... link:README.adoc#13_sysctl[13_sysctl]
+.... link:README.adoc#14_limits[14_limits]
+.... link:README.adoc#15_adduser[15_adduser]
+.... link:README.adoc#16_rootaccess[16_rootaccess]
+.... link:README.adoc#17_packages[17_packages]
+.... link:README.adoc#18_sshdconfig[18_sshdconfig]
+.... link:README.adoc#19_password[19_password]
+.... link:README.adoc#20_cron[20_cron]
+.... link:README.adoc#21_ctraltdel[21_ctraltdel]
+.... link:README.adoc#22_auditd[22_auditd]
+.... link:README.adoc#23_disablemod[23_disablemod]
+.... link:README.adoc#24_aide[24_aide]
+.... link:README.adoc#25_rhosts[25_rhosts]
+.... link:README.adoc#26_users[26_users]
+.... link:README.adoc#27_suid[27_suid]
+.... link:README.adoc#28_umask[28_umask]
+.... link:README.adoc#29_apparmor[29_apparmor]
+.... link:README.adoc#30_path[30_path]
+.... link:README.adoc#31_logindconf[31_logindconf]
+.... link:README.adoc#32_resolvedconf[32_resolvedconf]
+.... link:README.adoc#33_rkhunter[33_rkhunter]
+.... link:README.adoc#34_issue[34_issue]
+.... link:README.adoc#35_apport[35_apport]
+.... link:README.adoc#36_lockroot[36_lockroot]
+.... link:README.adoc#37_coredump[37_coredump]
+.... link:README.adoc#38_postfix[38_postfix]
+.... link:README.adoc#39_motdnews[39_motdnews]
+.... link:README.adoc#40_usbguard[40_usbguard]
+.... link:README.adoc#41_compilers[41_compilers]
+.... link:README.adoc#98_systemddelta[98_systemddelta]
+.... link:README.adoc#99_reboot[99_reboot]
+... link:README.adoc#function-execution-order[Function execution order]
+.. link:README.adoc#tests[Tests]
+... link:README.adoc#test-automation-using-vagrant[Test automation using Vagrant]
+... link:README.adoc#testing-a-host[Testing a host]
+.. link:README.adoc#structure[Structure]
+.. link:README.adoc#recommended-reading[Recommended reading]
+.. link:README.adoc#contributing[Contributing]
+
 == Howto
 Start the installation of the server. +
 Pick language, keyboard layout, timezone and so on as you usually would.
@@ -383,7 +441,6 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 .
 ├── LICENSE
 ├── README.adoc
-├── TESTRESULTS.adoc
 ├── Vagrantfile
 ├── action-shellcheck
 │   ├── Dockerfile
@@ -396,6 +453,11 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── initpath.sh
 │   └── tmp.mount
 ├── createPartitions.sh
+├── genIndex.sh
+├── logo
+│   ├── horizontal.png
+│   ├── icon.png
+│   └── vertical.png
 ├── misc
 │   ├── audit-aggressive.rules
 │   ├── audit-base.rules
@@ -494,6 +556,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 40_usbguard.bats
 │   ├── 41_compilers.bats
 │   ├── 99_misc.bats
+│   ├── runHostTests.sh
 │   └── test_helper.bash
 ├── ubuntu.cfg
 └── ubuntu.sh
