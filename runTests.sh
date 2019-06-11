@@ -21,10 +21,6 @@ find ./ -name '*.log' -exec rm {} \;
 vagrant box update --insecure
 vagrant destroy --force
 
-if [ -f './disco_disk01.vdi' ]; then
-  rm ./disco_disk01.vdi
-fi
-
 grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
   vagrant up "${v}"
 done
@@ -92,7 +88,7 @@ wait
     fi
 
     echo
-    echo "== ${VM}"
+    echo "== Ubuntu release: ${VM}"
 
     echo "----"
     while read -r f; do
@@ -146,7 +142,7 @@ wait
     fi
 
     echo
-    echo "== ${VM}"
+    echo "== Ubuntu release: ${VM} bionic"
 
     while read -r f; do
       if test -s "${f}"; then
