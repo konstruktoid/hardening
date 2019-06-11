@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2001
+
 echo "== Index"
 while read -r index; do
   echo "$(echo "$index" | sed 's/=/./g' | sed 's/. .*/. /')link:README.adoc#$(echo "$index" |\
