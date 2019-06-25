@@ -7,7 +7,7 @@ function f_aptget {
 
   echo "[$SCRIPT_COUNT] Upgrading installed packages"
 
-  $APT upgrade
+  $APT --with-new-pkgs upgrade
 
   ((SCRIPT_COUNT++))
 }
