@@ -1,21 +1,21 @@
-= Vagrant Ubuntu Test results - Mon Jun 10 12:02:33 UTC 2019
+= Vagrant Ubuntu Test results - Tue Jun 25 14:41:02 UTC 2019
 :icons: font
 Number of tests: 494
 
 The score is calculated using `100-(100*FAILED_TESTS/TESTS)`.
 
-NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar too those used by your organization.
+NOTE: This is a quick test script using Vagrant boxes and some functions may fail resulting in incorrect output or score. Always verify using systems similar to those used by your organization.
 
 == System information
 ----
 Vagrant 2.2.4
-ubuntu/bionic86 (virtualbox, 20190604.0.0)
-ubuntu/cosmic86 (virtualbox, 20190604.0.0)
-ubuntu/bionic86 (virtualbox, 20190604.0.0)
-ubuntu/disco86 (virtualbox, 20190605.0.0)
+ubuntu/bionic86 (virtualbox, 20190624.0.0)
+ubuntu/cosmic86 (virtualbox, 20190621.0.0)
+ubuntu/bionic86 (virtualbox, 20190624.0.0)
+ubuntu/disco86 (virtualbox, 20190622.0.0)
 ----
 
-== bionic
+== Ubuntu release: bionic
 ----
 Failed number of tests: 8
 ----
@@ -59,7 +59,7 @@ suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 
 === Score: 99
 
-== cosmic
+== Ubuntu release: cosmic
 ----
 Failed number of tests: 14
 ----
@@ -109,7 +109,7 @@ suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 
 === Score: 98
 
-== disco
+== Ubuntu release: disco
 ----
 Failed number of tests: 14
 ----
@@ -159,13 +159,13 @@ suggestion[]=ACCT-9626|Enable sysstat to collect accounting (no results)|-|-|
 
 === Score: 98
 
-== standard
+== Ubuntu release: standard bionic
 === Failed number of tests: 406
 === Lynis score:
 ----
 
 os_version=18.04
-hardening_index=62
+hardening_index=67
 ----
 
 === Score: 18
