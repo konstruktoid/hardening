@@ -8,4 +8,17 @@ function f_rootaccess {
   echo "console" > /etc/securetty
 
   ((SCRIPT_COUNT++))
+
+  echo "[$SCRIPT_COUNT] Mask debug-shell"
+
+  systemctl mask debug-shell.service
+  systemctl stop debug-shell.service
+  systemctl daemon-reload
+
+  if [[ $VERBOSE == "Y" ]]; then
+    systemctl status debug-shell.service --no-pager
+    echo
+  fi
+
+  ((SCRIPT_COUNT++))
 }

@@ -11,3 +11,8 @@ load test_helper
   run oneEntry console /etc/securetty 1
   [ "$status" -eq 0 ]
 }
+
+@test "Ensure debug-shell is masked" {
+  run isMasked debug-shell.service
+  [ "$status" -eq 0 ]
+}
