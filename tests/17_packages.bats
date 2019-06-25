@@ -92,6 +92,11 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify that pastebinit is not installed" {
+  run packageInstalled 'pastebinit'
+  [ "$status" -eq 1 ]
+}
+
 @test "Verify that popularity-contest is not installed" {
   run packageInstalled 'popularity-contest'
   [ "$status" -eq 1 ]
