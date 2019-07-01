@@ -62,8 +62,18 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify kernel.unprivileged_bpf_disabled in /etc/sysctl.*" {
+  run bash -c "grep -R '^kernel.unprivileged_bpf_disabled.*1$' /etc/sysctl.*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify kernel.yama.ptrace_scope in /etc/sysctl.*" {
   run bash -c "grep -R '^kernel.yama.ptrace_scope.*2$' /etc/sysctl.*"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify net.core.bpf_jit_harden in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.core.bpf_jit_harden.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
@@ -311,8 +321,18 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify sysctl runtime kernel.unprivileged_bpf_disabled" {
+  run sysctlRuntime '^kernel.unprivileged_bpf_disabled.*1$'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify sysctl runtime kernel.yama.ptrace_scope" {
   run sysctlRuntime '^kernel.yama.ptrace_scope.*2$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify sysctl runtime net.core.bpf_jit_harden" {
+  run sysctlRuntime '^net.core.bpf_jit_harden.*2$'
   [ "$status" -eq 0 ]
 }
 

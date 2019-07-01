@@ -98,6 +98,21 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that /boot is a separate partition" {
+  run bash -c "grep '[[:space:]]/boot[[:space:]]' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /boot is mounted with nodev" {
+  run bash -c "grep '[[:space:]]/boot[[:space:]].*nodev.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that /boot is mounted with nosuid" {
+  run bash -c "grep '[[:space:]]/boot[[:space:]].*nosuid.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that /home is a separate partition" {
   run bash -c "grep '[[:space:]]/home[[:space:]]' /proc/mounts"
   [ "$status" -eq 0 ]
