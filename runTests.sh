@@ -21,6 +21,10 @@ find ./ -name '*.log' -exec rm {} \;
 vagrant box update --insecure
 vagrant destroy --force
 
+for d in $(grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"');
+  do rm -v "/tmp/${d}_disk01.vdi"
+done
+
 grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
   vagrant up "${v}"
 done
