@@ -42,6 +42,7 @@ EOF
     mkdir -p /home/vagrant
     mv /root/vagrant-ssh /home/vagrant/.ssh
     chown -R vagrant:vagrant /home/vagrant
+    chmod 0750 /home/vagrant
     chmod 0700 /home/vagrant/.ssh
     chmod 0600 /home/vagrant/.ssh/*
   fi
