@@ -75,7 +75,7 @@ wait
   echo "== System information"
   echo "----"
   vagrant --version
-  vboxmanage --version
+  echo "VirtualBox $(vboxmanage --version)"
 
   for box in $(grep 'vm.box' Vagrantfile | grep -o '".*"$' | tr -d '"'); do
     vagrant box list | grep -i "${box}" | tail -n1 | sed 's/64.*(/86 \(/g'
