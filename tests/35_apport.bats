@@ -12,11 +12,6 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Verify that apport is masked" {
-  run isMasked apport.service
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify that whoopsie is not installed" {
   run packageInstalled 'whoopsie'
   [ "$status" -eq 1 ]
