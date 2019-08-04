@@ -15,7 +15,7 @@ function f_firewall {
   ufw --force enable
 
   for admin in $FW_ADMIN; do
-    ufw allow log from "$admin" to any port 22 proto tcp
+    ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
   done
 
   if [[ $VERBOSE == "Y" ]]; then
