@@ -111,6 +111,7 @@ run the script, `sudo bash ubuntu.sh`. +
 ----
 FW_ADMIN='127.0.0.1' // <1>
 SSH_GRPS='sudo' // <2>
+SSH_PORT='22' // <12>
 SYSCTL_CONF='./misc/sysctl.conf' // <3>
 AUDITD_MODE='1' // <4>
 AUDITD_RULES='./misc/audit-base.rules ./misc/audit-aggressive.rules ./misc/audit-docker.rules' // <5>
@@ -160,6 +161,7 @@ USERCONF='/etc/systemd/user.conf'
 <9> If you want all the details or not.
 <10> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
 <11> Add something just to verify that you actually glanced the code.
+<12> Add other Port to SSH. Default Port: 22
 
 == Functions
 
