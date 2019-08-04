@@ -17,6 +17,11 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify OpenSSH Port" {
+  run sshdConfig '^Port $SSH_PORT $'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify OpenSSH RhostsRSAAuthentication (Deprecated)" {
   run sshdConfig RhostsRSAAuthentication
   [ "$status" -eq 1 ]
