@@ -429,7 +429,7 @@ sudo bats .
 === Test automation using Vagrant
 Running `bash ./runTests.sh` will use https://www.vagrantup.com/[Vagrant] to run
 all above tests and https://github.com/CISOfy/Lynis[Lynis] on all supported Ubuntu
-versions. The script will generate link:TESTRESULTS.adoc[TESTRESULTS.adoc].
+versions. The script will generate a file named `TESTRESULTS.adoc`.
 
 === Testing a host
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
