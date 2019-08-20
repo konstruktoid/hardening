@@ -1,3 +1,4 @@
 *.log
 *.vdi
+TESTRESULTS.adoc
 tests/*.adoc
