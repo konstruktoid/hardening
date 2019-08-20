@@ -100,8 +100,11 @@ wait
       if test -s "${f}"; then
         FAILED_TESTS="$(grep -c '^not ok' "${f}")"
         echo "Failed number of tests: ${FAILED_TESTS}"
+        STAGE_FAIL=0
       else
         echo "$f is empty, a test stage failed."
+        FAILED_TESTS=100
+        STAGE_FAIL=1
       fi
     done < <(find ./ -name "*${VM}*bats.log" -type f)
     echo "----"
@@ -109,7 +112,11 @@ wait
     echo
     echo "=== Failed tests:"
     echo "----"
-    grep -shE '^not ok' ./*"${VM}"*bats.log | sort -k3n | uniq
+    if [ "${STAGE_FAIL}" == 0 ]; then
+      grep -shE '^not ok' ./*"${VM}"*bats.log | sort -k3n | uniq
+    else
+      echo "N/A."
+    fi
     echo "----"
 
 
