@@ -576,6 +576,6 @@ Do you want to contribute? That's great! Contributions are always welcome,
 no matter how large or small. If you found something odd, feel free to
 https://github.com/konstruktoid/hardening/issues/[submit a new issue],
 improve the code by https://github.com/konstruktoid/hardening/pulls[creating a pull request],
-or by https://opencollective.com/konstruktoid_hardening#sponsor[sponsoring this project].
+or by https://ko-fi.com/konstruktoid[sponsoring this project].
 
 Logo by https://github.com/reallinfo[reallinfo].
