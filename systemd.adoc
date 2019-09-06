@@ -91,7 +91,7 @@ See https://www.freedesktop.org/software/systemd/man/resolved.conf.html[resolved
 ----
 [Resolve]
 DNS=127.0.0.1 // <1>
-FallbackDNS=9.9.9.9 185.121.177.177 // <2>
+FallbackDNS=1.1.1.1 1.0.0.1 // <2>
 DNSSEC=allow-downgrade // <3>
 DNSOverTLS=opportunistic // <4>
 ----
