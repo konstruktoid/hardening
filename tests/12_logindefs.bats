@@ -3,22 +3,22 @@
 load test_helper
 
 @test "Verify LOG_OK_LOGINS in $LOGINDEFS" {
-  run bash -c "grep '^LOG_OK_LOGINS.*yes$' $LOGINDEFS"
+  run bash -c "grep '^LOG_OK_LOGINS yes$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify UMASK in $LOGINDEFS" {
-  run bash -c "grep '^UMASK.*077$' $LOGINDEFS"
+  run bash -c "grep '^UMASK 077$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify PASS_MIN_DAYS in $LOGINDEFS" {
-  run bash -c "grep '^PASS_MIN_DAYS.*1$' $LOGINDEFS"
+  run bash -c "grep '^PASS_MIN_DAYS 1$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify PASS_MAX_DAYS in $LOGINDEFS" {
-  run bash -c "grep '^PASS_MAX_DAYS.*60$' $LOGINDEFS"
+  run bash -c "grep '^PASS_MAX_DAYS 60$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 
@@ -38,6 +38,6 @@ load test_helper
 }
 
 @test "Verify SHA_CRYPT_MAX_ROUNDS in $LOGINDEFS" {
-  run bash -c "grep '^SHA_CRYPT_MAX_ROUNDS.*10000$' $LOGINDEFS"
+  run bash -c "grep '^SHA_CRYPT_MAX_ROUNDS 10000$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
