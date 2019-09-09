@@ -198,6 +198,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that /dev/shm is mounted with noexec" {
+  run bash -c "grep '[[:space:]]/dev/shm[[:space:]].*noexec.*' /proc/mounts"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that /run/shm is mounted with nodev" {
   run bash -c "grep '[[:space:]]/run/shm[[:space:]].*nodev.*' /proc/mounts"
   [ "$status" -eq 0 ]

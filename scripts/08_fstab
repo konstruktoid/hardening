@@ -28,11 +28,15 @@ function f_fstab {
 
   cp "$TMPFSTAB" /etc/fstab
 
-  if ! grep -i '/run/shm' /etc/fstab 2>/dev/null 1>&2; then
+  if ! grep -q '/run/shm ' /etc/fstab; then
     echo 'none /run/shm tmpfs rw,noexec,nosuid,nodev 0 0' >> /etc/fstab
   fi
 
-  if ! grep -i '/proc' /etc/fstab 2>/dev/null 1>&2; then
+  if ! grep -q '/dev/shm ' /etc/fstab; then
+    echo 'none /dev/shm tmpfs rw,noexec,nosuid,nodev 0 0' >> /etc/fstab
+  fi
+
+  if ! grep -q '/proc ' /etc/fstab; then
     echo 'none /proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2 0 0' >> /etc/fstab
   fi
 
