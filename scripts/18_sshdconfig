@@ -107,6 +107,9 @@ function f_sshdconfig {
   grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | sort | uniq > "$SSHDFILE"
   rm "/etc/ssh/sshd_config.$(date +%y%m%d)"
 
+  chown root:root "$SSHDFILE"
+  chmod 0600 "$SSHDFILE"
+
   systemctl restart sshd.service
 
   if [[ $VERBOSE == "Y" ]]; then
