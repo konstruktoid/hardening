@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "Verify /etc/hosts.deny" {
-  run bash -c "grep '^ALL: PARANOID$' /etc/hosts.deny"
+  run bash -c "grep '^ALL: ALL$' /etc/hosts.deny"
   [ "$status" -eq 0 ]
 }
 
