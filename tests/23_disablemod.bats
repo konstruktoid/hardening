@@ -22,6 +22,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that kernel module floppy is disabled" {
+  run bash -c "modprobe -n -v floppy | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that kernel module net-pf-31 is disabled" {
   run bash -c "modprobe -n -v net-pf-31 | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
