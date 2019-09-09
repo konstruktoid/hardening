@@ -21,4 +21,12 @@ function f_rootaccess {
   fi
 
   ((SCRIPT_COUNT++))
+
+  ((SCRIPT_COUNT++))
+
+  echo "[$SCRIPT_COUNT] Restrict access to su"
+
+  if ! grep -q 'auth required' /etc/pam.d/su; then
+    echo "auth required pam_wheel.so" > /etc/pam.d/su
+  fi
 }
