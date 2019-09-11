@@ -3,9 +3,6 @@
 # shellcheck disable=2009
 # shellcheck disable=2034
 
-if ps -fe &>; then
-  echo
-
 if ! ps -p $$ | grep -si bash; then
   echo "Sorry, this script requires bash."
   exit 1
