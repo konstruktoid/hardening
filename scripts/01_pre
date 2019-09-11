@@ -1,3 +1,5 @@
+# shellcheck disable=2034
+
 function f_pre {
   SCRIPT_COUNT="0"
   ((SCRIPT_COUNT++))
