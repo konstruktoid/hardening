@@ -1,5 +1,5 @@
-on: push
-name: New workflow
+on: [push, pull_request]
+name: Konstruktoid ShellCheck
 jobs:
   konstruktoidShellCheck:
     name: Konstruktoid ShellCheck
