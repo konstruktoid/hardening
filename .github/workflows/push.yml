@@ -11,4 +11,5 @@ jobs:
       - name: Create Issue
         if: failure()
         uses: JasonEtco/create-an-issue@master
-        secrets: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
