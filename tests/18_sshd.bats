@@ -166,3 +166,18 @@ load test_helper
   run moduliSize
   [ "$status" -eq 0 ]
 }
+
+@test "Verify OpenSSH Client HashKnownHosts" {
+  run bash -c "grep '^\s.*HashKnownHosts yes$' /etc/ssh/ssh_config"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH Client Ciphers" {
+  run bash -c "grep '^\s.*Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr$' /etc/ssh/ssh_config"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH Client Macs" {
+  run bash -c "grep '^\s.*MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256$' /etc/ssh/ssh_config"
+  [ "$status" -eq 0 ]
+}

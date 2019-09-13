@@ -107,6 +107,7 @@ function main {
   f_apport
   f_motdnews
   f_rkhunter
+  f_sshconfig
   f_sshdconfig
   f_password
   f_cron

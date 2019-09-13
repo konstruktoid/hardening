@@ -1,7 +1,7 @@
 # https://wiki.mozilla.org/Security/Guidelines/OpenSSH
 
 function f_sshdconfig {
-  echo "[$SCRIPT_COUNT] /etc/ssh/sshd_config"
+  echo "[$SCRIPT_COUNT] $SSHDFILE"
 
   awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
   mv /etc/ssh/moduli.tmp /etc/ssh/moduli
@@ -118,4 +118,18 @@ function f_sshdconfig {
   fi
 
   ((SCRIPT_COUNT++))
+}
+
+function f_sshconfig {
+  echo "[$SCRIPT_COUNT] $SSHFILE"
+
+  cp "$SSHFILE" "/etc/ssh/ssh_config.$(date +%y%m%d)"
+
+  if ! grep -q "^\s.*HashKnownHosts" "$SSHFILE" 2> /dev/null; then
+    sed -i '/HashKnownHosts/d' "$SSHFILE"
+    echo "    HashKnownHosts yes" >> "$SSHFILE"
+  fi
+
+  sed -i 's/#.*Ciphers .*/    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr/g' "$SSHFILE"
+  sed -i 's/#.*MACs .*/    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256/' "$SSHFILE"
 }
