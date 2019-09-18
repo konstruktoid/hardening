@@ -37,6 +37,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that gnupg2 is installed" {
+  run packageInstalled 'gnupg2'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that haveged is installed" {
   run packageInstalled 'haveged'
   [ "$status" -eq 0 ]
