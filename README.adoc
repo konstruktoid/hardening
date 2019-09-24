@@ -245,11 +245,13 @@ Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
 UBTU-16-010050, UBTU-16-010500, UBTU-16-010600
 
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
-`debsums` `haveged` `libpam-apparmor` `libpam-cracklib` `libpam-tmpdir`
-`openssh-server` `postfix` `rkhunter` `vlock`.
+`debsums` `gnupg2` `haveged` `libpam-apparmor` `libpam-cracklib`
+`libpam-tmpdir` `openssh-server` `postfix` `rkhunter` `systemd-coredump`
+`vlock`.
 
-Removes `avahi*` `beep` `popularity-contest` `rsh*` `talk*` `telnet*` `tftp*`
-`yp-tools` `ypbind` `xinetd`.
+Removes `apport*` `avahi*` `beep` `git` `pastebinit` `popularity-contest`
+`rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie` `xinetd` `yp-tools`
+`ypbind`.
 
 ==== 18_sshdconfig
 CCE-27471-2, CCE-27082-7, CCE-27433-2, CCE-27314-4, CCE-27363-1, CCE-27413-4,
