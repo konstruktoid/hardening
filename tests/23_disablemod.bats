@@ -17,6 +17,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that kernel module cpia2 is disabled" {
+  run bash -c "modprobe -n -v cpia2 | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that kernel module firewire-core is disabled" {
   run bash -c "modprobe -n -v firewire-core | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
@@ -24,6 +29,11 @@ load test_helper
 
 @test "Verify that kernel module floppy is disabled" {
   run bash -c "modprobe -n -v floppy | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that kernel module n_hdlc is disabled" {
+  run bash -c "modprobe -n -v n_hdlc | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
 }
 
@@ -54,5 +64,15 @@ load test_helper
 
 @test "Verify that kernel module usb-storage is disabled" {
   run bash -c "modprobe -n -v usb-storage | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that kernel module uvcvideo is disabled" {
+  run bash -c "modprobe -n -v uvcvideo | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that kernel module v4l2_common is disabled" {
+  run bash -c "modprobe -n -v v4l2_common | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
 }

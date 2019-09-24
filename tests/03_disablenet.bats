@@ -7,13 +7,13 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module sctp is disabled" {
-  run bash -c "modprobe -n -v sctp | grep 'install /bin/true'"
+@test "Verify that kernel module rds is disabled" {
+  run bash -c "modprobe -n -v rds | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module rds is disabled" {
-  run bash -c "modprobe -n -v rds | grep 'install /bin/true'"
+@test "Verify that kernel module sctp is disabled" {
+  run bash -c "modprobe -n -v sctp | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
 }
 
