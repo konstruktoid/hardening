@@ -283,8 +283,9 @@ Configure `auditd`, use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
 ==== 23_disablemod
 CCE-27327-6, CCE-27277-3, UBTU-16-010580
 
-Disable `bluetooth` `bnep` `btusb` `firewire-core` `n_hdlc` `net-pf-31`
-`pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage` kernel modules.
+Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
+`net-pf-31` `pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage`
+`uvcvideo` `v4l2_common` kernel modules.
 
 ==== 24_aide
 CCE-27096-7, UBTU-16-020000, UBTU-16-020010
