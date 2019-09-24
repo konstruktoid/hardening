@@ -72,6 +72,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that tcpd is installed" {
+  run packageInstalled 'tcpd'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that vlock is installed" {
   run packageInstalled 'vlock'
   [ "$status" -eq 0 ]
@@ -97,6 +102,11 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify that git is not installed" {
+  run packageInstalled 'git'
+  [ "$status" -eq 1 ]
+}
+
 @test "Verify that pastebinit is not installed" {
   run packageInstalled 'pastebinit'
   [ "$status" -eq 1 ]
@@ -109,6 +119,11 @@ load test_helper
 
 @test "Verify that rsh is not installed" {
   run packageInstalled 'rsh'
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify that rsync is not installed" {
+  run packageInstalled 'rsync'
   [ "$status" -eq 1 ]
 }
 
@@ -127,6 +142,16 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify that whoopsie is not installed" {
+  run packageInstalled 'whoopsie'
+  [ "$status" -eq 1 ]
+}
+
+@test "Verify that xinetd is not installed" {
+  run packageInstalled 'xinetd'
+  [ "$status" -eq 1 ]
+}
+
 @test "Verify that yp-tools is not installed" {
   run packageInstalled 'yp-tools'
   [ "$status" -eq 1 ]
@@ -134,10 +159,5 @@ load test_helper
 
 @test "Verify that ypbind is not installed" {
   run packageInstalled 'ypbind'
-  [ "$status" -eq 1 ]
-}
-
-@test "Verify that xinetd is not installed" {
-  run packageInstalled 'xinetd'
   [ "$status" -eq 1 ]
 }
