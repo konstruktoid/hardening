@@ -13,7 +13,7 @@ load test_helper
 }
 
 @test "Verify remember in $COMMONPASSWD" {
-  run bash -c "grep '^password.*pam_unix.*[[:space:]]remember=5' $COMMONPASSWD"
+  run bash -c "grep '^password.*required.*pam_pwhistory.so.*[[:space:]]remember=5$' $COMMONPASSWD"
   [ "$status" -eq 0 ]
 }
 

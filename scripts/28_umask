@@ -14,7 +14,7 @@ function f_umask {
   fi
 
   if ! grep -q -i "TMOUT" "/etc/profile.d/*" 2> /dev/null; then
-    echo -e 'TMOUT=900\nreadonly TMOUT\nexport TMOUT' > '/etc/profile.d/autologout.sh'
+    echo -e 'TMOUT=600\nreadonly TMOUT\nexport TMOUT' > '/etc/profile.d/autologout.sh'
     chmod +x /etc/profile.d/autologout.sh
   fi
 

@@ -11,7 +11,7 @@
 }
 
 @test "Verify TMOUT in /etc/profile.d/autologout.sh" {
-  run bash -c "grep '^TMOUT=900$' /etc/profile.d/autologout.sh"
+  run bash -c "grep '^TMOUT=600$' /etc/profile.d/autologout.sh"
   [ "$status" -eq 0 ]
 }
 
