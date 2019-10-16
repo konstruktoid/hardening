@@ -20,6 +20,7 @@ function f_sshdconfig {
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
   sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp internal-sftp/' "$SSHDFILE"
   sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
+  sed -i "s/.*Port.*/Port $SSH_PORT/" "$SSHDFILE"
 
   echo "" >> "$SSHDFILE"
 
