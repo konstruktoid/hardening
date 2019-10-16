@@ -9,6 +9,32 @@ https://github.com/konstruktoid/hardening[Hardening Ubuntu. Systemd edition.] +
 http://0pointer.de/blog/projects/security.html[systemd for Administrators, Part XII: Securing Your Services] +
 https://github.com/systemd/systemd[systemd upstream]
 
+=== systemd_scan.sh
+
+https://github.com/konstruktoid/hardening/blob/master/misc/systemd_scan.sh[systemd_scan.sh]
+is a script to check the current `systemd` configuration of a local service.
+
+[source,shell]
+----
+$ bash systemd_scan.sh mongodb
+[I] mongodb
+    [I] /lib/systemd/system/mongodb.service used.
+    [P] User is set.
+    [P] Group is set.
+    [P] CapabilityBoundingSet is set.
+    [F] PrivateTmp is not set.
+    [F] PrivateDevices is not set.
+    [F] NoNewPrivileges is not set.
+    [F] SELinuxContext is not set.
+    [F] AppArmorProfile is not set.
+    [P] LimitNOFILE is set.
+    [P] LimitNPROC is set.
+    [F] DynamicUser is not set.
+    [P] ProtectSystem=full is set.
+    [P] ProtectHome=true is set.
+    [I] 6 failures, 7 passed.
+----
+
 == Logging
 
 === /etc/systemd/journald.conf
@@ -170,6 +196,7 @@ DynamicUser= // <9>
 ----
 [Unit]
 Description=A high performance web server and a reverse proxy server
+Documentation=man:nginx(8)
 After=network.target
 
 [Service]
@@ -188,6 +215,38 @@ NoNewPrivileges=true
 ReadOnlyDirectories=/var/www/html
 CapabilityBoundingSet=~CAP_SYS_PTRACE
 PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target
+----
+
+=== /etc/systemd/system/mongod.service example
+
+See https://github.com/mongodb/mongo/pull/1224[mongo/pull/1224].
+
+[source,shell]
+----
+[Unit]
+Description=MongoDB Database Server
+After=network.target
+Documentation=https://docs.mongodb.org/manual
+
+[Service]
+User=mongodb
+Group=mongodb
+ExecStart=/usr/bin/mongod --config /etc/mongod.conf
+PIDFile=/var/run/mongodb/mongod.pid
+LimitFSIZE=infinity
+LimitCPU=infinity
+LimitAS=infinity
+LimitNOFILE=64000
+LimitNPROC=64000
+LimitMEMLOCK=infinity
+TasksMax=infinity
+TasksAccounting=false
+ProtectSystem=full
+ProtectHome=true
+CapabilityBoundingSet=~CAP_SYS_PTRACE
 
 [Install]
 WantedBy=multi-user.target
