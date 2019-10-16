@@ -22,6 +22,11 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
+@test "Verify OpenSSH port $SSH_PORT" {
+  run bash -c "sshd -T | grep -i \"^port $SSH_PORT$\""
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify OpenSSH User and Groups access limits" {
   run bash -c "sshd -T | grep -i -E 'allowgroups|allowusers|denygroups|denyusers'"
   [ "$status" -eq 0 ]

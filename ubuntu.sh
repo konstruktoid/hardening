@@ -35,6 +35,7 @@ function main {
 
   readonly FW_ADMIN
   readonly SSH_GRPS
+  readonly SSH_PORT
   readonly SYSCTL_CONF
   readonly AUDITD_MODE
   readonly AUDITD_RULES
