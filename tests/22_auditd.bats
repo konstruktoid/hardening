@@ -416,10 +416,6 @@ load test_helper
   run auditctlRuntime '^-w /bin/journalctl -p x'
   [ "$status" -eq 0 ]
 }
-@test "Verify auditd runtime /bin/journalctl" {
-  run auditctlRuntime '^-w /bin/journalctl -p x'
-  [ "$status" -eq 0 ]
-}
 
 @test "Verify auditd runtime /etc/cron.allow" {
   run auditctlRuntime '^-w /etc/cron.allow -p wa'

@@ -57,11 +57,6 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify OpenSSH HostbasedAuthentication" {
-  run sshdConfig '^HostbasedAuthentication no$'
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify OpenSSH X11Forwarding" {
   run sshdConfig '^X11Forwarding no$'
   [ "$status" -eq 0 ]
