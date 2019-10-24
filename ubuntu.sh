@@ -16,8 +16,19 @@ fi
 function main {
   clear
 
+  REQUIREDPROGS='arp w'
+  for p in $REQUIREDPROGS; do
+    if ! command -v "$p" >/dev/null 2>&1; then
+      echo "$p is required."
+      exit 1
+    fi
+  done
+
+  ARPBIN="$(command -v arp)"
+  WBIN="$(command -v w)"
+
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
-    USERIP="$(w -ih | awk '{print $3}' | head -n1)"
+    USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
 
     if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       ADMINIP="$USERIP"
@@ -26,13 +37,15 @@ function main {
     fi
 
     sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
-    sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$(w -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
+    sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$($WBIN -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
     sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
     sed -i "s/VERBOSE='N'/VERBOSE='Y'/" ./ubuntu.cfg
   fi
 
   source ./ubuntu.cfg
 
+  readonly ARPBIN
+  readonly WBIN
   readonly FW_ADMIN
   readonly SSH_GRPS
   readonly SSH_PORT
