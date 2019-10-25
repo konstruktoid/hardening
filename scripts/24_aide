@@ -21,20 +21,22 @@ function f_aide_post {
 }
 
 function f_aide_timer {
-  echo "[$SCRIPT_COUNT] Enable daily Aide check"
+  if ! [ -f /etc/cron.daily/aide ]; then
+    echo "[$SCRIPT_COUNT] Enable daily Aide check"
 
-  cp ./config/aidecheck.service /etc/systemd/system/aidecheck.service
-  cp ./config/aidecheck.timer /etc/systemd/system/aidecheck.timer
-  chmod 0644 /etc/systemd/system/aidecheck.*
+    cp ./config/aidecheck.service /etc/systemd/system/aidecheck.service
+    cp ./config/aidecheck.timer /etc/systemd/system/aidecheck.timer
+    chmod 0644 /etc/systemd/system/aidecheck.*
 
-  systemctl reenable aidecheck.timer
-  systemctl restart aidecheck.timer
-  systemctl daemon-reload
+    systemctl reenable aidecheck.timer
+    systemctl restart aidecheck.timer
+    systemctl daemon-reload
 
-  if [[ $VERBOSE == "Y" ]]; then
-    systemctl status aidecheck.timer --no-pager
-    echo
+    if [[ $VERBOSE == "Y" ]]; then
+      systemctl status aidecheck.timer --no-pager
+      echo
+    fi
+
+    ((SCRIPT_COUNT++))
   fi
-
-  ((SCRIPT_COUNT++))
 }
