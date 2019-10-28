@@ -5,8 +5,8 @@ image::logo/horizontal.png[Ubuntu Hardening]
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `18.04 Bionic Beaver`, `18.10 Cosmic Cuttlefish`,
-`Ubuntu 19.04 Disco Dingo` and `Ubuntu 19.10 Eoan Ermine`.
+Tested on `18.04 Bionic Beaver`, `Ubuntu 19.04 Disco Dingo`
+and `Ubuntu 19.10 Eoan Ermine`.
 
 Systemd required.
 
