@@ -98,7 +98,7 @@ load test_helper
 }
 
 @test "Verify net.ipv4.conf.all.secure_redirects in /etc/sysctl.*" {
-  run bash -c "grep -R '^net.ipv4.conf.all.secure_redirects.*1$' /etc/sysctl.*"
+  run bash -c "grep -R '^net.ipv4.conf.all.secure_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
@@ -133,7 +133,7 @@ load test_helper
 }
 
 @test "Verify net.ipv4.conf.default.secure_redirects in /etc/sysctl.*" {
-  run bash -c "grep -R '^net.ipv4.conf.default.secure_redirects.*1$' /etc/sysctl.*"
+  run bash -c "grep -R '^net.ipv4.conf.default.secure_redirects.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
@@ -367,7 +367,7 @@ load test_helper
 }
 
 @test "Verify sysctl runtime net.ipv4.conf.all.secure_redirects" {
-  run sysctlRuntime '^net.ipv4.conf.all.secure_redirects.*1$'
+  run sysctlRuntime '^net.ipv4.conf.all.secure_redirects.*0$'
   [ "$status" -eq 0 ]
 }
 
@@ -397,7 +397,7 @@ load test_helper
 }
 
 @test "Verify sysctl runtime net.ipv4.conf.default.secure_redirects" {
-  run sysctlRuntime '^net.ipv4.conf.default.secure_redirects.*1$'
+  run sysctlRuntime '^net.ipv4.conf.default.secure_redirects.*0$'
   [ "$status" -eq 0 ]
 }
 
