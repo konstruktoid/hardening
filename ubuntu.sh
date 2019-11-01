@@ -114,7 +114,6 @@ function main {
   f_adduser
   f_rootaccess
   f_package_install
-  f_package_remove
   f_coredump
   f_usbguard
   f_postfix
@@ -131,6 +130,7 @@ function main {
   f_rhosts
   f_users
   f_lockroot
+  f_package_remove
   f_aptget_clean
   f_suid
   f_restrictcompilers

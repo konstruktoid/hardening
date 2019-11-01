@@ -18,6 +18,10 @@ function f_aptget_clean {
   apt-get -qq clean
   apt-get -qq autoremove
 
+  for deb_clean in $(dpkg -l | grep '^rc' | awk '{print $2}'); do
+    $APT purge "$deb_clean"
+  done
+
   ((SCRIPT_COUNT++))
 }
 
