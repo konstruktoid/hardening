@@ -87,6 +87,16 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that needrestart is installed" {
+  run packageInstalled 'needrestart'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that update-notifier-common is installed" {
+  run packageInstalled 'update-notifier-common'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that autofs is not installed" {
   run packageInstalled 'autofs'
   [ "$status" -eq 1 ]

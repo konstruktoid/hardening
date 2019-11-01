@@ -113,8 +113,8 @@ function main {
   f_limitsconf
   f_adduser
   f_rootaccess
-  f_package_remove
   f_package_install
+  f_package_remove
   f_coredump
   f_usbguard
   f_postfix
