@@ -34,6 +34,7 @@ wait
 for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}' |\
  grep -v 'standard'); do
   vagrant ssh "${VM}" -c 'cp /vagrant/checkScore.sh ~/'
+  vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats net-tools shellcheck --no-install-recommends'
   vagrant ssh "${VM}" -c 'cp -R /vagrant ~/hardening && sed -i.bak -e "s/^AUTOFILL=.*/AUTOFILL='\''Y'\''/" -e "s/^CHANGEME=.*/CHANGEME='\''changed'\''/" ~/hardening/ubuntu.cfg && cd ~/hardening && sudo bash ubuntu.sh && sudo reboot'
 done
 
@@ -41,7 +42,7 @@ wait
 
 for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}' |\
  grep -v 'standard'); do
-  vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats && cd ~/hardening/tests && sudo bats . >> ~/bats.log'
+  vagrant ssh "${VM}" -c 'cd ~/hardening/tests && sudo bats . >> ~/bats.log'
   wait
   vagrant ssh "${VM}" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
   vagrant ssh "${VM}" -c 'sh ~/checkScore.sh || exit 1 && cat ~/lynis-report.dat' > "hardening-$VM-$(date +%y%m%d)-lynis.log"
