@@ -26,6 +26,7 @@ NOTE: This is a constant work in progress. Make sure you understand what it
 does. `Read the code`.
 
 == Index
+.. link:README.adoc#index[Index]
 .. link:README.adoc#howto[Howto]
 ... link:README.adoc#partition-the-system[Partition the system]
 ... link:README.adoc#login-set-a-grub2-password-configure-and-run-ubuntush[Login, set a Grub2 password, configure and run ubuntu.sh]
@@ -73,6 +74,7 @@ does. `Read the code`.
 .... link:README.adoc#39_motdnews[39_motdnews]
 .... link:README.adoc#40_usbguard[40_usbguard]
 .... link:README.adoc#41_compilers[41_compilers]
+.... link:README.adoc#42_kernel[42_kernel]
 .... link:README.adoc#98_systemddelta[98_systemddelta]
 .... link:README.adoc#99_reboot[99_reboot]
 ... link:README.adoc#function-execution-order[Function execution order]
@@ -363,6 +365,9 @@ Install and configure `usbguard`.
 ==== 41_compilers
 Restrict compiler access.
 
+==== 42_kernel
+Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -476,6 +481,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── auditgenerator.sh
 │   ├── fdcount.sh
 │   ├── logrotate.conf
+│   ├── mozilla-firefox-user.js
 │   ├── proc_check.sh
 │   ├── sysctl.conf
 │   └── systemd_scan.sh
@@ -523,6 +529,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 39_motdnews
 │   ├── 40_usbguard
 │   ├── 41_compilers
+│   ├── 42_kernel
 │   ├── 98_systemddelta
 │   └── 99_reboot
 ├── systemd.adoc
@@ -569,6 +576,8 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   └── test_helper.bash
 ├── ubuntu.cfg
 └── ubuntu.sh
+
+6 directories, 117 files
 ----
 
 == Recommended reading
@@ -585,6 +594,6 @@ Do you want to contribute? That's great! Contributions are always welcome,
 no matter how large or small. If you found something odd, feel free to
 https://github.com/konstruktoid/hardening/issues/[submit a new issue],
 improve the code by https://github.com/konstruktoid/hardening/pulls[creating a pull request],
-or by https://ko-fi.com/konstruktoid[sponsoring this project].
+or by https://github.com/sponsors/konstruktoid[sponsoring this project].
 
 Logo by https://github.com/reallinfo[reallinfo].
