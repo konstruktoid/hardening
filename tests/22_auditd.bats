@@ -3,7 +3,7 @@
 load test_helper
 
 @test "Verify that audit is enabled" {
-  run bash -c "grep '^GRUB_CMDLINE_LINUX=\".*audit=1.*\"' $DEFAULTGRUB"
+  run bash -c "grep 'audit=1' /proc/cmdline"
   [ "$status" -eq 0 ]
 }
 
