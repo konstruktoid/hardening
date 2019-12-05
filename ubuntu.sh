@@ -93,6 +93,7 @@ function main {
   done
 
   f_pre
+  f_kernel
   f_firewall
   f_disablenet
   f_disablefs
@@ -141,6 +142,7 @@ function main {
   f_aide_timer
   f_aptget_noexec
   f_systemddelta
+  f_post
   f_checkreboot
 
   echo
