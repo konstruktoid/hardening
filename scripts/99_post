@@ -1,0 +1,9 @@
+function f_post {
+  if [[ $VERBOSE == "Y" ]]; then
+    echo "[$SCRIPT_COUNT] Post processing"
+    update-grub
+    ((SCRIPT_COUNT++))
+  else
+    update-grub 2>/dev/null
+  fi
+}
