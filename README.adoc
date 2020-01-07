@@ -251,7 +251,7 @@ UBTU-16-010050, UBTU-16-010500, UBTU-16-010600
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
 `debsums` `gnupg2` `haveged` `libpam-apparmor` `libpam-cracklib`
 `libpam-tmpdir` `needrestart` `openssh-server` `postfix` `rkhunter`
-`systemd-coredump` `tcpd` `update-notifier-common` `vlock`.
+`sysstat` `systemd-coredump` `tcpd` `update-notifier-common` `vlock`.
 
 Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`

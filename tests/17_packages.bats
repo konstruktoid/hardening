@@ -92,6 +92,16 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that sysstat is installed" {
+  run packageInstalled 'sysstat'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that sysstat is enabled" {
+  run bash -c 'grep ENABLED=\"true\" /etc/default/sysstat'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that update-notifier-common is installed" {
   run packageInstalled 'update-notifier-common'
   [ "$status" -eq 0 ]
