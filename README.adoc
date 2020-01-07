@@ -378,6 +378,7 @@ Print if a reboot is required.
 [source,shell]
 ----
 f_pre
+f_kernel
 f_firewall
 f_disablenet
 f_disablefs
@@ -426,6 +427,7 @@ f_aide_post
 f_aide_timer
 f_aptget_noexec
 f_systemddelta
+f_post
 f_checkreboot
 ----
 
@@ -531,6 +533,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 41_compilers
 │   ├── 42_kernel
 │   ├── 98_systemddelta
+│   ├── 99_post
 │   └── 99_reboot
 ├── systemd.adoc
 ├── tests
@@ -571,20 +574,21 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 39_motdnews.bats
 │   ├── 40_usbguard.bats
 │   ├── 41_compilers.bats
+│   ├── 42_kernel.bats
 │   ├── 99_misc.bats
 │   ├── runHostTests.sh
 │   └── test_helper.bash
 ├── ubuntu.cfg
 └── ubuntu.sh
 
-6 directories, 117 files
+6 directories, 119 files
 ----
 
 == Recommended reading
-https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=independentlinux.100[CIS Distribution Independent Linux Benchmark v1.0.0] +
+https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 16.04 LTS STIG - Ver 1, Rel 2] +
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG ] +
-https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmarks] +
+https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
 https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
