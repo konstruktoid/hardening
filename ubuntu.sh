@@ -133,7 +133,6 @@ function main {
   f_users
   f_lockroot
   f_package_remove
-  f_aptget_clean
   f_suid
   f_restrictcompilers
   f_umask
@@ -142,6 +141,7 @@ function main {
   f_aide_post
   f_aide_timer
   f_aptget_noexec
+  f_aptget_clean
   f_systemddelta
   f_post
   f_checkreboot

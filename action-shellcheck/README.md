@@ -1,7 +1,7 @@
 = ShellCheck action for the Hardening repository
 
 Using [koalaman/shellcheck-alpine](https://hub.docker.com/r/koalaman/shellcheck-alpine)
-too lint the shell code.
+to lint the shell code.
 
 == Disabled tests
 

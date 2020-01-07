@@ -581,23 +581,24 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 40_usbguard.bats
 │   ├── 41_compilers.bats
 │   ├── 42_kernel.bats
+│   ├── 43_sudo.bats
 │   ├── 99_misc.bats
 │   ├── runHostTests.sh
 │   └── test_helper.bash
 ├── ubuntu.cfg
 └── ubuntu.sh
 
-6 directories, 119 files
+6 directories, 121 files
 ----
 
 == Recommended reading
-https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 16.04 LTS STIG - Ver 1, Rel 2] +
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG ] +
+https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
+https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG ] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
-https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
 
 == Contributing
 Do you want to contribute? That's great! Contributions are always welcome,
