@@ -109,6 +109,7 @@ function main {
   f_aptget
   f_hosts
   f_issue
+  f_sudo
   f_logindefs
   f_sysctl
   f_limitsconf

@@ -1,0 +1,18 @@
+function f_sudo {
+  echo "[$SCRIPT_COUNT] sudo configuration"
+
+  if ! grep -qER '^Defaults.*use_pty$' /etc/sudo*; then
+    echo "Defaults use_pty" > /etc/sudoers.d/011_use_pty
+  fi
+
+  if ! grep -qER '^Defaults.*logfile' /etc/sudo*; then
+    echo 'Defaults logfile="/var/log/sudo.log"' > /etc/sudoers.d/012_logfile
+  fi
+
+  if [[ $VERBOSE == "Y" ]]; then
+    sudo -ll
+    echo
+  fi
+
+  ((SCRIPT_COUNT++))
+}

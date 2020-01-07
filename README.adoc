@@ -75,6 +75,7 @@ does. `Read the code`.
 .... link:README.adoc#40_usbguard[40_usbguard]
 .... link:README.adoc#41_compilers[41_compilers]
 .... link:README.adoc#42_kernel[42_kernel]
+.... link:README.adoc#43_sudo[43_sudo]
 .... link:README.adoc#98_systemddelta[98_systemddelta]
 .... link:README.adoc#99_reboot[99_reboot]
 ... link:README.adoc#function-execution-order[Function execution order]
@@ -368,6 +369,9 @@ Restrict compiler access.
 ==== 42_kernel
 Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 
+==== 43_sudo
+Configure `sudo` `use_pty` and `logfile`.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -394,6 +398,7 @@ f_aptget_configure
 f_aptget
 f_hosts
 f_issue
+f_sudo
 f_logindefs
 f_sysctl
 f_limitsconf
@@ -532,6 +537,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── 40_usbguard
 │   ├── 41_compilers
 │   ├── 42_kernel
+│   ├── 43_sudo
 │   ├── 98_systemddelta
 │   ├── 99_post
 │   └── 99_reboot
