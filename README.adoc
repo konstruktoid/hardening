@@ -443,7 +443,9 @@ for most of the above settings available in the link:tests/[tests directory].
 [source,shell]
 ----
 git clone https://github.com/konstruktoid/hardening.git
-cd tests/
+cd hardening/tests/
+[[ ! $(command -v bats) ]] && \
+  sudo apt -y install bats
 sudo bats .
 ----
 
