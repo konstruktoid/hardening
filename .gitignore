@@ -1,4 +1,6 @@
 *.log
 *.vdi
+.scannerwork
+.sonar
 TESTRESULTS.adoc
 tests/*.adoc
