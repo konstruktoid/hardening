@@ -7,12 +7,19 @@ examples, hopefully making your server and services a bit more secure.
 == Documentation
 https://github.com/konstruktoid/hardening[Hardening Ubuntu. Systemd edition.] +
 http://0pointer.de/blog/projects/security.html[systemd for Administrators, Part XII: Securing Your Services] +
-https://github.com/systemd/systemd[systemd upstream]
+https://github.com/systemd/systemd[systemd upstream] +
+https://www.freedesktop.org/software/systemd/man/systemd.exec.html[systemd execution environment configuration]
 
-=== systemd_scan.sh
+=== systemd-analyze and systemd_scan.sh
+
+Since `systemd` version 240, `systemd-analyze` has the "security" option for
+analyzing the security and sand-boxing settings of services in order to
+determine an "exposure level" for them, indicating whether a service would
+benefit from more sand-boxing options turned on for them.
 
 https://github.com/konstruktoid/hardening/blob/master/misc/systemd_scan.sh[systemd_scan.sh]
-is a script to check the current `systemd` configuration of a local service.
+is a script to check the current `systemd` configuration of a local service,
+similar to a very basic version of `systemd-analyze security`.
 
 [source,shell]
 ----
@@ -33,6 +40,44 @@ $ bash systemd_scan.sh mongodb
     [P] ProtectSystem=full is set.
     [P] ProtectHome=true is set.
     [I] 6 failures, 7 passed.
+----
+
+`systemd-analyze security` calculates an exposure value based on the following
+configuration options:
+
+[source,shell]
+----
+AmbientCapabilities=
+CapabilityBoundingSet=
+Delegate=
+DeviceAllow=
+IPAddressDeny=
+KeyringMode=
+LockPersonality=
+MemoryDenyWriteExecute=
+NoNewPrivileges=
+NotifyAccess=
+PrivateDevices=
+PrivateMounts=
+PrivateNetwork=
+PrivateTmp=
+PrivateUsers=
+ProtectControlGroups=
+ProtectHome=
+ProtectHostname=
+ProtectKernelLogs=
+ProtectKernelModules=
+ProtectKernelTunables=
+ProtectSystem=
+RestrictAddressFamilies=
+RestrictNamespaces=
+RestrictRealtime=
+RestrictSUIDSGID=
+RootDirectory=/RootImage=
+SystemCallArchitectures=
+SystemCallFilter=
+UMask=
+User=/DynamicUser=
 ----
 
 == Logging
