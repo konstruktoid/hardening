@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=1090
 # shellcheck disable=2009
 # shellcheck disable=2034
 
@@ -85,9 +86,8 @@ function main {
   readonly USERADD
   readonly USERCONF
 
-  # shellcheck disable=1090
   for s in ./scripts/[0-9_]*; do
-    [[ -e $s ]] || break
+    [[ -f $s ]] || break
 
     source "$s"
   done
