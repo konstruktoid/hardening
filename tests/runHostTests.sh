@@ -8,8 +8,7 @@ fi
 TESTS="$(grep -Ro '@test' ./*_*.bats | wc -l)"
 HOST="$(hostname -s)"
 
-# shellcheck disable=SC2024
-sudo bats . > ./"${HOST}-bats.log"
+sudo bats . | tee ./"${HOST}-bats.log" 1>/dev/null
 
 {
   echo "= Test results - $(LANG=C date --utc)"
