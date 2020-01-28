@@ -381,6 +381,7 @@ for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
 ----
+sudo apt-get -y install bats
 git clone https://github.com/konstruktoid/hardening.git
 cd tests/
 sudo bats .
