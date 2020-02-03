@@ -13,6 +13,10 @@ function f_sudo {
     echo 'Defaults !pwfeedback' > /etc/sudoers.d/013_pwfeedback
   fi
 
+  if ! grep -qER '^Defaults.*visiblepw' /etc/sudo*; then
+    echo 'Defaults !visiblepw' > /etc/sudoers.d/014_visiblepw
+  fi
+
   if [[ $VERBOSE == "Y" ]]; then
     sudo -ll
     echo

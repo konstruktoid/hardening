@@ -15,6 +15,11 @@
   [ "$status" -eq 0 ]
 }
 
+@test "Verify sudo disabled visiblepw" {
+  run bash -c "grep -qER '^Defaults !visiblepw$' /etc/sudo*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify sudo runtime use_pty" {
   run bash -c "sudo -l | grep 'use_pty'"
   [ "$status" -eq 0 ]
@@ -27,5 +32,10 @@
 
 @test "Verify sudo runtime disabled pwfeedback" {
   run bash -c "sudo -l | grep '!pwfeedback'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify sudo runtime disabled visiblepw" {
+  run bash -c "sudo -l | grep '!visiblepw'"
   [ "$status" -eq 0 ]
 }
