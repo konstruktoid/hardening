@@ -9,6 +9,10 @@ function f_sudo {
     echo 'Defaults logfile="/var/log/sudo.log"' > /etc/sudoers.d/012_logfile
   fi
 
+  if ! grep -qER '^Defaults.*pwfeedback' /etc/sudo*; then
+    echo 'Defaults !pwfeedback' > /etc/sudoers.d/013_pwfeedback
+  fi
+
   if [[ $VERBOSE == "Y" ]]; then
     sudo -ll
     echo
