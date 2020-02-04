@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "hardening" do |hardening|
-    hardening.vm.box = "ubuntu/bionic64"
+    hardening.vm.box = "ubuntu/eoan64"
     hardening.ssh.insert_key = true
     hardening.vm.network "private_network", ip: "10.7.8.45"
     hardening.vm.hostname = "hardening"
