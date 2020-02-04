@@ -17,6 +17,8 @@ function f_sudo {
     echo 'Defaults !visiblepw' > /etc/sudoers.d/014_visiblepw
   fi
 
+  find /etc/sudoers.d/ -type f -name '[0-9]*' -exec chmod 0440 {} \;
+
   if [[ $VERBOSE == "Y" ]]; then
     sudo -ll
     echo
