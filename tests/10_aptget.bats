@@ -37,6 +37,16 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify APT AllowInsecureRepositories" {
+  run bash -c "grep '^Acquire::AllowInsecureRepositories \"false\";$' /etc/apt/apt.conf.d/*"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify APT AllowDowngradeToInsecureRepositories" {
+  run bash -c "grep '^Acquire::AllowDowngradeToInsecureRepositories \"false\";$' /etc/apt/apt.conf.d/*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify APT runtime AllowRedirect" {
   run bash -c "apt-config dump | grep '^Acquire::http::AllowRedirect \"false\";$'"
   [ "$status" -eq 0 ]
@@ -69,5 +79,15 @@ load test_helper
 
 @test "Verify APT runtime Remove-Unused-Dependencies" {
   run bash -c "apt-config dump | grep '^Unattended-Upgrade::Remove-Unused-Dependencies \"true\";$'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify APT runtime AllowInsecureRepositories" {
+  run bash -c "apt-config dump | grep '^Acquire::AllowInsecureRepositories \"false\";$'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify APT runtime AllowDowngradeToInsecureRepositories" {
+  run bash -c "apt-config dump | grep '^Acquire::AllowDowngradeToInsecureRepositories \"false\";$'"
   [ "$status" -eq 0 ]
 }
