@@ -7,12 +7,14 @@ function f_timesyncd {
   local FALLBACKARRAY
   local TMPCONF
 
-  LATENCY="50"
-  SERVERS="4"
   APPLY="YES"
   CONF="$TIMESYNCD"
-  SERVERARRAY=()
   FALLBACKARRAY=()
+  FALLBACKSERV=0
+  LATENCY="50"
+  NUMSERV=0
+  SERVERARRAY=()
+  SERVERS="4"
   TMPCONF=$(mktemp --tmpdir ntpconf.XXXXX)
 
   if [[ -z "$NTPSERVERPOOL" ]]; then
