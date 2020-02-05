@@ -4,6 +4,8 @@
 # shellcheck disable=2009
 # shellcheck disable=2034
 
+set -u -o pipefail
+
 if ! ps -p $$ | grep -si bash; then
   echo "Sorry, this script requires bash."
   exit 1

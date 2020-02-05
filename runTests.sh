@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u -o pipefail
+
 if ! command -v shellcheck; then
   exit 1
 fi
