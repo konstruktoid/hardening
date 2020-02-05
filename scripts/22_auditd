@@ -1,4 +1,8 @@
 function f_auditd {
+  if [[ $LXC == "1" ]]; then
+    return
+  fi
+
   echo "[$SCRIPT_COUNT] Auditd"
 
   sed -i 's/^action_mail_acct =.*/action_mail_acct = root/' "$AUDITDCONF"

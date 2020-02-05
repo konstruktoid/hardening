@@ -1,4 +1,8 @@
 function f_sysctl {
+  if [[ $LXC == "1" ]]; then
+    return
+  fi
+
   echo "[$SCRIPT_COUNT] $SYSCTL"
 
   cp "$SYSCTL_CONF" "$SYSCTL"

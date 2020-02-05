@@ -29,6 +29,11 @@ function main {
 
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
+  LXC="0"
+
+  if grep -qE 'container=lxc|container=lxd' /proc/1/environ; then
+    LXC="1"
+  fi
 
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
     USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
@@ -49,6 +54,7 @@ function main {
 
   readonly ARPBIN
   readonly WBIN
+  readonly LXC
   readonly FW_ADMIN
   readonly SSH_GRPS
   readonly SSH_PORT

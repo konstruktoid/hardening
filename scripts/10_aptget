@@ -86,6 +86,10 @@ function f_aptget_configure {
 }
 
 function f_aptget_noexec {
+  if [[ $LXC == "1" ]]; then
+    return
+  fi
+
   echo "[$SCRIPT_COUNT] Configure DPkg noexec"
 
   if ! grep 'mount.* /tmp' /etc/apt/apt.conf.d/* ; then

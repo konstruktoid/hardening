@@ -2,6 +2,10 @@ function f_package_install {
   echo "[$SCRIPT_COUNT] Installing base packages"
 
   local VM
+  local AUDITD
+
+  VM=""
+  AUDITD="auditd"
 
   if dmesg | grep -i -E "dmi.*vmware"; then
     VM="open-vm-tools"
@@ -11,11 +15,15 @@ function f_package_install {
     VM="virtualbox-guest-dkms virtualbox-guest-utils"
   fi
 
+  if [[ $LXC == "1" ]]; then
+    AUDITD=""
+  fi
+
   echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
   echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 
   local PACKAGE_INSTALL
-  PACKAGE_INSTALL="acct aide-common apparmor-profiles apparmor-utils auditd debsums gnupg2 haveged libpam-apparmor libpam-cracklib libpam-tmpdir needrestart openssh-server postfix rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $VM"
+  PACKAGE_INSTALL="acct aide-common apparmor-profiles apparmor-utils debsums gnupg2 haveged libpam-apparmor libpam-cracklib libpam-tmpdir needrestart openssh-server postfix rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $AUDITD $VM"
 
   for deb_install in $PACKAGE_INSTALL; do
     $APT install --no-install-recommends "$deb_install"

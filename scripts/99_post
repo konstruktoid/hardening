@@ -1,9 +1,17 @@
 function f_post {
+  if [[ $LXC == "1" ]]; then
+    return
+  fi
+
+  echo "[$SCRIPT_COUNT] Post processing"
+
   if [[ $VERBOSE == "Y" ]]; then
-    echo "[$SCRIPT_COUNT] Post processing"
     update-grub
     ((SCRIPT_COUNT++))
   else
     update-grub 2>/dev/null
   fi
+
+  find /boot/ -type f -name '*.cfg' -exec chmod 0400 {} \;
+
 }

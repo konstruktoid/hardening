@@ -1,4 +1,8 @@
 function f_aa_enforce {
+  if [[ $LXC == "1" ]]; then
+    return
+  fi
+
   echo "[$SCRIPT_COUNT] Enforce apparmor profiles"
 
   if ! grep 'session.*pam_apparmor.so order=user,group,default' /etc/pam.d/*; then
