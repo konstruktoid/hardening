@@ -28,15 +28,15 @@ EOF
 
   mkdir -p /var/log/audit
 
-  mount -t xfs /dev/sdc1 /var/log
-  mount -t xfs /dev/sdc2 /var/log/audit
-  mount -t xfs /dev/sdc3 /home
-
   {
     echo '/dev/sdc1 /var/log xfs defaults 0 0'
     echo '/dev/sdc2 /var/log/audit xfs defaults 0 0'
     echo '/dev/sdc3 /home xfs defaults 0 0'
   } >> /etc/fstab
+
+  mount -t xfs /dev/sdc1 /var/log
+  mount -t xfs /dev/sdc2 /var/log/audit
+  mount -t xfs /dev/sdc3 /home
 
   if grep '^vagrant' /etc/passwd; then
     mkdir -p /home/vagrant
