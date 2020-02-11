@@ -55,7 +55,7 @@ oneEntry() {
 }
 
 sshdConfig() {
-  sshd -T | grep -i "$1"
+  sshd -T | grep -iE "$1"
 }
 
 sysctlRuntime() {

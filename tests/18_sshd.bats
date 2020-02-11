@@ -162,6 +162,21 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify OpenSSH RekeyLimit" {
+  run sshdConfig '^RekeyLimit [0-9]{5,9} 3600$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH AllowTcpForwarding" {
+  run sshdConfig '^AllowTcpForwarding no$'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify OpenSSH AllowAgentForwarding" {
+  run sshdConfig '^AllowAgentForwarding no$'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify moduli sizes" {
   run moduliSize
   [ "$status" -eq 0 ]

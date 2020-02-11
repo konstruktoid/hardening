@@ -77,7 +77,7 @@ function f_sshdconfig {
   if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
     echo "MaxSessions 4" >> "$SSHDFILE"
   else
-    sed -i 's/MaxSessions.*/MaxSessions 4"/' "$SSHDFILE"
+    sed -i 's/MaxSessions.*/MaxSessions 4/' "$SSHDFILE"
   fi
 
   if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
@@ -102,6 +102,36 @@ function f_sshdconfig {
     echo "HostbasedAuthentication no" >> "$SSHDFILE"
   else
     sed -i 's/HostbasedAuthentication.*/HostbasedAuthentication no/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^KerberosAuthentication" "$SSHDFILE" 2> /dev/null; then
+    echo "KerberosAuthentication no" >> "$SSHDFILE"
+  else
+    sed -i 's/KerberosAuthentication.*/KerberosAuthentication no/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^GSSAPIAuthentication" "$SSHDFILE" 2> /dev/null; then
+    echo "GSSAPIAuthentication no" >> "$SSHDFILE"
+  else
+    sed -i 's/GSSAPIAuthentication.*/GSSAPIAuthentication no/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^RekeyLimit" "$SSHDFILE" 2> /dev/null; then
+    echo "RekeyLimit 512M 1h" >> "$SSHDFILE"
+  else
+    sed -i 's/RekeyLimit.*/RekeyLimit 512M 1h/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^AllowTcpForwarding" "$SSHDFILE" 2> /dev/null; then
+    echo "AllowTcpForwarding no" >> "$SSHDFILE"
+  else
+    sed -i 's/AllowTcpForwarding.*/AllowTcpForwarding no/' "$SSHDFILE"
+  fi
+
+  if ! grep -q "^AllowAgentForwarding" "$SSHDFILE" 2> /dev/null; then
+    echo "AllowAgentForwarding no" >> "$SSHDFILE"
+  else
+    sed -i 's/AllowAgentForwarding.*/AllowTcpForwarding no/' "$SSHDFILE"
   fi
 
   cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"
