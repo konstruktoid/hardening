@@ -177,6 +177,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify OpenSSH TCPKeepAlive" {
+  run sshdConfig '^TCPKeepAlive no$'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify moduli sizes" {
   run moduliSize
   [ "$status" -eq 0 ]

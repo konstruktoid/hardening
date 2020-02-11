@@ -134,6 +134,12 @@ function f_sshdconfig {
     sed -i 's/AllowAgentForwarding.*/AllowTcpForwarding no/' "$SSHDFILE"
   fi
 
+  if ! grep -q "^TCPKeepAlive" "$SSHDFILE" 2> /dev/null; then
+    echo "TCPKeepAlive no" >> "$SSHDFILE"
+  else
+    sed -i 's/TCPKeepAlive.*/TCPKeepAlive no/' "$SSHDFILE"
+  fi
+
   cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"
   grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | sort | uniq > "$SSHDFILE"
   rm "/etc/ssh/sshd_config.$(date +%y%m%d)"
