@@ -223,17 +223,21 @@ CapabilityBoundingSet= // <6>
 PrivateDevices= // <7>
 User=, Group= // <8>
 DynamicUser= // <9>
+TemporaryFileSystem= // <10>
+PrivateUsers= // <11>
 ----
 
-<1> "sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
-<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too."
-<3> "If true, the directories /home, /root and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead."
+<1> "Takes a boolean argument. If true, sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
+<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too. If set to "strict" the entire file system hierarchy is mounted read-only, except for the API file system subtrees /dev, /proc and /sys."
+<3> "Takes a boolean argument or the special values "read-only" or "tmpfs". If true, the directories /home, /root, and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead. If set to "tmpfs", temporary file systems are mounted on the three directories in read-only mode."
 <4> "If true, ensures that the service process and all its children can never gain new privileges."
 <5> "Sets up a new file system namespace for executed processes."
 <6> "Controls which capabilities to include in the capability bounding set for the executed process."
 <7> "If true, sets up a new /dev namespace for the executed processes and only adds API pseudo devices such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY subsystem) to it"
 <8> "Sets the Unix user or group that the processes are executed as, respectively"
 <9> "User and group pair is allocated dynamically when the unit is started, and released as soon as it is stopped."
+<10> "Takes a space-separated list of mount points for temporary file systems (tmpfs). If set, a new file system namespace is set up for executed processes, and a temporary file system is mounted on each mount point."
+<11> "Takes a boolean argument. If true, sets up a new user namespace for the executed processes and configures a minimal user and group mapping, that maps the "root" user and group as well as the unit's own user and group to themselves and everything else to the "nobody" user and group."
 
 === /etc/systemd/system/nginx.service example
 
