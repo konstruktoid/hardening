@@ -19,24 +19,33 @@ p
 3
 
 +500M
+n
+p
+4
+
++500M
 w
 EOF
 
   mkfs.xfs /dev/sdc1
   mkfs.xfs /dev/sdc2
   mkfs.xfs /dev/sdc3
+  mkfs.xfs /dev/sdc4
 
   mkdir -p /var/log/audit
+  mkdir -p /var/lib/docker
 
   {
     echo '/dev/sdc1 /var/log xfs defaults 0 0'
     echo '/dev/sdc2 /var/log/audit xfs defaults 0 0'
     echo '/dev/sdc3 /home xfs defaults 0 0'
+    echo '/dev/sdc4 /var/lib/docker xfs defaults 0 0'
   } >> /etc/fstab
 
   mount -t xfs /dev/sdc1 /var/log
   mount -t xfs /dev/sdc2 /var/log/audit
   mount -t xfs /dev/sdc3 /home
+  mount -t xfs /dev/sdc4 /var/lib/docker
 
   if grep '^vagrant' /etc/passwd; then
     mkdir -p /home/vagrant
