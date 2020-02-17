@@ -52,47 +52,49 @@ function main {
 
   source ./ubuntu.cfg
 
+  readonly ADDUSER
   readonly ARPBIN
-  readonly WBIN
-  readonly LXC
-  readonly FW_ADMIN
-  readonly SSH_GRPS
-  readonly SSH_PORT
-  readonly SYSCTL_CONF
+  readonly AUDITDCONF
   readonly AUDITD_MODE
   readonly AUDITD_RULES
-  readonly LOGROTATE_CONF
-  readonly NTPSERVERPOOL
-  readonly TIMEDATECTL
-  readonly VERBOSE
-  readonly CHANGEME
-  readonly ADDUSER
-  readonly AUDITDCONF
   readonly AUDITRULES
-  readonly COMMONPASSWD
+  readonly AUTOFILL
+  readonly CHANGEME
   readonly COMMONACCOUNT
   readonly COMMONAUTH
+  readonly COMMONPASSWD
   readonly COREDUMPCONF
   readonly DEFAULTGRUB
-  readonly DISABLEMNT
+  readonly DISABLEFS
   readonly DISABLEMOD
   readonly DISABLENET
+  readonly FW_ADMIN
   readonly JOURNALDCONF
   readonly LIMITSCONF
   readonly LOGINDCONF
   readonly LOGINDEFS
   readonly LOGROTATE
+  readonly LOGROTATE_CONF
+  readonly LXC
+  readonly NTPSERVERPOOL
   readonly PAMLOGIN
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
   readonly SECURITYACCESS
   readonly SSHDFILE
+  readonly SSHFILE
+  readonly SSH_GRPS
+  readonly SSH_PORT
   readonly SYSCTL
+  readonly SYSCTL_CONF
   readonly SYSTEMCONF
+  readonly TIMEDATECTL
   readonly TIMESYNCD
   readonly UFWDEFAULT
   readonly USERADD
   readonly USERCONF
+  readonly VERBOSE
+  readonly WBIN
 
   for s in ./scripts/[0-9_]*; do
     [[ -f $s ]] || break
