@@ -33,8 +33,7 @@ done
 
 wait
 
-for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}' |\
- grep -v 'standard'); do
+for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}'); do
   vagrant ssh "${VM}" -c 'cp /vagrant/checkScore.sh ~/'
   vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats net-tools shellcheck --no-install-recommends'
   vagrant ssh "${VM}" -c 'cp -R /vagrant ~/hardening && sed -i.bak -e "s/^AUTOFILL=.*/AUTOFILL='\''Y'\''/" -e "s/^CHANGEME=.*/CHANGEME='\''changed'\''/" ~/hardening/ubuntu.cfg && cd ~/hardening && sudo bash ubuntu.sh && sudo reboot'
@@ -42,21 +41,12 @@ done
 
 wait
 
-for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}' |\
- grep -v 'standard'); do
+for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}'); do
+  while ! vagrant ssh "$VM" -c 'id'; do
+    echo "Waiting for $VM."
+    sleep 10
+  done
   vagrant ssh "${VM}" -c 'cd ~/hardening/tests && sudo bats . >> ~/bats.log'
-  wait
-  vagrant ssh "${VM}" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
-  vagrant ssh "${VM}" -c 'sh ~/checkScore.sh || exit 1 && cat ~/lynis-report.dat' > "hardening-$VM-$(date +%y%m%d)-lynis.log"
-done
-
-wait
-
-for VM in $(vagrant status | grep -iE 'running.*virtualbox'| awk '{print $1}' |\
- grep 'standard'); do
-  vagrant ssh "${VM}" -c 'cp -R /vagrant ~/hardening'
-  vagrant ssh "${VM}" -c 'cp /vagrant/checkScore.sh ~/'
-  vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats && cd ~/hardening/tests && sudo bats . >> ~/bats.log'
   wait
   vagrant ssh "${VM}" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
   vagrant ssh "${VM}" -c 'sh ~/checkScore.sh || exit 1 && cat ~/lynis-report.dat' > "hardening-$VM-$(date +%y%m%d)-lynis.log"
@@ -86,8 +76,7 @@ wait
   echo "----"
 
   # Modified VMs
-  for VM in $(vagrant status | grep -iE 'running.*virtualbox' |\
-   grep -v 'standard' | awk '{print $1}'); do
+  for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}'); do
     if [ -z "${VM}" ]; then
       echo "We dont have any VMs, exiting."
       exit 1
@@ -139,45 +128,6 @@ wait
     echo "=== Lynis warnings and suggestions:"
     echo "----"
     grep -shE '^warning|^suggestion' ./*"${VM}"*lynis.log | sort -r | uniq
-    echo "----"
-
-    echo
-    echo "=== Score: $((100-(100*FAILED_TESTS/TESTS)))"
-  done
-
-
-  # Vagrant standard Ubuntu
-  for VM in $(vagrant status | grep -iE 'running.*virtualbox' |\
-   grep 'standard' | awk '{print $1}'); do
-    if [ -z "${VM}" ]; then
-      echo "We dont have any VMs, exiting."
-      exit 1
-    else
-      VM="${VM}"
-    fi
-
-    echo
-    echo "== Ubuntu release: ${VM} bionic"
-
-    while read -r f; do
-      if test -s "${f}"; then
-        FAILED_TESTS="$(grep -c '^not ok' "${f}")"
-        echo "=== Failed number of tests: ${FAILED_TESTS}"
-      else
-        echo "$f is empty, a test stage failed."
-      fi
-    done < <(find ./ -name "*${VM}*bats.log" -type f)
-
-    echo "=== Lynis score:"
-    echo "----"
-    find ./ -name "*${VM}*lynis.log" -type f | while read -r f; do
-      if test -s "${f}"; then
-        echo
-        grep -E 'hardening_index|os_version' "${f}"
-      else
-        echo "$f is empty, a test stage failed."
-      fi
-    done
     echo "----"
 
     echo
