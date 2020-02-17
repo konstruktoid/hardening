@@ -311,7 +311,8 @@ Restrict compiler access.
 Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 
 ==== 43_sudo
-Configure `sudo` `use_pty`, `logfile`, `!visiblepw` and `!pwfeedback`.
+Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
+`passwd_timeout`.
 
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.

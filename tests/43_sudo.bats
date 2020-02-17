@@ -20,6 +20,16 @@
   [ "$status" -eq 0 ]
 }
 
+@test "Verify sudo passwd_timeout" {
+  run bash -c "grep -qER '^Defaults passwd_timeout=5$' /etc/sudo*"
+  [ "$status" -eq 0 ]
+}
+
+@test "Ensure sudo NOPASSWD is not used" {
+  run bash -c "grep -qER 'NOPASSWD:' /etc/sudo*"
+  [ "$status" -eq 1 ]
+}
+
 @test "Verify sudo runtime use_pty" {
   run bash -c "sudo -l | grep 'use_pty'"
   [ "$status" -eq 0 ]
@@ -37,5 +47,10 @@
 
 @test "Verify sudo runtime disabled visiblepw" {
   run bash -c "sudo -l | grep '!visiblepw'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify sudo runtime passwd_timeout" {
+  run bash -c "sudo -l | grep 'passwd_timeout=5'"
   [ "$status" -eq 0 ]
 }
