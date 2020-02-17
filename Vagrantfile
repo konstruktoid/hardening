@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "hardening" do |hardening|
+    hardening.ssh.extra_args = ["-o","ConnectTimeout=600"]
     hardening.ssh.insert_key = true
     hardening.vm.boot_timeout = 600
     hardening.vm.box = "ubuntu/focal64"
