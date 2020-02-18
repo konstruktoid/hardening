@@ -1,15 +1,26 @@
 function f_suid {
   echo "[$SCRIPT_COUNT] Remove suid bits"
 
-  for p in /bin/fusermount /bin/mount /bin/ping /bin/ping6 /bin/su /bin/umount /usr/bin/bsd-write /usr/bin/chage /usr/bin/chfn /usr/bin/chsh /usr/bin/mlocate /usr/bin/mtr /usr/bin/newgrp /usr/bin/pkexec /usr/bin/traceroute6.iputils /usr/bin/wall /usr/sbin/pppd; do
-    if [ -e "$p" ]; then
-      oct=$(stat -c "%a" $p |sed 's/^4/0/')
-      ug=$(stat -c "%U %G" $p)
-      dpkg-statoverride --remove $p 2> /dev/null
-      dpkg-statoverride --add "$ug" "$oct" $p 2> /dev/null
-      chmod -s $p
-    fi
-  done
+  local PATH
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
+  if ! [ -f ./misc/suid.list ]; then
+    echo "The list with SUID binaries can't be found."
+  else
+    while read -r suid; do
+      file=$(command -v "$suid")
+      if [ -f "$file" ]; then
+        if stat -c "%a" "$file" | grep -qE '^2|^4'; then
+          oct=$(stat -c "%a" "$file" | sed -e 's/^2/0/' -e 's/^4/0/')
+          ug=$(stat -c "%U %G" "$file")
+          dpkg-statoverride --remove "$file" 2> /dev/null
+          dpkg-statoverride --add "$ug" "$oct" "$file" 2> /dev/null
+          chmod -s "$file"
+          echo "$file"
+        fi
+      fi
+    done <<< "$(grep -E '^[a-zA-Z0-9]' ./misc/suid.list)"
+  fi
 
   while read -r suidshells; do
     if [ -x "$suidshells" ]; then
