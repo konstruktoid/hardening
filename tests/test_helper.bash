@@ -20,7 +20,8 @@ fragmentPath() {
 }
 
 gotSGid() {
-  stat -c %A | grep -q 's'
+  bin="$(command -v "$1")"
+  stat -c %A "$bin" | grep -qi 's'
 }
 
 isMasked() {

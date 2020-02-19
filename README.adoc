@@ -251,11 +251,8 @@ UBTU-16-010650
 Remove `games` `gnats` `irc` `list` `news` `sync` `uucp` users.
 
 ==== 27_suid
-Remove `suid` bits from `/bin/fusermount` `/bin/mount` `/bin/ping` `/bin/ping6`
-`/bin/su` `/bin/umount` `/usr/bin/bsd-write` `/usr/bin/chage` `/usr/bin/chfn`
-`/usr/bin/chsh` `/usr/bin/mlocate` `/usr/bin/mtr` `/usr/bin/newgrp`
-`/usr/bin/pkexec` `/usr/bin/traceroute6.iputils` `/usr/bin/wall`
-`/usr/sbin/pppd`.
+Remove `suid` bits from the executables listed in
+link:misc/suid.list[this document].
 
 ==== 28_umask
 CCE-80202-5, UBTU-16-010060
@@ -379,7 +376,7 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 500 https://github.com/sstephenson/bats[Bats tests]
+There are approximately 680 https://github.com/sstephenson/bats[Bats tests]
 for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]

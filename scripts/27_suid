@@ -9,15 +9,17 @@ function f_suid {
   else
     while read -r suid; do
       file=$(command -v "$suid")
-      if [ -f "$file" ]; then
-        if stat -c "%a" "$file" | grep -qE '^2|^4'; then
-          oct=$(stat -c "%a" "$file" | sed -e 's/^2/0/' -e 's/^4/0/')
+      if [ -x "$file" ]; then
+          if stat -c "%A" "$file" | grep -qi 's'; then
+            if [[ $VERBOSE == "Y" ]]; then
+              echo "$file"
+            fi
+          fi
+          chmod -s "$file"
+          oct=$(stat -c "%A" "$file" | sed 's/s/x/g')
           ug=$(stat -c "%U %G" "$file")
           dpkg-statoverride --remove "$file" 2> /dev/null
           dpkg-statoverride --add "$ug" "$oct" "$file" 2> /dev/null
-          chmod -s "$file"
-          echo "$file"
-        fi
       fi
     done <<< "$(grep -E '^[a-zA-Z0-9]' ./misc/suid.list)"
   fi
