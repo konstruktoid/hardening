@@ -40,7 +40,7 @@ function f_aptget_configure {
     sed -i 's/.*APT::Get::AllowUnauthenticated.*/APT::Get::AllowUnauthenticated "false";/g' "$(grep -l 'APT::Get::AllowUnauthenticated' /etc/apt/apt.conf.d/*)"
   fi
 
-  if ! grep '^APT::Periodic::AutocleanInterval;' /etc/apt/apt.conf.d/*; then
+  if ! grep '^APT::Periodic::AutocleanInterval' /etc/apt/apt.conf.d/*; then
     echo 'APT::Periodic::AutocleanInterval "7";' >> /etc/apt/apt.conf.d/10periodic
   else
     sed -i 's/.*APT::Periodic::AutocleanInterval.*/APT::Periodic::AutocleanInterval "7";/g' "$(grep -l 'APT::Periodic::AutocleanInterval' /etc/apt/apt.conf.d/*)"
