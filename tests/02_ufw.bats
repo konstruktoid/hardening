@@ -2,18 +2,13 @@
 
 load test_helper
 
-@test "Verify that UFW is installed" {
-  run bash -c "dpkg -l | grep ii.*ufw.*firewall"
+@test "Verify UFW is installed and default deny policy" {
+  run bash -c "ufw status verbose | grep 'deny (incoming)'"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify that UFW is enabled" {
   run bash -c "systemctl is-enabled ufw"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify UFW default deny policy" {
-  run bash -c "ufw status verbose | grep 'deny (incoming)'"
   [ "$status" -eq 0 ]
 }
 
