@@ -12,6 +12,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify password rounds in $COMMONPASSWD" {
+  run bash -c "grep '^password.*pam_unix.*[[:space:]]sha512[[:space:]]rounds=65536$' $COMMONPASSWD"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify remember in $COMMONPASSWD" {
   run bash -c "grep '^password.*required.*pam_pwhistory.so.*[[:space:]]remember=5$' $COMMONPASSWD"
   [ "$status" -eq 0 ]
