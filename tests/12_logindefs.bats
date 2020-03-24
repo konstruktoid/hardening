@@ -38,6 +38,11 @@ load test_helper
 }
 
 @test "Verify SHA_CRYPT_MAX_ROUNDS in $LOGINDEFS" {
-  run bash -c "grep '^SHA_CRYPT_MAX_ROUNDS 10000$' $LOGINDEFS"
+  run bash -c "grep '^SHA_CRYPT_MAX_ROUNDS 65536$' $LOGINDEFS"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify SHA_CRYPT_MIN_ROUNDS in $LOGINDEFS" {
+  run bash -c "grep '^SHA_CRYPT_MIN_ROUNDS 10000$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
