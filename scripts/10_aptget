@@ -7,7 +7,7 @@ function f_aptget {
 
   echo "[$SCRIPT_COUNT] Upgrading installed packages"
 
-  $APT --with-new-pkgs upgrade
+  $APT -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --with-new-pkgs upgrade
 
   ((SCRIPT_COUNT++))
 }
