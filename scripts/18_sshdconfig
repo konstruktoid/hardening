@@ -45,9 +45,9 @@ function f_sshdconfig {
   fi
 
   if ! grep -q "^MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxAuthTries 4" >> "$SSHDFILE"
+    echo "MaxAuthTries 3" >> "$SSHDFILE"
   else
-    sed -i 's/MaxAuthTries.*/MaxAuthTries 4/' "$SSHDFILE"
+    sed -i 's/MaxAuthTries.*/MaxAuthTries 3/' "$SSHDFILE"
   fi
 
   if ! grep -q "^ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
