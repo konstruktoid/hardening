@@ -21,3 +21,8 @@ load test_helper
   run bash -c "grep '^auth required pam_yubico.so.*$' /etc/pam.d/sshd"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify OpenSSH certificate use" {
+  run sshdConfig '^HostCertificate.*-cert.pub$'
+  [ "$status" -eq 0 ]
+}
