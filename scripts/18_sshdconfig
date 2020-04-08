@@ -75,9 +75,9 @@ function f_sshdconfig {
   fi
 
   if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxSessions 4" >> "$SSHDFILE"
+    echo "MaxSessions 3" >> "$SSHDFILE"
   else
-    sed -i 's/MaxSessions.*/MaxSessions 4/' "$SSHDFILE"
+    sed -i 's/MaxSessions.*/MaxSessions 3/' "$SSHDFILE"
   fi
 
   if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then

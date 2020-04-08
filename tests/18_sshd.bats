@@ -128,7 +128,7 @@ load test_helper
 }
 
 @test "Verify OpenSSH MaxSessions" {
-  run sshdConfig '^MaxSessions 4$'
+  run sshdConfig '^MaxSessions 3$'
   [ "$status" -eq 0 ]
 }
 
