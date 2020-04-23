@@ -12,5 +12,7 @@ function f_issue {
     echo -e "$TEXT" > $f
   done
 
+  chmod a-x /etc/update-motd.d/*
+
   ((SCRIPT_COUNT++))
 }
