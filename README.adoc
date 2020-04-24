@@ -384,7 +384,7 @@ for most of the above settings available in the link:tests/[tests directory].
 sudo apt-get -y install bats
 git clone https://github.com/konstruktoid/hardening.git
 cd hardening/tests/
-sudo bats . #note the '.'
+sudo bats .
 ----
 
 === Test automation using Vagrant
@@ -532,11 +532,11 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 ----
 
 == Recommended reading
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 16.04 LTS STIG - Ver 1, Rel 2] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 1, Rel 1] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
 https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG ] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
 
