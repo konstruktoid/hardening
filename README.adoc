@@ -5,8 +5,7 @@ image::logo/horizontal.png[Ubuntu Hardening]
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `18.04 Bionic Beaver`, `Ubuntu 19.10 Eoan Ermine` and
-`Ubuntu 20.04 Focal Fossa (development branch)`.
+Tested on `18.04 Bionic Beaver` and `Ubuntu 20.04 Focal Fossa`.
 
 Systemd required.
 
@@ -396,6 +395,23 @@ versions. The script will generate a file named `TESTRESULTS.adoc`.
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 
+=== OpenSCAP testing
+To run a https://github.com/ComplianceAsCode/content[OpenSCAP] test on a
+Ubuntu host, where `v0.1.49` should be replaced with the latest available
+version:
+
+[source,shell]
+----
+sudo apt-get -y install libopenscap8 unzip
+wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.49/scap-security-guide-0.1.49-oval-510.zip
+unzip scap-security-guide-0.1.49-oval-510.zip
+cd scap-security-guide-0.1.49-oval-5.10
+oscap info --fetch-remote-resources ./ssg-ubuntu1804-ds.xml
+sudo oscap xccdf eval --fetch-remote-resources \
+  --profile xccdf_org.ssgproject.content_profile_anssi_np_nt28_high \
+  --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
+----
+
 == Structure
 [source,shell]
 ----
@@ -414,7 +430,6 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── initpath.sh
 │   └── tmp.mount
 ├── createPartitions.sh
-├── genIndex.sh
 ├── logo
 │   ├── horizontal.png
 │   ├── icon.png
@@ -430,6 +445,7 @@ will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 │   ├── logrotate.conf
 │   ├── mozilla-firefox-user.js
 │   ├── proc_check.sh
+│   ├── suid.list
 │   ├── sysctl.conf
 │   └── systemd_scan.sh
 ├── renovate.json
