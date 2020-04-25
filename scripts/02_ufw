@@ -13,6 +13,15 @@ function f_firewall {
 
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' "$UFWDEFAULT"
   
+  #### Maybe this need move to right place
+  # Littlle backups
+  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules.ORI 
+  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules.ORI2 
+  cp --preserve /etc/ufw/before6.rules /etc/ufw/before6.rules.ORI
+  cp --preserve /etc/ufw/after.rules /etc/ufw/after.rules.ORI 
+  cp --preserve /etc/ufw/after6.rules /etc/ufw/after6.rules.ORI
+  ####
+
   #icmp enabling aKa allow outbound icmp ip4&ip6
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
