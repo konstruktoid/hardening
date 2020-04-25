@@ -16,15 +16,12 @@ function f_psad {
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
   
   ### PSAD Configuration
-  echo "127.0.0.1    0;  # localhost" >> $PSADDL
-  echo "$VPSIP    0; # Server IP" >> $PSADDL
-  
-  cp --preserve $PSADCONF $PSADCONF.$(date +"%Y%m%d%H%M%S")
-  
-  ## check TIP FROM https://www.cipherdyne.org/psad/docs/faq.html#documentation
+  echo -e "127.0.0.1    0; \n$VPSIP    0;" >> $PSADDL
+    
+  ## check TIPs FROM https://www.cipherdyne.org/psad/docs/faq.html#documentation
   sed -i 's/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             '$MYEMAIL';/' $PSADCONF
   sed -i 's/HOSTNAME                    _CHANGEME_;/HOSTNAME                    '$MYHOS.$MYDOM';/' $PSADCONF
-  sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' $PSADCONF
+  sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' $PSADCONF       #### Run as PSAD and IDS/IPS too :)
   sed -i 's/DANGER_LEVEL2               15;/DANGER_LEVEL2               15;/' $PSADCONF
   sed -i 's/DANGER_LEVEL3               150;/DANGER_LEVEL3               150;/' $PSADCONF
   sed -i 's/DANGER_LEVEL4               1500;/DANGER_LEVEL4               1500;/' $PSADCONF
@@ -36,10 +33,12 @@ function f_psad {
   sed -i 's/ENABLE_MAC_ADDR_REPORTING   N;/ENABLE_MAC_ADDR_REPORTING   Y;/' $PSADCONF
   sed -i 's/AUTO_IDS_DANGER_LEVEL       5;/AUTO_IDS_DANGER_LEVEL       1;/' $PSADCONF
   sed -i 's/ENABLE_AUTO_IDS_EMAILS      ;/ENABLE_AUTO_IDS_EMAILS      Y;/' $PSADCONF
-  sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/syslog;/' $PSADCONF
+  sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' $PSADCONF      #### Add PORTS TO BE IGNORED by PSAD
+  sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/ufw.log;/' $PSADCONF
 
-  ######## IF USE THIS SERVER ON LOCAL NETWORK NEED UNCOMMENT THIS ########
+  ######## IF USE THIS SERVER ON LOCAL NETWORK (NOT CLOUD SERVER) NEED UNCOMMENT THIS ########
   #sed -i 's/HOME_NET                    any;/HOME_NET                    192.168.1.0\/24;/' $PSADCONF
+  #sed -i 's/EXTERNAL_NET                    *;/EXTERNAL_NET                    any;/' $PSADCONF
   
   # log all traffic so psad can analyze
   sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
