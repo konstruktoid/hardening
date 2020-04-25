@@ -20,11 +20,13 @@ function main {
   clear
 
   REQUIREDPROGS='arp w'
-  for p in $REQUIREDPROGS; do
-    if ! command -v "$p" >/dev/null 2>&1; then
-      echo "$p is required."
-      exit 1
-    fi
+  for p in "${REQUIREDPROGS[@]}"
+    do
+      command -v $p > /dev/null 2>&1 || {
+        echo "Installing $p required package..."
+        sleep 0.5
+        sudo apt install $p > /dev/null 2>&1 ;
+        }
   done
 
   ARPBIN="$(command -v arp)"
