@@ -14,6 +14,7 @@ function f_psad {
   
   #####
   ## Maybe need moove to right place
+  cp --preserve $PSADCONF $PSADCONF.ORI
   # what email notification
   read -p "What is your EMAIL to get notifications?" MYEMAIL
   # adding aliases
