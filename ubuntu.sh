@@ -36,7 +36,9 @@ function main {
   fi
 
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
-    USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
+    USERIP=$(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+    GATEIP=$(ip route get 1.1.1.1 | awk -F"via " 'NR==1{split($2,a," ");print a[1]}')
+    IFACIP=$(ip route get 1.1.1.1 | awk -F"dev " 'NR==1{split($2,a," ");print a[1]}')
 
     if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       ADMINIP="$USERIP"
@@ -46,7 +48,7 @@ function main {
 
     sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
     sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$($WBIN -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
-    sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
+   # sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg # Should BE FORCED to read the code at same..
     sed -i "s/VERBOSE='N'/VERBOSE='Y'/" ./ubuntu.cfg
   fi
 
@@ -69,6 +71,8 @@ function main {
   readonly DISABLEMOD
   readonly DISABLENET
   readonly FW_ADMIN
+  readonly GATEIP
+  readonly IFACIP
   readonly JOURNALDCONF
   readonly LIMITSCONF
   readonly LOGINDCONF
@@ -88,6 +92,8 @@ function main {
   readonly SYSCTL
   readonly SYSCTL_CONF
   readonly SYSTEMCONF
+  readonly PSADCONF
+  readonly PSADDL
   readonly TIMEDATECTL
   readonly TIMESYNCD
   readonly UFWDEFAULT
@@ -129,6 +135,7 @@ function main {
   f_coredump
   f_usbguard
   f_postfix
+  f_psad
   f_apport
   f_motdnews
   f_rkhunter
