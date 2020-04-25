@@ -12,11 +12,38 @@ function f_firewall {
   fi
 
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' "$UFWDEFAULT"
+  
+  #icmp enabling aKa allow outbound icmp ip4&ip6
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  
+  #JUST NEEDED IF EXIST SOME problem on UFW after rebooting. I have resolve that with this.
+  #This issue followed me :X Maybe because I have not installed iptables-persistence before ?! not yet opportunity to test yet
+  # cp /lib/systemd/system/ufw.service /lib/systemd/system/ufw.service.ORI
+  # sed -i '/^Before=network.target/a After=netfilter-persistent.service' /lib/systemd/system/ufw.service
+  
   ufw --force enable
+  ufw default allow outgoing comment 'allow all outgoing traffic'
+  ufw default deny incoming comment 'deny all incoming traffic'
+  ufw logging on
+  
+  ## Final PSAD and firewall Setup 1/2
+  iptables -A INPUT -j LOG
+  iptables -A FORWARD -j LOG
+  ip6tables -A INPUT -j LOG
+  ip6tables -A FORWARD -j LOG
 
+  # maybe unnecessary.. all traffic will be analyzed by psad and need all info to best results
   for admin in $FW_ADMIN; do
     ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
   done
+  #
+  
+  # Final PSAD and firewall Setup 2/2
+  netfilter-persistent save
+  netfilter-persistent reload
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status ufw.service --no-pager
