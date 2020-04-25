@@ -11,14 +11,9 @@ function f_psad {
     return
   fi
   
-  ### Prepare UFW to PSAD
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
-  
   ### PSAD Configuration
   echo -e "127.0.0.1    0; \n$VPSIP    0;" >> $PSADDL
     
-  ## check TIPs FROM https://www.cipherdyne.org/psad/docs/faq.html#documentation
   sed -i 's/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             '$MYEMAIL';/' $PSADCONF
   sed -i 's/HOSTNAME                    _CHANGEME_;/HOSTNAME                    '$MYHOS.$MYDOM';/' $PSADCONF
   sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' $PSADCONF       #### Run as PSAD and IDS/IPS too :)
@@ -40,24 +35,8 @@ function f_psad {
   #sed -i 's/HOME_NET                    any;/HOME_NET                    192.168.1.0\/24;/' $PSADCONF
   #sed -i 's/EXTERNAL_NET                    *;/EXTERNAL_NET                    any;/' $PSADCONF
   
-  # log all traffic so psad can analyze
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
-
   for admin in $FW_ADMIN; do  
     ufw reload
-    iptables -A INPUT -j LOG
-    iptables -A FORWARD -j LOG
-    ip6tables -A INPUT -j LOG
-    ip6tables -A FORWARD -j LOG
-    netfilter-persistent save
-    netfilter-persistent reload
     psad -R
     psad --sig-update
     psad -H
