@@ -18,6 +18,14 @@ function f_firewall {
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
   
   #JUST NEEDED IF EXIST SOME problem on UFW after rebooting. I have resolve that with this.
   #This issue followed me :X Maybe because I have not installed iptables-persistence before ?! not yet opportunity to test yet
