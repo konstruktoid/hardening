@@ -11,6 +11,17 @@ function f_psad {
     return
   fi
   
+  
+  #####
+  ## Maybe need moove to right place
+  # what email notification
+  read -p "What is your EMAIL to get notifications?" MYEMAIL
+  # adding aliases
+  echo "$USER : $MYEMAIL" >> /etc/aliases
+  ##
+  ####
+  
+  
   ### PSAD Configuration
   echo -e "127.0.0.1    0; \n$VPSIP    0;" >> $PSADDL
     
