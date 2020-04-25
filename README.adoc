@@ -95,6 +95,8 @@ TIMESYNCD='/etc/systemd/timesyncd.conf'
 UFWDEFAULT='/etc/default/ufw'
 USERADD='/etc/default/useradd'
 USERCONF='/etc/systemd/user.conf'
+PSADCONF="/etc/psad/psad.conf"
+PSADDL="/etc/psad/auto_dl"
 ----
 <1> The IP addresses that will be able to connect with SSH, separated by spaces.
 <2> Which group the users have to be member of in order to acess via SSH, separated by spaces.
@@ -310,6 +312,9 @@ Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
 `passwd_timeout`.
 
+==== 44_psad
+Configure `psad` `ufw`, `logfile`.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -372,6 +377,7 @@ f_aptget_noexec
 f_systemddelta
 f_post
 f_checkreboot
+f_psad
 ----
 
 == Tests
@@ -494,6 +500,7 @@ sudo oscap xccdf eval --fetch-remote-resources \
 │   ├── 41_compilers
 │   ├── 42_kernel
 │   ├── 43_sudo
+│   ├── 44_psad
 │   ├── 98_systemddelta
 │   ├── 99_post
 │   └── 99_reboot
@@ -538,6 +545,7 @@ sudo oscap xccdf eval --fetch-remote-resources \
 │   ├── 41_compilers.bats
 │   ├── 42_kernel.bats
 │   ├── 43_sudo.bats
+│   ├── 44_psad
 │   ├── 99_misc.bats
 │   ├── runHostTests.sh
 │   └── test_helper.bash
