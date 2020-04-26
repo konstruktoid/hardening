@@ -16,3 +16,8 @@ load test_helper
   run bash -c "postconf | grep '^smtpd_client_restrictions = permit_mynetworks,reject$'"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that postfix email alias exist" {
+  run bash -c "tails /etc/aliases  | grep '^$USER : $MYEMAIL$'"
+  [ "$status" -eq 0 ]
+}
