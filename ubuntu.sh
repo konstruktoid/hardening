@@ -16,6 +16,10 @@ if ! [ -x "$(command -v systemctl)" ]; then
   exit 1
 fi
 
+function finish {
+  echo "Securely shredding \"Hardening Repository\"; shred -u ../hardening;
+}
+  
 function main {
   clear
 
@@ -166,9 +170,12 @@ function main {
   f_checkreboot
 
   echo
+
 }
 
 LOGFILE="hardening-$(hostname --short)-$(date +%y%m%d).log"
-echo "[HARDENING LOG - $(hostname --fqdn) - $(LANG=C date)]" >> "$LOGFILE"
+echo "[HARDENING LOG - $(hostname --fqdn) - $(LANG=C date)]" >> "$HOME"/"$LOGFILE"
 
-main "$@" | tee -a "$LOGFILE"
+main "$@" | tee -a "$HOME"/"$LOGFILE"
+
+trap finish EXIT
