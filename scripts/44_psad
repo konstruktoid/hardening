@@ -60,7 +60,7 @@ function f_psad {
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status psad.service --no-pager
-    psad -v
+    psad -S
     echo
   fi
 
