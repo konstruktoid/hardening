@@ -17,7 +17,7 @@ if ! [ -x "$(command -v systemctl)" ]; then
 fi
 
 function finish {
-  echo "Securely shredding \"Hardening Repository\"; shred -u ../hardening;
+  echo "Securely shredding -Hardening- repository" ; shred -u ../hardening ;
 }
   
 function main {
@@ -26,10 +26,10 @@ function main {
   REQUIREDPROGS='arp w'
   for p in "${REQUIREDPROGS[@]}"
     do
-      command -v $p > /dev/null 2>&1 || {
+      command -v "$p" > /dev/null 2>&1 || {
         echo "Installing $p required package..."
         sleep 0.5
-        sudo apt install $p > /dev/null 2>&1 ;
+        sudo apt install "$p" > /dev/null 2>&1 ;
         }
   done
 
@@ -54,7 +54,7 @@ function main {
 
     sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
     sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$($WBIN -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
-   # sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg # Should BE FORCED to read the code at same..
+# sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg # Should BE FORCED to read the code at same.. #
     sed -i "s/VERBOSE='N'/VERBOSE='Y'/" ./ubuntu.cfg
   fi
 
