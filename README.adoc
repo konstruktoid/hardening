@@ -84,6 +84,8 @@ LOGINDCONF='/etc/systemd/logind.conf'
 LOGINDEFS='/etc/login.defs'
 LOGROTATE='/etc/logrotate.conf'
 PAMLOGIN='/etc/pam.d/login'
+PSADCONF='/etc/psad/psad.conf'
+PSADDL='/etc/psad/auto_dl'
 RESOLVEDCONF='/etc/systemd/resolved.conf'
 RKHUNTERCONF='/etc/default/rkhunter'
 SECURITYACCESS='/etc/security/access.conf'
@@ -95,8 +97,7 @@ TIMESYNCD='/etc/systemd/timesyncd.conf'
 UFWDEFAULT='/etc/default/ufw'
 USERADD='/etc/default/useradd'
 USERCONF='/etc/systemd/user.conf'
-PSADCONF="/etc/psad/psad.conf"
-PSADDL="/etc/psad/auto_dl"
+
 ----
 <1> The IP addresses that will be able to connect with SSH, separated by spaces.
 <2> Which group the users have to be member of in order to acess via SSH, separated by spaces.
