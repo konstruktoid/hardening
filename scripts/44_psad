@@ -26,8 +26,8 @@ function f_psad {
   ### PSAD Configuration
   echo -e "127.0.0.1    0; \n$FW_ADMIN    0;" >> "$PSADDL"
     
-  sed -i 's/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             '"$MYEMAIL"';/' "$PSADCONF"
-  sed -i 's/HOSTNAME                    _CHANGEME_;/HOSTNAME                    "$(hostname --fqdn)";/' "$PSADCONF"
+  sed -i "s/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             $MYEMAIL"'/' "$PSADCONF"
+  sed -i "s/HOSTNAME                    _CHANGEME_;/HOSTNAME                    $(hostname --fqdn);/" "$PSADCONF"
   sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' "$PSADCONF"       #### Run as PSAD and IDS/IPS too :)
   sed -i 's/DANGER_LEVEL2               15;/DANGER_LEVEL2               15;/' "$PSADCONF"
   sed -i 's/DANGER_LEVEL3               150;/DANGER_LEVEL3               150;/' "$PSADCONF"
