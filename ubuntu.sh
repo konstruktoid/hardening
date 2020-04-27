@@ -17,7 +17,8 @@ if ! [ -x "$(command -v systemctl)" ]; then
 fi
 
 function finish {
-  echo "Securely shredding -Hardening- repository" ; shred -u ../hardening ;
+  echo "Securely shredding Hardening repository"
+  shred -u ../hardening
 }
   
 function main {
