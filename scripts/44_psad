@@ -47,16 +47,18 @@ function f_psad {
   ###sed -i 's/HOME_NET                    any;/HOME_NET                    192.168.1.0\/24;/' "$PSADCONF"
   ###sed -i 's/EXTERNAL_NET                    *;/EXTERNAL_NET                    any;/' "$PSADCONF"
   
-  for admin in $FW_ADMIN; do
-    ufw reload
-    psad -R
-    psad --sig-update
-    psad -H
-    psad -R
-    sleep 2
-    ###Analyze it
-    psad --fw-analyze
-  done
+  ufw reload
+  psad -R
+  sleep 1
+  psad --sig-update
+  sleep 1
+  psad -H
+  sleep 1
+  psad -R
+  sleep 2
+  
+  ###Analyze it
+  psad --fw-analyze
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status psad.service --no-pager
