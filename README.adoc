@@ -546,7 +546,7 @@ sudo oscap xccdf eval --fetch-remote-resources \
 │   ├── 41_compilers.bats
 │   ├── 42_kernel.bats
 │   ├── 43_sudo.bats
-│   ├── 44_psad
+│   ├── 44_psad.bats
 │   ├── 99_misc.bats
 │   ├── runHostTests.sh
 │   └── test_helper.bash
