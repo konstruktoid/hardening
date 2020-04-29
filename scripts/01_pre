@@ -34,5 +34,9 @@ function f_pre {
     echo "Ubuntu only. Exiting."
     echo
     exit 1
+  elif ! lsb_release -i | grep 'Debian'; then
+    echo "Debian only. Exiting."
+    echo
+    exit 1
   fi
 }
