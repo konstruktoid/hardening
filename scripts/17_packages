@@ -26,7 +26,11 @@ function f_package_install {
   echo "postfix postfix/mailname string $(hostname -f)" | debconf-set-selections
 
   local PACKAGE_INSTALL
-  PACKAGE_INSTALL="acct aide-common debsums gnupg2 haveged libpam-cracklib libpam-tmpdir needrestart openssh-server postfix rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM psad iptables-persistent"
+  if grep -qi 'ubuntu' "/etc/os-release"; then
+    PACKAGE_INSTALL="acct aide-common debsums gnupg2 haveged libpam-cracklib libpam-tmpdir needrestart openssh-server postfix rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM psad iptables-persistent"
+  elif grep -qi 'Debian' "/etc/os-release"; then
+    PACKAGE_INSTALL="acct aide-common debsums gnupg2 haveged libpam-cracklib libpam-tmpdir needrestart openssh-server postfix rkhunter sysstat systemd-coredump tcpd apt-config-auto-update vlock $APPARMOR $AUDITD $VM psad iptables-persistent"
+  fi
 
   for deb_install in $PACKAGE_INSTALL; do
     $APT install --no-install-recommends "$deb_install"
