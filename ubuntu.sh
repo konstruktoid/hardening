@@ -62,7 +62,7 @@ function main {
 
     sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
     sed -i "s/SSH_GRPS='/SSH_GRPS='$(id "$($WBIN -ih | awk '{print $1}' | head -n1)" -ng) /" ./ubuntu.cfg
-# sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg # Should BE FORCED to read the code at same.. #
+    sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
     sed -i "s/VERBOSE='N'/VERBOSE='Y'/" ./ubuntu.cfg
   fi
 
