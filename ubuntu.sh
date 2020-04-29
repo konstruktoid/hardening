@@ -37,7 +37,6 @@ function main {
     do
       command -v "$p" > /dev/null 2>&1 || {
         echo "Installing $p required package..."
-        sleep 0.5
         sudo apt install "$p" > /dev/null 2>&1 ;
         }
   done
