@@ -314,7 +314,7 @@ Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
 `passwd_timeout`.
 
 ==== 44_psad
-Configure `psad` `ufw`, `logfile`.
+Configure `psad`.
 
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
