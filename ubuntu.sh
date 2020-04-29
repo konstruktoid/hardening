@@ -16,9 +16,9 @@ if ! [ -x "$(command -v systemctl)" ]; then
   exit 1
 fi
 
-if grep -qi 'ubuntu' "$dir/etc/os-release"; then
+if grep -qi 'ubuntu' "etc/os-release"; then
   REQUIREDPROGS='arp w'
-elif grep -qi 'debian' "$dir/etc/os-release"; then
+elif grep -qi 'debian' "etc/os-release"; then
   REQUIREDPROGS='net-tools'
 else
   echo "/etc/os-release doesn't seem to include ubuntu or debian. Exiting."
