@@ -15,11 +15,10 @@ function f_firewall {
   
   #### Maybe this need move to right place
   # Littlle backups
-  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules.ORI 
-  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules.ORI2 
-  cp --preserve /etc/ufw/before6.rules /etc/ufw/before6.rules.ORI
-  cp --preserve /etc/ufw/after.rules /etc/ufw/after.rules.ORI 
-  cp --preserve /etc/ufw/after6.rules /etc/ufw/after6.rules.ORI
+  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules.$(date +%y%m%d) 
+  cp --preserve /etc/ufw/before6.rules /etc/ufw/before6.rules..$(date +%y%m%d)
+  cp --preserve /etc/ufw/after.rules /etc/ufw/after.rules..$(date +%y%m%d) 
+  cp --preserve /etc/ufw/after6.rules /etc/ufw/after6.rules..$(date +%y%m%d)
   ####
 
   #icmp enabling aKa allow outbound icmp ip4&ip6
