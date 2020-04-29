@@ -50,7 +50,7 @@ function main {
   fi
 
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
-    USERIP=$(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+    USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
     GATEIP=$(ip route get 1.1.1.1 | awk -F"via " 'NR==1{split($2,a," ");print a[1]}')
     IFACIP=$(ip route get 1.1.1.1 | awk -F"dev " 'NR==1{split($2,a," ");print a[1]}')
 
