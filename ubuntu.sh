@@ -16,6 +16,15 @@ if ! [ -x "$(command -v systemctl)" ]; then
   exit 1
 fi
 
+if grep -qi 'ubuntu' "$dir/etc/os-release"; then
+  REQUIREDPROGS='arp w'
+elif grep -qi 'debian' "$dir/etc/os-release"; then
+  REQUIREDPROGS='net-tools'
+else
+  echo "/etc/os-release doesn't seem to include ubuntu or debian. Exiting."
+  exit 2
+fi
+
 function finish {
   echo "Securely shredding Hardening repository"
   shred -u ../hardening
@@ -24,7 +33,6 @@ function finish {
 function main {
   clear
 
-  REQUIREDPROGS='arp w'
   for p in "${REQUIREDPROGS[@]}"
     do
       command -v "$p" > /dev/null 2>&1 || {
