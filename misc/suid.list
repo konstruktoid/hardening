@@ -1,4 +1,6 @@
 # https://gtfobins.github.io/#+suid
+# https://raw.githubusercontent.com/konstruktoid/hardening/master/misc/suid.list
+
 apt
 apt-get
 aria2c
@@ -11,18 +13,23 @@ base64
 bash
 bpftrace
 bsd-write
+bundler
 busctl
 busybox
+byebug
 cancel
 cat
 chage
 chfn
 chmod
 chown
+chroot
 chsh
+cobc
 cp
 cpan
 cpulimit
+crash
 crontab
 csh
 curl
@@ -30,6 +37,7 @@ cut
 dash
 date
 dd
+dialog
 diff
 dmesg
 dmsetup
@@ -37,6 +45,7 @@ dnf
 docker
 dpkg
 easy_install
+eb
 ed
 emacs
 env
@@ -55,12 +64,16 @@ fusermount
 gawk
 gcc
 gdb
+gem
+genisoimage
 gimp
 git
 grep
+gtester
 hd
 head
 hexdump
+highlight
 iconv
 iftop
 ionice
@@ -71,6 +84,7 @@ journalctl
 jq
 jrunscript
 ksh
+ksshell
 ld.so
 ldconfig
 less
@@ -78,6 +92,8 @@ logsave
 look
 ltrace
 lua
+lwp-download
+lwp-request
 mail
 make
 man
@@ -114,10 +130,14 @@ ping6
 pip
 pkexec
 pppd
+pry
 puppet
 python
+rake
 readelf
 red
+redcarpet
+restic
 rlogin
 rlwrap
 rpm
@@ -134,6 +154,7 @@ sed
 service
 setarch
 sftp
+sh
 shuf
 smbclient
 socat
@@ -153,6 +174,7 @@ tar
 taskset
 tclsh
 tcpdump
+tcsh
 tee
 telnet
 tftp
@@ -166,6 +188,9 @@ umount
 unexpand
 uniq
 unshare
+uudecode
+uuencode
+valgrind
 vi
 vim
 wall
@@ -176,6 +201,7 @@ wish
 write
 xargs
 xxd
+yelp
 yum
 zip
 zsh
