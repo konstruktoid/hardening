@@ -22,14 +22,9 @@ elif grep -qi 'debian' "/etc/os-release"; then
   REQUIREDPROGS='net-tools'
 else
   echo "/etc/os-release doesn't seem to include ubuntu or debian. Exiting."
-  exit 2
+  exit 1
 fi
 
-function finish {
-  echo "Securely shredding Hardening repository"
-  shred -u ../hardening
-}
-  
 function main {
   clear
 
@@ -182,8 +177,6 @@ function main {
 }
 
 LOGFILE="hardening-$(hostname --short)-$(date +%y%m%d).log"
-echo "[HARDENING LOG - $(hostname --fqdn) - $(LANG=C date)]" >> "$HOME"/"$LOGFILE"
+echo "[HARDENING LOG - $(hostname --fqdn) - $(LANG=C date)]" >> "$LOGFILE"
 
-main "$@" | tee -a "$HOME"/"$LOGFILE"
-
-trap finish EXIT
+main "$@" | tee -a "$LOGFILE"
