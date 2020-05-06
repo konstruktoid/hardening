@@ -13,14 +13,6 @@ function f_firewall {
 
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' "$UFWDEFAULT"
   
-  #### Maybe this need move to right place
-  # Littlle backups
-  cp --preserve /etc/ufw/before.rules /etc/ufw/before.rules."$(date +%y%m%d)"
-  cp --preserve /etc/ufw/before6.rules /etc/ufw/before6.rules."$(date +%y%m%d)"
-  cp --preserve /etc/ufw/after.rules /etc/ufw/after.rules."$(date +%y%m%d)"
-  cp --preserve /etc/ufw/after6.rules /etc/ufw/after6.rules."$(date +%y%m%d)"
-  ####
-
   #icmp enabling aKa allow outbound icmp ip4&ip6
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
@@ -35,11 +27,6 @@ function f_firewall {
   sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
   sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
   
-  #JUST NEEDED IF EXIST SOME problem on UFW after rebooting. I have resolve that with this.
-  #This issue followed me :X Maybe because I have not installed iptables-persistence before ?! not yet opportunity to test yet
-  # cp /lib/systemd/system/ufw.service /lib/systemd/system/ufw.service."$(date +%y%m%d)"
-  # sed -i '/^Before=network.target/a After=netfilter-persistent.service' /lib/systemd/system/ufw.service
-  
   ufw --force enable
   ufw default allow outgoing comment 'allow all outgoing traffic'
   ufw default deny incoming comment 'deny all incoming traffic'
@@ -51,11 +38,9 @@ function f_firewall {
   ip6tables -A INPUT -j LOG
   ip6tables -A FORWARD -j LOG
 
-  # maybe unnecessary.. all traffic will be analyzed by psad and need all info to best results. ?!
-  # for admin in $FW_ADMIN; do
-  #  ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
-  # done
-  #
+  for admin in $FW_ADMIN; do
+    ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
+  done
   
   # Final PSAD and firewall Setup 2/2
   netfilter-persistent save
