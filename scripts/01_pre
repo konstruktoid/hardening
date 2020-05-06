@@ -30,9 +30,8 @@ function f_pre {
     exit 1
   fi
 
-  if ! lsb_release -i | grep -qEi 'ubuntu|debian'; then echo "Ubuntu or Debian"; fi
-    echo "Debian or Ubuntu only. Exiting."
-    echo
+  if ! lsb_release -i | grep -qEi 'ubuntu|debian'; then
+    echo "Ubuntu or Debian. Exiting."
     exit 1
   fi
 }
