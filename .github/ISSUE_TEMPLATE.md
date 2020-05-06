@@ -1,8 +1,10 @@
 ---
 name: Bug report
-title: Action failed
+about: Create a report to help us improve
+title: "[BUG] Action failed"
+labels: ''
 assignees: konstruktoid
-labels: bug
+
 ---
 
 A action failed.
