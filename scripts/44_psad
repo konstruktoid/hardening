@@ -12,15 +12,10 @@ function f_psad {
   fi
   
   
-  #####
-  ## Maybe need moove to right place
-  cp --preserve "$PSADCONF" "$PSADCONF.$(date +%y%m%d)"
   # what email notification
   read -r -p "What is your EMAIL to get notifications?" MYEMAIL
   # adding aliases
   echo "$USER : $MYEMAIL" >> /etc/aliases
-  ##
-  ####
   
   
   ### PSAD Configuration
@@ -49,13 +44,9 @@ function f_psad {
   
   ufw reload
   psad -R
-  sleep 1
   psad --sig-update
-  sleep 1
   psad -H
-  sleep 1
   psad -R
-  sleep 2
   
   ###Analyze it
   psad --fw-analyze
