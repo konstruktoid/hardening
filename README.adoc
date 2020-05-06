@@ -352,6 +352,7 @@ f_package_install
 f_coredump
 f_usbguard
 f_postfix
+f_psad
 f_apport
 f_motdnews
 f_rkhunter
@@ -378,7 +379,6 @@ f_aptget_noexec
 f_systemddelta
 f_post
 f_checkreboot
-f_psad
 ----
 
 == Tests
