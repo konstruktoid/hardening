@@ -201,3 +201,138 @@ load test_helper
   run bash -c "grep '^\s.*MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256$' /etc/ssh/ssh_config"
   [ "$status" -eq 0 ]
 }
+
+@test "Ensure OpenSSH MAC hmac-md5 is not used" {
+  run sshdConfig 'hmac-md5'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-md5-96 is not used" {
+  run sshdConfig 'hmac-md5-96'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-ripemd160 is not used" {
+  run sshdConfig 'hmac-ripemd160'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-sha1 is not used" {
+  run sshdConfig 'hmac-sha1'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-sha1-96 is not used" {
+  run sshdConfig 'hmac-sha1-96'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC umac-64@openssh.com is not used" {
+  run sshdConfig 'umac-64@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC umac-128@openssh.com is not used" {
+  run sshdConfig 'umac-128@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-md5-etm@openssh.com is not used" {
+  run sshdConfig 'hmac-md5-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-md5-96-etm@openssh.com is not used" {
+  run sshdConfig 'hmac-md5-96-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-ripemd160-etm@openssh.com is not used" {
+  run sshdConfig 'hmac-ripemd160-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-sha1-etm@openssh.com is not used" {
+  run sshdConfig 'hmac-sha1-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC hmac-sha1-96-etm@openssh.com is not used" {
+  run sshdConfig 'hmac-sha1-96-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC umac-64-etm@openssh.com is not used" {
+  run sshdConfig 'umac-64-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH MAC umac-128-etm@openssh.com is not used" {
+  run sshdConfig 'umac-128-etm@openssh.com'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher 3des-cbc is not used" {
+  run sshdConfig '3des-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher aes128-cbc is not used" {
+  run sshdConfig 'aes128-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher aes192-cbc is not used" {
+  run sshdConfig 'aes192-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher aes256-cbc is not used" {
+  run sshdConfig 'aes256-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher arcfour is not used" {
+  run sshdConfig 'arcfour'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher arcfour128 is not used" {
+  run sshdConfig 'arcfour128'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher arcfour256 is not used" {
+  run sshdConfig 'arcfour256'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher blowfish-cbc is not used" {
+  run sshdConfig 'blowfish-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher cast128-cbc is not used" {
+  run sshdConfig 'cast128-cbc'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH cipher rijndael-cbc@lysator.liu.se is not used" {
+  run sshdConfig 'rijndael-cbc@lysator.liu.se'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH KEX diffie-hellman-group1-sha1 is not used" {
+  run sshdConfig 'diffie-hellman-group1-sha1'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH KEX diffie-hellman-group14-sha1 is not used" {
+  run sshdConfig 'diffie-hellman-group14-sha1'
+  [ "$status" -eq 1 ]
+}
+
+@test "Ensure OpenSSH KEX diffie-hellman-group-exchange-sha1 is not used" {
+  run sshdConfig 'diffie-hellman-group-exchange-sha1'
+  [ "$status" -eq 1 ]
+}
