@@ -20,12 +20,18 @@ function main {
   clear
 
   REQUIREDPROGS='arp w'
+  REQFAILED=0
   for p in $REQUIREDPROGS; do
     if ! command -v "$p" >/dev/null 2>&1; then
       echo "$p is required."
-      exit 1
+      REQFAILED=1
     fi
   done
+
+  if [ $REQFAILED = 1 ]; then
+    echo 'net-tools and procps packages has to be installed.'
+    exit 1
+  fi
 
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
