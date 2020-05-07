@@ -207,6 +207,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify net.ipv6.conf.all.accept_source_route in /etc/sysctl.*" {
+  run bash -c "grep -R '^net.ipv6.conf.all.accept_source_route.*0$' /etc/sysctl.*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify net.ipv6.conf.all.accept_ra in /etc/sysctl.*" {
   run bash -c "grep -R '^net.ipv6.conf.all.accept_ra.*0$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
