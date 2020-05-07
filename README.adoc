@@ -375,7 +375,7 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 680 https://github.com/sstephenson/bats[Bats tests]
+There are approximately 700 https://github.com/sstephenson/bats[Bats tests]
 for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
