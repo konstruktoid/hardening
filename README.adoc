@@ -65,6 +65,7 @@ TIMEDATECTL='' // <9>
 VERBOSE='N' // <10>
 AUTOFILL='N' // <11>
 CHANGEME='' // <12>
+MYEMAIL="Your@mail.Only" // <13>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -108,6 +109,7 @@ USERCONF='/etc/systemd/user.conf'
 <10> If you want all the details or not.
 <11> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
 <12> Add something just to verify that you actually glanced the code.
+<13> Add a valid email address, so PSAD can send notifications. 
 
 == Functions
 
