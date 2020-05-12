@@ -46,8 +46,6 @@ function main {
 
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
     USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
-    GATEIP=$(ip route get 1.1.1.1 | awk -F"via " 'NR==1{split($2,a," ");print a[1]}')
-    IFACIP=$(ip route get 1.1.1.1 | awk -F"dev " 'NR==1{split($2,a," ");print a[1]}')
 
     if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       ADMINIP="$USERIP"
