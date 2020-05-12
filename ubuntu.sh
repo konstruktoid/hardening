@@ -87,6 +87,7 @@ function main {
   readonly LOGROTATE
   readonly LOGROTATE_CONF
   readonly LXC
+  readonly MYEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
   readonly RESOLVEDCONF
