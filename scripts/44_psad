@@ -10,20 +10,11 @@ function f_psad {
 
     return
   fi
-  
-  
-  # what email notification
-  read -r -p "What is your EMAIL to get notifications?" MYEMAIL
-  # adding aliases
-  echo "$USER : $MYEMAIL" >> /etc/aliases
-  
-  
-  ### PSAD Configuration
+
   echo -e "127.0.0.1    0; \n$FW_ADMIN    0;" >> "$PSADDL"
-    
   sed -i "s/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             $MYEMAIL"'/' "$PSADCONF"
   sed -i "s/HOSTNAME                    _CHANGEME_;/HOSTNAME                    $(hostname --fqdn);/" "$PSADCONF"
-  sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' "$PSADCONF"       #### Run as PSAD and IDS/IPS too :)
+  sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' "$PSADCONF"
   sed -i 's/DANGER_LEVEL2               15;/DANGER_LEVEL2               15;/' "$PSADCONF"
   sed -i 's/DANGER_LEVEL3               150;/DANGER_LEVEL3               150;/' "$PSADCONF"
   sed -i 's/DANGER_LEVEL4               1500;/DANGER_LEVEL4               1500;/' "$PSADCONF"
@@ -35,20 +26,14 @@ function f_psad {
   sed -i 's/ENABLE_MAC_ADDR_REPORTING   N;/ENABLE_MAC_ADDR_REPORTING   Y;/' "$PSADCONF"
   sed -i 's/AUTO_IDS_DANGER_LEVEL       5;/AUTO_IDS_DANGER_LEVEL       1;/' "$PSADCONF"
   sed -i 's/ENABLE_AUTO_IDS_EMAILS      ;/ENABLE_AUTO_IDS_EMAILS      Y;/' "$PSADCONF"
-  sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' "$PSADCONF"      #### Add PORTS TO BE IGNORED by PSAD
+  sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' "$PSADCONF"
   sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/ufw.log;/' "$PSADCONF"
 
-  ######## IF USE THIS SERVER ON LOCAL NETWORK (NOT CLOUD SERVER) NEED UNCOMMENT THIS ########
-  ###sed -i 's/HOME_NET                    any;/HOME_NET                    192.168.1.0\/24;/' "$PSADCONF"
-  ###sed -i 's/EXTERNAL_NET                    *;/EXTERNAL_NET                    any;/' "$PSADCONF"
-  
   ufw reload
   psad -R
   psad --sig-update
   psad -H
   psad -R
-  
-  ###Analyze it
   psad --fw-analyze
 
   if [[ $VERBOSE == "Y" ]]; then
