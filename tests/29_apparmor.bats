@@ -2,9 +2,9 @@
 
 load test_helper
 
-@test "Ensure that AppArmor is not disabled on the kernel command line" {
-  run bash -c "grep -R 'apparmor=0' /boot/*"
-  [ "$status" -eq 1 ]
+@test "Verify that AppArmor is enabled on the kernel command line" {
+  run bash -c "grep 'apparmor=1' /proc/cmdline"
+  [ "$status" -eq 0 ]
 }
 
 @test "Verify that AppArmor is enabled" {

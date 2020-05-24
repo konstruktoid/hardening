@@ -32,6 +32,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that audispd-plugins is installed" {
+  run packageInstalled 'audispd-plugins'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that debsums is installed" {
   run packageInstalled 'debsums'
   [ "$status" -eq 0 ]

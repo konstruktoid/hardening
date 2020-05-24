@@ -36,6 +36,11 @@ function main {
         }
   done
 
+  if [ $REQFAILED = 1 ]; then
+    echo 'net-tools and procps packages has to be installed.'
+    exit 1
+  fi
+
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
   LXC="0"

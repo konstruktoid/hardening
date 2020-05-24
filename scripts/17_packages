@@ -6,7 +6,7 @@ function f_package_install {
   local VM
 
   APPARMOR="apparmor-profiles apparmor-utils libpam-apparmor"
-  AUDITD="auditd"
+  AUDITD="auditd audispd-plugins"
   VM=""
 
   if dmesg | grep -i -E "dmi.*vmware"; then
