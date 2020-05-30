@@ -36,7 +36,7 @@ function main {
         }
   done
 
-  if [ $REQFAILED = 1 ]; then
+  if [ "$REQFAILED" = 1 ]; then
     echo 'net-tools and procps packages has to be installed.'
     exit 1
   fi
