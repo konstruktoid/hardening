@@ -140,7 +140,6 @@ function main {
   f_adduser
   f_rootaccess
   f_package_install
-  f_psad
   f_coredump
   f_usbguard
   f_postfix
@@ -153,6 +152,7 @@ function main {
   f_cron
   f_ctrlaltdel
   f_auditd
+  f_psad
   f_aide
   f_rhosts
   f_users
