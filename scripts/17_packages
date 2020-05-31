@@ -33,7 +33,7 @@ function f_package_install {
   fi
   
   for deb_install in $PACKAGE_INSTALL; do
-    sudo "$APT" install -y --no-install-recommends "$deb_install"
+    "$APT" install --no-install-recommends "$deb_install"
   done
 
   if dpkg -l | grep -q sysstat; then
@@ -51,7 +51,7 @@ function f_package_remove {
   PACKAGE_REMOVE="apport* autofs avahi* beep git pastebinit popularity-contest rsh* rsync talk* telnet* tftp* whoopsie xinetd yp-tools ypbind"
 
   for deb_remove in $PACKAGE_REMOVE; do
-    sudo "$APT" purge "$deb_remove"
+    "$APT" purge "$deb_remove"
   done
 
   ((SCRIPT_COUNT++))
