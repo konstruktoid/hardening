@@ -28,11 +28,11 @@ function main {
     exit 1
   fi
   
-  for p in "${REQUIREDPROGS[@]}"
+  for p in $REQUIREDPROGS
     do
       command -v "$p" > /dev/null 2>&1 || {
         echo "Installing $p required package..." 
-        sudo apt install "$p"
+        sudo apt -y install "$p"
         }
   done
 
@@ -119,6 +119,7 @@ function main {
   f_pre
   f_kernel
   f_firewall
+  f_psad
   f_disablenet
   f_disablefs
   f_disablemod
@@ -143,7 +144,6 @@ function main {
   f_coredump
   f_usbguard
   f_postfix
-  f_psad
   f_apport
   f_motdnews
   f_rkhunter
