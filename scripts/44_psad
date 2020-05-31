@@ -28,6 +28,31 @@ function f_psad {
   sed -i 's/ENABLE_AUTO_IDS_EMAILS      ;/ENABLE_AUTO_IDS_EMAILS      Y;/' "$PSADCONF"
   sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' "$PSADCONF"
   sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/ufw.log;/' "$PSADCONF"
+  
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
+  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
+  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
+  
+  ufw default allow outgoing comment 'allow all outgoing traffic'
+  ufw default deny incoming comment 'deny all incoming traffic'
+  ufw logging on
+  
+  iptables -A INPUT -j LOG
+  iptables -A FORWARD -j LOG
+  ip6tables -A INPUT -j LOG
+  ip6tables -A FORWARD -j LOG
+
+  netfilter-persistent save
+  netfilter-persistent reload
 
   ufw reload
   psad -R
