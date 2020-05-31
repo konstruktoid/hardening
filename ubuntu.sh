@@ -119,7 +119,6 @@ function main {
   f_pre
   f_kernel
   f_firewall
-  f_psad
   f_disablenet
   f_disablefs
   f_disablemod
@@ -141,6 +140,7 @@ function main {
   f_adduser
   f_rootaccess
   f_package_install
+  f_psad
   f_coredump
   f_usbguard
   f_postfix
