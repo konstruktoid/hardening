@@ -50,7 +50,7 @@ function f_package_remove {
   local PACKAGE_REMOVE
   PACKAGE_REMOVE="apport* autofs avahi* beep git pastebinit popularity-contest rsh* rsync talk* telnet* tftp* whoopsie xinetd yp-tools ypbind"
 
-  for deb_remove in "$PACKAGE_REMOVE; do
+  for deb_remove in $PACKAGE_REMOVE; do
     sudo "$APT" purge "$deb_remove"
   done
 
