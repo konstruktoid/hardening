@@ -9,6 +9,10 @@ function f_aa_enforce {
     echo 'session optional pam_apparmor.so order=user,group,default' > /etc/pam.d/apparmor
   fi
 
+  if ! grep -q 'apparmor=1' /proc/cmdline; then
+    echo "GRUB_CMDLINE_LINUX=\"\$GRUB_CMDLINE_LINUX apparmor=1 security=apparmor\"" > "$DEFAULTGRUB/99-hardening-apparmor.cfg"
+  fi
+
   systemctl enable apparmor.service
   systemctl restart apparmor.service
 
