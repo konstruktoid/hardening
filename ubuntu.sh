@@ -19,19 +19,22 @@ fi
 function main {
   clear
 
-  REQUIREDPROGS='arp w'
-  REQFAILED=0
-  for p in $REQUIREDPROGS; do
-    if ! command -v "$p" >/dev/null 2>&1; then
-      echo "$p is required."
-      REQFAILED=1
-    fi
-  done
-
-  if [ $REQFAILED = 1 ]; then
-    echo 'net-tools and procps packages has to be installed.'
+  if grep -qi 'Ubuntu' "/etc/os-release"; then
+    REQUIREDPROGS='arp w'
+  elif grep -qi 'Debian' "/etc/os-release"; then
+    REQUIREDPROGS='net-tools procps'
+  else
+    echo "/etc/os-release doesn't seem to include ubuntu or debian. Exiting."
     exit 1
   fi
+  
+  for p in "${REQUIREDPROGS[@]}"
+    do
+      command -v "$p" > /dev/null 2>&1 || {
+        echo "Installing $p required package..."
+        sudo apt install "$p" > /dev/null 2>&1 ;
+        }
+  done
 
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
@@ -75,6 +78,8 @@ function main {
   readonly DISABLEMOD
   readonly DISABLENET
   readonly FW_ADMIN
+  readonly GWIP
+  readonly IFIP
   readonly JOURNALDCONF
   readonly LIMITSCONF
   readonly LOGINDCONF
@@ -85,6 +90,8 @@ function main {
   readonly MYEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
+  readonly PSADCONF
+  readonly PSADDL
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
   readonly SECURITYACCESS
@@ -136,6 +143,7 @@ function main {
   f_coredump
   f_usbguard
   f_postfix
+  f_psad
   f_apport
   f_motdnews
   f_rkhunter
