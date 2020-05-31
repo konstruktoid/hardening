@@ -31,8 +31,8 @@ function main {
   for p in "${REQUIREDPROGS[@]}"
     do
       command -v "$p" > /dev/null 2>&1 || {
-        echo "Installing $p required package..."
-        sudo apt install "$p" > /dev/null 2>&1 ;
+        echo "Installing $p required package..." 
+        sudo apt install "$p"
         }
   done
 
