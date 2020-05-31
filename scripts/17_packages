@@ -27,9 +27,9 @@ function f_package_install {
 
   local PACKAGE_INSTALL
   if grep -qi 'Ubuntu' "/etc/os-release"; then
-    PACKAGE_INSTALL="acct aide-common debsums gnupg2 haveged netfilter-persistent libpam-cracklib libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM"
+    PACKAGE_INSTALL="acct aide-common debsums gnupg2 haveged iptables-persistent netfilter-persistent libpam-cracklib libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM"
   elif grep -qi 'Debian' "/etc/os-release"; then
-    PACKAGE_INSTALL="acct aide-common apt-config-auto-update debsums gnupg2 haveged iptables-persistent libpam-cracklib libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd vlock $APPARMOR $AUDITD $VM"
+    PACKAGE_INSTALL="acct aide-common apt-config-auto-update debsums gnupg2 haveged iptables-persistent netfilter-persistent libpam-cracklib libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd vlock $APPARMOR $AUDITD $VM"
   fi
   
   for deb_install in $PACKAGE_INSTALL; do
