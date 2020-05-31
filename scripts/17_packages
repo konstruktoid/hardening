@@ -33,7 +33,7 @@ function f_package_install {
   fi
   
   for deb_install in $PACKAGE_INSTALL; do
-    $APT install --no-install-recommends "$deb_install"
+    sudo $APT install -y --no-install-recommends "$deb_install"
   done
 
   if dpkg -l | grep -q sysstat; then
