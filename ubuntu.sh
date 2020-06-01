@@ -28,12 +28,8 @@ function main {
     exit 1
   fi
   
-  for p in $REQUIREDPROGS
-    do
-      command -v "$p" > /dev/null 2>&1 || {
-        echo "Installing $p required package..." 
-        sudo apt -y install "$p"
-        }
+  for p in $REQUIREDPROGS; do
+    command -v "$p" > /dev/null 2>&1 || { echo "Installing $p required package..."; sudo apt -y install "$p" }
   done
 
   ARPBIN="$(command -v arp)"
@@ -78,8 +74,6 @@ function main {
   readonly DISABLEMOD
   readonly DISABLENET
   readonly FW_ADMIN
-  readonly GWIP
-  readonly IFIP
   readonly JOURNALDCONF
   readonly LIMITSCONF
   readonly LOGINDCONF

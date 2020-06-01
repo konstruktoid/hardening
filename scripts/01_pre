@@ -30,4 +30,9 @@ function f_pre {
     exit 1
   fi
 
+  if ! lsb_release -i | grep 'Ubuntu'; then
+    echo "Ubuntu only. Exiting."
+    echo
+    exit 1
+  fi
 }

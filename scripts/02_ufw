@@ -13,11 +13,11 @@ function f_firewall {
 
   sed -i 's/IPT_SYSCTL=.*/IPT_SYSCTL=\/etc\/sysctl\.conf/' "$UFWDEFAULT"
   ufw --force enable
-  
+
   for admin in $FW_ADMIN; do
     ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
   done
- 
+
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status ufw.service --no-pager
     ufw status verbose
