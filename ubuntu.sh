@@ -28,8 +28,11 @@ function main {
     exit 1
   fi
   
-  for p in $REQUIREDPROGS; do
-    command -v "$p" > /dev/null 2>&1 || { echo "Installing $p required package..."; sudo apt -y install "$p" }
+  for pre_require in $REQUIREDPROGS; do
+    if ! command -v "$pre_require" >/dev/null 2>&1; then
+      echo "Installing $pre_require required package..."
+      $APT -y install "$pre_require"
+    fi
   done
 
   ARPBIN="$(command -v arp)"
