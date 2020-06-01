@@ -116,6 +116,7 @@ function main {
   f_pre
   f_kernel
   f_firewall
+  f_psad
   f_disablenet
   f_disablefs
   f_disablemod
@@ -149,7 +150,6 @@ function main {
   f_cron
   f_ctrlaltdel
   f_auditd
-  f_psad
   f_aide
   f_rhosts
   f_users
