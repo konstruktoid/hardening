@@ -114,6 +114,7 @@ function main {
   done
 
   f_pre
+  f_package_install
   f_kernel
   f_firewall
   f_psad
@@ -137,7 +138,6 @@ function main {
   f_limitsconf
   f_adduser
   f_rootaccess
-  f_package_install
   f_coredump
   f_usbguard
   f_postfix
