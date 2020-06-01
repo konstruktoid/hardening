@@ -31,7 +31,7 @@ function main {
   for pre_require in $REQUIREDPROGS; do
     if ! command -v "$pre_require" >/dev/null 2>&1; then
       echo "Installing $pre_require required package..."
-      $APT -y install "$pre_require"
+      apt -y install "$pre_require"
     fi
   done
 
