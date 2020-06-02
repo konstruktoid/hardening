@@ -31,8 +31,8 @@ function f_psad {
   
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A ufw6-before-output -p icmpv6 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
+  sed -i '/^COMMIT/i -A ufw6-before-output -p icmpv6 -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
   sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
   sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
@@ -60,6 +60,7 @@ function f_psad {
   psad -H
   psad -R
   psad --fw-analyze
+  psad -F
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status psad.service --no-pager
