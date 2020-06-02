@@ -39,10 +39,11 @@
 # Changes to the time
 -a always,exit -F arch=b64 -S settimeofday -k audit_time_rules
 -a always,exit -F arch=b64 -S adjtimex -k audit_time_rules
--a always,exit -F arch=b64 -S clock_settime -k audit_time_rules
+-a always,exit -F arch=b64 -S clock_settime -F a0=0x0 -F key=time-change
+-a always,exit -F arch=b32 -S stime -F key=audit_time_rules
 -a always,exit -F arch=b32 -S settimeofday -k audit_time_rules
 -a always,exit -F arch=b32 -S adjtimex -k audit_time_rules
--a always,exit -F arch=b32 -S clock_settime -k audit_time_rules
+-a always,exit -F arch=b32 -S clock_settime -F a0=0x0 -F key=time-change
 
 # Cron configuration & scheduled jobs
 -w /etc/cron.allow -p wa -k cron
@@ -88,7 +89,7 @@
 -w /etc/login.defs -p wa -k login
 -w /etc/securetty -p wa -k login
 -w /var/log/faillog -p wa -k login
--w /var/run/faillock/ -p wa -k logins
+-w /var/run/faillock -p wa -k logins
 -w /var/log/lastlog -p wa -k login
 -w /var/log/tallylog -p wa -k login
 
@@ -120,8 +121,10 @@
 -w /etc/modules -p wa -k modprobe
 
 # Module manipulations
+-a always,exit -F arch=b64 -S finit_module -F key=modules
 -a always,exit -F arch=b64 -S init_module -S delete_module -F key=modules
 -a always,exit -F arch=b64 -S init_module -F key=modules
+-a always,exit -F arch=b32 -S finit_module -F key=modules
 -a always,exit -F arch=b32 -S init_module -S delete_module -F key=modules
 -a always,exit -F arch=b32 -S init_module -F key=modules
 
@@ -254,3 +257,8 @@
 -a always,exit -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
 -a always,exit -F path=/usr/sbin/usernetct -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
 -a always,exit -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=4294967295 -F key=privileged
+
+# Session activity
+-w /var/run/utmp -p wa -k session
+-w /var/log/btmp -p wa -k session
+-w /var/log/wtmp -p wa -k session
