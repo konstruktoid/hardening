@@ -19,13 +19,8 @@ fi
 function main {
   clear
 
-  if grep -qi 'Ubuntu' "/etc/os-release"; then
-    REQUIREDPROGS='arp w'
-  elif grep -qi 'Debian' "/etc/os-release"; then
+  if grep -qi 'Debian' "/etc/os-release"; then
     REQUIREDPROGS='net-tools procps'
-  else
-    echo "/etc/os-release doesn't seem to include ubuntu or debian. Exiting."
-    exit 1
   fi
   
   for pre_require in $REQUIREDPROGS; do
