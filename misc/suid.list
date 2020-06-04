@@ -78,11 +78,6 @@ iconv
 iftop
 ionice
 ip
-ip6tables
-ip6tables-restore
-iptables
-iptables-restore
-iptables-save
 irb
 jjs
 journalctl
