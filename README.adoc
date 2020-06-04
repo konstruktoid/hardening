@@ -139,7 +139,7 @@ Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
 `DefaultLimitNPROC` to 1024.
 
 ==== 06_journalctl
-Compress logs, forward to syslog and make log storage persistent. Ensure rsylog
+Compress logs, forward to syslog and make log storage persistent. Ensure rsyslog
 writes logs with stricter permissions.
 
 ==== 07_timesyncd
