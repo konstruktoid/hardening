@@ -27,7 +27,7 @@ function f_resolvedconf {
   systemctl daemon-reload
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status resolvconf.service --no-pager
+    journalctl -r -n10 -u systemd-resolved --no-pager
     echo
   fi
 
