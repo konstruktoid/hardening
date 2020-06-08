@@ -9,6 +9,10 @@ function f_journalctl {
 
   systemctl restart systemd-journald
 
+  if [ -w /etc/rsyslog.conf ]; then
+    sed -i "s/^\$FileCreateMode.*/\$FileCreateMode 0600/g" "$RSYSLOGCONF"
+  fi
+
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status systemd-journald --no-pager
     echo

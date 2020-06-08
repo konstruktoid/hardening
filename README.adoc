@@ -89,6 +89,7 @@ PSADCONF='/etc/psad/psad.conf'
 PSADDL='/etc/psad/auto_dl'
 RESOLVEDCONF='/etc/systemd/resolved.conf'
 RKHUNTERCONF='/etc/default/rkhunter'
+RSYSLOGCONF='/etc/rsyslog.conf'
 SECURITYACCESS='/etc/security/access.conf'
 SSHFILE='/etc/ssh/ssh_config'
 SSHDFILE='/etc/ssh/sshd_config'
@@ -143,7 +144,8 @@ Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
 `DefaultLimitNPROC` to 1024.
 
 ==== 06_journalctl
-Compress logs, forward to syslog and make log storage persistent.
+Compress logs, forward to syslog and make log storage persistent. Ensure rsyslog
+writes logs with stricter permissions.
 
 ==== 07_timesyncd
 Add four NTP-servers with a latency < 50ms from `$NTPSERVERPOOL`.

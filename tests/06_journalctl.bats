@@ -21,3 +21,8 @@ load test_helper
   run bash -c "grep '^compress$' $LOGROTATE"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify FileCreateMode in $RSYSLOGCONF" {
+  run bash -c "grep '^\$FileCreateMode 0600$' $RSYSLOGCONF"
+  [ "$status" -eq 0 ]
+}
