@@ -11,7 +11,7 @@ function f_psad {
     return
   fi
 
-  echo -e "127.0.0.1    0; \n$FW_ADMIN    0;" >> "$PSADDL"
+  echo "$FW_ADMIN    0;" >> "$PSADDL"
   sed -i "s/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             $MYEMAIL;/" "$PSADCONF"
   sed -i "s/HOSTNAME                    _CHANGEME_;/HOSTNAME                    $(hostname --fqdn);/" "$PSADCONF"
   sed -i 's/ENABLE_AUTO_IDS             N;/ENABLE_AUTO_IDS               Y;/' "$PSADCONF"
@@ -21,7 +21,6 @@ function f_psad {
   sed -i 's/DANGER_LEVEL5               10000;/DANGER_LEVEL5               10000;/' "$PSADCONF"
   sed -i 's/EMAIL_ALERT_DANGER_LEVEL    1;/EMAIL_ALERT_DANGER_LEVEL    5;/' "$PSADCONF"
   sed -i 's/EMAIL_LIMIT                 0;/EMAIL_LIMIT                 5;/' "$PSADCONF"
-  sed -i 's/EMAIL_LIMIT_STATUS_MSG      Y;/EMAIL_LIMIT_STATUS_MSG      N;/' "$PSADCONF"
   sed -i 's/EXPECT_TCP_OPTIONS             *;/EXPECT_TCP_OPTIONS             Y;/' "$PSADCONF"
   sed -i 's/ENABLE_MAC_ADDR_REPORTING   N;/ENABLE_MAC_ADDR_REPORTING   Y;/' "$PSADCONF"
   sed -i 's/AUTO_IDS_DANGER_LEVEL       5;/AUTO_IDS_DANGER_LEVEL       1;/' "$PSADCONF"
@@ -29,32 +28,6 @@ function f_psad {
   sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' "$PSADCONF"
   sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/ufw.log;/' "$PSADCONF"
   
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A ufw6-before-output -p icmpv6 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A ufw6-before-output -p icmpv6 -m state --state ESTABLISHED,RELATED -j ACCEPT' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/before6.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after.rules
-  sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
-  sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
-  
-  ufw default allow outgoing comment 'allow all outgoing traffic'
-  ufw default deny incoming comment 'deny all incoming traffic'
-  ufw logging on
-  
-  iptables -A INPUT -j LOG
-  iptables -A FORWARD -j LOG
-  ip6tables -A INPUT -j LOG
-  ip6tables -A FORWARD -j LOG
-
-  netfilter-persistent save
-  netfilter-persistent reload
-
-  ufw reload
   psad -R
   psad --sig-update
   psad -H
