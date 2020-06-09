@@ -11,6 +11,7 @@ function f_psad {
     return
   fi
 
+  echo "127.0.0.1    0;" >> "$PSADDL"
   echo "$FW_ADMIN    0;" >> "$PSADDL"
   sed -i "s/EMAIL_ADDRESSES             root@localhost;/EMAIL_ADDRESSES             $MYEMAIL;/" "$PSADCONF"
   sed -i "s/HOSTNAME                    _CHANGEME_;/HOSTNAME                    $(hostname --fqdn);/" "$PSADCONF"
