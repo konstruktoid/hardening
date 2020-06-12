@@ -167,6 +167,7 @@ stdbuf
 strace
 strings
 su
+sysctl
 systemctl
 tac
 tail
