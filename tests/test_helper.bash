@@ -21,7 +21,15 @@ fragmentPath() {
 
 gotSGid() {
   bin="$(command -v "$1")"
-  stat -c %A "$bin" | grep -qi 's'
+  if [ -x "$bin" ]; then
+    if [ "$(stat -c %a "$bin")" -le 777 ]; then
+      exit 0
+    else
+      exit 1
+    fi
+  else
+    exit 0
+  fi
 }
 
 isMasked() {
