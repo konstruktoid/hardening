@@ -47,7 +47,7 @@ function main {
     if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       ADMINIP="$USERIP"
     else
-      ADMINIP="$(hostname -I)"
+      ADMINIP="$(hostname -I | sed -E 's/\.[0-9]+ /.0\/24 /g')"
     fi
 
     sed -i "s/FW_ADMIN='/FW_ADMIN='$ADMINIP /" ./ubuntu.cfg
