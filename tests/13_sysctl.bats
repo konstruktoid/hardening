@@ -2,6 +2,11 @@
 
 load test_helper
 
+@test "Verify dev.tty.ldisc_autoload in /etc/sysctl.*" {
+  run bash -c "grep -R 'dev.tty.ldisc_autoload.*0$' /etc/sysctl.*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify fs.protected_hardlinks in /etc/sysctl.*" {
   run bash -c "grep -R '^fs.protected_hardlinks.*1$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
