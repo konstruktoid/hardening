@@ -15,12 +15,6 @@ available as a link:systemd.adoc[separate document].
 If you're interested in testing your host settings, you'll find the
 link:README.adoc#tests[instructions here].
 
-If you're using Ansible, a playbook with most of the above functions implemented
-is available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
-
-A basic ISO-generation script is available in the https://github.com/konstruktoid/hardening-geniso[konstruktoid/hardening-geniso]
-repository.
-
 NOTE: This is a constant work in progress. Make sure you understand what it
 does. `Read the code`.
 
@@ -45,10 +39,20 @@ Note that `/tmp` and `/var/tmp` will be added automatically by the script.
 === Login, set a Grub2 password, configure and run ubuntu.sh
 Do not add any packages. +
 Log in. +
-Select a Grub2 password (using `grub-mkpasswd-pbkdf2`). +
-Download the script using `git clone https://github.com/konstruktoid/hardening.git`. +
-Change the configuration options in the `ubuntu.cfg` file and last but not least
-run the script, `sudo bash ubuntu.sh`. +
+Select a Grub2 password with `grub-mkpasswd-pbkdf2`. +
+Download the script: `git clone https://github.com/konstruktoid/hardening.git`. +
+Change the configuration options in the `ubuntu.cfg` file. +
+Run the script: `sudo bash ubuntu.sh`. +
+Reboot.
+
+If possible, use the newly installed and configured system as a reference,
+or golden, image. Use that image as a baseline installation media and ensure
+that any future installation comply with benchmarks and policies using a
+configuration management tool, e.g https://www.ansible.com/[Ansible] or
+https://puppet.com/[Puppet].
+
+If you're using Ansible, a playbook with most of the functions in this script is
+available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
 
 == Configuration options
 [source,shell]
@@ -266,6 +270,10 @@ Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
+==== 99_post
+Ensure `secureboot-db` is installed, update grub and ensure strict permissions
+on boot files.
+
 ==== 99_reboot
 Print if a reboot is required.
 
@@ -313,7 +321,6 @@ f_rhosts
 f_users
 f_lockroot
 f_package_remove
-f_aptget_clean
 f_suid
 f_restrictcompilers
 f_umask
@@ -322,6 +329,7 @@ f_aa_enforce
 f_aide_post
 f_aide_timer
 f_aptget_noexec
+f_aptget_clean
 f_systemddelta
 f_post
 f_checkreboot
@@ -363,141 +371,6 @@ oscap info --fetch-remote-resources ./ssg-ubuntu1804-ds.xml
 sudo oscap xccdf eval --fetch-remote-resources \
   --profile xccdf_org.ssgproject.content_profile_anssi_np_nt28_high \
   --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
-----
-
-== Structure
-[source,shell]
-----
-.
-├── LICENSE
-├── README.adoc
-├── Vagrantfile
-├── action-shellcheck
-│   ├── Dockerfile
-│   ├── README.md
-│   └── entrypoint.sh
-├── checkScore.sh
-├── config
-│   ├── aidecheck.service
-│   ├── aidecheck.timer
-│   ├── initpath.sh
-│   └── tmp.mount
-├── createPartitions.sh
-├── logo
-│   ├── horizontal.png
-│   ├── icon.png
-│   └── vertical.png
-├── misc
-│   ├── audit-aggressive.rules
-│   ├── audit-base.rules
-│   ├── audit-docker.rules
-│   ├── audit.footer
-│   ├── audit.header
-│   ├── auditgenerator.sh
-│   ├── fdcount.sh
-│   ├── logrotate.conf
-│   ├── mozilla-firefox-user.js
-│   ├── proc_check.sh
-│   ├── suid.list
-│   ├── sysctl.conf
-│   └── systemd_scan.sh
-├── renovate.json
-├── runTests.sh
-├── scripts
-│   ├── 01_pre
-│   ├── 02_ufw
-│   ├── 03_disablenet
-│   ├── 04_disablefs
-│   ├── 05_systemdconf
-│   ├── 06_journalctl
-│   ├── 07_timesyncd
-│   ├── 08_fstab
-│   ├── 09_prelink
-│   ├── 10_aptget
-│   ├── 11_hosts
-│   ├── 12_logindefs
-│   ├── 13_sysctl
-│   ├── 14_limits
-│   ├── 15_adduser
-│   ├── 16_rootaccess
-│   ├── 17_packages
-│   ├── 18_sshdconfig
-│   ├── 19_password
-│   ├── 20_cron
-│   ├── 21_ctraltdel
-│   ├── 22_auditd
-│   ├── 23_disablemod
-│   ├── 24_aide
-│   ├── 25_rhosts
-│   ├── 26_users
-│   ├── 27_suid
-│   ├── 28_umask
-│   ├── 29_apparmor
-│   ├── 30_path
-│   ├── 31_logindconf
-│   ├── 32_resolvedconf
-│   ├── 33_rkhunter
-│   ├── 34_issue
-│   ├── 35_apport
-│   ├── 36_lockroot
-│   ├── 37_coredump
-│   ├── 38_postfix
-│   ├── 39_motdnews
-│   ├── 40_usbguard
-│   ├── 41_compilers
-│   ├── 42_kernel
-│   ├── 43_sudo
-│   ├── 98_systemddelta
-│   ├── 99_post
-│   └── 99_reboot
-├── systemd.adoc
-├── tests
-│   ├── 01_pre.bats
-│   ├── 02_ufw.bats
-│   ├── 03_disablenet.bats
-│   ├── 04_disablefs.bats
-│   ├── 05_systemdconf.bats
-│   ├── 06_journalctl.bats
-│   ├── 07_timesyncd.bats
-│   ├── 08_fstab.bats
-│   ├── 10_aptget.bats
-│   ├── 11_hosts.bats
-│   ├── 12_logindefs.bats
-│   ├── 13_sysctl.bats
-│   ├── 14_limits.bats
-│   ├── 15_adduser.bats
-│   ├── 16_rootaccess.bats
-│   ├── 17_packages.bats
-│   ├── 18_sshd.bats
-│   ├── 19_password.bats
-│   ├── 20_cron.bats
-│   ├── 21_ctrlaltdel.bats
-│   ├── 22_auditd.bats
-│   ├── 23_disablemod.bats
-│   ├── 24_aide.bats
-│   ├── 26_users.bats
-│   ├── 27_suid.bats
-│   ├── 28_umask.bats
-│   ├── 29_apparmor.bats
-│   ├── 31_logindconf.bats
-│   ├── 32_resolvedconf.bats
-│   ├── 33_rkhunter.bats
-│   ├── 35_apport.bats
-│   ├── 36_lockroot.bats
-│   ├── 37_coredump.bats
-│   ├── 38_postfix.bats
-│   ├── 39_motdnews.bats
-│   ├── 40_usbguard.bats
-│   ├── 41_compilers.bats
-│   ├── 42_kernel.bats
-│   ├── 43_sudo.bats
-│   ├── 99_misc.bats
-│   ├── runHostTests.sh
-│   └── test_helper.bash
-├── ubuntu.cfg
-└── ubuntu.sh
-
-6 directories, 121 files
 ----
 
 == Recommended reading
