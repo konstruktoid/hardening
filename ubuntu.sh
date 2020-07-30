@@ -121,8 +121,6 @@ function main {
   f_timesyncd
   f_fstab
   f_prelink
-  f_aptget_configure
-  f_aptget
   f_hosts
   f_issue
   f_sudo
@@ -156,8 +154,6 @@ function main {
   f_aa_enforce
   f_aide_post
   f_aide_timer
-  f_aptget_noexec
-  f_aptget_clean
   f_systemddelta
   f_post
   f_checkreboot
