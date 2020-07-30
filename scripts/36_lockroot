@@ -1,7 +1,7 @@
 function f_lockroot {
   echo "[$SCRIPT_COUNT] Lock root account"
 
-  usermod -L root
+  #usermod -L root
 
   if [[ $VERBOSE == "Y" ]]; then
     passwd -S root
