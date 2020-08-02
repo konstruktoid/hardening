@@ -97,6 +97,7 @@
 -w /etc/hosts -p wa -k audit_rules_networkconfig_modification
 -w /etc/network/ -p wa -k audit_rules_networkconfig_modification
 -w /etc/sysconfig/network -p wa -k audit_rules_networkconfig_modification
+-w /etc/netplan/ -p wa -k audit_rules_networkconfig_modification
 
 # System startup scripts
 -w /etc/inittab -p wa -k init
