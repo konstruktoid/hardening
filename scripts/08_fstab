@@ -1,8 +1,6 @@
 function f_fstab {
   echo "[$SCRIPT_COUNT] /etc/fstab, system/tmp.mount and system/var-tmp.mount"
 
-  local TMPFSTAB
-
   cp ./config/tmp.mount /etc/systemd/system/tmp.mount
   cp /etc/fstab /etc/fstab.bck
 
