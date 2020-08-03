@@ -6,29 +6,11 @@ function f_fstab {
   cp ./config/tmp.mount /etc/systemd/system/tmp.mount
   cp /etc/fstab /etc/fstab.bck
 
-  TMPFSTAB=$(mktemp --tmpdir fstab.XXXXX)
-
   sed -i '/floppy/d' /etc/fstab
-
-  grep -v -E '[[:space:]]/boot[[:space:]]|[[:space:]]/home[[:space:]]|[[:space:]]/var/log[[:space:]]|[[:space:]]/var/log/audit[[:space:]]' /etc/fstab > "$TMPFSTAB"
-
-  if grep -q '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
-  fi
-
-  if grep -q '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
-  fi
-
-  if grep -q '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
-  fi
-
-  if grep -q '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
-  fi
-
-  cp "$TMPFSTAB" /etc/fstab
+  sed -i '/[[:space:]]\/boot[[:space:]].*defaults[[:space:]]/s/defaults/defaults,nosuid,nodev/g' /etc/fstab
+  sed -i '/[[:space:]]\/home[[:space:]].*defaults[[:space:]]/s/defaults/defaults,nosuid,nodev/g' /etc/fstab
+  sed -i '/[[:space:]]\/var\/log[[:space:]].*defaults[[:space:]]/s/defaults/defaults,nosuid,nodev,noexec/g' /etc/fstab
+  sed -i '/[[:space:]]\/var\/log\/audit[[:space:]].*defaults[[:space:]]/s/defaults/defaults,nosuid,nodev,noexec/g' /etc/fstab
 
   if ! grep -q '/run/shm ' /etc/fstab; then
     echo 'none /run/shm tmpfs rw,noexec,nosuid,nodev 0 0' >> /etc/fstab
