@@ -17,18 +17,8 @@ load test_helper
   [ "$status" -eq 1 ]
 }
 
-@test "Ensure /var/tmp is not present in /etc/fstab" {
-  run bash -c "grep -e '[[:space:]]/var/tmp[[:space:]]' /etc/fstab"
-  [ "$status" -eq 1 ]
-}
-
 @test "Verify that tmp.mount is enabled" {
   run bash -c "systemctl is-enabled tmp.mount"
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify that var-tmp.mount is enabled" {
-  run bash -c "systemctl is-enabled var-tmp.mount"
   [ "$status" -eq 0 ]
 }
 

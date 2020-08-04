@@ -32,9 +32,10 @@ swap
 /var
 /var/log (rw,nosuid,nodev,noexec)
 /var/log/audit (rw,nosuid,nodev,noexec)
+/var/tmp (rw,noexec,nodev,nosuid)
 ----
 
-Note that `/tmp` and `/var/tmp` will be added automatically by the script.
+Note that `/tmp` will be added automatically by the script.
 
 === Login, set a Grub2 password, configure and run ubuntu.sh
 Do not add any packages. +
