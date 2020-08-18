@@ -204,6 +204,9 @@ Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
 `net-pf-31` `pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage`
 `uvcvideo` `v4l2_common` kernel modules.
 
+Note that disabling the `usb-storage` will disable any usage of USB storage
+devices, if such devices are needed `USBGuard` should be configured accordingly.
+
 ==== 24_aide
 Configure `aide`.
 
