@@ -23,7 +23,7 @@ load test_helper
 }
 
 @test "Verify INACTIVE in $USERADD" {
-  run bash -c "grep '^INACTIVE=35$' $USERADD"
+  run bash -c "grep '^INACTIVE=30$' $USERADD"
   [ "$status" -eq 0 ]
 }
 
