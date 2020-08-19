@@ -167,7 +167,9 @@ Update `$SYSCTL` with `$SYSCTL_CONF`.
 Set hard and soft limits.
 
 ==== 15_adduser
-Set `/bin/false` as default shell when adding users.
+Configure `useradd` and `adduser` to set `/bin/false` as default shell,
+home directory permissions to `0750` and lock users 30 days after password
+expires.
 
 ==== 16_rootaccess
 Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
@@ -268,8 +270,10 @@ Restrict compiler access.
 Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 
 ==== 43_sudo
-Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
-`passwd_timeout`.
+Configure `sudo` with `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback`,
+`passwd_timeout` and `timestamp_timeout`.
+
+Restrict `su` to the `sudo` group.
 
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
