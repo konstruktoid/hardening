@@ -381,6 +381,19 @@ sudo oscap xccdf eval --fetch-remote-resources \
   --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
 ----
 
+== Known issues
+Currently this script breaks `snapd`, and installing `snapd` with recommended
+packages will result in the following error when installing a snap:
+
+[source,shell]
+----
+- Setup snap "core" (9804) security profiles (cannot setup profiles for snap "core": cannot create host snap-confine apparmor configuration: cannot reload snap-confine apparmor profile: cannot load apparmor profiles: exec: "apparmor_parser": executable file not found in $PATH
+apparmor_parser output:
+)
+----
+
+Fix is low priority.
+
 == Recommended reading
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 1, Rel 1] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
