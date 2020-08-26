@@ -18,11 +18,11 @@ function f_sudo {
   fi
 
   if ! grep -qER '^Defaults.*passwd_timeout' /etc/sudo*; then
-    echo 'Defaults passwd_timeout=1' > /etc/sudoers.d/15_passwdtimeout
+    echo 'Defaults passwd_timeout=1' > /etc/sudoers.d/015_passwdtimeout
   fi
 
   if ! grep -qER '^Defaults.*timestamp_timeout' /etc/sudo*; then
-    echo 'Defaults timestamp_timeout=5' > /etc/sudoers.d/15_timestamptimeout
+    echo 'Defaults timestamp_timeout=5' > /etc/sudoers.d/016_timestamptimeout
   fi
 
   find /etc/sudoers.d/ -type f -name '[0-9]*' -exec chmod 0440 {} \;
