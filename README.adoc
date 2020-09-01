@@ -177,10 +177,10 @@ Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
 
 ==== 17_packages
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
-`audispd-plugins` `debsums` `gnupg2` `haveged` `libpam-apparmor`
-`libpam-cracklib` `libpam-tmpdir` `needrestart` `openssh-server` `postfix`
-`rkhunter` `sysstat` `systemd-coredump` `tcpd` `update-notifier-common`
-`vlock`.
+`audispd-plugins` `cracklib-runtime``debsums` `gnupg2` `haveged`
+`libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
+`openssh-server` `postfix` `rkhunter` `sysstat` `systemd-coredump` `tcpd`
+`update-notifier-common` `vlock`.
 
 Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`
@@ -190,7 +190,7 @@ Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 Configure the `OpenSSH`-daemon.
 
 ==== 19_password
-Configure `pam_cracklib.so` and `pam_tally2.so`.
+Configure `pam_pwquality.so` and `pam_tally2.so`.
 
 ==== 20_cron
 Allow `root` to use `cron`. Mask `atd`.
