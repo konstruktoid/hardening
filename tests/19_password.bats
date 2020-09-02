@@ -32,6 +32,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify retry in $COMMONPASSWD" {
+  run bash -c "grep '^password.*requisite.*pam_pwquality.so.*[[:space:]]retry=3$' $COMMONPASSWD"
+  [ "$status" -eq 0 ]
+}
+
 @test "Ensure nullok is not used in $COMMONAUTH" {
   run bash -c "grep 'nullok' $COMMONAUTH"
   [ "$status" -eq 1 ]
