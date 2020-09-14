@@ -17,7 +17,7 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 @test "Verify /etc/audit/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/audit/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/audit -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -27,7 +27,7 @@ load test_helper
 }
 
 @test "Verify /etc/audisp/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/audisp/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/audisp -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -42,12 +42,12 @@ load test_helper
 }
 
 @test "Verify /etc/apparmor/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/apparmor/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/apparmor -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/apparmor.d/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/apparmor.d/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/apparmor.d -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -72,7 +72,7 @@ load test_helper
 }
 
 @test "Verify /etc/systemd/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/systemd/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/systemd -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -97,27 +97,27 @@ load test_helper
 }
 
 @test "Verify /etc/cron.d/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/cron.d/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/cron.d -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/cron.daily/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/cron.daily/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/cron.daily -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/cron.hourly/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/cron.hourly/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/cron.hourly -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/cron.monthly/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/cron.monthly/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/cron.monthly -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/cron.weekly/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/cron.weekly/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/cron.weekly -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -202,7 +202,7 @@ load test_helper
 }
 
 @test "Verify /etc/network/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/network/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/network -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -212,12 +212,12 @@ load test_helper
 }
 
 @test "Verify /etc/init.d/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/init.d/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/init.d -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify /etc/init/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/init/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/init -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -247,7 +247,7 @@ load test_helper
 }
 
 @test "Verify /etc/modprobe.d/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/modprobe.d/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/modprobe.d -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
@@ -257,7 +257,7 @@ load test_helper
 }
 
 @test "Verify /etc/pam.d/ in /etc/audit/*" {
-  run bash -c "grep -R '^-w /etc/pam.d/ -p wa' /etc/audit/*"
+  run bash -c "grep -R '^-w /etc/pam.d -p wa' /etc/audit/*"
   [ "$status" -eq 0 ]
 }
 
