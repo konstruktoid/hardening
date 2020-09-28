@@ -146,6 +146,7 @@ rsync
 ruby
 run-mailcap
 run-parts
+rview
 rvim
 scp
 screen
@@ -193,6 +194,7 @@ uudecode
 uuencode
 valgrind
 vi
+view
 vim
 wall
 watch
