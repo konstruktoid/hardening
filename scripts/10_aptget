@@ -97,10 +97,5 @@ function f_aptget_noexec {
     echo 'DPkg::Post-Invoke {"mount -o remount,mode=1777,strictatime,noexec,nodev,nosuid /tmp";};' >> /etc/apt/apt.conf.d/99noexec-tmp
   fi
 
-  if ! grep 'mount.* /var/tmp' /etc/apt/apt.conf.d/* ; then
-    echo 'DPkg::Pre-Invoke {"mount -o remount,exec,nodev,nosuid /var/tmp";};' >> /etc/apt/apt.conf.d/99noexec-tmp
-    echo 'DPkg::Post-Invoke {"mount -o remount,mode=1777,strictatime,noexec,nodev,nosuid /var/tmp";};' >> /etc/apt/apt.conf.d/99noexec-tmp
-  fi
-
   ((SCRIPT_COUNT++))
 }

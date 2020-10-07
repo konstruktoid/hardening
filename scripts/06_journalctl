@@ -9,7 +9,7 @@ function f_journalctl {
 
   systemctl restart systemd-journald
 
-  if [ -w /etc/rsyslog.conf ]; then
+  if [ -w "$RSYSLOGCONF" ]; then
     sed -i "s/^\$FileCreateMode.*/\$FileCreateMode 0600/g" "$RSYSLOGCONF"
   fi
 

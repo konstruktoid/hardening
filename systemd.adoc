@@ -126,31 +126,13 @@ Before=local-fs.target
 What=tmpfs // <1>
 Where=/tmp // <2>
 Type=tmpfs // <3>
-Options=mode=1777,strictatime,nodev,nosuid // <4><5>
+Options=mode=1777,strictatime,nodev,noexec,nosuid // <4><5>
 ----
 
 <1> "an absolute path of a device node, file or other resource to mount."
 <2> "an absolute path of a directory of the mount point."
 <3> "a string for the file system type."
 <4> "options to use when mounting."
-<5> add `noexec` if possible.
-
-=== /etc/systemd/system/var-tmp.mount
-[source,shell]
-----
-[Unit]
-Description=Temporary Directory
-Documentation=man:hier(7)
-Before=local-fs.target
-
-[Mount]
-What=tmpfs
-Where=/var/tmp
-Type=tmpfs
-Options=mode=1777,strictatime,nodev,nosuid // <1>
-----
-
-<1> add `noexec` if possible.
 
 == System
 

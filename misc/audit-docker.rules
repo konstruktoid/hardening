@@ -1,29 +1,29 @@
-# Docker
--w /etc/default/docker -k docker
--w /etc/docker -k docker
--w /etc/sysconfig/docker -k docker
--w /etc/sysconfig/docker-network -k docker
--w /etc/sysconfig/docker-registry -k docker
--w /etc/sysconfig/docker-storage -k docker
--w /etc/systemd/system/docker-registry.service -k docker
--w /etc/systemd/system/docker.service -k docker
--w /lib/systemd/system/docker-registry.service -k docker
--w /lib/systemd/system/docker.service -k docker
--w /lib/systemd/system/docker.socket -k docker
--w /usr/bin/containerd -k docker
--w /usr/bin/containerd-shim -k docker
--w /usr/bin/ctr -k docker
--w /usr/bin/docker -k docker
--w /usr/bin/docker-containerd -k docker
--w /usr/bin/docker-containerd-ctr -k docker
--w /usr/bin/docker-containerd-shim -k docker
--w /usr/bin/docker-init -k docker
--w /usr/bin/docker-proxy -k docker
--w /usr/bin/docker-runc -k docker
--w /usr/bin/dockerd -k docker
--w /usr/bin/dockerd-ce -k docker
--w /usr/lib/systemd/system/docker-registry.service -k docker
--w /usr/lib/systemd/system/docker.service -k docker
--w /usr/sbin/runc -k docker
--w /var/lib/docker -k docker
--w /var/run/docker.sock -k docker
+# Docker configuration and tools
+-w /etc/default/docker -p rwxa -k docker
+-w /etc/docker -p rwxa -k docker
+-w /etc/sysconfig/docker -p rwxa -k docker
+-w /etc/sysconfig/docker-network -p rwxa -k docker
+-w /etc/sysconfig/docker-registry -p rwxa -k docker
+-w /etc/sysconfig/docker-storage -p rwxa -k docker
+-w /etc/systemd/system/docker-registry.service -p rwxa -k docker
+-w /etc/systemd/system/docker.service -p rwxa -k docker
+-w /lib/systemd/system/docker-registry.service -p rwxa -k docker
+-w /lib/systemd/system/docker.service -p rwxa -k docker
+-w /lib/systemd/system/docker.socket -p rwxa -k docker
+-w /usr/bin/containerd -p rwxa -k docker
+-w /usr/bin/containerd-shim -p rwxa -k docker
+-w /usr/bin/ctr -p rwxa -k docker
+-w /usr/bin/docker -p rwxa -k docker
+-w /usr/bin/docker-containerd -p rwxa -k docker
+-w /usr/bin/docker-containerd-ctr -p rwxa -k docker
+-w /usr/bin/docker-containerd-shim -p rwxa -k docker
+-w /usr/bin/docker-init -p rwxa -k docker
+-w /usr/bin/docker-proxy -p rwxa -k docker
+-w /usr/bin/docker-runc -p rwxa -k docker
+-w /usr/bin/dockerd -p rwxa -k docker
+-w /usr/bin/dockerd-ce -p rwxa -k docker
+-w /usr/lib/systemd/system/docker-registry.service -p rwxa -k docker
+-w /usr/lib/systemd/system/docker.service -p rwxa -k docker
+-w /usr/sbin/runc -p rwxa -k docker
+-w /var/lib/docker -p rwxa -k docker
+-w /var/run/docker.sock -p rwxa -k docker

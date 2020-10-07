@@ -17,7 +17,6 @@ function f_aa_enforce {
   systemctl restart apparmor.service
 
   find /etc/apparmor.d/ -maxdepth 1 -type f -exec aa-enforce {} \;
-  aa-complain /etc/apparmor.d/usr.sbin.rsyslogd
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status apparmor.service --no-pager

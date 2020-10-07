@@ -32,9 +32,10 @@ swap
 /var
 /var/log (rw,nosuid,nodev,noexec)
 /var/log/audit (rw,nosuid,nodev,noexec)
+/var/tmp (rw,noexec,nodev,nosuid)
 ----
 
-Note that `/tmp` and `/var/tmp` will be added automatically by the script.
+Note that `/tmp` will be added automatically by the script.
 
 === Login, set a Grub2 password, configure and run ubuntu.sh
 Do not add any packages. +
@@ -168,7 +169,9 @@ Update `$SYSCTL` with `$SYSCTL_CONF`.
 Set hard and soft limits.
 
 ==== 15_adduser
-Set `/bin/false` as default shell when adding users.
+Configure `useradd` and `adduser` to set `/bin/false` as default shell,
+home directory permissions to `0750` and lock users 30 days after password
+expires.
 
 ==== 16_rootaccess
 Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
@@ -176,10 +179,10 @@ Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
 
 ==== 17_packages
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
-`audispd-plugins` `debsums` `gnupg2` `haveged` `libpam-apparmor`
-`libpam-cracklib` `libpam-tmpdir` `needrestart` `openssh-server` `postfix`
-`rkhunter` `sysstat` `systemd-coredump` `tcpd` `update-notifier-common`
-`vlock`.
+`audispd-plugins` `cracklib-runtime``debsums` `gnupg2` `haveged`
+`libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
+`openssh-server` `postfix` `rkhunter` `sysstat` `systemd-coredump` `tcpd`
+`update-notifier-common` `vlock`.
 
 Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`
@@ -189,7 +192,7 @@ Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 Configure the `OpenSSH`-daemon.
 
 ==== 19_password
-Configure `pam_cracklib.so` and `pam_tally2.so`.
+Configure `pam_pwquality.so` and `pam_tally2.so`.
 
 ==== 20_cron
 Allow `root` to use `cron`. Mask `atd`.
@@ -204,6 +207,9 @@ Configure `auditd`, use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
 Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
 `net-pf-31` `pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage`
 `uvcvideo` `v4l2_common` kernel modules.
+
+Note that disabling the `usb-storage` will disable any usage of USB storage
+devices, if such devices are needed `USBGuard` should be configured accordingly.
 
 ==== 24_aide
 Configure `aide`.
@@ -266,8 +272,10 @@ Restrict compiler access.
 Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 
 ==== 43_sudo
-Configure `sudo` `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback` and
-`passwd_timeout`.
+Configure `sudo` with `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback`,
+`passwd_timeout` and `timestamp_timeout`.
+
+Restrict `su` to the `sudo` group.
 
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
@@ -374,6 +382,19 @@ sudo oscap xccdf eval --fetch-remote-resources \
   --profile xccdf_org.ssgproject.content_profile_anssi_np_nt28_high \
   --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
 ----
+
+== Known issues
+Currently this script breaks `snapd`, and installing `snapd` with recommended
+packages will result in the following error when installing a snap:
+
+[source,shell]
+----
+- Setup snap "core" (9804) security profiles (cannot setup profiles for snap "core": cannot create host snap-confine apparmor configuration: cannot reload snap-confine apparmor profile: cannot load apparmor profiles: exec: "apparmor_parser": executable file not found in $PATH
+apparmor_parser output:
+)
+----
+
+Fix is low priority.
 
 == Recommended reading
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 1, Rel 1] +
