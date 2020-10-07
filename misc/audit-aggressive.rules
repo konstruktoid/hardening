@@ -1,34 +1,66 @@
-# Monitor admins accessing user files.
--a always,exit -F dir=/home/ -F uid=0 -C auid!=obj_uid -k admin_user_home
+-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S open -F dir=/bin -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/etc -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/home -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/root -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/sbin -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/srv -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/tmp -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/usr/bin -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/usr/sbin -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F dir=/var -F success=0 -k access
+-a always,exit -F arch=b32 -S open -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S open -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b32 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S open -F dir=/bin -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/etc -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/home -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/root -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/sbin -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/srv -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/tmp -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/usr/bin -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/usr/sbin -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F dir=/var -F success=0 -k access
+-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k access
+-a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k access
 
-# File deletions
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/etc -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/bin -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/sbin -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/usr -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/var -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/root -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/lib -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/lib64 -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/etc -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/bin -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/sbin -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/usr -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/var -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/root -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/lib -F auid>=1000 -F auid!=4294967295 -F key=delete
--a always,exit -F arch=b32 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F dir=/lib64 -F auid>=1000 -F auid!=4294967295 -F key=delete
+-a always,exit -F arch=b32 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions
+-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b64 -C euid!=uid -F euid=0 -Fauid>=1000 -F auid!=4294967295 -S execve -k actions
+-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k actions
+-a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=-1 -k actions
+-a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=1000 -F auid!=4294967295 -k actions
 
-# Permissions
--a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
--a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=4294967295 -F key=perm_mod
+-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete
+-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete

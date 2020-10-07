@@ -16,8 +16,3 @@ load test_helper
   run isMasked debug-shell.service
   [ "$status" -eq 0 ]
 }
-
-@test "Verify su access" {
-  run bash -c "grep '^auth required pam_wheel.so$' /etc/pam.d/su"
-  [ "$status" -eq 0 ]
-}

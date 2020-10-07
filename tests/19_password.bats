@@ -2,8 +2,18 @@
 
 load test_helper
 
-@test "Verify password minimum length in $COMMONPASSWD" {
-  run bash -c "grep '^password.*required.*pam_cracklib.*[[:space:]]minlen=15' $COMMONPASSWD"
+@test "Verify minlen in /etc/security/pwquality.conf" {
+  run bash -c "grep '^minlen = 15$' /etc/security/pwquality.conf"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify minclass in /etc/security/pwquality.conf" {
+  run bash -c "grep '^minclass = 3$' /etc/security/pwquality.conf"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify maxrepeat in /etc/security/pwquality.conf" {
+  run bash -c "grep '^maxrepeat = 3$' /etc/security/pwquality.conf"
   [ "$status" -eq 0 ]
 }
 
@@ -19,6 +29,11 @@ load test_helper
 
 @test "Verify remember in $COMMONPASSWD" {
   run bash -c "grep '^password.*required.*pam_pwhistory.so.*[[:space:]]remember=5$' $COMMONPASSWD"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify retry in $COMMONPASSWD" {
+  run bash -c "grep '^password.*requisite.*pam_pwquality.so.*[[:space:]]retry=3$' $COMMONPASSWD"
   [ "$status" -eq 0 ]
 }
 

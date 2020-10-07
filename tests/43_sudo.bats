@@ -21,13 +21,23 @@
 }
 
 @test "Verify sudo passwd_timeout" {
-  run bash -c "grep -qER '^Defaults passwd_timeout=5$' /etc/sudo*"
+  run bash -c "grep -qER '^Defaults passwd_timeout=1$' /etc/sudo*"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify sudo timestamp_timeout" {
+  run bash -c "grep -qER '^Defaults timestamp_timeout=5$' /etc/sudo*"
   [ "$status" -eq 0 ]
 }
 
 @test "Ensure sudo NOPASSWD is not used" {
   run bash -c "grep -qER 'NOPASSWD:' /etc/sudo*"
   [ "$status" -eq 1 ]
+}
+
+@test "Verify su pam_wheel restrictions" {
+  run bash -c "grep -qER '^auth required pam_wheel.so use_uid group=' /etc/pam.d/su"
+  [ "$status" -eq 0 ]
 }
 
 @test "Verify sudo runtime use_pty" {
@@ -51,6 +61,11 @@
 }
 
 @test "Verify sudo runtime passwd_timeout" {
-  run bash -c "sudo -l | grep 'passwd_timeout=5'"
+  run bash -c "sudo -l | grep 'passwd_timeout=1'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify sudo runtime timestamp_timeout" {
+  run bash -c "sudo -l | grep 'timestamp_timeout=5'"
   [ "$status" -eq 0 ]
 }

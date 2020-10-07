@@ -5,6 +5,8 @@ function f_post {
 
   echo "[$SCRIPT_COUNT] Post processing"
 
+  $APT install --no-install-recommends fwupd secureboot-db
+
   if [[ $VERBOSE == "Y" ]]; then
     update-grub
     ((SCRIPT_COUNT++))
@@ -13,5 +15,4 @@ function f_post {
   fi
 
   find /boot/ -type f -name '*.cfg' -exec chmod 0400 {} \;
-
 }

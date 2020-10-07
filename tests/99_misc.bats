@@ -2,6 +2,16 @@
 
 load test_helper
 
+@test "Verify that fwupd is installed" {
+  run packageInstalled 'fwupd'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that secureboot-db is installed" {
+  run packageInstalled 'secureboot-db'
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify NX support is enabled" {
   run bash -c "grep -Ei 'processor|\snx\s' /proc/cpuinfo"
   [ "$status" -eq 0 ]

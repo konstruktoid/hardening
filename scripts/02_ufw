@@ -29,12 +29,20 @@ function f_firewall {
   
   ufw default allow outgoing comment 'allow all outgoing traffic'
   ufw default deny incoming comment 'deny all incoming traffic'
+
+  ufw allow in on lo
+  ufw allow out on lo
+  ufw deny in from 127.0.0.0/8
+  ufw deny in from ::1
+  
   ufw logging on
   ufw reload
 
   for admin in $FW_ADMIN; do
     ufw allow log from "$admin" to any port "$SSH_PORT" proto tcp
   done
+
+  ufw default deny incoming
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status ufw.service --no-pager
