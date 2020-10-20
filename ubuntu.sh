@@ -19,16 +19,19 @@ fi
 function main {
   clear
 
-  if grep -qi 'Debian' "/etc/os-release"; then
-    REQUIREDPROGS='net-tools procps'
-  fi
-  
-  for pre_require in $REQUIREDPROGS; do
-    if ! command -v "$pre_require" >/dev/null 2>&1; then
-      echo "Installing $pre_require required package..."
-      apt -y install "$pre_require"
+  REQUIREDPROGS='arp w'
+  REQFAILED=0
+  for p in $REQUIREDPROGS; do
+    if ! command -v "$p" >/dev/null 2>&1; then
+      echo "$p is required."
+      REQFAILED=1
     fi
   done
+
+  if [ $REQFAILED = 1 ]; then
+    echo 'net-tools and procps packages has to be installed.'
+    exit 1
+  fi
 
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
