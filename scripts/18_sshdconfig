@@ -51,11 +51,11 @@ function f_sshdconfig {
   fi
 
   if ! grep -q "^ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveInterval 300" >> "$SSHDFILE"
+    echo "ClientAliveInterval 200" >> "$SSHDFILE"
   fi
 
   if ! grep -q "^ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveCountMax 0" >> "$SSHDFILE"
+    echo "ClientAliveCountMax 3" >> "$SSHDFILE"
   fi
 
   if ! grep -q "^PermitUserEnvironment" "$SSHDFILE" 2> /dev/null; then
