@@ -98,12 +98,12 @@ load test_helper
 }
 
 @test "Verify OpenSSH ClientAliveInterval" {
-  run sshdConfig '^ClientAliveInterval 300$'
+  run sshdConfig '^ClientAliveInterval 200$'
   [ "$status" -eq 0 ]
 }
 
 @test "Verify OpenSSH ClientAliveCountMax" {
-  run sshdConfig '^ClientAliveCountMax 0$'
+  run sshdConfig '^ClientAliveCountMax 3$'
   [ "$status" -eq 0 ]
 }
 
