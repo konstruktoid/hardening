@@ -5,7 +5,7 @@ image::logo/horizontal.png[Ubuntu Hardening]
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `Ubuntu 20.04 Focal Fossa` and `Ubuntu 20.10 Groovy Gorilla (development branch)`.
+Tested on `Ubuntu 20.04 Focal Fossa` and `Ubuntu 20.10 Groovy Gorilla`.
 
 Systemd required.
 
