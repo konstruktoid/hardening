@@ -18,14 +18,14 @@ link:README.adoc#tests[instructions here].
 NOTE: This is a constant work in progress. Make sure you understand what it
 does. `Read the code`.
 
-If possible, use the newly installed and configured system as a reference,
+When possible, use the newly installed and configured system as a reference,
 or golden, image. Use that image as a baseline installation media and ensure
 that any future installation comply with benchmarks and policies using a
 configuration management tool, e.g https://www.ansible.com/[Ansible] or
 https://puppet.com/[Puppet].
 
-If you're using Ansible, a playbook with most of the functions in this script is
-available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
+An Ansible playbook is available in the https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening]
+repository.
 
 == Howto
 Start the installation of the server. +
