@@ -32,7 +32,7 @@ function f_package_install {
     $APT install --no-install-recommends "$deb_install"
   done
 
-  if dpkg -l | grep -q sysstat; then
+  if [[ -f /etc/default/sysstat ]]; then
     sed -i 's/ENABLED=.*/ENABLED="true"/' /etc/default/sysstat
     systemctl enable sysstat
   fi
