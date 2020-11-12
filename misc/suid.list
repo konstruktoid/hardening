@@ -26,6 +26,9 @@ chown
 chroot
 chsh
 cobc
+composer
+cowsay
+cowthink
 cp
 cpan
 cpulimit
@@ -159,6 +162,7 @@ setarch
 sftp
 sh
 shuf
+slsh
 smbclient
 socat
 soelim
