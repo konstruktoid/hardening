@@ -24,6 +24,10 @@ that any future installation comply with benchmarks and policies using a
 configuration management tool, e.g https://www.ansible.com/[Ansible] or
 https://puppet.com/[Puppet].
 
+== Packer template and Ansible playbook
+A https://www.packer.io/[Packer] template is available in the https://github.com/konstruktoid/hardening-geniso[konstruktoid/hardening-geniso]
+repository.
+
 An Ansible playbook is available in the https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening]
 repository.
 
