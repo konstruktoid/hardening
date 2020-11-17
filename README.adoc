@@ -16,7 +16,7 @@ If you're interested in testing your host settings, you'll find the
 link:README.adoc#tests[instructions here].
 
 NOTE: This is a constant work in progress. Make sure you understand what it
-does. `Read the code`. Do not run this script without first testing in a
+does. Read the code and do not run this script without first testing in a
 non-operational environment.
 
 When possible, use the newly installed and configured system as a reference,
