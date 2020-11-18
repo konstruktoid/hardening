@@ -369,23 +369,6 @@ versions. The script will generate a file named `TESTRESULTS.adoc`.
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 
-=== OpenSCAP testing
-To run a https://github.com/ComplianceAsCode/content[OpenSCAP] test on a
-Ubuntu host, where `v0.1.49` should be replaced with the latest available
-version:
-
-[source,shell]
-----
-sudo apt-get -y install libopenscap8 unzip
-wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.49/scap-security-guide-0.1.49-oval-510.zip
-unzip scap-security-guide-0.1.49-oval-510.zip
-cd scap-security-guide-0.1.49-oval-5.10
-oscap info --fetch-remote-resources ./ssg-ubuntu1804-ds.xml
-sudo oscap xccdf eval --fetch-remote-resources \
-  --profile xccdf_org.ssgproject.content_profile_anssi_np_nt28_high \
-  --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
-----
-
 == Known issues
 Currently this script breaks `snapd`, and installing `snapd` with recommended
 packages will result in the following error when installing a snap:
@@ -400,10 +383,10 @@ apparmor_parser output:
 Fix is low priority.
 
 == Recommended reading
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 1, Rel 1] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 2, Rel 1] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
-https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
+https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS] +
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
