@@ -196,6 +196,7 @@ umount
 unexpand
 uniq
 unshare
+update-alternatives
 uudecode
 uuencode
 valgrind
