@@ -18,6 +18,7 @@ busctl
 busybox
 byebug
 cancel
+capsh
 cat
 chage
 chfn
