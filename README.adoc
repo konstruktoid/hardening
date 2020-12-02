@@ -134,8 +134,7 @@ Enable `ufw`, use `/etc/sysctl.conf`, and allow port 22 from `$FW_ADMIN`.
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
 ==== 04_disablemnt
-Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `squashfs` `udf` `vfat` file
-systems.
+Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `udf` `vfat` file systems.
 
 ==== 05_systemdconf
 Disable coredumps and crash shells, set `DefaultLimitNOFILE` and

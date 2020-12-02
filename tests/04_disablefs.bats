@@ -27,11 +27,6 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that kernel module squashfs is disabled" {
-  run bash -c "modprobe -n -v squashfs | grep 'install /bin/true'"
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify that kernel module udf is disabled" {
   run bash -c "modprobe -n -v udf | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
