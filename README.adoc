@@ -368,18 +368,18 @@ versions. The script will generate a file named `TESTRESULTS.adoc`.
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 
-== Known issues
-Currently this script breaks `snapd`, and installing `snapd` with recommended
-packages will result in the following error when installing a snap:
+== Issues: snapd
+In order to use `snapd` you will have to disable the https://man7.org/linux/man-pages/man7/kernel_lockdown.7.html[kernel_lockdown]
+setting, update `grub`, reboot the host and then reinstall
+`snapd`.
 
 [source,shell]
 ----
-- Setup snap "core" (9804) security profiles (cannot setup profiles for snap "core": cannot create host snap-confine apparmor configuration: cannot reload snap-confine apparmor profile: cannot load apparmor profiles: exec: "apparmor_parser": executable file not found in $PATH
-apparmor_parser output:
-)
+sudo sed -i 's/^/# /g' /etc/default/grub.d/99-hardening-lockdown.cfg
+sudo update-grub
+sudo reboot
+sudo apt-get --assume-yes --reinstall install snapd
 ----
-
-Fix is low priority.
 
 == Recommended reading
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 2, Rel 1] +
