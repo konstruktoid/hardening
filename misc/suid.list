@@ -10,6 +10,7 @@ at
 awk
 base32
 base64
+basenc
 bash
 bpftrace
 bsd-write
@@ -21,12 +22,21 @@ cancel
 capsh
 cat
 chage
+check_by_ssh
+check_cups
+check_log
+check_memory
+check_raid
+check_ssl_cert
+check_statusfile
 chfn
 chmod
 chown
 chroot
 chsh
 cobc
+column
+comm
 composer
 cowsay
 cowthink
@@ -36,6 +46,7 @@ cpulimit
 crash
 crontab
 csh
+csplit
 curl
 cut
 dash
@@ -54,6 +65,7 @@ ed
 emacs
 env
 eqn
+ex
 expand
 expect
 facter
@@ -82,10 +94,12 @@ hexdump
 highlight
 iconv
 iftop
+install
 ionice
 ip
 irb
 jjs
+join
 journalctl
 jq
 jrunscript
@@ -125,6 +139,7 @@ nsenter
 ntfs-3g
 od
 openssl
+paste
 pdb
 perl
 pg
@@ -136,7 +151,9 @@ ping6
 pip
 pkexec
 pppd
+pr
 pry
+psql
 puppet
 python
 rake
@@ -144,6 +161,7 @@ readelf
 red
 redcarpet
 restic
+rev
 rlogin
 rlwrap
 rpm
@@ -168,8 +186,11 @@ smbclient
 socat
 soelim
 sort
+split
 sqlite3
+ss
 ssh
+ssh-keyscan
 start-stop-daemon
 stdbuf
 strace
@@ -181,6 +202,7 @@ tac
 tail
 tar
 taskset
+tbl
 tclsh
 tcpdump
 tcsh
@@ -192,6 +214,7 @@ timeout
 tmux
 top
 traceroute6.iputils
+troff
 ul
 umount
 unexpand
@@ -211,6 +234,7 @@ whois
 wish
 write
 xargs
+xmodmap
 xxd
 xz
 yelp
