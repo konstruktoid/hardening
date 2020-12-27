@@ -10,7 +10,7 @@ function f_fstab {
 
   sed -i '/floppy/d' /etc/fstab
 
-  grep -v -E '[[:space:]]/boot[[:space:]]|[[:space:]]/home[[:space:]]|[[:space:]]/var/log[[:space:]]|[[:space:]]/var/log/audit[[:space:]]' /etc/fstab > "$TMPFSTAB"
+  grep -v -E '[[:space:]]/boot[[:space:]]|[[:space:]]/home[[:space:]]|[[:space:]]/var/log[[:space:]]|[[:space:]]/var/log/audit[[:space:]]|[[:space:]]/var/tmp[[:space:]]' /etc/fstab > "$TMPFSTAB"
 
   if grep -q '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
     grep '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
