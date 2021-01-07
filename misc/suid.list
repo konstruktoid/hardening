@@ -92,6 +92,7 @@ hd
 head
 hexdump
 highlight
+hping3
 iconv
 iftop
 install
