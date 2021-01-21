@@ -3,16 +3,19 @@
 
 apt
 apt-get
+ar
 aria2c
 arp
 ash
 at
+atobm
 awk
 base32
 base64
 basenc
 bash
 bpftrace
+bridge
 bsd-write
 bundler
 busctl
@@ -47,6 +50,7 @@ crash
 crontab
 csh
 csplit
+cupsfilter
 curl
 cut
 dash
@@ -54,6 +58,7 @@ date
 dd
 dialog
 diff
+dig
 dmesg
 dmsetup
 dnf
@@ -66,6 +71,7 @@ emacs
 env
 eqn
 ex
+exiftool
 expand
 expect
 facter
@@ -135,11 +141,13 @@ nl
 nmap
 node
 nohup
+npm
 nroff
 nsenter
 ntfs-3g
 od
 openssl
+openvt
 paste
 pdb
 perl
