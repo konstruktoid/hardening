@@ -188,6 +188,7 @@ sed
 service
 setarch
 sftp
+sg
 sh
 shuf
 slsh
@@ -235,7 +236,10 @@ uuencode
 valgrind
 vi
 view
+vigr
 vim
+vimdiff
+vipw
 wall
 watch
 wget
