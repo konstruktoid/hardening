@@ -94,6 +94,7 @@ gimp
 git
 grep
 gtester
+gzip
 hd
 head
 hexdump
@@ -147,6 +148,7 @@ nsenter
 ntfs-3g
 od
 openssl
+openvpn
 openvt
 paste
 pdb
