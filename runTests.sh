@@ -86,8 +86,6 @@ wait
     if [ -z "${VM}" ]; then
       echo "We dont have any VMs, exiting."
       exit 1
-    else
-      VM="${VM}"
     fi
 
     echo
