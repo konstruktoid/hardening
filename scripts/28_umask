@@ -2,15 +2,15 @@ function f_umask {
   echo "[$SCRIPT_COUNT] umask"
 
   if [ -f /etc/init.d/rc ]; then
-    sed -i 's/umask 022/umask 027/g' /etc/init.d/rc
+    sed -i 's/umask 022/umask 077/g' /etc/init.d/rc
   fi
 
   if ! grep -q -i "umask" "/etc/profile" 2> /dev/null; then
-    echo "umask 027" >> /etc/profile
+    echo "umask 077" >> /etc/profile
   fi
 
   if ! grep -q -i "umask" "/etc/bash.bashrc" 2> /dev/null; then
-    echo "umask 027" >> /etc/bash.bashrc
+    echo "umask 077" >> /etc/bash.bashrc
   fi
 
   if ! grep -q -i "TMOUT" "/etc/profile.d/*" 2> /dev/null; then

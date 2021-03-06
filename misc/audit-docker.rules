@@ -1,4 +1,5 @@
 # Docker configuration and tools
+-a exit,always -F path=/var/lib/docker -F perm=war -k docker
 -w /etc/default/docker -p rwxa -k docker
 -w /etc/docker -p rwxa -k docker
 -w /etc/sysconfig/docker -p rwxa -k docker
@@ -12,6 +13,8 @@
 -w /lib/systemd/system/docker.socket -p rwxa -k docker
 -w /usr/bin/containerd -p rwxa -k docker
 -w /usr/bin/containerd-shim -p rwxa -k docker
+-w /usr/bin/containerd-shim-runc-v1 -p rwxa -k docker
+-w /usr/bin/containerd-shim-runc-v2 -p rwxa -k docker
 -w /usr/bin/ctr -p rwxa -k docker
 -w /usr/bin/docker -p rwxa -k docker
 -w /usr/bin/docker-containerd -p rwxa -k docker
@@ -22,8 +25,10 @@
 -w /usr/bin/docker-runc -p rwxa -k docker
 -w /usr/bin/dockerd -p rwxa -k docker
 -w /usr/bin/dockerd-ce -p rwxa -k docker
+-w /usr/bin/rootlesskit -p rwxa -k docker
+-w /usr/bin/rootlesskit-docker-proxy -p rwxa -k docker
+-w /usr/bin/runc -p rwxa -k docker
 -w /usr/lib/systemd/system/docker-registry.service -p rwxa -k docker
 -w /usr/lib/systemd/system/docker.service -p rwxa -k docker
 -w /usr/sbin/runc -p rwxa -k docker
--w /var/lib/docker -p rwxa -k docker
 -w /var/run/docker.sock -p rwxa -k docker

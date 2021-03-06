@@ -1,4 +1,5 @@
 Vagrant.configure("2") do |config|
+  config.vbguest.installer_options = { allow_kernel_upgrade: true }
   config.vm.provider "virtualbox" do |v|
     v.default_nic_type = "Am79C973"
     v.memory = 2048
@@ -23,5 +24,14 @@ Vagrant.configure("2") do |config|
     groovy.vm.box = "ubuntu/groovy64"
     groovy.vm.hostname = "groovy"
     groovy.vm.network "private_network", ip: "10.7.8.46"
+  end
+
+  config.vm.define "hirsute" do |hirsute|
+    hirsute.ssh.extra_args = ["-o","ConnectTimeout=600"]
+    hirsute.ssh.insert_key = true
+    hirsute.vm.boot_timeout = 600
+    hirsute.vm.box = "ubuntu/hirsute64"
+    hirsute.vm.hostname = "hirsute"
+    hirsute.vm.network "private_network", ip: "10.7.8.47"
   end
 end

@@ -1,12 +1,12 @@
 #!/usr/bin/env bats
 
 @test "Verify umask in /etc/profile" {
-  run bash -c "grep '^umask 027$' /etc/profile"
+  run bash -c "grep '^umask 077$' /etc/profile"
   [ "$status" -eq 0 ]
 }
 
 @test "Verify umask in /etc/bash.bashrc" {
-  run bash -c "grep '^umask 027$' /etc/bash.bashrc"
+  run bash -c "grep '^umask 077$' /etc/bash.bashrc"
   [ "$status" -eq 0 ]
 }
 

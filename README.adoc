@@ -5,7 +5,8 @@ image::logo/horizontal.png[Ubuntu Hardening]
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `Ubuntu 20.04 Focal Fossa` and `Ubuntu 20.10 Groovy Gorilla (development branch)`.
+Tested on `Ubuntu 20.04 Focal Fossa`, `Ubuntu 20.10 Groovy Gorilla`
+and `Ubuntu 21.04 Hirsute Hippo (development branch)`.
 
 Systemd required.
 
@@ -16,7 +17,21 @@ If you're interested in testing your host settings, you'll find the
 link:README.adoc#tests[instructions here].
 
 NOTE: This is a constant work in progress. Make sure you understand what it
-does. `Read the code`.
+does. Read the code and do not run this script without first testing in a
+non-operational environment.
+
+When possible, use the newly installed and configured system as a reference,
+or golden, image. Use that image as a baseline installation media and ensure
+that any future installation comply with benchmarks and policies using a
+configuration management tool, e.g https://www.ansible.com/[Ansible] or
+https://puppet.com/[Puppet].
+
+== Packer template and Ansible playbook
+A https://www.packer.io/[Packer] template is available in the https://github.com/konstruktoid/hardening-geniso[konstruktoid/hardening-geniso]
+repository.
+
+An Ansible playbook is available in the https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening]
+repository.
 
 == Howto
 Start the installation of the server. +
@@ -45,15 +60,6 @@ Download the script: `git clone https://github.com/konstruktoid/hardening.git`. 
 Change the configuration options in the `ubuntu.cfg` file. +
 Run the script: `sudo bash ubuntu.sh`. +
 Reboot.
-
-If possible, use the newly installed and configured system as a reference,
-or golden, image. Use that image as a baseline installation media and ensure
-that any future installation comply with benchmarks and policies using a
-configuration management tool, e.g https://www.ansible.com/[Ansible] or
-https://puppet.com/[Puppet].
-
-If you're using Ansible, a playbook with most of the functions in this script is
-available in my Ansible repository https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening].
 
 == Configuration options
 [source,shell]
@@ -134,8 +140,7 @@ Enable `ufw`, use `/etc/sysctl.conf`, prepare to `psad`, and allow port 22 from 
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
 ==== 04_disablemnt
-Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `squashfs` `udf` `vfat` file
-systems.
+Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `udf` `vfat` file systems.
 
 ==== 05_systemdconf
 Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
@@ -373,36 +378,24 @@ versions. The script will generate a file named `TESTRESULTS.adoc`.
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 
-=== OpenSCAP testing
-To run a https://github.com/ComplianceAsCode/content[OpenSCAP] test on a
-Ubuntu host, where `v0.1.49` should be replaced with the latest available
-version:
+== Issues: snapd
+In order to use `snapd` you will have to disable the https://man7.org/linux/man-pages/man7/kernel_lockdown.7.html[kernel_lockdown]
+setting, update `grub`, reboot the host and then reinstall
+`snapd`.
 
 [source,shell]
 ----
-sudo apt-get -y install libopenscap8 unzip
-wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.49/scap-security-guide-0.1.49-oval-510.zip
-unzip scap-security-guide-0.1.49-oval-510.zip
-cd scap-security-guide-0.1.49-oval-5.10
-oscap info --fetch-remote-resources ./ssg-ubuntu1804-ds.xml
-sudo oscap xccdf eval --fetch-remote-resources \
-  --profile xccdf_org.ssgproject.content_profile_anssi_np_nt28_high \
-  --report ../bionic_stig-report.html ./ssg-ubuntu1804-ds.xml
+sudo sed -i 's/^/# /g' /etc/default/grub.d/99-hardening-lockdown.cfg
+sudo update-grub
+sudo reboot
+sudo apt-get --assume-yes --reinstall install snapd
 ----
-
-== Known issues
-Currently this script breaks `snapd`, and installing `snapd` with recommended
-packages will result in the following error when installing a snap:
-
-[source,shell]
-----
-Fix is low priority.
 
 == Recommended reading
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 1, Rel 1] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 2, Rel 1] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
-https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS]
+https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS] +
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +

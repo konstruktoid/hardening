@@ -33,6 +33,12 @@ done
 
 wait
 
+grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
+  vagrant reload "${v}"
+done
+
+wait
+
 for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}'); do
   vagrant ssh "${VM}" -c 'cp /vagrant/checkScore.sh ~/'
   vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats net-tools shellcheck --no-install-recommends'
@@ -80,8 +86,6 @@ wait
     if [ -z "${VM}" ]; then
       echo "We dont have any VMs, exiting."
       exit 1
-    else
-      VM="${VM}"
     fi
 
     echo
