@@ -191,3 +191,18 @@ load test_helper
   run packageInstalled 'ypbind'
   [ "$status" -eq 1 ]
 }
+
+@test "Verify that psad is installed" {
+  run packageInstalled 'psad'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that iptables-persistent is installed" {
+  run packageInstalled 'iptables-persistent'
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify that netfilter-persistent is installed" {
+  run packageInstalled 'netfilter-persistent'
+  [ "$status" -eq 0 ]
+}

@@ -76,7 +76,7 @@ TIMEDATECTL='' // <9>
 VERBOSE='N' // <10>
 AUTOFILL='N' // <11>
 CHANGEME='' // <12>
-MYEMAIL="Your@mail.Only" // <13>
+MYEMAIL="root@localhost" // <13>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -96,6 +96,8 @@ LOGINDCONF='/etc/systemd/logind.conf'
 LOGINDEFS='/etc/login.defs'
 LOGROTATE='/etc/logrotate.conf'
 PAMLOGIN='/etc/pam.d/login'
+PSADCONF='/etc/psad/psad.conf'
+PSADDL='/etc/psad/auto_dl'
 RESOLVEDCONF='/etc/systemd/resolved.conf'
 RKHUNTERCONF='/etc/default/rkhunter'
 RSYSLOGCONF='/etc/rsyslog.conf'
@@ -108,6 +110,7 @@ TIMESYNCD='/etc/systemd/timesyncd.conf'
 UFWDEFAULT='/etc/default/ufw'
 USERADD='/etc/default/useradd'
 USERCONF='/etc/systemd/user.conf'
+
 ----
 <1> The IP addresses that will be able to connect with SSH, separated by spaces.
 <2> Which group the users have to be member of in order to acess via SSH, separated by spaces.
@@ -131,7 +134,7 @@ USERCONF='/etc/systemd/user.conf'
 Setup script, sets APT flags and permission checks.
 
 ==== 02_firewall
-Enable `ufw`, use `/etc/sysctl.conf`, and allow port 22 from `$FW_ADMIN`.
+Enable `ufw`, use `/etc/sysctl.conf`, prepare to `psad`, and allow port 22 from `$FW_ADMIN`.
 
 ==== 03_disablenet
 Disable `dccp` `sctp` `rds` `tipc` protocols.
@@ -187,7 +190,7 @@ Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
 `audispd-plugins` `cracklib-runtime``debsums` `gnupg2` `haveged`
 `libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
 `openssh-server` `postfix` `rkhunter` `sysstat` `systemd-coredump` `tcpd`
-`update-notifier-common` `vlock`.
+`psad` `update-notifier-common` `vlock`.
 
 Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`
@@ -282,6 +285,9 @@ Configure `sudo` with `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback`,
 
 Restrict `su` to the `sudo` group.
 
+==== 44_psad
+Configure `psad`.
+
 ==== 98_systemddelta
 If verbose, show `systemd-delta`.
 
@@ -331,6 +337,7 @@ f_password
 f_cron
 f_ctrlaltdel
 f_auditd
+f_psad
 f_aide
 f_rhosts
 f_users

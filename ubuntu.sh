@@ -85,6 +85,8 @@ function main {
   readonly MYEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
+  readonly PSADCONF
+  readonly PSADDL
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
   readonly SECURITYACCESS
@@ -133,6 +135,7 @@ function main {
   f_adduser
   f_rootaccess
   f_package_install
+  f_psad
   f_coredump
   f_usbguard
   f_postfix
