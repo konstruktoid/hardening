@@ -37,11 +37,6 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify that cracklib-runtime is installed" {
-  run packageInstalled 'cracklib-runtime'
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify that debsums is installed" {
   run packageInstalled 'debsums'
   [ "$status" -eq 0 ]

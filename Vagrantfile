@@ -26,12 +26,13 @@ Vagrant.configure("2") do |config|
     groovy.vm.network "private_network", ip: "10.7.8.46"
   end
 
-  config.vm.define "hirsute" do |hirsute|
-    hirsute.ssh.extra_args = ["-o","ConnectTimeout=600"]
-    hirsute.ssh.insert_key = true
-    hirsute.vm.boot_timeout = 600
-    hirsute.vm.box = "ubuntu/hirsute64"
-    hirsute.vm.hostname = "hirsute"
-    hirsute.vm.network "private_network", ip: "10.7.8.47"
-  end
+#  https://bugs.launchpad.net/ubuntu/+source/aide/+bug/1903298
+#  config.vm.define "hirsute" do |hirsute|
+#    hirsute.ssh.extra_args = ["-o","ConnectTimeout=600"]
+#    hirsute.ssh.insert_key = true
+#    hirsute.vm.boot_timeout = 600
+#    hirsute.vm.box = "ubuntu/hirsute64"
+#    hirsute.vm.hostname = "hirsute"
+#    hirsute.vm.network "private_network", ip: "10.7.8.47"
+#  end
 end

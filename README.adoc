@@ -187,7 +187,7 @@ Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
 
 ==== 17_packages
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
-`audispd-plugins` `cracklib-runtime``debsums` `gnupg2` `haveged`
+`audispd-plugins` `debsums` `gnupg2` `haveged`
 `libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
 `openssh-server` `postfix` `rkhunter` `sysstat` `systemd-coredump` `tcpd`
 `psad` `update-notifier-common` `vlock`.
