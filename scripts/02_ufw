@@ -27,9 +27,6 @@ function f_firewall {
   sed -i '/^COMMIT/i -A INPUT -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
   sed -i '/^COMMIT/i -A FORWARD -j LOG --log-tcp-options --log-prefix "[UFW "' /etc/ufw/after6.rules
   
-  ufw default allow outgoing comment 'allow all outgoing traffic'
-  ufw default deny incoming comment 'deny all incoming traffic'
-
   ufw allow in on lo
   ufw allow out on lo
   ufw deny in from 127.0.0.0/8
