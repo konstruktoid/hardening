@@ -36,6 +36,7 @@ function main {
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
   LXC="0"
+  SERVERIP="$(ip route | grep '^default' | awk '{print $9}')"
 
   if grep -qE 'container=lxc|container=lxd' /proc/1/environ; then
     LXC="1"
@@ -90,6 +91,7 @@ function main {
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
   readonly SECURITYACCESS
+  readonly SERVERIP
   readonly SSHDFILE
   readonly SSHFILE
   readonly SSH_GRPS
