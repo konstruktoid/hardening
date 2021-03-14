@@ -29,12 +29,9 @@ function f_psad {
   sed -i 's/IGNORE_PORTS             *;/IGNORE_PORTS             NONE;/' "$PSADCONF"
   sed -i 's/IPT_SYSLOG_FILE             \/var\/log\/messages;/IPT_SYSLOG_FILE             \/var\/log\/syslog;/' "$PSADCONF"
   
-  psad -R
   psad --sig-update
   psad -H
-  psad -R
   psad --fw-analyze
-  psad -F
 
   if [[ $VERBOSE == "Y" ]]; then
     systemctl status psad.service --no-pager
