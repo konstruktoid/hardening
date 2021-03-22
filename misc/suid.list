@@ -45,11 +45,13 @@ cowsay
 cowthink
 cp
 cpan
+cpio
 cpulimit
 crash
 crontab
 csh
 csplit
+csvtool
 cupsfilter
 curl
 cut
@@ -202,6 +204,7 @@ split
 sqlite3
 ss
 ssh
+ssh-keygen
 ssh-keyscan
 start-stop-daemon
 stdbuf
@@ -242,6 +245,7 @@ vigr
 vim
 vimdiff
 vipw
+virsh
 wall
 watch
 wget
