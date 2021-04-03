@@ -24,6 +24,7 @@ byebug
 cancel
 capsh
 cat
+certbot
 chage
 check_by_ssh
 check_cups
