@@ -164,6 +164,7 @@ ping
 ping6
 pip
 pkexec
+pkg
 pppd
 pr
 pry
@@ -198,6 +199,7 @@ sh
 shuf
 slsh
 smbclient
+snap
 socat
 soelim
 sort
