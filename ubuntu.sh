@@ -36,6 +36,7 @@ function main {
   ARPBIN="$(command -v arp)"
   WBIN="$(command -v w)"
   LXC="0"
+  SERVERIP="$(ip route | grep '^default' | awk '{print $9}')"
 
   if grep -qE 'container=lxc|container=lxd' /proc/1/environ; then
     LXC="1"
@@ -82,11 +83,15 @@ function main {
   readonly LOGROTATE
   readonly LOGROTATE_CONF
   readonly LXC
+  readonly MYEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
+  readonly PSADCONF
+  readonly PSADDL
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
   readonly SECURITYACCESS
+  readonly SERVERIP
   readonly SSHDFILE
   readonly SSHFILE
   readonly SSH_GRPS
@@ -132,6 +137,7 @@ function main {
   f_adduser
   f_rootaccess
   f_package_install
+  f_psad
   f_coredump
   f_usbguard
   f_postfix

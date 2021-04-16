@@ -139,6 +139,7 @@ mysql
 nano
 nawk
 nc
+netfilter-persistent
 newgrp
 nice
 nl
@@ -168,6 +169,7 @@ pkg
 pppd
 pr
 pry
+psad
 psql
 puppet
 python

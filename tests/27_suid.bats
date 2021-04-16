@@ -652,6 +652,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Ensure psad hasn't SUID/GUID set" {
+  run gotSGid psad
+  [ "$status" -eq 0 ]
+}
+
 @test "Ensure puppet hasn't SUID/GUID set" {
   run gotSGid puppet
   [ "$status" -eq 0 ]
