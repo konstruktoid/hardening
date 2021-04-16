@@ -83,7 +83,7 @@ function main {
   readonly LOGROTATE
   readonly LOGROTATE_CONF
   readonly LXC
-  readonly MYEMAIL
+  readonly ADMINEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
   readonly PSADCONF

@@ -75,8 +75,8 @@ NTPSERVERPOOL='0.ubuntu.pool.ntp.org 1.ubuntu.pool.ntp.org 2.ubuntu.pool.ntp.org
 TIMEDATECTL='' // <9>
 VERBOSE='N' // <10>
 AUTOFILL='N' // <11>
-CHANGEME='' // <12>
-MYEMAIL="root@localhost" // <13>
+ADMINEMAIL="root@localhost" // <12>
+CHANGEME='' // <13>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -123,8 +123,8 @@ USERCONF='/etc/systemd/user.conf'
 <9> Add a specific time zone or use the system default by leaving it empty.
 <10> If you want all the details or not.
 <11> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
-<12> Add something just to verify that you actually glanced the code.
-<13> Add a valid email address, so PSAD can send notifications. 
+<12> Add a valid email address, so PSAD can send notifications.
+<13> Add something just to verify that you actually glanced the code.
 
 == Functions
 
