@@ -67,6 +67,7 @@ dmsetup
 dnf
 docker
 dpkg
+dvips
 easy_install
 eb
 ed
@@ -116,6 +117,7 @@ jq
 jrunscript
 ksh
 ksshell
+latex
 ld.so
 ldconfig
 less
@@ -123,6 +125,8 @@ logsave
 look
 ltrace
 lua
+lualatex
+luatex
 lwp-download
 lwp-request
 mail
@@ -150,12 +154,15 @@ npm
 nroff
 nsenter
 ntfs-3g
+octave
 od
 openssl
 openvpn
 openvt
 paste
 pdb
+pdflatex
+pdftex
 perl
 pg
 php
@@ -228,6 +235,7 @@ tcpdump
 tcsh
 tee
 telnet
+tex
 tftp
 time
 timeout
@@ -259,6 +267,8 @@ whois
 wish
 write
 xargs
+xelatex
+xetex
 xmodmap
 xxd
 xz
