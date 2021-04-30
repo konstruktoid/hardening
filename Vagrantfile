@@ -17,15 +17,6 @@ Vagrant.configure("2") do |config|
     focal.vm.network "private_network", ip: "10.7.8.45"
   end
 
-  config.vm.define "groovy" do |groovy|
-    groovy.ssh.extra_args = ["-o","ConnectTimeout=600"]
-    groovy.ssh.insert_key = true
-    groovy.vm.boot_timeout = 600
-    groovy.vm.box = "ubuntu/groovy64"
-    groovy.vm.hostname = "groovy"
-    groovy.vm.network "private_network", ip: "10.7.8.46"
-  end
-
 #  https://bugs.launchpad.net/ubuntu/+source/aide/+bug/1903298
 #  config.vm.define "hirsute" do |hirsute|
 #    hirsute.ssh.extra_args = ["-o","ConnectTimeout=600"]
@@ -35,4 +26,14 @@ Vagrant.configure("2") do |config|
 #    hirsute.vm.hostname = "hirsute"
 #    hirsute.vm.network "private_network", ip: "10.7.8.47"
 #  end
+
+  config.vm.define "impish" do |impish|
+    impish.ssh.extra_args = ["-o","ConnectTimeout=600"]
+    impish.ssh.insert_key = true
+    impish.vm.boot_timeout = 600
+    impish.vm.box = "ubuntu/impish-daily"
+    impish.vm.box_url = "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64-vagrant.box"
+    impish.vm.hostname = "impish"
+    impish.vm.network "private_network", ip: "10.7.8.48"
+  end
 end
