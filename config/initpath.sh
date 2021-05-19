@@ -3,5 +3,5 @@
 if [[ $EUID -eq 0 ]]; then
   export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 else
-  export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/snap/bin
+  export PATH=/usr/local/bin:/usr/bin:/bin:/snap/bin
 fi

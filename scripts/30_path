@@ -1,7 +1,7 @@
 function f_path {
   echo "[$SCRIPT_COUNT] Modifying paths"
 
-  sed -i 's/PATH=.*/PATH=\"\/usr\/local\/bin:\/usr\/bin:\/bin:\/usr\/sbin:\/snap\/bin"/' /etc/environment
+  sed -i 's/PATH=.*/PATH=\"\/usr\/local\/bin:\/usr\/bin:\/bin:\/snap\/bin"/' /etc/environment
   cp ./config/initpath.sh /etc/profile.d/initpath.sh
 
   chown root:root /etc/profile.d/initpath.sh
