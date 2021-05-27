@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     impish.ssh.insert_key = true
     impish.vm.boot_timeout = 600
     impish.vm.box = "impish/20210518"
-    impish.vm.box_url = "https://cloud-images.ubuntu.com/impish/20210518/impish-server-cloudimg-amd64-vagrant.box"
+    impish.vm.box_url = "https://cloud-images.ubuntu.com/impish/20210521/impish-server-cloudimg-amd64-vagrant.box"
     impish.vm.hostname = "impish"
     impish.vm.network "private_network", ip: "10.7.8.48"
   end
