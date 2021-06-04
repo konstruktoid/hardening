@@ -27,14 +27,16 @@ for d in $(grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"');
   do rm -v "/tmp/${d}_disk01.vdi"
 done
 
-grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
-  vagrant up "${v}"
+grep config.vm.define Vagrantfile | grep -v '^#' | grep -o '".*"' | tr -d '"' |\
+  while read -r v; do
+    vagrant up "${v}"
 done
 
 wait
 
-grep config.vm.define Vagrantfile | grep -o '".*"' | tr -d '"' | while read -r v; do
-  vagrant reload "${v}"
+grep config.vm.define Vagrantfile | grep -v '^#' | grep -o '".*"' | tr -d '"' |\
+  while read -r v; do
+    vagrant reload "${v}"
 done
 
 wait
