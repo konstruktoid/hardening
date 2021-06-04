@@ -17,6 +17,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify cracklib password list" {
+  run bash -c "grep '/usr/share/dict/passwords' '/var/cache/cracklib/src-dicts'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify password hash in $COMMONPASSWD" {
   run bash -c "grep '^password.*pam_unix.*[[:space:]]sha512' $COMMONPASSWD"
   [ "$status" -eq 0 ]
