@@ -21,6 +21,8 @@ bundler
 busctl
 busybox
 byebug
+c89
+c99
 cancel
 capsh
 cat
@@ -138,7 +140,11 @@ more
 mount
 mount.nfs
 msgattrib
+msgcat
 msgconv
+msgfilter
+msgmerge
+msguniq
 mtr
 mv
 mysql
