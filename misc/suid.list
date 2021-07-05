@@ -5,6 +5,7 @@ apt
 apt-get
 ar
 aria2c
+arj
 arp
 ash
 at
@@ -123,6 +124,7 @@ latex
 ld.so
 ldconfig
 less
+loginctl
 logsave
 look
 ltrace
@@ -246,11 +248,13 @@ telnet
 tex
 tftp
 time
+timedatectl
 timeout
 tmux
 top
 traceroute6.iputils
 troff
+tshark
 ul
 umount
 unexpand
@@ -281,6 +285,7 @@ xmodmap
 xmore
 xxd
 xz
+yarn
 yelp
 yum
 zip
