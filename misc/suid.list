@@ -1,6 +1,7 @@
 # https://gtfobins.github.io/#+suid
 # https://raw.githubusercontent.com/konstruktoid/hardening/master/misc/suid.list
 
+ansible-playbook
 apt
 apt-get
 ar
@@ -41,6 +42,7 @@ chmod
 chown
 chroot
 chsh
+cmp
 cobc
 column
 comm
@@ -66,6 +68,7 @@ dialog
 diff
 dig
 dmesg
+dmidecode
 dmsetup
 dnf
 docker
@@ -118,12 +121,14 @@ join
 journalctl
 jq
 jrunscript
+knife
 ksh
 ksshell
 latex
 ld.so
 ldconfig
 less
+ln
 loginctl
 logsave
 look
