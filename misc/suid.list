@@ -240,6 +240,7 @@ strings
 su
 sysctl
 systemctl
+systemd-resolve
 tac
 tail
 tar
@@ -252,6 +253,7 @@ tee
 telnet
 tex
 tftp
+tic
 time
 timedatectl
 timeout
