@@ -8,6 +8,7 @@ ar
 aria2c
 arj
 arp
+as
 ash
 at
 atobm
@@ -160,6 +161,7 @@ mysql
 nano
 nawk
 nc
+neofetch
 netfilter-persistent
 newgrp
 nice
@@ -285,6 +287,7 @@ wall
 watch
 wc
 wget
+whiptail
 whois
 wish
 write
