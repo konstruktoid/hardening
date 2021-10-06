@@ -24,6 +24,7 @@ bundler
 busctl
 busybox
 byebug
+bzip2
 c89
 c99
 cancel
@@ -159,6 +160,7 @@ mtr
 mv
 mysql
 nano
+nasm
 nawk
 nc
 neofetch
