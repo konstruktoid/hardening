@@ -12,10 +12,10 @@ https://www.freedesktop.org/software/systemd/man/systemd.exec.html[systemd execu
 
 === systemd-analyze and systemd_scan.sh
 
-Since `systemd` version 240, `systemd-analyze` has the "security" option for
-analyzing the security and sand-boxing settings of services in order to
-determine an "exposure level" for them, indicating whether a service would
-benefit from more sand-boxing options turned on for them.
+Since `systemd` version 240, `systemd-analyze` has the https://www.freedesktop.org/software/systemd/man/systemd-analyze.html[security]
+option for analyzing the security and sandboxing settings of services in order
+to determine an exposure level value for them, indicating whether a service
+would benefit from more sand-boxing options turned on for them.
 
 https://github.com/konstruktoid/hardening/blob/master/misc/systemd_scan.sh[systemd_scan.sh]
 is a script to check the current `systemd` configuration of a local service,
@@ -108,7 +108,7 @@ ProcessSizeMax=0 // <2>
 ----
 
 <1> "When "none", the core dumps will be logged but not stored permanently."
-<2> "Setting Storage=none and ProcessSizeMax=0 disables all coredump handling except for a log entry."
+<2> "Setting `Storage=none` and `ProcessSizeMax=0` disables all coredump handling except for a log entry."
 
 == Mounts
 
@@ -151,8 +151,8 @@ DNSOverTLS=opportunistic // <4>
 
 <1> "space-separated list of IPv4 and IPv6 addresses to use as system DNS servers."
 <2> "space-separated list of IPv4 and IPv6 addresses to use as the fallback DNS servers."
-<3> "If set to "allow-downgrade" DNSSEC validation is attempted, but if the server does not support DNSSEC properly, DNSSEC mode is automatically disabled." Should be set to `true` if possible.
-<4> "When set to "opportunistic" DNS request are attempted to send encrypted with DNS-over-TLS."
+<3> "If set to `allow-downgrade` DNSSEC validation is attempted, but if the server does not support DNSSEC properly, DNSSEC mode is automatically disabled." Should be set to `true` if possible.
+<4> "When set to `opportunistic` DNS request are attempted to send encrypted with DNS-over-TLS." Shoule be set to `true` if possible.
 
 === /etc/systemd/system.conf
 See https://www.freedesktop.org/software/systemd/man/systemd-system.conf.html[system.conf] and https://www.freedesktop.org/software/systemd/man/systemd.html[systemd, init].
@@ -209,17 +209,17 @@ TemporaryFileSystem= // <10>
 PrivateUsers= // <11>
 ----
 
-<1> "Takes a boolean argument. If true, sets up a new file system namespace for the executed processes and mounts private /tmp and /var/tmp directories inside it that is not shared by processes outside of the namespace."
-<2> "If true, mounts the /usr and /boot directories read-only for processes invoked by this unit. If set to "full", the /etc directory is mounted read-only, too. If set to "strict" the entire file system hierarchy is mounted read-only, except for the API file system subtrees /dev, /proc and /sys."
-<3> "Takes a boolean argument or the special values "read-only" or "tmpfs". If true, the directories /home, /root, and /run/user are made inaccessible and empty for processes invoked by this unit. If set to "read-only", the three directories are made read-only instead. If set to "tmpfs", temporary file systems are mounted on the three directories in read-only mode."
-<4> "If true, ensures that the service process and all its children can never gain new privileges."
+<1> "Takes a boolean argument. If true, sets up a new file system namespace for the executed processes and mounts private `/tmp` and `/var/tmp` directories inside it that is not shared by processes outside of the namespace."
+<2> "If true, mounts the `/usr` and `/boot` directories read-only for processes invoked by this unit. If set to `full`, the `/etc` directory is mounted read-only, too. If set to `strict` the entire file system hierarchy is mounted read-only, except for the API file system subtrees `/dev`, `/proc` and `/sys`."
+<3> "Takes a boolean argument or the special values `read-only` or `tmpfs`. If `true`, the directories `/home`, `/root`, and `/run/user` are made inaccessible and empty for processes invoked by this unit. If set to `read-only`, the three directories are made read-only instead. If set to `tmpfs`, temporary file systems are mounted on the three directories in read-only mode."
+<4> "If `true`, ensures that the service process and all its children can never gain new privileges."
 <5> "Sets up a new file system namespace for executed processes."
 <6> "Controls which capabilities to include in the capability bounding set for the executed process."
-<7> "If true, sets up a new /dev namespace for the executed processes and only adds API pseudo devices such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY subsystem) to it"
+<7> "If `true`, sets up a new `/dev` namespace for the executed processes and only adds API pseudo devices such as `/dev/null`, `/dev/zero` or `/dev/random` (as well as the pseudo TTY subsystem) to it"
 <8> "Sets the Unix user or group that the processes are executed as, respectively"
 <9> "User and group pair is allocated dynamically when the unit is started, and released as soon as it is stopped."
 <10> "Takes a space-separated list of mount points for temporary file systems (tmpfs). If set, a new file system namespace is set up for executed processes, and a temporary file system is mounted on each mount point."
-<11> "Takes a boolean argument. If true, sets up a new user namespace for the executed processes and configures a minimal user and group mapping, that maps the "root" user and group as well as the unit's own user and group to themselves and everything else to the "nobody" user and group."
+<11> "Takes a boolean argument. If `true`, sets up a new user namespace for the executed processes and configures a minimal user and group mapping, that maps the `root` user and group as well as the unit's own user and group to themselves and everything else to the `nobody` user and group."
 
 === /etc/systemd/system/nginx.service example
 
