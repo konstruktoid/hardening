@@ -63,7 +63,7 @@ done
 wait
 
 {
-  TESTS="$(grep -Ro '@test' tests/*_*.bats | wc -l)"
+  TESTS="$(grep -Ro '@test' tests/*.bats | wc -l)"
 
   echo "= Vagrant Ubuntu Test results - $(LANG=C date --utc)"
   echo ":icons: font"
