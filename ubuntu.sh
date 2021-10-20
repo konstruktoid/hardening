@@ -107,7 +107,7 @@ function main {
   readonly VERBOSE
   readonly WBIN
 
-  for s in ./scripts/[0-9_]*; do
+  for s in ./scripts/*; do
     [[ -f $s ]] || break
 
     source "$s"
