@@ -82,6 +82,12 @@ function f_aptget_configure {
     sed -i 's/.*Acquire::AllowInsecureRepositories.*/Acquire::AllowInsecureRepositories "false";/g' "$(grep -l 'Acquire::AllowInsecureRepositories' /etc/apt/apt.conf.d/*)"
   fi
 
+  if ! grep '^APT::Sandbox::Seccomp' /etc/apt/apt.conf.d/*; then
+    echo 'APT::Sandbox::Seccomp "1";' >> /etc/apt/apt.conf.d/98-hardening-ubuntu
+  else
+    sed -i 's/.*APT::Sandbox::Seccomp.*/APT::Sandbox::Seccomp "1";/g' "$(grep -l 'APT::Sandbox::Seccomp' /etc/apt/apt.conf.d/*)"
+  fi
+
   ((SCRIPT_COUNT++))
 }
 
