@@ -14,7 +14,6 @@ Vagrant.configure("2") do |config|
     focal.vm.boot_timeout = 600
     focal.vm.box = "ubuntu/focal64"
     focal.vm.hostname = "focal"
-    focal.vm.network "private_network", ip: "10.7.8.45"
   end
 
   config.vm.define "impish" do |impish|
@@ -23,6 +22,5 @@ Vagrant.configure("2") do |config|
     impish.vm.boot_timeout = 600
     impish.vm.box = "ubuntu/impish64"
     impish.vm.hostname = "impish"
-    impish.vm.network "private_network", ip: "10.7.8.46"
   end
 end
