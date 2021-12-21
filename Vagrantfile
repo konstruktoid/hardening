@@ -23,4 +23,13 @@ Vagrant.configure("2") do |config|
     impish.vm.box = "ubuntu/impish64"
     impish.vm.hostname = "impish"
   end
+
+  config.vm.define "jammy" do |jammy|
+    jammy.ssh.extra_args = ["-o","ConnectTimeout=600"]
+    jammy.ssh.insert_key = true
+    jammy.vm.boot_timeout = 600
+    jammy.vm.box = "jammy/20211219"
+    jammy.vm.box_url = "https://cloud-images.ubuntu.com/jammy/20211219/jammy-server-cloudimg-amd64-vagrant.box"
+    jammy.vm.hostname = "jammy"
+  end
 end
