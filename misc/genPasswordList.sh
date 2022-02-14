@@ -6,6 +6,10 @@ curl -sSL https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passw
 curl -sSL https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Leaked-Databases/Lizard-Squad.txt >> leaked.list
 curl -sSL https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Leaked-Databases/NordVPN.txt >> leaked.list
 
+if [ -x "$(which dos2unix)" ]; then
+  dos2unix ./*.list
+fi
+
 grep -v '^#' ./leaked.list ./ncschabp.list ./zxcvbn.list | sed 's/.*://g' |\
   grep -Ei '^[a-z]|^[0-9]' | sort | uniq > passwords.list
 
