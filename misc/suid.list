@@ -177,6 +177,7 @@ netfilter-persistent
 newgrp
 nice
 nl
+nm
 nmap
 node
 nohup
