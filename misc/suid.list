@@ -97,6 +97,7 @@ facter
 file
 find
 finger
+fish
 flock
 fmt
 fold
@@ -111,6 +112,7 @@ genisoimage
 ghc
 ghci
 gimp
+ginsh
 git
 grc
 grep
@@ -210,6 +212,7 @@ pppd
 pr
 pry
 psad
+psftp
 psql
 ptx
 puppet
@@ -300,6 +303,7 @@ vim
 vimdiff
 vipw
 virsh
+volatility
 wall
 watch
 wc
@@ -314,6 +318,7 @@ xelatex
 xetex
 xmodmap
 xmore
+xpad
 xxd
 xz
 yarn
