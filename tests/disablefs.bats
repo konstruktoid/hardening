@@ -31,8 +31,3 @@ load test_helper
   run bash -c "modprobe -n -v udf | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
 }
-
-@test "Verify that kernel module vfat is disabled" {
-  run bash -c "modprobe -n -v vfat | grep 'install /bin/true'"
-  [ "$status" -eq 0 ]
-}
