@@ -43,6 +43,7 @@ wait
 
 for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}'); do
   vagrant ssh "${VM}" -c 'cp /vagrant/checkScore.sh ~/'
+  vagrant ssh "${VM}" -c 'cp /vagrant/misc/genOSCAPreport.sh ~/'
   vagrant ssh "${VM}" -c 'sudo apt-get -y update && sudo apt-get -y install bats net-tools shellcheck --no-install-recommends'
   vagrant ssh "${VM}" -c 'cp -R /vagrant ~/hardening && sed -i.bak -e "s/^AUTOFILL=.*/AUTOFILL='\''Y'\''/" -e "s/^CHANGEME=.*/CHANGEME='\''changed'\''/" ~/hardening/ubuntu.cfg && cd ~/hardening && sudo bash ubuntu.sh && sudo reboot'
 done
@@ -58,6 +59,8 @@ for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}');
   wait
   vagrant ssh "${VM}" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
   vagrant ssh "${VM}" -c 'sh ~/checkScore.sh || exit 1 && cat ~/lynis-report.dat' > "hardening-$VM-$(date +%y%m%d)-lynis.log"
+  vagrant ssh "${VM}" -c 'bash ~/genOSCAPreport.sh'
+  vagrant scp "${VM}:*.html" "."
 done
 
 wait
