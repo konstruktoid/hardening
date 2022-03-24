@@ -357,7 +357,7 @@ f_checkreboot
 ----
 
 == Tests
-There are approximately 750 https://github.com/bats-core/bats-core[Bats tests]
+There are approximately 760 https://github.com/bats-core/bats-core[Bats tests]
 for most of the above settings available in the link:tests/[tests directory].
 
 [source,shell]
@@ -370,8 +370,13 @@ sudo bats .
 
 === Test automation using Vagrant
 Running `bash ./runTests.sh` will use https://www.vagrantup.com/[Vagrant] to run
-all above tests and https://github.com/CISOfy/Lynis[Lynis] on all supported Ubuntu
-versions. The script will generate a file named `TESTRESULTS.adoc`.
+all above tests, https://github.com/CISOfy/Lynis[Lynis] and
+https://www.open-scap.org/[OpenSCAP] with a
+https://www.cisecurity.org/benchmark/ubuntu_linux[CIS Ubuntu benchmark] on all
+supported Ubuntu versions.
+
+The script will generate a file named `TESTRESULTS.adoc` and CIS report in
+HTML-format.
 
 === Testing a host
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
@@ -391,11 +396,10 @@ sudo apt-get --assume-yes --reinstall install snapd
 ----
 
 == Recommended reading
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 18.04 LTS STIG - Ver 2, Rel 1] +
+https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 20.04 LTS STIG - Ver 1, Rel 3] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
 https://www.cisecurity.org/benchmark/ubuntu_linux/[CIS Ubuntu Linux Benchmark] +
 https://www.ncsc.gov.uk/collection/end-user-device-security/platform-specific-guidance/ubuntu-18-04-lts[EUD Security Guidance: Ubuntu 18.04 LTS] +
-https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Red Hat Enterprise Linux 7 - Ver 2, Rel 3 STIG] +
 https://wiki.ubuntu.com/Security/Features +
 https://help.ubuntu.com/community/StricterDefaults +
 
