@@ -55,11 +55,10 @@ for VM in $(vagrant status | grep -iE 'running.*virtualbox' | awk '{print $1}');
     echo "Waiting for $VM."
     sleep 10
   done
+  vagrant ssh "${VM}" -c 'bash ~/genOSCAPreport.sh'
   vagrant ssh "${VM}" -c 'cd ~/hardening/tests && sudo bats . >> ~/bats.log'
-  wait
   vagrant ssh "${VM}" -c 'cat ~/bats.log' | grep 'not ok'  > "hardening-$VM-$(date +%y%m%d)-bats.log"
   vagrant ssh "${VM}" -c 'sh ~/checkScore.sh || exit 1 && cat ~/lynis-report.dat' > "hardening-$VM-$(date +%y%m%d)-lynis.log"
-  vagrant ssh "${VM}" -c 'bash ~/genOSCAPreport.sh'
   vagrant scp "${VM}:*.html" "."
 done
 
