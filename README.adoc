@@ -33,32 +33,33 @@ An Ansible playbook is available in the https://github.com/konstruktoid/ansible-
 repository.
 
 == Howto
-Start the installation of the server. +
-Pick language, keyboard layout, timezone and so on as you usually would.
+. Start the server installation.
+. Pick language and keyboard layout.
+. Select "Ubuntu Server (minimized)".
+. Configure network connections.
+. Partition the system, see below for recommendations.
+. Do not install the OpenSSH server, "Featured Server Snaps", or any other packages.
+. Finish the installation and reboot.
+. Log in.
+. If wanted, set a Grub2 password with `grub-mkpasswd-pbkdf2`. See https://help.ubuntu.com/community/Grub2/Passwords[https://help.ubuntu.com/community/Grub2/Passwords]
+for more information.
+. Install necessary packages: `sudo apt-get -y install git not-tools procps --no-install-recommends`.
+. Download the script: `git clone https://github.com/konstruktoid/hardening.git`.
+. Change the configuration options in the `ubuntu.cfg` file.
+. Run the script: `sudo bash ubuntu.sh`.
+. Reboot.
 
-=== Partition the system
+=== Recommended partitions and options
 [source,shell]
 ----
-/
 /boot (rw)
 /home (rw,nosuid,nodev)
-swap
-/var
 /var/log (rw,nosuid,nodev,noexec)
 /var/log/audit (rw,nosuid,nodev,noexec)
-/var/tmp (rw,noexec,nodev,nosuid)
+/var/tmp (rw,nosuid,nodev,noexec)
 ----
 
 Note that `/tmp` will be added automatically by the script.
-
-=== Login, set a Grub2 password, configure and run ubuntu.sh
-Do not add any packages. +
-Log in. +
-Select a Grub2 password with `grub-mkpasswd-pbkdf2`. +
-Download the script: `git clone https://github.com/konstruktoid/hardening.git`. +
-Change the configuration options in the `ubuntu.cfg` file. +
-Run the script: `sudo bash ubuntu.sh`. +
-Reboot.
 
 == Configuration options
 [source,shell]
