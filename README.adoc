@@ -43,7 +43,7 @@ repository.
 . Log in.
 . If wanted, set a Grub2 password with `grub-mkpasswd-pbkdf2`. See https://help.ubuntu.com/community/Grub2/Passwords[https://help.ubuntu.com/community/Grub2/Passwords]
 for more information.
-. Install necessary packages: `sudo apt-get -y install git not-tools procps --no-install-recommends`.
+. Install necessary packages: `sudo apt-get -y install git net-tools procps --no-install-recommends`.
 . Download the script: `git clone https://github.com/konstruktoid/hardening.git`.
 . Change the configuration options in the `ubuntu.cfg` file.
 . Run the script: `sudo bash ubuntu.sh`.
