@@ -12,18 +12,12 @@ git clone https://github.com/konstruktoid/hardening.git
 
 cd ./hardening || exit 1
 
-sed -i "s/CHANGEME=''/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
-sed -i "s/VERBOSE='/VERBOSE='Y/" ./ubuntu.cfg
+sed -i.bak "s/CHANGEME='.*/CHANGEME='$(date +%s)'/" ./ubuntu.cfg
+sed -i.bak "s/VERBOSE='.*/VERBOSE='Y'/" ./ubuntu.cfg
+sed -i.bak "s/KEEP_SNAPD='.*/KEEP_SNAPD='Y'/" ./ubuntu.cfg
 
 # Don't run aide by default
 sed -i "s/  f_aide/# f_aide/g" ubuntu.sh
-
-# This is because of snapd
-# https://github.com/konstruktoid/hardening/issues/123
-sed -i "s/  f_apport/# f_apport/g" ubuntu.sh
-sed -i "s/apport\* //g" scripts/packages
-sed -i "s/popularity-contest //g" scripts/packages
-sed -i "s/rsync //g" scripts/packages
 
 chmod a+x ./ubuntu.sh
 sudo bash ./ubuntu.sh
