@@ -77,6 +77,7 @@ function main {
   readonly DISABLENET
   readonly FW_ADMIN
   readonly JOURNALDCONF
+  readonly KEEP_SNAPD
   readonly LIMITSCONF
   readonly LOGINDCONF
   readonly LOGINDEFS

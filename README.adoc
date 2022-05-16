@@ -76,7 +76,8 @@ TIMEDATECTL='' // <9>
 VERBOSE='N' // <10>
 AUTOFILL='N' // <11>
 ADMINEMAIL="root@localhost" // <12>
-CHANGEME='' // <13>
+KEEP_SNAPD='Y' // <13>
+CHANGEME='' // <14>
 
 # Configuration files
 ADDUSER='/etc/adduser.conf'
@@ -124,7 +125,8 @@ USERCONF='/etc/systemd/user.conf'
 <10> If you want all the details or not.
 <11> Let the script guess the `FW_ADMIN` and `SSH_GRPS` settings.
 <12> Add a valid email address, so PSAD can send notifications.
-<13> Add something just to verify that you actually glanced the code.
+<13> If `'Y'` then the `snapd` package will be held to prevent removal.
+<14> Add something just to verify that you actually glanced the code.
 
 == Functions
 
@@ -382,19 +384,6 @@ HTML-format.
 === Testing a host
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
-
-== Issues: snapd
-In order to use `snapd` you will have to disable the https://man7.org/linux/man-pages/man7/kernel_lockdown.7.html[kernel_lockdown]
-setting, update `grub`, reboot the host and then reinstall
-`snapd`.
-
-[source,shell]
-----
-sudo sed -i 's/^/# /g' /etc/default/grub.d/99-hardening-lockdown.cfg
-sudo update-grub
-sudo reboot
-sudo apt-get --assume-yes --reinstall install snapd
-----
 
 == Recommended reading
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 20.04 LTS STIG - Ver 1, Rel 3] +

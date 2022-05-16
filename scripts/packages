@@ -5,6 +5,10 @@ function f_package_install {
   local AUDITD
   local VM
 
+  if [[ "${KEEP_SNAPD}" == "Y" ]]; then
+    apt-mark hold snapd
+  fi
+
   APPARMOR="apparmor-profiles apparmor-utils libpam-apparmor"
   AUDITD="auditd audispd-plugins"
   VM=""
