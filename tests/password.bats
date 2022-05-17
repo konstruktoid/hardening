@@ -18,7 +18,7 @@ load test_helper
 }
 
 @test "Verify cracklib password list" {
-  run bash -c "grep '/usr/share/dict/passwords' '/var/cache/cracklib/src-dicts'"
+  run bash -c "grep -E '/usr/share/dict/passwords|/usr/share/dict/passwords_text' '/var/cache/cracklib/src-dicts'"
   [ "$status" -eq 0 ]
 }
 
