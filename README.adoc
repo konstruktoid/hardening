@@ -198,7 +198,9 @@ Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `xinetd` `yp-tools` `ypbind`.
 
 ==== sshdconfig
-Configure the `OpenSSH`-daemon.
+Configure the `OpenSSH` daemon. The configuration changes will be placed in
+the directory defined by the `Include` option if present, otherwise the default
+`sshd_config` will be modified.
 
 ==== password
 Configure `pam_pwquality.so` and `pam_tally2.so`.
