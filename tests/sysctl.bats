@@ -202,11 +202,6 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
-@test "Verify net.ipv4.tcp_timestamps in /etc/sysctl.*" {
-  run bash -c "grep -R '^net.ipv4.tcp_timestamps.*0$' /etc/sysctl.*"
-  [ "$status" -eq 0 ]
-}
-
 @test "Verify net.ipv6.conf.all.use_tempaddr in /etc/sysctl.*" {
   run bash -c "grep -R '^net.ipv6.conf.all.use_tempaddr.*2$' /etc/sysctl.*"
   [ "$status" -eq 0 ]
@@ -463,11 +458,6 @@ load test_helper
 
 @test "Verify sysctl runtime net.ipv4.tcp_syn_retries" {
   run sysctlRuntime '^net.ipv4.tcp_syn_retries.*5$'
-  [ "$status" -eq 0 ]
-}
-
-@test "Verify sysctl runtime net.ipv4.tcp_timestamps" {
-  run sysctlRuntime '^net.ipv4.tcp_timestamps.*0$'
   [ "$status" -eq 0 ]
 }
 
