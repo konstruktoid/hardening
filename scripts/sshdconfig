@@ -6,146 +6,169 @@ function f_sshdconfig {
   awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
   mv /etc/ssh/moduli.tmp /etc/ssh/moduli
 
-  cp "$SSHDFILE" "$SSHDFILE-$(date +%s)"
+  if grep -q '^Include' /etc/ssh/sshd_config; then
+    local INCLUDEDIR
+    # shellcheck disable=SC2046
+    INCLUDEDIR="$(dirname $(grep '^Include' /etc/ssh/sshd_config | awk '{print $NF}'))"
 
-  sed -i '/HostKey.*ssh_host_dsa_key.*/d' "$SSHDFILE"
-  sed -i '/KeyRegenerationInterval.*/d' "$SSHDFILE"
-  sed -i '/ServerKeyBits.*/d' "$SSHDFILE"
-  sed -i '/UseLogin.*/d' "$SSHDFILE"
-  sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDFILE"
-  sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDFILE"
-  sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDFILE"
-  sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDFILE"
-  sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDFILE"
-  sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDFILE"
-  sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp internal-sftp/' "$SSHDFILE"
-  sed -i 's/^#.*Compression.*/Compression no/' "$SSHDFILE"
-  sed -i "s/.*Port.*/Port $SSH_PORT/" "$SSHDFILE"
+    if [ ! -d "$INCLUDEDIR" ]; then
+      mkdir -p "$INCLUDEDIR"
+    fi
 
-  echo "" >> "$SSHDFILE"
+    SSHDCONF="$INCLUDEDIR/hardening.conf"
 
-  if ! grep -q "^LogLevel" "$SSHDFILE" 2> /dev/null; then
-    echo "LogLevel VERBOSE" >> "$SSHDFILE"
-  fi
+    cp "$SSHDFILE" "$SSHDCONF"
 
-  if ! grep -q "^PrintLastLog" "$SSHDFILE" 2> /dev/null; then
-    echo "PrintLastLog yes" >> "$SSHDFILE"
-  fi
-
-  if ! grep -q "^IgnoreUserKnownHosts" "$SSHDFILE" 2> /dev/null; then
-    echo "IgnoreUserKnownHosts yes" >> "$SSHDFILE"
-  fi
-
-  if ! grep -q "^PermitEmptyPasswords" "$SSHDFILE" 2> /dev/null; then
-    echo "PermitEmptyPasswords no" >> "$SSHDFILE"
-  fi
-
-  if ! grep -q "^AllowGroups" "$SSHDFILE" 2> /dev/null; then
-    echo "AllowGroups $SSH_GRPS" >> "$SSHDFILE"
-  fi
-
-  if ! grep -q "^MaxAuthTries" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxAuthTries 3" >> "$SSHDFILE"
+    sed -i '/.*Subsystem.*/d' "$SSHDFILE"
+    sed -i '/Include.*/d' "$SSHDCONF"
   else
-    sed -i 's/MaxAuthTries.*/MaxAuthTries 3/' "$SSHDFILE"
+    SSHDCONF="$SSHDFILE"
   fi
 
-  if ! grep -q "^ClientAliveInterval" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveInterval 200" >> "$SSHDFILE"
+
+  if [[ $VERBOSE == "Y" ]]; then
+    echo "Using $SSHDCONF"
   fi
 
-  if ! grep -q "^ClientAliveCountMax" "$SSHDFILE" 2> /dev/null; then
-    echo "ClientAliveCountMax 3" >> "$SSHDFILE"
+  sed -i '/HostKey.*ssh_host_dsa_key.*/d' "$SSHDCONF"
+  sed -i '/KeyRegenerationInterval.*/d' "$SSHDCONF"
+  sed -i '/ServerKeyBits.*/d' "$SSHDCONF"
+  sed -i '/UseLogin.*/d' "$SSHDCONF"
+
+  sed -i 's/.*X11Forwarding.*/X11Forwarding no/' "$SSHDCONF"
+  sed -i 's/.*LoginGraceTime.*/LoginGraceTime 20/' "$SSHDCONF"
+  sed -i 's/.*PermitRootLogin.*/PermitRootLogin no/' "$SSHDCONF"
+  sed -i 's/.*UsePrivilegeSeparation.*/UsePrivilegeSeparation sandbox/' "$SSHDCONF"
+  sed -i 's/.*LogLevel.*/LogLevel VERBOSE/' "$SSHDCONF"
+  sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDCONF"
+  sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp internal-sftp/' "$SSHDCONF"
+  sed -i 's/^#.*Compression.*/Compression no/' "$SSHDCONF"
+  sed -i "s/.*Port.*/Port $SSH_PORT/" "$SSHDCONF"
+
+  echo "" >> "$SSHDCONF"
+
+  if ! grep -q "^LogLevel" "$SSHDCONF" 2> /dev/null; then
+    echo "LogLevel VERBOSE" >> "$SSHDCONF"
   fi
 
-  if ! grep -q "^PermitUserEnvironment" "$SSHDFILE" 2> /dev/null; then
-    echo "PermitUserEnvironment no" >> "$SSHDFILE"
+  if ! grep -q "^PrintLastLog" "$SSHDCONF" 2> /dev/null; then
+    echo "PrintLastLog yes" >> "$SSHDCONF"
   fi
 
-  if ! grep -q "^KexAlgorithms" "$SSHDFILE" 2> /dev/null; then
-    echo 'KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256' >> "$SSHDFILE"
+  if ! grep -q "^IgnoreUserKnownHosts" "$SSHDCONF" 2> /dev/null; then
+    echo "IgnoreUserKnownHosts yes" >> "$SSHDCONF"
   fi
 
-  if ! grep -q "^Ciphers" "$SSHDFILE" 2> /dev/null; then
-    echo 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr' >> "$SSHDFILE"
+  if ! grep -q "^PermitEmptyPasswords" "$SSHDCONF" 2> /dev/null; then
+    echo "PermitEmptyPasswords no" >> "$SSHDCONF"
   fi
 
-  if ! grep -q "^Macs" "$SSHDFILE" 2> /dev/null; then
-    echo 'Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256' >> "$SSHDFILE"
+  if ! grep -q "^AllowGroups" "$SSHDCONF" 2> /dev/null; then
+    echo "AllowGroups $SSH_GRPS" >> "$SSHDCONF"
   fi
 
-  if ! grep -q "^MaxSessions" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxSessions 3" >> "$SSHDFILE"
+  if ! grep -q "^MaxAuthTries" "$SSHDCONF" 2> /dev/null; then
+    echo "MaxAuthTries 3" >> "$SSHDCONF"
   else
-    sed -i 's/MaxSessions.*/MaxSessions 3/' "$SSHDFILE"
+    sed -i 's/MaxAuthTries.*/MaxAuthTries 3/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^UseDNS" "$SSHDFILE" 2> /dev/null; then
-    echo "UseDNS no" >> "$SSHDFILE"
+  if ! grep -q "^ClientAliveInterval" "$SSHDCONF" 2> /dev/null; then
+    echo "ClientAliveInterval 200" >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^ClientAliveCountMax" "$SSHDCONF" 2> /dev/null; then
+    echo "ClientAliveCountMax 3" >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^PermitUserEnvironment" "$SSHDCONF" 2> /dev/null; then
+    echo "PermitUserEnvironment no" >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^KexAlgorithms" "$SSHDCONF" 2> /dev/null; then
+    echo 'KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256' >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^Ciphers" "$SSHDCONF" 2> /dev/null; then
+    echo 'Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr' >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^Macs" "$SSHDCONF" 2> /dev/null; then
+    echo 'Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256' >> "$SSHDCONF"
+  fi
+
+  if ! grep -q "^MaxSessions" "$SSHDCONF" 2> /dev/null; then
+    echo "MaxSessions 3" >> "$SSHDCONF"
   else
-    sed -i 's/UseDNS.*/UseDNS no/' "$SSHDFILE"
+    sed -i 's/MaxSessions.*/MaxSessions 3/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^StrictModes" "$SSHDFILE" 2> /dev/null; then
-    echo "StrictModes yes" >> "$SSHDFILE"
+  if ! grep -q "^UseDNS" "$SSHDCONF" 2> /dev/null; then
+    echo "UseDNS no" >> "$SSHDCONF"
   else
-    sed -i 's/StrictModes.*/StrictModes yes/' "$SSHDFILE"
+    sed -i 's/UseDNS.*/UseDNS no/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^MaxStartups" "$SSHDFILE" 2> /dev/null; then
-    echo "MaxStartups 10:30:60" >> "$SSHDFILE"
+  if ! grep -q "^StrictModes" "$SSHDCONF" 2> /dev/null; then
+    echo "StrictModes yes" >> "$SSHDCONF"
   else
-    sed -i 's/MaxStartups.*/MaxStartups 10:30:60/' "$SSHDFILE"
+    sed -i 's/StrictModes.*/StrictModes yes/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^HostbasedAuthentication" "$SSHDFILE" 2> /dev/null; then
-    echo "HostbasedAuthentication no" >> "$SSHDFILE"
+  if ! grep -q "^MaxStartups" "$SSHDCONF" 2> /dev/null; then
+    echo "MaxStartups 10:30:60" >> "$SSHDCONF"
   else
-    sed -i 's/HostbasedAuthentication.*/HostbasedAuthentication no/' "$SSHDFILE"
+    sed -i 's/MaxStartups.*/MaxStartups 10:30:60/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^KerberosAuthentication" "$SSHDFILE" 2> /dev/null; then
-    echo "KerberosAuthentication no" >> "$SSHDFILE"
+  if ! grep -q "^HostbasedAuthentication" "$SSHDCONF" 2> /dev/null; then
+    echo "HostbasedAuthentication no" >> "$SSHDCONF"
   else
-    sed -i 's/KerberosAuthentication.*/KerberosAuthentication no/' "$SSHDFILE"
+    sed -i 's/HostbasedAuthentication.*/HostbasedAuthentication no/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^GSSAPIAuthentication" "$SSHDFILE" 2> /dev/null; then
-    echo "GSSAPIAuthentication no" >> "$SSHDFILE"
+  if ! grep -q "^KerberosAuthentication" "$SSHDCONF" 2> /dev/null; then
+    echo "KerberosAuthentication no" >> "$SSHDCONF"
   else
-    sed -i 's/GSSAPIAuthentication.*/GSSAPIAuthentication no/' "$SSHDFILE"
+    sed -i 's/KerberosAuthentication.*/KerberosAuthentication no/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^RekeyLimit" "$SSHDFILE" 2> /dev/null; then
-    echo "RekeyLimit 512M 1h" >> "$SSHDFILE"
+  if ! grep -q "^GSSAPIAuthentication" "$SSHDCONF" 2> /dev/null; then
+    echo "GSSAPIAuthentication no" >> "$SSHDCONF"
   else
-    sed -i 's/RekeyLimit.*/RekeyLimit 512M 1h/' "$SSHDFILE"
+    sed -i 's/GSSAPIAuthentication.*/GSSAPIAuthentication no/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^AllowTcpForwarding" "$SSHDFILE" 2> /dev/null; then
-    echo "AllowTcpForwarding no" >> "$SSHDFILE"
+  if ! grep -q "^RekeyLimit" "$SSHDCONF" 2> /dev/null; then
+    echo "RekeyLimit 512M 1h" >> "$SSHDCONF"
   else
-    sed -i 's/AllowTcpForwarding.*/AllowTcpForwarding no/' "$SSHDFILE"
+    sed -i 's/RekeyLimit.*/RekeyLimit 512M 1h/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^AllowAgentForwarding" "$SSHDFILE" 2> /dev/null; then
-    echo "AllowAgentForwarding no" >> "$SSHDFILE"
+  if ! grep -q "^AllowTcpForwarding" "$SSHDCONF" 2> /dev/null; then
+    echo "AllowTcpForwarding no" >> "$SSHDCONF"
   else
-    sed -i 's/AllowAgentForwarding.*/AllowTcpForwarding no/' "$SSHDFILE"
+    sed -i 's/AllowTcpForwarding.*/AllowTcpForwarding no/' "$SSHDCONF"
   fi
 
-  if ! grep -q "^TCPKeepAlive" "$SSHDFILE" 2> /dev/null; then
-    echo "TCPKeepAlive no" >> "$SSHDFILE"
+  if ! grep -q "^AllowAgentForwarding" "$SSHDCONF" 2> /dev/null; then
+    echo "AllowAgentForwarding no" >> "$SSHDCONF"
   else
-    sed -i 's/TCPKeepAlive.*/TCPKeepAlive no/' "$SSHDFILE"
+    sed -i 's/AllowAgentForwarding.*/AllowTcpForwarding no/' "$SSHDCONF"
   fi
 
-  cp "$SSHDFILE" "/etc/ssh/sshd_config.$(date +%y%m%d)"
-  grep -v '#' "/etc/ssh/sshd_config.$(date +%y%m%d)" | sort | uniq > "$SSHDFILE"
+  if ! grep -q "^TCPKeepAlive" "$SSHDCONF" 2> /dev/null; then
+    echo "TCPKeepAlive no" >> "$SSHDCONF"
+  else
+    sed -i 's/TCPKeepAlive.*/TCPKeepAlive no/' "$SSHDCONF"
+  fi
+
+  cp "$SSHDCONF" "/etc/ssh/sshd_config.$(date +%y%m%d)"
+  grep -vE '#|^$' "/etc/ssh/sshd_config.$(date +%y%m%d)" | sort | uniq > "$SSHDCONF"
   rm "/etc/ssh/sshd_config.$(date +%y%m%d)"
 
-  chown root:root "$SSHDFILE"
-  chmod 0600 "$SSHDFILE"
+  chown root:root "$SSHDCONF"
+  chmod 0600 "$SSHDCONF"
 
   systemctl restart sshd.service
 
