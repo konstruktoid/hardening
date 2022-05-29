@@ -20,6 +20,6 @@ if [ -x "$(which dos2unix)" ]; then
   dos2unix ./*.list "${TMPFILE}"
 fi
 
-grep -v '^$' "${TMPFILE}" | sort | uniq > passwords.list
+grep -v '^$' "${TMPFILE}" | sort | uniq | strings > passwords.list
 
 rm "${TMPFILE}"
