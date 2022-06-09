@@ -4,7 +4,7 @@ set -u
 set -o pipefail
 
 if lsb_release -d | grep -qo 'Ubuntu\s20.04.4'; then
-  CONTENT="0.1.61"
+  CONTENT="0.1.62"
   OVAL="5.10"
   REPORT_DATE="$(date +%y%m%d)"
   REPORT_NAME="$(hostname -s)-cis_level2_server-report-${REPORT_DATE}.html"
