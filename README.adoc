@@ -5,9 +5,13 @@ image::logo/horizontal.png[Ubuntu Hardening]
 
 A quick way to make a Ubuntu server a bit more secure.
 
-Tested on `Ubuntu 20.04 Focal Fossa` and `Ubuntu 22.04 Jammy Jellyfish`.
+Use the newly installed and configured system as a reference,
+or golden, image. Use that image as a baseline installation media and ensure
+that any future installation comply with benchmarks and policies using a
+configuration management tool, e.g https://www.ansible.com/[Ansible] or
+https://puppet.com/[Puppet].
 
-Systemd required.
+Tested on `Ubuntu 20.04 Focal Fossa` and `Ubuntu 22.04 Jammy Jellyfish`.
 
 If you're just interested in the security focused systemd configuration, it's
 available as a link:systemd.adoc[separate document].
@@ -18,12 +22,6 @@ link:README.adoc#tests[instructions here].
 NOTE: This is a constant work in progress. Make sure you understand what it
 does. Read the code and do not run this script without first testing in a
 non-operational environment.
-
-When possible, use the newly installed and configured system as a reference,
-or golden, image. Use that image as a baseline installation media and ensure
-that any future installation comply with benchmarks and policies using a
-configuration management tool, e.g https://www.ansible.com/[Ansible] or
-https://puppet.com/[Puppet].
 
 == Packer template and Ansible playbook
 A https://www.packer.io/[Packer] template is available in the link:packer/[Packer directory].
