@@ -129,62 +129,62 @@ USERCONF='/etc/systemd/user.conf'
 
 === Function list
 
-==== pre
+==== `pre`
 Setup script, sets APT flags and permission checks.
 
-==== firewall
+==== `firewall`
 Enable `ufw`, use `/etc/sysctl.conf`, prepare to `psad`, and allow port 22 from `$FW_ADMIN`.
 
-==== disablenet
+==== `disablenet`
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
-==== disablemnt
+==== `disablemnt`
 Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `udf` file systems.
 
-==== systemdconf
+==== `systemdconf`
 Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
 `DefaultLimitNPROC` to 1024.
 
-==== journalctl
+==== `journalctl`
 Compress logs, forward to syslog and make log storage persistent. Ensure rsyslog
 writes logs with stricter permissions.
 
-==== timesyncd
+==== `timesyncd`
 Add four NTP-servers with a latency < 50ms from `$NTPSERVERPOOL`.
 
-==== fstab
+==== `fstab`
 Configure `/tmp/` and `/var/tmp/`. Remove floppy drivers from `/etc/fstab`
 and add `hidepid=2` to `/proc`.
 
-==== prelink
+==== `prelink`
 Undo prelinking, and remove `prelink` package.
 
-==== aptget
+==== `aptget`
 Configure `dpkg` and `apt-get`. `apt-get` update and upgrade.
 
-==== hosts
+==== `hosts`
 `/etc/hosts.allow` and `/etc/hosts.deny` restrictions.
 
-==== logindefs
+==== `logindefs`
 Modify `/etc/login.defs`, e.g. `UMASK`, password age limits and
 `SHA_CRYPT_MAX_ROUNDS`.
 
-==== sysctl
+==== `sysctl`
 Update `$SYSCTL` with `$SYSCTL_CONF`.
 
-==== limits
+==== `limits`
 Set hard and soft limits.
 
-==== adduser
+==== `adduser`
 Configure `useradd` and `adduser` to set `/bin/false` as default shell,
 home directory permissions to `0750` and lock users 30 days after password
 expires.
 
-==== rootaccess
+==== `rootaccess`
 Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
 `/etc/security/access.conf`.
 
-==== packages
+==== `packages`
 Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
 `audispd-plugins` `debsums` `gnupg2` `haveged`
 `libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
@@ -195,24 +195,25 @@ Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
 `popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`
 `xinetd` `yp-tools` `ypbind`.
 
-==== sshdconfig
+==== `sshdconfig`
 Configure the `OpenSSH` daemon. The configuration changes will be placed in
 the directory defined by the `Include` option if present, otherwise the default
 `sshd_config` will be modified.
 
-==== password
+==== `password`
 Configure `pam_pwquality.so` and `pam_tally2.so`.
 
-==== cron
+==== `cron`
 Allow `root` to use `cron`. Mask `atd`.
 
-==== ctraltdel
+==== `ctraltdel`
 Disable Ctrl-alt-delete.
 
-==== auditd
-Configure `auditd`, use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
+==== `auditd`
+Configure https://www.man7.org/linux/man-pages/man8/auditd.8.html[auditd],
+use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
 
-==== disablemod
+==== `disablemod`
 Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
 `net-pf-31` `pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage`
 `uvcvideo` `v4l2_common` kernel modules.
@@ -220,83 +221,83 @@ Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
 Note that disabling the `usb-storage` will disable any usage of USB storage
 devices, if such devices are needed `USBGuard` should be configured accordingly.
 
-==== aide
-Configure `aide`.
+==== `aide`
+Configure https://aide.github.io/[aide].
 
-==== rhosts
+==== `rhosts`
 Remove `hosts.equiv` and `.rhosts`.
 
-==== users
+==== `users`
 Remove `games` `gnats` `irc` `list` `news` `sync` `uucp` users.
 
-==== suid
+==== `suid`
 Remove `suid` bits from the executables listed in
 link:misc/suid.list[this document].
 
-==== umask
+==== `umask`
 Set `bash` and `/etc/profile` umask.
 
-==== apparmor
+==== `apparmor`
 Enforce present `apparmor` profiles.
 
-==== path
+==== `path`
 Set `root` path to `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`,
 and user path to `/usr/local/bin:/usr/bin:/bin`.
 
-==== logindconf
+==== `logindconf`
 Configure `systemd/logind.conf` and use `KillUserProcesses`.
 
-==== resolvedconf
+==== `resolvedconf`
 Configure `systemd/resolved.conf`.
 
-==== rkhunter
-Configure `rkhunter`.
+==== `rkhunter`
+Configure https://sourceforge.net/projects/rkhunter/[rkhunter].
 
-==== issue
+==== `issue`
 Update `/etc/issue` `/etc/issue.net` `/etc/motd`.
 
-==== apport
+==== `apport`
 Disable `apport`, `ubuntu-report` and `popularity-contest`.
 
-==== lockroot
+==== `lockroot`
 Lock the `root` user account.
 
-==== coredump
+==== `coredump`
 Disable coredumps with `systemd/coredump.conf`.
 
-==== postfix
-Disable the `VRFY` command, configure `smtpd_banner`, `smtpd_client_restrictions`
-and `inet_interfaces`.
+==== `postfix`
+Configure https://www.postfix.org[postfix]. Disable the `VRFY` command,
+configure `smtpd_banner`, `smtpd_client_restrictions` and `inet_interfaces`.
 
-==== motdnews
+==== `motdnews`
 Disable `motd-news`.
 
-==== usbguard
-Install and configure `usbguard`.
+==== `usbguard`
+Install and configure https://usbguard.github.io/[usbguard].
 
-==== compilers
+==== `compilers`
 Restrict compiler access.
 
-==== kernel
+==== `kernel`
 Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
 
-==== sudo
+==== `sudo`
 Configure `sudo` with `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback`,
 `passwd_timeout` and `timestamp_timeout`.
 
 Restrict `su` to the `sudo` group.
 
-==== psad
-Configure `psad`.
+==== `psad`
+Configure https://www.cipherdyne.org/psad/[psad].
 
-==== systemddelta
+==== `systemddelta`
 If verbose, show `systemd-delta`.
 
-==== post
+==== `post`
 Ensure `secureboot-db` is installed, update grub and ensure strict permissions
 on boot files.
 
-==== reboot
+==== `reboot`
 Print if a reboot is required.
 
 === Function execution order
