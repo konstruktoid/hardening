@@ -3,6 +3,7 @@
 
 ab
 agetty
+alpine
 ansible-playbook
 apt
 apt-get
@@ -21,6 +22,7 @@ awk
 base32
 base64
 basenc
+basez
 bash
 bpftrace
 bridge
@@ -141,7 +143,9 @@ jrunscript
 knife
 ksh
 ksshell
+kubectl
 latex
+latexmk
 ld.so
 ldconfig
 less
@@ -173,6 +177,7 @@ msgfilter
 msgmerge
 msguniq
 mtr
+multitime
 mv
 mysql
 nano
@@ -234,7 +239,9 @@ rev
 rlogin
 rlwrap
 rpm
+rpmdb
 rpmquery
+rpmverify
 rsync
 ruby
 run-mailcap
@@ -242,9 +249,11 @@ run-parts
 rview
 rvim
 sash
+scanmem
 scp
 screen
 script
+scrot
 sed
 service
 setarch
@@ -278,6 +287,7 @@ tail
 tar
 task
 taskset
+tasksh
 tbl
 tclsh
 tcpdump
@@ -322,6 +332,7 @@ wireshark
 wish
 write
 xargs
+xdotool
 xelatex
 xetex
 xmodmap
