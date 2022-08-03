@@ -24,7 +24,7 @@ function f_pre {
     exit 1
   fi
 
-  if [ $EUID -ne 0 ]; then
+  if [ "$EUID" -ne 0 ]; then
     echo "Not root or not enough privileges. Exiting."
     echo
     exit 1
