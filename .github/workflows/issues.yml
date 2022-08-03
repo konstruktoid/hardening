@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'auto-assign issue'
-        uses: pozil/auto-assign-issue@v1.8.0
+        uses: pozil/auto-assign-issue@v1.9.0
         with:
           assignees: konstruktoid
