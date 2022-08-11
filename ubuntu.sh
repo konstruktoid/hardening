@@ -70,6 +70,7 @@ function main {
   source ./ubuntu.cfg
 
   readonly ADDUSER
+  readonly ADMINEMAIL
   readonly ARPBIN
   readonly AUDITDCONF
   readonly AUDITD_MODE
@@ -85,6 +86,7 @@ function main {
   readonly DISABLEFS
   readonly DISABLEMOD
   readonly DISABLENET
+  readonly FAILLOCKCONF
   readonly FW_ADMIN
   readonly JOURNALDCONF
   readonly KEEP_SNAPD
@@ -94,13 +96,13 @@ function main {
   readonly LOGROTATE
   readonly LOGROTATE_CONF
   readonly LXC
-  readonly ADMINEMAIL
   readonly NTPSERVERPOOL
   readonly PAMLOGIN
   readonly PSADCONF
   readonly PSADDL
   readonly RESOLVEDCONF
   readonly RKHUNTERCONF
+  readonly RSYSLOGCONF
   readonly SECURITYACCESS
   readonly SERVERIP
   readonly SSHDFILE
