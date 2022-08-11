@@ -20,6 +20,7 @@ at
 atobm
 awk
 base32
+base58
 base64
 basenc
 basez
@@ -140,6 +141,7 @@ join
 journalctl
 jq
 jrunscript
+jtag
 knife
 ksh
 ksshell
@@ -310,6 +312,7 @@ umount
 unexpand
 uniq
 unshare
+unzip
 update-alternatives
 uudecode
 uuencode
@@ -341,6 +344,7 @@ xpad
 xxd
 xz
 yarn
+yash
 yelp
 yum
 zathura
