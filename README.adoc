@@ -23,6 +23,10 @@ NOTE: This is a constant work in progress. Make sure you understand what it
 does. Read the code and do not run this script without first testing in a
 non-operational environment.
 
+NOTE: There is a https://slsa.dev/[SLSA] artifact present under the
+https://github.com/konstruktoid/ansible-role-hardening/actions/workflows/slsa.yml[slsa workflow]
+for file checksum verification.
+
 == Packer template and Ansible playbook
 A https://www.packer.io/[Packer] template is available in the link:packer/[Packer directory].
 
