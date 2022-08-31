@@ -38,6 +38,7 @@ c99
 cancel
 capsh
 cat
+cdist
 certbot
 chage
 check_by_ssh
@@ -259,6 +260,7 @@ scrot
 sed
 service
 setarch
+setfacl
 sftp
 sg
 sh
@@ -302,6 +304,7 @@ tic
 time
 timedatectl
 timeout
+tmate
 tmux
 top
 traceroute6.iputils
