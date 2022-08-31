@@ -17,6 +17,10 @@ function f_resolvedconf {
     echo "nameserver $n" >> /etc/resolv.conf
   done
 
+  if ! [[ -f "$RESOLVEDCONF" ]]; then
+    $APT install --no-install-recommends systemd-resolved
+  fi
+
   sed -i "s/^#DNS=.*/DNS=$dnslist/" "$RESOLVEDCONF"
   sed -i "s/^#FallbackDNS=.*/FallbackDNS=1.0.0.1/" "$RESOLVEDCONF"
   sed -i "s/^#DNSSEC=.*/DNSSEC=allow-downgrade/" "$RESOLVEDCONF"

@@ -23,4 +23,13 @@ Vagrant.configure("2") do |config|
     jammy.vm.box = "ubuntu/jammy64"
     jammy.vm.hostname = "jammy"
   end
+
+  config.vm.define "kinetic" do |kinetic|
+    kinetic.ssh.extra_args = ["-o","ConnectTimeout=600"]
+    kinetic.ssh.insert_key = true
+    kinetic.vm.boot_timeout = 600
+    kinetic.vm.box = "ubuntu/kinetic"
+    kinetic.vm.box_url = "https://cloud-images.ubuntu.com/kinetic/current/kinetic-server-cloudimg-amd64-vagrant.box"
+    kinetic.vm.hostname = "kinetic"
+  end
 end
