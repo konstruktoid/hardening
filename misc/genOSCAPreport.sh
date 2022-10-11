@@ -3,7 +3,7 @@
 set -u
 set -o pipefail
 
-CONTENT="0.1.63"
+CONTENT="0.1.64"
 OVAL="5.10"
 PROFILE="cis_level2_server"
 REPORT_DATE="$(date +%y%m%d)"
