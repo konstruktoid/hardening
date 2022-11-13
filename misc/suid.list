@@ -28,6 +28,7 @@ bash
 bpftrace
 bridge
 bsd-write
+bundle
 bundler
 busctl
 busybox
@@ -190,6 +191,7 @@ nc
 neofetch
 netfilter-persistent
 newgrp
+nft
 nice
 nl
 nm
