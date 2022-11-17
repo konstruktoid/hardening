@@ -1,9 +1,6 @@
 function f_suid {
   echo "[$SCRIPT_COUNT] Remove suid bits"
-
-  local PATH
-  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-
+  
   if ! [ -f ./misc/suid.list ]; then
     echo "The list with SUID binaries can't be found."
   else
