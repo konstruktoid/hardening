@@ -3,7 +3,7 @@ Description=Aide Check
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/aide.wrapper --check
+ExecStart=/usr/bin/aide --check --config /etc/aide/aide.conf
 
 [Install]
 WantedBy=multi-user.target
