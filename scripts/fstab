@@ -12,24 +12,24 @@ function f_fstab {
 
   grep -v -E '[[:space:]]/boot[[:space:]]|[[:space:]]/home[[:space:]]|[[:space:]]/var/log[[:space:]]|[[:space:]]/var/log/audit[[:space:]]|[[:space:]]/var/tmp[[:space:]]' /etc/fstab > "$TMPFSTAB"
 
-  if grep -q '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/boot[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
+  if grep -q '[[:space:]]/boot[[:space:]].*' /etc/fstab; then
+    grep '[[:space:]]/boot[[:space:]].*' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
   fi
 
-  if grep -q '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/home[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
+  if grep -q '[[:space:]]/home[[:space:]].*' /etc/fstab; then
+    grep '[[:space:]]/home[[:space:]].*' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev/g' >> "$TMPFSTAB"
   fi
 
-  if grep -q '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/var/log[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
+  if grep -q '[[:space:]]/var/log[[:space:]].*' /etc/fstab; then
+    grep '[[:space:]]/var/log[[:space:]].*' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
   fi
 
-  if grep -q '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/var/log/audit[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
+  if grep -q '[[:space:]]/var/log/audit[[:space:]].*' /etc/fstab; then
+    grep '[[:space:]]/var/log/audit[[:space:]].*' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
   fi
 
-  if grep -q '[[:space:]]/var/tmp[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab; then
-    grep '[[:space:]]/var/tmp[[:space:]].*defaults[[:space:]]0 0$' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
+  if grep -q '[[:space:]]/var/tmp[[:space:]].*' /etc/fstab; then
+    grep '[[:space:]]/var/tmp[[:space:]].*' /etc/fstab | sed 's/defaults/defaults,nosuid,nodev,noexec/g' >> "$TMPFSTAB"
   fi
 
   cp "$TMPFSTAB" /etc/fstab
