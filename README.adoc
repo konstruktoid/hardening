@@ -21,7 +21,7 @@ link:README.adoc#tests[instructions here].
 
 NOTE: This is a constant work in progress. Make sure you understand what it
 does. Read the code and do not run this script without first testing in a
-non-operational environment.
+non-operational environment. The code is *not* idempotent.
 
 NOTE: There is a https://slsa.dev/[SLSA] artifact present under the
 https://github.com/konstruktoid/hardening/actions/workflows/slsa.yml[slsa workflow]
