@@ -6,6 +6,7 @@ ab
 agetty
 alpine
 ansible-playbook
+aoss
 apt
 apt-get
 ar
@@ -155,6 +156,7 @@ jtag
 knife
 ksh
 ksshell
+ksu
 kubectl
 latex
 latexmk
@@ -276,6 +278,7 @@ sed
 service
 setarch
 setfacl
+setlock
 sftp
 sg
 sh
@@ -286,6 +289,7 @@ snap
 socat
 socket
 soelim
+softlimit
 sort
 split
 sqlite3
@@ -323,6 +327,8 @@ timeout
 tmate
 tmux
 top
+torify
+torsocks
 traceroute6.iputils
 troff
 tshark
