@@ -275,7 +275,7 @@ Configure https://www.postfix.org[postfix]. Disable the `VRFY` command,
 configure `smtpd_banner`, `smtpd_client_restrictions` and `inet_interfaces`.
 
 ==== `motdnews`
-Disable `motd-news`.
+Disable `motd-news` and `apt_news`.
 
 ==== `usbguard`
 Install and configure https://usbguard.github.io/[usbguard].
