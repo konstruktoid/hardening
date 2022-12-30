@@ -6,3 +6,8 @@ load test_helper
   run bash -c "grep '^ENABLED=0$' /etc/default/motd-news"
   [ "$status" -eq 0 ]
 }
+
+@test "Verify that APT news is disabled" {
+  run bash -c "pro config show | grep '^apt_news.*False'"
+  [ "$status" -eq 0 ]
+}
