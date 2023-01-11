@@ -22,6 +22,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify that kernel module ksmbd is disabled" {
+  run bash -c "modprobe -n -v ksmbd | grep 'install /bin/true'"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify that kernel module jffs2 is disabled" {
   run bash -c "modprobe -n -v jffs2 | grep 'install /bin/true'"
   [ "$status" -eq 0 ]
