@@ -144,7 +144,7 @@ Enable `ufw`, use `/etc/sysctl.conf`, prepare to `psad`, and allow port 22 from 
 Disable `dccp` `sctp` `rds` `tipc` protocols.
 
 ==== `disablemnt`
-Disable `cramfs` `freevxfs` `jffs2` `hfs` `hfsplus` `udf` file systems.
+Disable `cramfs` `freevxfs` `jffs2` `ksmbd` `hfs` `hfsplus` `udf` file systems.
 
 ==== `systemdconf`
 Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
