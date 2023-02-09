@@ -37,6 +37,11 @@ load test_helper
   [ "$status" -eq 0 ]
 }
 
+@test "Verify APT Remove-Unused-Kernel-Packages" {
+  run bash -c "grep '^Unattended-Upgrade::Remove-Unused-Kernel-Packages \"true\";$' /etc/apt/apt.conf.d/*"
+  [ "$status" -eq 0 ]
+}
+
 @test "Verify APT AllowInsecureRepositories" {
   run bash -c "grep '^Acquire::AllowInsecureRepositories \"false\";$' /etc/apt/apt.conf.d/*"
   [ "$status" -eq 0 ]
@@ -84,6 +89,11 @@ load test_helper
 
 @test "Verify APT runtime Remove-Unused-Dependencies" {
   run bash -c "apt-config dump | grep '^Unattended-Upgrade::Remove-Unused-Dependencies \"true\";$'"
+  [ "$status" -eq 0 ]
+}
+
+@test "Verify APT runtime Remove-Unused-Kernel-Packages" {
+  run bash -c "apt-config dump | grep '^Unattended-Upgrade::Remove-Unused-Kernel-Packages \"true\";$'"
   [ "$status" -eq 0 ]
 }
 

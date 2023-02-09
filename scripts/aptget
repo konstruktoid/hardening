@@ -70,6 +70,12 @@ function f_aptget_configure {
     sed -i 's/.*Unattended-Upgrade::Remove-Unused-Dependencies.*/Unattended-Upgrade::Remove-Unused-Dependencies "true";/g' "$(grep -l 'Unattended-Upgrade::Remove-Unused-Dependencies' /etc/apt/apt.conf.d/*)"
   fi
 
+  if ! grep '^Unattended-Upgrade::Remove-Unused-Kernel-Packages' /etc/apt/apt.conf.d/*; then
+    echo 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";' >> /etc/apt/apt.conf.d/50unattended-upgrades
+  else
+    sed -i 's/.*Unattended-Upgrade::Remove-Unused-Kernel-Packages.*/Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";/g' "$(grep -l 'Unattended-Upgrade::Remove-Unused-Kernel-Packages' /etc/apt/apt.conf.d/*)"
+  fi
+
   if ! grep '^Acquire::AllowDowngradeToInsecureRepositories' /etc/apt/apt.conf.d/*; then
     echo 'Acquire::AllowDowngradeToInsecureRepositories "false";' >> /etc/apt/apt.conf.d/98-hardening-ubuntu
   else
