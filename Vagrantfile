@@ -24,22 +24,14 @@ Vagrant.configure("2") do |config|
     jammy.vm.hostname = "jammy"
   end
 
-  config.vm.define "kinetic" do |kinetic|
-    kinetic.ssh.extra_args = ["-o","ConnectTimeout=600"]
-    kinetic.ssh.insert_key = true
-    kinetic.vm.boot_timeout = 600
-    kinetic.vm.box = "ubuntu/kinetic64"
-    kinetic.vm.hostname = "kinetic"
-  end
-
   config.vm.define "lunar" do |lunar|
     lunar.ssh.extra_args = ["-o","ConnectTimeout=600"]
     lunar.ssh.insert_key = true
     lunar.vm.boot_timeout = 600
-    lunar.vm.box = "lunar/20221227"
-    lunar.vm.box_url = "https://cloud-images.ubuntu.com/lunar/20221227/lunar-server-cloudimg-amd64-vagrant.box"
+    lunar.vm.box = "lunar/20230202"
+    lunar.vm.box_url = "https://cloud-images.ubuntu.com/lunar/20230202/lunar-server-cloudimg-amd64-vagrant.box"
     lunar.vm.box_download_checksum_type = "sha256"
-    lunar.vm.box_download_checksum = "5576b35423437b60ddcbf2500a2700a5354947a080d83efc057f75d4a0e08789"
+    lunar.vm.box_download_checksum = "dfd3f48efd8f170a0d2560b6fa17877929659c2e1d3903692cbc6c8787ae2407"
     lunar.vm.hostname = "lunar"
   end
 end
