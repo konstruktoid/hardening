@@ -88,6 +88,7 @@ debugfs
 dialog
 diff
 dig
+distcc
 dmesg
 dmidecode
 dmsetup
@@ -95,6 +96,7 @@ dnf
 docker
 dosbox
 dpkg
+dstat
 dvips
 easy_install
 eb
@@ -149,6 +151,7 @@ ip
 irb
 ispell
 jjs
+joe
 join
 journalctl
 jq
@@ -229,6 +232,7 @@ pdftex
 perf
 perl
 perlbug
+pexec
 pg
 php
 pic
@@ -254,6 +258,7 @@ rbash
 readelf
 red
 redcarpet
+redis
 restic
 rev
 rlogin
@@ -294,6 +299,7 @@ softlimit
 sort
 split
 sqlite3
+sqlmap
 ss
 ssh
 ssh-keygen
