@@ -1,4 +1,4 @@
-FROM koalaman/shellcheck-alpine
+FROM koalaman/shellcheck-alpine:stable
 
 LABEL "com.github.actions.name"="Konstruktoid ShellCheck"
 LABEL "com.github.actions.description"="ShellCheck for multiple files"

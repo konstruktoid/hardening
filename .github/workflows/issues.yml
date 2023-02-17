@@ -1,11 +1,16 @@
-name: issue assignment
+name: Issue assignment
 
 on:
   issues:
     types: [opened]
 
+permissions:
+  contents: read
+
 jobs:
   auto-assign:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: 'auto-assign issue'

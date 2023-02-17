@@ -1,8 +1,12 @@
 on: [push, pull_request]
-name: Konstruktoid ShellCheck
+name: ShellCheck
+
+permissions:
+  contents: read
+
 jobs:
   konstruktoidShellCheck:
-    name: Konstruktoid ShellCheck
+    name: ShellCheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
