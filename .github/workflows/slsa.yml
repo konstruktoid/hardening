@@ -1,9 +1,14 @@
 ---
-name: slsa
+name: SLSA
 on:
   push:
   release:
+    permissions:
+      contents: write
     types: [published, released]
+
+permissions:
+  contents: read
 
 jobs:
   build:
