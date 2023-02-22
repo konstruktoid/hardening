@@ -1,7 +1,8 @@
 image::logo/horizontal.png[Ubuntu Hardening]
-
 = Hardening Ubuntu. Systemd edition.
+
 :icons: font
+:hide-uri-scheme:
 
 A quick way to make a Ubuntu server a bit more secure.
 
@@ -28,12 +29,14 @@ https://github.com/konstruktoid/hardening/actions/workflows/slsa.yml[slsa workfl
 for file checksum verification.
 
 == Packer template and Ansible playbook
+
 A https://www.packer.io/[Packer] template is available in the link:packer/[Packer directory].
 
 An Ansible playbook is available in the https://github.com/konstruktoid/ansible-role-hardening[konstruktoid/ansible-role-hardening]
 repository.
 
 == Howto
+
 . Start the server installation.
 . Pick language and keyboard layout.
 . Select "Ubuntu Server (minimized)".
@@ -51,6 +54,7 @@ for more information.
 . Reboot.
 
 === Recommended partitions and options
+
 [source,shell]
 ----
 /boot (rw)
@@ -63,6 +67,7 @@ for more information.
 Note that `/tmp` will be added automatically by the script.
 
 == Configuration options
+
 [source,shell]
 ----
 FW_ADMIN='127.0.0.1' // <1>
@@ -80,7 +85,7 @@ ADMINEMAIL="root@localhost" // <12>
 KEEP_SNAPD='Y' // <13>
 CHANGEME='' // <14>
 
-# Configuration files
+# Configuration files // <15>
 ADDUSER='/etc/adduser.conf'
 AUDITDCONF='/etc/audit/auditd.conf'
 AUDITRULES='/etc/audit/rules.d/hardening.rules'
@@ -129,240 +134,490 @@ USERCONF='/etc/systemd/user.conf'
 <12> Add a valid email address, so PSAD can send notifications.
 <13> If `'Y'` then the `snapd` package will be held to prevent removal.
 <14> Add something just to verify that you actually glanced the code.
+<15> Default configuration file locations.
 
 == Functions
 
-=== Function list
+=== Function list in execution order
+
+Note that all functions has the `f_` prefix in the code.
 
 ==== `pre`
-Setup script, sets APT flags and permission checks.
+
+Sets `apt` flags and performs basic permission check.
+
+The `pre` function is located in link:scripts/pre[./scripts/pre].
+
+==== `kernel`
+
+Sets https://github.com/jeffmurphy/NetPass/blob/master/doc/netfilter_conntrack_perf.txt#L175[/sys/module/nf_conntrack/parameters/hashsize]
+to 1048576 if `hashsize` exists and is writable.
+
+Sets https://man7.org/linux/man-pages/man7/kernel_lockdown.7.html[/sys/kernel/security/lockdown]
+to `confidentiality` if `lockdown` exists and is writable.
+
+The `kernel` function is located in link:scripts/kernel[./scripts/kernel].
 
 ==== `firewall`
-Enable `ufw`, use `/etc/sysctl.conf`, prepare to `psad`, and allow port 22 from `$FW_ADMIN`.
+
+Configures https://help.ubuntu.com/community/UFW[UFW] if installed.
+
+Allows connections from the adresses in `$FW_ADMIN` to the `$SSH_PORT`.
+
+Sets logging and `IPT_SYSCTL=/etc/sysctl.conf`.
+
+The `firewall` function is located in link:scripts/ufw[./scripts/ufw].
 
 ==== `disablenet`
-Disable `dccp` `sctp` `rds` `tipc` protocols.
 
-==== `disablemnt`
-Disable `cramfs` `freevxfs` `jffs2` `ksmbd` `hfs` `hfsplus` `udf` file systems.
+Disables the `dccp`, `sctp`, `rds` and `tipc` kernel modules.
 
-==== `systemdconf`
-Disable coredumps and crash shells, set `DefaultLimitNOFILE` and
-`DefaultLimitNPROC` to 1024.
+The `disablenet` function is located in link:scripts/disablenet[./scripts/disablenet].
 
-==== `journalctl`
-Compress logs, forward to syslog and make log storage persistent. Ensure rsyslog
-writes logs with stricter permissions.
+==== `disablefs`
 
-==== `timesyncd`
-Add four NTP-servers with a latency < 50ms from `$NTPSERVERPOOL`.
+Disables the `cramfs` `freevxfs` `jffs2` `ksmbd` `hfs` `hfsplus` `udf` kernel
+modules.
 
-==== `fstab`
-Configure `/tmp/` and `/var/tmp/`. Remove floppy drivers from `/etc/fstab`
-and add `hidepid=2` to `/proc`.
-
-==== `prelink`
-Undo prelinking, and remove `prelink` package.
-
-==== `aptget`
-Configure `dpkg` and `apt-get`. `apt-get` update and upgrade.
-
-==== `hosts`
-`/etc/hosts.allow` and `/etc/hosts.deny` restrictions.
-
-==== `logindefs`
-Modify `/etc/login.defs`, e.g. `UMASK`, password age limits and
-`SHA_CRYPT_MAX_ROUNDS`.
-
-==== `sysctl`
-Update `$SYSCTL` with `$SYSCTL_CONF`.
-
-==== `limits`
-Set hard and soft limits.
-
-==== `adduser`
-Configure `useradd` and `adduser` to set `/bin/false` as default shell,
-home directory permissions to `0750` and lock users 30 days after password
-expires.
-
-==== `rootaccess`
-Limit `/etc/securetty` to `console`, and `root` from 127.0.0.1 in
-`/etc/security/access.conf`.
-
-==== `packages`
-Installs `acct` `aide-common` `apparmor-profiles` `apparmor-utils` `auditd`
-`audispd-plugins` `debsums` `gnupg2` `haveged`
-`libpam-apparmor` `libpam-pwquality` `libpam-tmpdir` `needrestart`
-`openssh-server` `postfix` `rkhunter` `sysstat` `systemd-coredump` `tcpd`
-`psad` `update-notifier-common` `vlock`.
-
-Removes `apport*` `autofs` `avahi*` `beep` `git` `pastebinit`
-`popularity-contest` `rsh*` `rsync` `talk*` `telnet*` `tftp*` `whoopsie`
-`xinetd` `yp-tools` `ypbind`.
-
-==== `sshdconfig`
-Configure the `OpenSSH` daemon. The configuration changes will be placed in
-the directory defined by the `Include` option if present, otherwise the default
-`sshd_config` will be modified.
-
-==== `password`
-Configure `pam_pwquality.so` and `pam_tally2.so`.
-
-==== `cron`
-Allow `root` to use `cron`. Mask `atd`.
-
-==== `ctraltdel`
-Disable Ctrl-alt-delete.
-
-==== `auditd`
-Configure https://www.man7.org/linux/man-pages/man8/auditd.8.html[auditd],
-use `$AUDITD_RULES` and set failure mode `$AUDITD_MODE`.
+The `disablefs` function is located in link:scripts/disablefs[./scripts/disablefs].
 
 ==== `disablemod`
-Disable `bluetooth` `bnep` `btusb` `cpia2` `firewire-core` `floppy` `n_hdlc`
-`net-pf-31` `pcspkr` `soundcore` `thunderbolt` `usb-midi` `usb-storage`
-`uvcvideo` `v4l2_common` kernel modules.
+
+Disables the `bluetooth`, `bnep`, `btusb`, `cpia2`, `firewire-core`, `floppy`,
+`n_hdlc`, `net-pf-31`, `pcspkr`, `soundcore`, `thunderbolt`, `usb-midi`,
+`usb-storage`, `uvcvideo`, `v4l2_common` kernel modules.
 
 Note that disabling the `usb-storage` will disable any usage of USB storage
 devices, if such devices are needed `USBGuard` should be configured accordingly.
 
-==== `aide`
-Configure https://aide.github.io/[aide].
+The `disablemod` function is located in link:scripts/disablemod[./scripts/disablemod].
 
-==== `rhosts`
-Remove `hosts.equiv` and `.rhosts`.
+==== `systemdconf`
 
-==== `users`
-Remove `games` `gnats` `irc` `list` `news` `sync` `uucp` users.
+Sets `CrashShell=no`, `DefaultLimitCORE=0`, `DefaultLimitNOFILE=1024`,
+`DefaultLimitNPROC=1024`, `DumpCore=no` in `$SYSTEMCONF`
+and `$USERCONF`.
 
-==== `suid`
-Remove `suid` bits from the executables listed in
-link:misc/suid.list[this document].
-
-==== `umask`
-Set `bash` and `/etc/profile` umask.
-
-==== `apparmor`
-Enforce present `apparmor` profiles.
-
-==== `path`
-Set `root` path to `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`,
-and user path to `/usr/local/bin:/usr/bin:/bin`.
-
-==== `logindconf`
-Configure `systemd/logind.conf` and use `KillUserProcesses`.
+The `systemdconf` function is located in link:scripts/systemdconf[./scripts/systemdconf].
 
 ==== `resolvedconf`
-Configure `systemd/resolved.conf`.
 
-==== `rkhunter`
-Configure https://sourceforge.net/projects/rkhunter/[rkhunter].
+Sets `DNS=$dnslist`, `DNSOverTLS=opportunistic`, `DNSSEC=allow-downgrade`, `FallbackDNS=1.0.0.1`
+in `$RESOLVEDCONF`, where `$dnslist` is an array with the nameservers present
+in `/etc/resolv.conf`.
+
+The `resolvedconf` function is located in link:scripts/resolvedconf[./scripts/resolvedconf].
+
+==== `logindconf`
+
+Sets `IdleAction=lock`, `IdleActionSec=15min`, `KillExcludeUsers=root`,
+`KillUserProcesses=1`, `RemoveIPC=yes` in `$LOGINDCONF`.
+
+The `logindconf` function is located in link:scripts/logindconf[./scripts/logindconf].
+
+==== `journalctl`
+
+Copies link:misc/logrotate.conf[./misc/logrotate.conf] to `$LOGROTATE`.
+
+Sets `Compress=yes`, `ForwardToSyslog=yes`, `Storage=persistent` in
+`$JOURNALDCONF`.
+
+Sets `$FileCreateMode 0600/` in `$RSYSLOGCONF`.
+if `RSYSLOGCONF` is writable.
+
+The `journalctl` function is located in link:scripts/journalctl[./scripts/journalctl].
+
+==== `timesyncd`
+
+Sets `NTP=${SERVERARRAY[*]}`, `FallbackNTP=${FALLBACKARRAY[*]}`, `RootDistanceMaxSec=1`
+in `$TIMESYNCD` where the arrays are up to four time servers with < 50ms
+latency.
+
+The `timesyncd` function is located in link:scripts/timesyncd[./scripts/timesyncd].
+
+==== `fstab`
+
+Configures the `/boot` and `/home` partitions with `defaults,nosuid,nodev` if
+they are available in `/etc/fstab`.
+
+Configures the `/var/log`, `/var/log/audit` and `/var/tmp` partitions with
+`defaults,nosuid,nodev,noexec` if they are available in `/etc/fstab`.
+
+Adds `/run/shm tmpfs rw,noexec,nosuid,nodev`,
+`/dev/shm tmpfs rw,noexec,nosuid,nodev` and
+`/proc proc rw,nosuid,nodev,noexec,relatime,hidepid=2` to `/etc/fstab` if
+the partition isn't present in `/etc/fstab`.
+
+Removes any floppy drivers from `/etc/fstab`.
+
+Copies ./config/tmp.mount[./config/tmp.mount] to
+`/etc/systemd/system/tmp.mount`, removes `/tmp` from `/etc/fstab`
+and enables the tmpfs `/tmp` mount instead.
+
+The `/proc` `hidepid` option is described in https://www.kernel.org/doc/html/latest/filesystems/proc.html#mount-options[https://www.kernel.org/doc/html/latest/filesystems/proc.html#mount-options].
+
+The `fstab` function is located in link:scripts/fstab[./scripts/fstab].
+
+==== `prelink`
+
+Reverts binaries and libraries to their original content before they were
+prelinked and uninstalls `prelink`.
+
+The `prelink` function is located in link:scripts/prelink[./scripts/prelink].
+
+==== `aptget_configure`
+
+Sets `apt` options `Acquire::http::AllowRedirect "false";`, `APT::Get::AllowUnauthenticated "false";`,
+`APT::Periodic::AutocleanInterval "7";`,
+`APT::Install-Recommends "false";`, `APT::Get::AutomaticRemove "true";`,
+`APT::Install-Suggests "false";`, `Acquire::AllowDowngradeToInsecureRepositories "false";`,
+`Acquire::AllowInsecureRepositories "false";`, `APT::Sandbox::Seccomp "1";`
+
+See https://manpages.ubuntu.com/manpages/jammy/man5/apt.conf.5.html[https://manpages.ubuntu.com/manpages/jammy/man5/apt.conf.5.html].
+
+The `aptget_configure` function is located in link:scripts/aptget[./scripts/aptget].
+
+==== `aptget`
+
+Upgrades installed packages.
+
+The `aptget` function is located in link:scripts/aptget[./scripts/aptget].
+
+==== `hosts`
+
+Sets `sshd : ALL : ALLOW`, `ALL: LOCAL, 127.0.0.1` in `/etc/hosts.allow` and
+`ALL: ALL` in `/etc/hosts.deny`.
+
+See https://manpages.ubuntu.com/manpages/jammy/man5/hosts_access.5.html[https://manpages.ubuntu.com/manpages/jammy/man5/hosts_access.5.html]
+for the format of host access control files.
+
+The `hosts` function is located in link:scripts/hosts[./scripts/hosts].
 
 ==== `issue`
-Update `/etc/issue` `/etc/issue.net` `/etc/motd`.
 
-==== `apport`
-Disable `apport`, `ubuntu-report` and `popularity-contest`.
+Writes a notice regarding authorized use only to `/etc/issue`, `/etc/issue.net`
+and `/etc/motd`.
 
-==== `lockroot`
-Lock the `root` user account.
+Removes the executable flag from every file in `/etc/update-motd.d/`.
 
-==== `coredump`
-Disable coredumps with `systemd/coredump.conf`.
-
-==== `postfix`
-Configure https://www.postfix.org[postfix]. Disable the `VRFY` command,
-configure `smtpd_banner`, `smtpd_client_restrictions` and `inet_interfaces`.
-
-==== `motdnews`
-Disable `motd-news` and `apt_news`.
-
-==== `usbguard`
-Install and configure https://usbguard.github.io/[usbguard].
-
-==== `compilers`
-Restrict compiler access.
-
-==== `kernel`
-Set `lockdown=confidentiality` if `/sys/kernel/security/lockdown` is present.
+The `issue` function is located in link:scripts/issue[./scripts/issue].
 
 ==== `sudo`
-Configure `sudo` with `use_pty`, `logfile`, `!visiblepw`, `!pwfeedback`,
-`passwd_timeout` and `timestamp_timeout`.
 
-Restrict `su` to the `sudo` group.
+Restricts `su` access to members of the `sudo` group using
+https://manpages.ubuntu.com/manpages/jammy/man8/pam_wheel.8.html[pam_wheel].
+
+Sets `!pwfeedback`, `!visiblepw`, `logfile=/var/log/sudo.log`, `passwd_timeout=1`,
+`timestamp_timeout=5`, `use_pty` https://manpages.ubuntu.com/manpages/jammy/man5/sudoers.5.html[sudo options].
+
+The `sudo` function is located in link:scripts/sudo[./scripts/sudo].
+
+==== `logindefs`
+
+Writes `LOG_OK_LOGINS yes`, `UMASK 077`, `PASS_MIN_DAYS 1`, `PASS_MAX_DAYS 60`,
+`DEFAULT_HOME no`, `ENCRYPT_METHOD SHA512`, `USERGROUPS_ENAB no`,
+`SHA_CRYPT_MIN_ROUNDS 10000`, `SHA_CRYPT_MAX_ROUNDS 65536` to
+https://manpages.ubuntu.com/manpages/jammy/man5/login.defs.5.html[$LOGINDEFS]
+
+The `logindefs` function is located in link:scripts/logindefs[./scripts/logindefs].
+
+==== `sysctl`
+
+Copies link:misc/sysctl.conf[./misc/sysctl.conf] to `$SYSCTL`.
+
+For an explanation of the options set, see
+https://www.kernel.org/doc/html/latest/admin-guide/sysctl/[https://www.kernel.org/doc/html/latest/admin-guide/sysctl/].
+
+The `sysctl` function is located in link:scripts/sysctl[./scripts/sysctl].
+
+==== `limitsconf`
+
+Sets `hard maxlogins 10`, `hard core 0`, `soft nproc 512`, `hard nproc 1024` in
+https://manpages.ubuntu.com/manpages/jammy/en/man5/limits.conf.5.html[$LIMITSCONF]
+
+The `limitsconf` function is located in link:scripts/limits[./scripts/limits].
+
+==== `adduser`
+
+Sets `DIR_MODE=0750`,`DSHELL=/bin/false`, and `USERGROUPS=yes` in `$ADDUSER`.
+
+Sets `INACTIVE=30` and `SHELL=/bin/false` in `$USERADD`.
+
+The `adduser` function is located in link:scripts/adduser[./scripts/adduser].
+
+==== `rootaccess`
+
+Writes `+:root:127.0.0.1/'` to `$SECURITYACCESS` and `console` to
+`/etc/securetty`.
+
+Masks https://freedesktop.org/wiki/Software/systemd/Debugging/[debug-shell].
+
+The `rootaccess` function is located in link:scripts/rootaccess[./scripts/rootaccess].
+
+==== `package_install`
+
+Installs `acct`, `aide-common`, `cracklib-runtime`, `debsums`, `gnupg2`,
+`haveged`, `libpam-pwquality`, `libpam-tmpdir`, `needrestart`, `openssh-server`,
+`postfix`, `psad`, `rkhunter`, `sysstat`, `systemd-coredump`, `tcpd`,
+`update-notifier-common`, `vlock`.
+
+The `package_install` function is located in link:scripts/packages[./scripts/packages].
 
 ==== `psad`
-Configure https://www.cipherdyne.org/psad/[psad].
 
-==== `systemddelta`
-If verbose, show `systemd-delta`.
+Installs and configures https://cipherdyne.org/psad/[PSAD]
 
-==== `post`
-Ensure `secureboot-db` is installed, update grub and ensure strict permissions
-on boot files.
+The `psad` function is located in link:scripts/psad[./scripts/psad].
 
-==== `reboot`
-Print if a reboot is required.
+==== `coredump`
 
-=== Function execution order
+Writes `Storage=none` and `ProcessSizeMax=0` to `$COREDUMPCONF`.
+
+The `coredump` function is located in link:scripts/coredump[./scripts/coredump].
+
+==== `usbguard`
+
+Installs and configures https://usbguard.github.io/[USBGuard].
+
+The `usbguard` function is located in link:scripts/usbguard[./scripts/usbguard].
+
+==== `postfix`
+
+Installs `postfix` and sets `disable_vrfy_command=yes`,
+`inet_interfaces=loopback-only`,
+`smtpd_banner="\$myhostname`,
+`smtpd_client_restrictions=permit_mynetworks,reject` using https://manpages.ubuntu.com/manpages/jammy/en/man1/postconf.1.html[postconf].
+
+The `postfix` function is located in link:scripts/postfix[./scripts/postfix].
+
+==== `apport`
+
+Disables
+https://manpages.ubuntu.com/manpages/jammy/man1/apport-cli.1.html[apport],
+https://github.com/Ubuntu/ubuntu-report[ubuntu-report] and
+https://manpages.ubuntu.com/manpages/jammy/en/man8/popularity-contest.8.html[popularity-contest].
+
+The `apport` function is located in link:scripts/apport[./scripts/apport].
+
+==== `motdnews`
+
+Disables `apt_news` and https://ubuntu.com/legal/motd[motd-news].
+
+The `motdnews` function is located in link:scripts/motdnews[./scripts/motdnews].
+
+==== `rkhunter`
+
+Sets `CRON_DAILY_RUN="yes"`, `APT_AUTOGEN="yes"` in `$RKHUNTERCONF`.
+
+The `rkhunter` function is located in link:scripts/rkhunter[./scripts/rkhunter].
+
+==== `sshconfig`
+
+Sets `HashKnownHosts yes`, `Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr`
+and `MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256`
+in `$SSHFILE`.
+
+The `sshconfig` function is located in link:scripts/sshdconfig[./scripts/sshdconfig].
+
+==== `sshdconfig`
+
+Configures the `OpenSSH` daemon. The configuration changes will be placed in
+the directory defined by the `Include` option if present, otherwise
+https://manpages.ubuntu.com/manpages/jammy/en/man5/sshd_config.5.html[$SSHDFILE]
+will be modified.
+
+By default `/etc/ssh/sshd_config.d/hardening.conf` will contain the following:
+
 [source,shell]
 ----
-f_pre
-f_kernel
-f_firewall
-f_disablenet
-f_disablefs
-f_disablemod
-f_systemdconf
-f_resolvedconf
-f_logindconf
-f_journalctl
-f_timesyncd
-f_fstab
-f_prelink
-f_aptget_configure
-f_aptget
-f_hosts
-f_issue
-f_sudo
-f_logindefs
-f_sysctl
-f_limitsconf
-f_adduser
-f_rootaccess
-f_package_install
-f_psad
-f_coredump
-f_usbguard
-f_postfix
-f_apport
-f_motdnews
-f_rkhunter
-f_sshconfig
-f_sshdconfig
-f_password
-f_cron
-f_ctrlaltdel
-f_auditd
-f_aide
-f_rhosts
-f_users
-f_lockroot
-f_package_remove
-f_suid
-f_restrictcompilers
-f_umask
-f_path
-f_aa_enforce
-f_aide_post
-f_aide_timer
-f_aptget_noexec
-f_aptget_clean
-f_systemddelta
-f_post
-f_checkreboot
+AcceptEnv LANG LC_*
+AllowAgentForwarding no
+AllowGroups sudo
+AllowTcpForwarding no
+Banner /etc/issue.net
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr
+ClientAliveCountMax 3
+ClientAliveInterval 200
+Compression no
+GSSAPIAuthentication no
+HostbasedAuthentication no
+IgnoreUserKnownHosts yes
+KbdInteractiveAuthentication no
+KerberosAuthentication no
+KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
+LogLevel VERBOSE
+LoginGraceTime 20
+Macs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256
+MaxAuthTries 3
+MaxSessions 3
+MaxStartups 10:30:60
+PasswordAuthentication no
+PermitEmptyPasswords no
+PermitRootLogin no
+PermitUserEnvironment no
+Port 22
+PrintLastLog yes
+PrintMotd no
+RekeyLimit 512M 1h
+StrictModes yes
+TCPKeepAlive no
+UseDNS no
+UsePAM yes
+X11Forwarding no
 ----
+
+The `sshdconfig` function is located in link:scripts/sshdconfig[./scripts/sshdconfig].
+
+==== `password`
+
+Copies ./config/pwquality.conf[./config/pwquality.conf] to `/etc/security/pwquality.conf`,
+
+Removes `nullok` from https://manpages.ubuntu.com/manpages/jammy/man5/pam.conf.5.html[PAM]
+`$COMMONAUTH`.
+
+Configures https://manpages.ubuntu.com/manpages/jammy/en/man8/faillock.8.html[faillock]
+or https://manpages.ubuntu.com/manpages/jammy/man8/pam_tally2.8.html[pam_tally2]
+depending on which is installed.
+
+Adds a link:misc/passwords.list[password list] to https://manpages.ubuntu.com/manpages/jammy/man8/update-cracklib.8.html[cracklib].
+
+The `password` function is located in link:scripts/password[./scripts/password].
+
+==== `cron`
+
+Disables https://manpages.ubuntu.com/manpages/jammy/en/man8/atd.8.html[atd]
+and only allow root to use https://manpages.ubuntu.com/manpages/jammy/en/man1/at.1.html[at]
+or https://manpages.ubuntu.com/manpages/jammy/en/man8/cron.8.html[cron].
+
+The `cron` function is located in link:scripts/cron[./scripts/cron].
+
+==== `ctrlaltdel`
+
+Masks https://manpages.ubuntu.com/manpages/jammy/man1/systemd.1.html#signals[ctrl-alt-del.target].
+
+The `ctrlaltdel` function is located in link:scripts/ctraltdel[./scripts/ctraltdel].
+
+==== `auditd`
+
+Configures https://manpages.ubuntu.com/manpages/jammy/en/man8/auditd.8.html[auditd].
+
+See link:misc/audit-base.rules[./misc/audit-base.rules],
+link:misc/audit-aggressive.rules[./misc/audit-aggressive.rules] and link:misc/audit-docker.rules[./misc/audit-docker.rules]
+for the rules used.
+
+The `auditd` function is located in link:scripts/auditd[./scripts/auditd].
+
+==== `aide`
+
+Excludes `/var/lib/lxcfs/cgroup` and `/var/lib/docker` from https://manpages.ubuntu.com/manpages/jammy/en/man1/aide.1.html[AIDE].
+
+The `aide` function is located in link:scripts/aide[./scripts/aide].
+
+==== `rhosts`
+
+Removes any existing `hosts.equiv` or `.rhosts` files.
+
+The `rhosts` function is located in link:scripts/rhosts[./scripts/rhosts].
+
+==== `users`
+
+Removes the `games`, `gnats`, `irc`, `list`, `news`, `sync`, `uucp` users.
+
+The `users` function is located in link:scripts/users[./scripts/users].
+
+==== `lockroot`
+
+Locks root account
+
+The `lockroot` function is located in link:scripts/lockroot[./scripts/lockroot].
+
+==== `package_remove`
+
+Removes the `apport*`, `autofs`, `avahi*`, `beep`, `git`, `pastebinit`,
+`popularity-contest`, `rsh*`, `rsync`, `talk*`, `telnet*`, `tftp*`, `whoopsie`,
+`xinetd`, `yp-tools`, `ypbind` packages.
+
+The `package_remove` function is located in link:scripts/packages[./scripts/packages].
+
+==== `suid`
+
+Ensures the executables in link:misc/suid.list[./misc/suid.list] don't have suid
+bits set.
+
+The `suid` function is located in link:scripts/suid[./scripts/suid].
+
+==== `restrictcompilers`
+
+Changes mode to `0750` on any installed compilers.
+
+The `restrictcompilers` function is located in link:scripts/compilers[./scripts/compilers].
+
+==== `umask`
+
+Sets the default https://manpages.ubuntu.com/manpages/jammy/man2/umask.2.html[umask] to `077`
+
+The `umask` function is located in link:scripts/umask[./scripts/umask].
+
+==== `path`
+
+Copies ./config/initpath.sh[./config/initpath.sh] to `/etc/profile.d/initpath.sh`
+and sets `PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
+for the `root` user and `PATH=/usr/local/bin:/usr/sbin:/usr/bin:/bin:/snap/bin`
+for everyone else.
+
+The `path` function is located in link:scripts/path[./scripts/path].
+
+==== `aa_enforce`
+
+Enforces available https://manpages.ubuntu.com/manpages/jammy/en/man7/apparmor.7.html[apparmor]
+profiles.
+
+The `aa_enforce` function is located in link:scripts/apparmor[./scripts/apparmor].
+
+==== `aide_post`
+
+Creates a new AIDE database.
+
+The `aide_post` function is located in link:scripts/aide[./scripts/aide].
+
+==== `aide_timer`
+
+Copies a systemd AIDE check service and timer to /etc/systemd/system/.
+
+The `aide_timer` function is located in link:scripts/aide[./scripts/aide].
+
+==== `aptget_noexec`
+
+Adds a `DPkg::Pre-Invoke` and `DPkg::Post-Invoke` to ensure package updates
+don't fail on a `noexec` `/tmp` partition.
+
+The `aptget_noexec` function is located in link:scripts/aptget[./scripts/aptget].
+
+==== `aptget_clean`
+
+Runs https://manpages.ubuntu.com/manpages/jammy/en/man8/apt-get.8.html[apt-get] `clean` and `autoremove`.
+
+The `aptget_clean` function is located in link:scripts/aptget[./scripts/aptget].
+
+==== `systemddelta`
+
+Runs https://manpages.ubuntu.com/manpages/jammy/man1/systemd-delta.1.html[systemd-delta] if running in verbose mode.
+
+The `systemddelta` function is located in link:scripts/systemddelta[./scripts/systemddelta].
+
+==== `post`
+
+Ensures https://manpages.ubuntu.com/manpages/jammy/man1/fwupdmgr.1.html[fwupdmgr]
+and https://packages.ubuntu.com/jammy/secureboot-db[secureboot-db] is installed
+and GRUB is updated.
+
+The `post` function is located in link:scripts/post[./scripts/post].
+
+==== `checkreboot`
+
+Checks if a reboot is required.
+
+The `checkreboot` function is located in link:scripts/reboot[./scripts/reboot].
 
 == Tests
 There are approximately 760 https://github.com/bats-core/bats-core[Bats tests]
