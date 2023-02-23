@@ -5,7 +5,7 @@ if ! command -v bats 1>/dev/null; then
   exit 1
 fi
 
-TESTS="$(grep -Ro '@test' ./*_*.bats | wc -l)"
+TESTS="$(grep -Ro '@test' ./*.bats | wc -l)"
 HOST="$(hostname -s)"
 
 sudo bats . | tee ./"${HOST}-bats.log" 1>/dev/null
