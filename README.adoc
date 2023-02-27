@@ -229,7 +229,7 @@ The `journalctl` function is located in link:scripts/journalctl[./scripts/journa
 
 ==== `timesyncd`
 
-Sets `NTP=${SERVERARRAY[*]}`, `FallbackNTP=${FALLBACKARRAY[*]}`, `RootDistanceMaxSec=1`
+Sets `NTP=${SERVERARRAY}`, `FallbackNTP=${FALLBACKARRAY}`, `RootDistanceMaxSec=1`
 in `$TIMESYNCD` where the arrays are up to four time servers with < 50ms
 latency.
 
