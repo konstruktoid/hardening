@@ -9,6 +9,6 @@ jobs:
     name: ShellCheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # master
       - name: Konstruktoid ShellCheck
         uses: ./action-shellcheck
