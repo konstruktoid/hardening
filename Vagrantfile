@@ -28,10 +28,7 @@ Vagrant.configure("2") do |config|
     lunar.ssh.extra_args = ["-o","ConnectTimeout=600"]
     lunar.ssh.insert_key = true
     lunar.vm.boot_timeout = 600
-    lunar.vm.box = "lunar/20230222"
-    lunar.vm.box_url = "https://cloud-images.ubuntu.com/lunar/20230222/lunar-server-cloudimg-amd64-vagrant.box"
-    lunar.vm.box_download_checksum_type = "sha256"
-    lunar.vm.box_download_checksum = "766970c1585d624ac9e2b7420f2675cc25cd387250d8ac04fb6b7ebc2cff7d25"
+    lunar.vm.box = "ubuntu/lunar64"
     lunar.vm.hostname = "lunar"
   end
 end
