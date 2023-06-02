@@ -19,7 +19,7 @@ fi
 function main {
   clear
 
-  REQUIREDPROGS='arp w'
+  REQUIREDPROGS='arp dig ping w'
   REQFAILED=0
   for p in $REQUIREDPROGS; do
     if ! command -v "$p" >/dev/null 2>&1; then
@@ -29,11 +29,13 @@ function main {
   done
 
   if [ $REQFAILED = 1 ]; then
-    echo 'net-tools and procps packages has to be installed.'
-    exit 1
+    apt-get -qq update
+    apt-get -qq install bind9-dnsutils iputils-ping net-tools procps --no-install-recommends
   fi
 
   ARPBIN="$(command -v arp)"
+  DIGBIN="$(command -v dig)"
+  PINGBIN="$(command -v ping)"
   WBIN="$(command -v w)"
   LXC="0"
 

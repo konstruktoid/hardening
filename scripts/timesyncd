@@ -24,7 +24,7 @@ function f_timesyncd {
 
   echo "[Time]" > "$TMPCONF"
 
-  PONG="ping -c2"
+  PONG="${PINGBIN} -c2"
 
   # shellcheck disable=2086
   while read -r s; do
@@ -45,7 +45,7 @@ function f_timesyncd {
         ((NUMSERV++))
       fi
     fi
-  done <<< "$(dig +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}')"
+  done <<< "$(${DIGBIN} +noall +answer +nocomments $NTPSERVERPOOL | awk '{print $5}')"
 
   for l in $NTPSERVERPOOL; do
     if [[ $FALLBACKSERV -le "2" ]]; then
