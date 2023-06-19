@@ -6,8 +6,6 @@ to lint the shell code.
 == Disabled tests
 
 ```sh
-genIndex.sh: # shellcheck disable=SC2001
-misc/systemd_scan.sh: # shellcheck disable=2001
 scripts/01_pre: # shellcheck disable=2034
 scripts/07_timesyncd: # shellcheck disable=2086
 scripts/07_timesyncd: # shellcheck disable=2143
