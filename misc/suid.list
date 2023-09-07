@@ -64,6 +64,7 @@ choom
 chown
 chroot
 chsh
+clamscan
 cmp
 cobc
 column
@@ -336,6 +337,7 @@ tcsh
 tdbtool
 tee
 telnet
+terraform
 tex
 tftp
 tic
@@ -355,6 +357,7 @@ umount
 unexpand
 uniq
 unshare
+unsquashfs
 unzip
 update-alternatives
 uudecode
@@ -380,6 +383,7 @@ wireshark
 wish
 write
 xargs
+xdg-user-dir
 xdotool
 xelatex
 xetex
