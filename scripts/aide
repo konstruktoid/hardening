@@ -9,6 +9,8 @@ function f_aide {
     echo '!/var/lib/docker' > /etc/aide/aide.conf.d/70_aide_docker
   fi
 
+  sed -i 's/^Checksums.*/Checksums = sha512/' /etc/aide/aide.conf
+
   ((SCRIPT_COUNT++))
 }
 
