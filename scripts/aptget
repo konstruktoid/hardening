@@ -31,7 +31,7 @@ function f_aptget_configure {
   if ! grep '^Acquire::http::AllowRedirect' /etc/apt/apt.conf.d/* ; then
     echo 'Acquire::http::AllowRedirect "false";' >> /etc/apt/apt.conf.d/98-hardening-ubuntu
   else
-    sed -i 's/.*Acquire::http::AllowRedirect*/Acquire::http::AllowRedirect "false";/g' "$(grep -l 'Acquire::http::AllowRedirect' /etc/apt/apt.conf.d/*)"
+    sed -i 's/.*Acquire::http::AllowRedirect.*/Acquire::http::AllowRedirect "false";/g' "$(grep -l 'Acquire::http::AllowRedirect' /etc/apt/apt.conf.d/*)"
   fi
 
   if ! grep '^APT::Get::AllowUnauthenticated' /etc/apt/apt.conf.d/* ; then
