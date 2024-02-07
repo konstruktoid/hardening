@@ -20,9 +20,8 @@ available as a link:systemd.adoc[separate document].
 If you're interested in testing your host settings, you'll find the
 link:README.adoc#tests[instructions here].
 
-NOTE: This is a constant work in progress. Make sure you understand what it
-does. Read the code and do not run this script without first testing in a
-non-operational environment. The code is *not* idempotent.
+NOTE: Read the code and do not run this script without first testing in a
+non-operational environment. The code is *not* idempotent, use the https://github.com/konstruktoid/ansible-role-hardening[Ansible role] in production environments instead.
 
 NOTE: There is a https://slsa.dev/[SLSA] artifact present under the
 https://github.com/konstruktoid/hardening/actions/workflows/slsa.yml[slsa workflow]
