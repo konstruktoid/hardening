@@ -2,7 +2,6 @@ image::logo/horizontal.png[Ubuntu Hardening]
 = Hardening Ubuntu. Systemd edition.
 
 :icons: font
-:hide-uri-scheme:
 
 A quick way to make a Ubuntu server a bit more secure.
 
