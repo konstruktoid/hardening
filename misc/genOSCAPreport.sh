@@ -3,7 +3,7 @@
 set -u
 set -o pipefail
 
-CONTENT="0.1.71"
+CONTENT="0.1.72"
 
 function download_content {
   if ! [ -f "scap-security-guide-${CONTENT}.zip" ]; then
@@ -31,9 +31,17 @@ function generate_report () {
     sudo oscap xccdf eval --fetch-remote-resources --profile "xccdf_org.ssgproject.content_profile_${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" "./ssg-ubuntu${RELEASE}-ds-1.2.xml"
   fi
 
-  if grep -qo '^AlmaLinux\srelease\s8' /etc/redhat-release; then
+  if grep -qo '^AlmaLinux\s' /etc/redhat-release; then
+    MAJOR_VERSION=$(grep AlmaLinux /etc/redhat-release | awk '{split($3, a, "."); print a[1]}')
+
+    if [[ $MAJOR_VERSION -eq 8 ]]; then
+      SCAP_FILE="ssg-almalinux8-xccdf.xml"
+    else
+      SCAP_FILE="ssg-almalinux9-ds.xml"
+    fi
+
     sudo dnf install -y openscap openscap-utils scap-security-guide
-    sudo oscap xccdf eval --fetch-remote-resources --profile "${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" /usr/share/xml/scap/ssg/content/ssg-almalinux8-xccdf.xml
+    sudo oscap xccdf eval --fetch-remote-resources --profile "${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" "/usr/share/xml/scap/ssg/content/${SCAP_FILE}"
   fi
 
   if [ -f "${REPORT_NAME}" ]; then
@@ -43,6 +51,7 @@ function generate_report () {
 }
 
 generate_report "cis"
+generate_report "cui"
 generate_report "stig"
 
 cd .. || exit 1
