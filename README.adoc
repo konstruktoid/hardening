@@ -644,6 +644,10 @@ HTML-format.
 Running `bash ./runHostTests.sh`, located in the link:tests/[tests directory],
 will generate a `TESTRESULTS-<HOSTNAME>.adoc` report.
 
+Running `bash ./runHostTestsCsv.sh`, located in the link:tests/[tests directory],
+will generate a `TESTRESULTS-<HOSTNAME>.csv` report.
+
+
 == Recommended reading
 https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux[Canonical Ubuntu 20.04 LTS STIG - Ver 1, Rel 3] +
 https://www.cisecurity.org/benchmark/distribution_independent_linux/[CIS Distribution Independent Linux Benchmark] +
