@@ -17,25 +17,25 @@ FAILED_TESTS=0
 sudo bats . | tee "./${LOG_FILE}" >/dev/null
 
 # Start creating CSV file
-{
-  echo "Test Name,Result" > "${CSV_FILE}"
+echo "Test Name,Result" > "${CSV_FILE}"
   
-  # Process log file for failed tests and add them to the CSV
-  while IFS= read -r line; do
-    if [[ "$line" == not\ ok* ]]; then
-      # Extract test name and add to CSV as failed
-      testName=$(echo "$line" | sed 's/not ok //')
-      echo "\"$testName\",Failed" >> "${CSV_FILE}"
-      ((FAILED_TESTS++))
-    fi
-  done < "${LOG_FILE}"
+# Process log file for failed tests and add them to the CSV
+while IFS= read -r line; do
+  if [[ "$line" == not\ ok* ]]; then
+    # Extract test name using parameter expansion and add to CSV as failed
+    testName="${line#not ok }"
+    echo "\"$testName\",Failed" >> "${CSV_FILE}"
+    ((FAILED_TESTS++))
+  fi
+done < "${LOG_FILE}"
 
+{
   # Add summary to the end of the CSV
   SCORE=$((100-(100*FAILED_TESTS/TESTS)))
-  echo "Total Tests,$TESTS" >> "${CSV_FILE}"
-  echo "Failed Tests,$FAILED_TESTS" >> "${CSV_FILE}"
-  echo "Score,$SCORE%" >> "${CSV_FILE}"
-} 
+  echo "Total Tests,$TESTS"
+  echo "Failed Tests,$FAILED_TESTS"
+  echo "Score,$SCORE%"
+} >> "${CSV_FILE}"
 
 # Optional: convert to Unix format if needed
 if command -v dos2unix >/dev/null; then
