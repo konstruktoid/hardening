@@ -28,7 +28,7 @@ load test_helper
 }
 
 @test "Verify ENCRYPT_METHOD in $LOGINDEFS" {
-  run bash -c "grep '^ENCRYPT_METHOD SHA512$' $LOGINDEFS"
+  run bash -c "grep -E '^ENCRYPT_METHOD (SHA512|YESCRYPT)$' $LOGINDEFS"
   [ "$status" -eq 0 ]
 }
 

@@ -88,7 +88,7 @@ load test_helper
 }
 
 @test "Verify OpenSSH sftp" {
-  run sshdConfig '^Subsystem sftp internal-sftp$'
+  run sshdConfig '^Subsystem sftp (internal-sftp|internal-sftp -f LOCAL6 -l INFO)$'
   [ "$status" -eq 0 ]
 }
 

@@ -53,7 +53,7 @@ load test_helper
 }
 
 @test "Verify kernel.perf_event_paranoid in /etc/sysctl.* /usr/lib/sysctl.*" {
-  run bash -c "grep -R '^kernel.perf_event_paranoid.*2$' /etc/sysctl.* /usr/lib/sysctl.*"
+  run bash -c "grep -ER '^kernel.perf_event_paranoid.*(2|3)$' /etc/sysctl.* /usr/lib/sysctl.*"
   [ "$status" -eq 0 ]
 }
 
@@ -322,7 +322,7 @@ load test_helper
 }
 
 @test "Verify sysctl runtime kernel.perf_event_paranoid" {
-  run sysctlRuntime '^kernel.perf_event_paranoid.*2$'
+  run sysctlRuntime '^kernel.perf_event_paranoid.*(2|3)$'
   [ "$status" -eq 0 ]
 }
 
