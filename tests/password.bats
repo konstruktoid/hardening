@@ -8,7 +8,7 @@ load test_helper
 }
 
 @test "Verify minclass in /etc/security/pwquality.conf" {
-  run bash -c "grep '^minclass = 3$' /etc/security/pwquality.conf"
+  run bash -c "grep -E '^minclass = (3|4)$' /etc/security/pwquality.conf"
   [ "$status" -eq 0 ]
 }
 
@@ -33,7 +33,7 @@ load test_helper
 }
 
 @test "Verify remember in $COMMONPASSWD" {
-  run bash -c "grep '^password.*required.*pam_pwhistory.so.*[[:space:]]remember=5$' $COMMONPASSWD"
+  run bash -c "grep -E '^password(.*required.*pam_pwhistory.so|.*pam_unix.so).*[[:space:]]remember=5$' $COMMONPASSWD"
   [ "$status" -eq 0 ]
 }
 

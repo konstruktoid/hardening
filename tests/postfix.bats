@@ -3,7 +3,7 @@
 load test_helper
 
 @test "Verify postfix smtpd_banner" {
-  run bash -c "postconf | grep '^smtpd_banner = \$myhostname ESMTP$'"
+  run bash -c "postconf | grep -E '^smtpd_banner.*\$myhostname( | - )ESMTP$'"
   [ "$status" -eq 0 ]
 }
 

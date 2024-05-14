@@ -68,7 +68,7 @@ sshdConfig() {
 }
 
 sysctlRuntime() {
-  sysctl --all | grep -i "$1"
+  sysctl --all | grep -iE "$1"
 }
 
 moduliSize() {

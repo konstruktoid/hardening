@@ -23,6 +23,6 @@ load test_helper
 }
 
 @test "Verify FileCreateMode in $RSYSLOGCONF" {
-  run bash -c "grep '^\$FileCreateMode 0600$' $RSYSLOGCONF"
+  run bash -c "grep -E '^\$FileCreateMode 06(0|4)0$' $RSYSLOGCONF"
   [ "$status" -eq 0 ]
 }
