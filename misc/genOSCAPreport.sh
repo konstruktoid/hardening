@@ -3,7 +3,7 @@
 set -u
 set -o pipefail
 
-CONTENT="0.1.72"
+CONTENT="0.1.73"
 
 function download_content {
   if ! [ -f "scap-security-guide-${CONTENT}.zip" ]; then
@@ -17,7 +17,7 @@ function generate_report () {
   REPORT_DATE="$(date +%y%m%d)"
   REPORT_NAME="$(hostname -s)-${PROFILE}-report-${REPORT_DATE}.html"
 
-  if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2).04'; then
+  if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2|4).04'; then
     if [ "${PROFILE}" = "cis" ]; then
       PROFILE="cis_level2_server"
     fi
