@@ -6,11 +6,6 @@ function f_users {
 
   for user in games gnats irc list news sync uucp; do
       userdel -r "$user" 2>/dev/null
-      if [ $? -eq 0 ]; then
-        echo "User $user deleted successfully."
-      else
-        echo "Failed to delete user $user."
-      fi
   done
   ((SCRIPT_COUNT++))
 }
