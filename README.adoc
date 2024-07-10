@@ -47,7 +47,7 @@ repository.
 for more information.
 . Install necessary packages: `sudo apt-get -y install git net-tools procps --no-install-recommends`.
 . Download the script: `git clone https://github.com/konstruktoid/hardening.git`.
-. Change the configuration options in the `ubuntu.cfg` file.
+. Change the configuration options in the `ubuntu.cfg` file. Make sure to update the CHANGEME variable otherwise the script will fail.
 . Run the script: `sudo bash ubuntu.sh`.
 . Reboot.
 
