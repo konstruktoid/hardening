@@ -5,17 +5,12 @@ function f_users {
   echo "[$SCRIPT_COUNT] Remove users"
 
   for user in games gnats irc list news sync uucp; do
-    if id "$user" &>/dev/null; then
-      pkill -u "$user"
       userdel -r "$user" 2>/dev/null
       if [ $? -eq 0 ]; then
         echo "User $user deleted successfully."
       else
         echo "Failed to delete user $user."
       fi
-    else
-      echo "User $user does not exist."
-    fi
   done
   ((SCRIPT_COUNT++))
 }
