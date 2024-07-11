@@ -1,7 +1,6 @@
 #!/bin/bash
 
 function f_users {
-  SCRIPT_COUNT=1
   echo "[$SCRIPT_COUNT] Remove users"
 
   for user in games gnats irc list news sync uucp; do
