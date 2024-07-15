@@ -34,7 +34,7 @@ function f_package_install {
   PACKAGE_INSTALL="acct aide-common cracklib-runtime debsums gnupg2 haveged libpam-pwquality libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM"
 
   for deb_install in $PACKAGE_INSTALL; do
-    $APT install --no-install-recommends "$deb_install"
+    $APT install -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confnew --no-install-recommends "$deb_install"
   done
 
   if [[ -f /etc/default/sysstat ]]; then
