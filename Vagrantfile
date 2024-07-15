@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vbguest.installer_options = { allow_kernel_upgrade: true }
+  config.vbguest.auto_update = false
   config.vm.provider "virtualbox" do |v|
     v.default_nic_type = "Am79C973"
     v.memory = 1024
@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     focal.ssh.extra_args = ["-o","ConnectTimeout=600"]
     focal.ssh.insert_key = true
     focal.vm.boot_timeout = 600
-    focal.vm.box = "ubuntu/focal64"
+    focal.vm.box = "bento/ubuntu-20.04"
     focal.vm.hostname = "focal"
   end
 
@@ -20,23 +20,15 @@ Vagrant.configure("2") do |config|
     jammy.ssh.extra_args = ["-o","ConnectTimeout=600"]
     jammy.ssh.insert_key = true
     jammy.vm.boot_timeout = 600
-    jammy.vm.box = "ubuntu/jammy64"
+    jammy.vm.box = "bento/ubuntu-22.04"
     jammy.vm.hostname = "jammy"
   end
 
-  config.vm.define "lunar" do |lunar|
-    lunar.ssh.extra_args = ["-o","ConnectTimeout=600"]
-    lunar.ssh.insert_key = true
-    lunar.vm.boot_timeout = 600
-    lunar.vm.box = "ubuntu/lunar64"
-    lunar.vm.hostname = "lunar"
-  end
-
-  config.vm.define "mantic" do |mantic|
-    mantic.ssh.extra_args = ["-o","ConnectTimeout=600"]
-    mantic.ssh.insert_key = true
-    mantic.vm.boot_timeout = 600
-    mantic.vm.box = "ubuntu/mantic64"
-    mantic.vm.hostname = "mantic"
+  config.vm.define "noble" do |noble|
+    noble.ssh.extra_args = ["-o","ConnectTimeout=600"]
+    noble.ssh.insert_key = true
+    noble.vm.boot_timeout = 600
+    noble.vm.box = "bento/ubuntu-24.04"
+    noble.vm.hostname = "noble"
   end
 end
