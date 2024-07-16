@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -u
-set -o pipefail
+set -u -o pipefail
 
 CONTENT="0.1.73"
 
@@ -25,7 +24,11 @@ function generate_report () {
     RELEASE="$(lsb_release -r | awk '{print $NF}' | tr -d '.')"
 
     sudo apt-get -y update
-    sudo apt install -y libopenscap8 unzip wget
+    if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2).04'; then
+      sudo apt-get install -y libopenscap8 unzip wget
+    else
+      sudo apt-get install -y libopenscap25t64 openscap-common openscap-scanner unzip wget
+    fi
     download_content
     cd "scap-security-guide-${CONTENT}" || exit 1
     sudo oscap xccdf eval --fetch-remote-resources --profile "xccdf_org.ssgproject.content_profile_${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" "./ssg-ubuntu${RELEASE}-ds-1.2.xml"
