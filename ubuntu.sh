@@ -37,6 +37,7 @@ function main {
   DIGBIN="$(command -v dig)"
   PINGBIN="$(command -v ping)"
   WBIN="$(command -v w)"
+  WHOBIN="$(command -v who)"
   LXC="0"
 
   if resolvectl status >/dev/null 2>&1; then
@@ -55,7 +56,8 @@ function main {
   fi
 
   if grep -s "AUTOFILL='Y'" ./ubuntu.cfg; then
-    USERIP="$($WBIN -ih | awk '{print $3}' | head -n1)"
+    USERIP="$($WHOBIN | awk '{print $NF}' | tr -d '()' |\
+      grep -E '^[0-9]' | head -n1)"
 
     if [[ "$USERIP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       ADMINIP="$USERIP"
