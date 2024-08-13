@@ -7,8 +7,8 @@ CONTENT="0.1.74"
 function download_content {
   if ! [ -f "scap-security-guide-${CONTENT}.zip" ]; then
     wget -nc "https://github.com/ComplianceAsCode/content/releases/download/v${CONTENT}/scap-security-guide-${CONTENT}.zip"
+    unzip -n "scap-security-guide-${CONTENT}.zip"
   fi
-  unzip -n "scap-security-guide-${CONTENT}.zip"
 }
 
 function generate_report () {
@@ -31,7 +31,7 @@ function generate_report () {
     fi
     download_content
     cd "scap-security-guide-${CONTENT}" || exit 1
-    sudo oscap xccdf eval --fetch-remote-resources --profile "xccdf_org.ssgproject.content_profile_${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" "./ssg-ubuntu${RELEASE}-ds-1.2.xml"
+    sudo oscap xccdf eval --fetch-remote-resources --profile "xccdf_org.ssgproject.content_profile_${PROFILE}" --results-arf "results-${REPORT_DATE}.xml" --report "${REPORT_NAME}" "./ssg-ubuntu${RELEASE}-ds.xml"
   fi
 
   if grep -qo '^AlmaLinux\s' /etc/redhat-release; then
@@ -51,10 +51,10 @@ function generate_report () {
     sudo chown "$(id -u):$(id -g)" "${REPORT_NAME}"
     cp -v "${REPORT_NAME}" ~/"${REPORT_NAME}"
   fi
+
+  cd .. || exit 1
 }
 
 generate_report "cis"
 generate_report "cui"
 generate_report "stig"
-
-cd .. || exit 1
