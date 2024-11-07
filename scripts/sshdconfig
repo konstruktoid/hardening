@@ -154,7 +154,7 @@ function f_sshdconfig {
   if ! grep -q "^AllowAgentForwarding" "$SSHDCONF" 2> /dev/null; then
     echo "AllowAgentForwarding no" >> "$SSHDCONF"
   else
-    sed -i 's/AllowAgentForwarding.*/AllowTcpForwarding no/' "$SSHDCONF"
+    sed -i 's/AllowAgentForwarding.*/AllowAgentForwarding no/' "$SSHDCONF"
   fi
 
   if ! grep -q "^TCPKeepAlive" "$SSHDCONF" 2> /dev/null; then
