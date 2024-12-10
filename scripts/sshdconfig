@@ -170,10 +170,10 @@ function f_sshdconfig {
   chown root:root "$SSHDCONF"
   chmod 0600 "$SSHDCONF"
 
-  systemctl restart sshd.service
+  systemctl restart ssh.service
 
   if [[ $VERBOSE == "Y" ]]; then
-    systemctl status sshd.service --no-pager
+    systemctl status ssh.service --no-pager
     echo
   fi
 
