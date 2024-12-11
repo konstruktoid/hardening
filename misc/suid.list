@@ -9,6 +9,7 @@ alpine
 ansible-playbook
 ansible-test
 aoss
+apache2ctl
 apt
 apt-get
 ar
@@ -16,8 +17,8 @@ aria2c
 arj
 arp
 as
-ascii85
 ascii-xfr
+ascii85
 ash
 aspell
 at
@@ -86,6 +87,7 @@ curl
 cut
 dash
 date
+dc
 dd
 debugfs
 dialog
@@ -109,6 +111,7 @@ ed
 efax
 elvish
 emacs
+enscript
 env
 eqn
 espeak
@@ -171,10 +174,11 @@ ksu
 kubectl
 latex
 latexmk
-ldconfig
 ld.so
+ldconfig
 less
 lftp
+links
 ln
 loginctl
 logsave
@@ -190,6 +194,7 @@ mail
 make
 man
 mawk
+minicom
 mlocate
 more
 mosquitto
@@ -210,6 +215,7 @@ nano
 nasm
 nawk
 nc
+ncdu
 ncftp
 neofetch
 netfilter-persistent
@@ -225,6 +231,7 @@ npm
 nroff
 nsenter
 ntfs-3g
+ntpdate
 octave
 od
 openssl
@@ -282,6 +289,7 @@ rtorrent
 ruby
 run-mailcap
 run-parts
+runscript
 rview
 rvim
 sash
@@ -321,6 +329,7 @@ stdbuf
 strace
 strings
 su
+sudo
 sysctl
 systemctl
 systemd-resolve
@@ -364,6 +373,7 @@ uudecode
 uuencode
 vagrant
 valgrind
+varnishncsa
 vi
 view
 vigr
