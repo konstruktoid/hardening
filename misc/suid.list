@@ -329,7 +329,6 @@ stdbuf
 strace
 strings
 su
-sudo
 sysctl
 systemctl
 systemd-resolve
