@@ -206,11 +206,12 @@
 -a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale
 -a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale
 
-# systemd configuration and tools
--w /etc/systemd -p wa -k systemd
--w /lib/systemd -p wa -k systemd
--w /bin/journalctl -p x -k systemd-tools
--w /bin/systemctl -p x -k systemd-tools
+# Systemd configuration and tools
+-w /bin/journalctl -p x -F key=systemd-tools
+-w /bin/systemctl -p x -F key=systemd-tools
+-w /etc/systemd -p wa -F key=systemd
+-w /lib/systemd -p wa -F key=systemd
+-w /var/lib/systemd/credential.secret -p wa -F key=systemd
 
 # Time modification
 -a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change
