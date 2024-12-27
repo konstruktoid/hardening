@@ -187,7 +187,7 @@ Disables the `bluetooth`, `bnep`, `btusb`, `cpia2`, `firewire-core`, `floppy`,
 
 Note that disabling the `usb-storage` module will disable any usage of USB
 storage devices, if such devices are needed `USBGuard` should be configured
-accordingly.
+accordingly and `usb-storage` removed from the `disablemod` function.
 
 The `disablemod` function is located in link:scripts/disablemod[./scripts/disablemod].
 
