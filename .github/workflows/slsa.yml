@@ -38,7 +38,7 @@ jobs:
           echo "hashes=$(sha256sum ${{ env.REPOSITORY_NAME }}.sha256 | base64 -w0)" >> "$GITHUB_OUTPUT"
 
       - name: Upload ${{ env.REPOSITORY_NAME }}.sha256
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: ${{ env.REPOSITORY_NAME }}.sha256
           path: ${{ env.REPOSITORY_NAME }}.sha256
