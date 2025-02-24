@@ -2,7 +2,7 @@
 
 set -u -o pipefail
 
-CONTENT="0.1.75"
+CONTENT="0.1.76"
 
 function download_content {
   if ! [ -f "scap-security-guide-${CONTENT}.zip" ]; then
