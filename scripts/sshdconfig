@@ -9,7 +9,7 @@ function f_sshdconfig {
   if grep -q '^Include' /etc/ssh/sshd_config; then
     local INCLUDEDIR
     # shellcheck disable=SC2046
-    INCLUDEDIR="$(dirname $(grep '^Include' /etc/ssh/sshd_config | awk '{print $NF}'))"
+    INCLUDEDIR=$(dirname "$(awk '/^Include/{print $NF; exit}' /etc/ssh/sshd_config)")
 
     if [ ! -d "$INCLUDEDIR" ]; then
       mkdir -p "$INCLUDEDIR"
