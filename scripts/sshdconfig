@@ -9,7 +9,7 @@ function f_sshdconfig {
   if grep -q '^Include' /etc/ssh/sshd_config; then
     local INCLUDEDIR
     # shellcheck disable=SC2046
-    INCLUDEDIR="$(dirname $(grep '^Include' /etc/ssh/sshd_config | awk '{print $NF}'))"
+    INCLUDEDIR=$(dirname "$(awk '/^Include/{print $NF; exit}' /etc/ssh/sshd_config)")
 
     if [ ! -d "$INCLUDEDIR" ]; then
       mkdir -p "$INCLUDEDIR"
@@ -43,7 +43,14 @@ function f_sshdconfig {
   sed -i 's/.*Banner.*/Banner \/etc\/issue.net/' "$SSHDCONF"
   sed -i 's/.*Subsystem.*sftp.*/Subsystem sftp internal-sftp/' "$SSHDCONF"
   sed -i 's/^#.*Compression.*/Compression no/' "$SSHDCONF"
-  sed -i "s/.*Port.*/Port $SSH_PORT/" "$SSHDCONF"
+
+  sed -i '/^Port /d' "$SSHDCONF"
+
+  for port in $SSH_PORT; do
+    if ! grep -q "^Port $port" "$SSHDCONF" 2> /dev/null; then
+      echo "Port $port" >> "$SSHDCONF"
+    fi
+  done
 
   echo "" >> "$SSHDCONF"
 
