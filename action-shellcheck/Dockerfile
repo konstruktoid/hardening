@@ -1,4 +1,4 @@
-FROM koalaman/shellcheck-alpine:stable@sha256:10d8a40c4ee029bce4e04ba9a92efd7a0df4afba023c0cd8fc9c55a1e3ae7aeb
+FROM koalaman/shellcheck-alpine:stable@sha256:c82fe42504fbc9fc68f15d36638e5ee2324ebb8b94e96a3c4e395bf361c49183
 
 LABEL "com.github.actions.name"="Konstruktoid ShellCheck"
 LABEL "com.github.actions.description"="ShellCheck for multiple files"
