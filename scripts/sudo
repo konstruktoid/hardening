@@ -5,8 +5,11 @@ function f_sudo {
     echo "Defaults use_pty" > /etc/sudoers.d/011_use_pty
   fi
 
-  if ! grep -qER '^Defaults.*logfile' /etc/sudo*; then
-    echo 'Defaults logfile="/var/log/sudo.log"' > /etc/sudoers.d/012_logfile
+  # shellcheck disable=SC2024,SC2260
+  if ! sudo --version &>/dev/stdout | grep -q sudo-rs; then
+    if ! grep -qER '^Defaults.*logfile' /etc/sudo*; then
+      echo 'Defaults logfile="/var/log/sudo.log"' > /etc/sudoers.d/012_logfile
+    fi
   fi
 
   if ! grep -qER '^Defaults.*pwfeedback' /etc/sudo*; then
