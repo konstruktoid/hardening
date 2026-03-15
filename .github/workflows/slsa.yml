@@ -74,7 +74,7 @@ jobs:
           name: ${{ env.REPOSITORY_NAME }}.sha256
 
       - name: Upload asset
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        uses: softprops/action-gh-release@1853d73993c8ca1b2c9c1a7fede39682d0ab5c2a # v2.5.3
         with:
           files: |
             ${{ env.REPOSITORY_NAME }}.sha256
