@@ -39,7 +39,7 @@ function generate_report () {
     if [[ $MAJOR_VERSION -eq 8 ]]; then
       SCAP_FILE="ssg-almalinux8-xccdf.xml"
     else
-      SCAP_FILE="ssg-almalinux${MAJOR_VERION}-ds.xml"
+      SCAP_FILE="ssg-almalinux${MAJOR_VERSION}-ds.xml"
     fi
 
     sudo dnf install -y openscap openscap-utils scap-security-guide
