@@ -2,7 +2,7 @@
 
 set -u -o pipefail
 
-CONTENT="0.1.80"
+CONTENT="0.1.81"
 
 function download_content {
   if ! [ -f "scap-security-guide-${CONTENT}.zip" ]; then
@@ -16,18 +16,17 @@ function generate_report () {
   REPORT_DATE="$(date +%y%m%d)"
   REPORT_NAME="$(hostname -s)-${PROFILE}-report-${REPORT_DATE}.html"
 
-  if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2|4).04'; then
+  if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2|4|6).04'; then
     if [ "${PROFILE}" = "cis" ]; then
       PROFILE="cis_level2_server"
     fi
 
     RELEASE="$(lsb_release -r | awk '{print $NF}' | tr -d '.')"
 
-    sudo apt-get -y update
     if lsb_release -d | grep -qoE 'Ubuntu\s2(0|2).04'; then
-      sudo apt-get install -y libopenscap8 unzip wget
+      sudo apt-get install --update -y libopenscap8 unzip wget
     else
-      sudo apt-get install -y libopenscap25t64 openscap-common openscap-scanner unzip wget
+      sudo apt-get install --update -y libopenscap25t64 openscap-common openscap-scanner unzip wget
     fi
     download_content
     cd "scap-security-guide-${CONTENT}" || exit 1
@@ -40,7 +39,7 @@ function generate_report () {
     if [[ $MAJOR_VERSION -eq 8 ]]; then
       SCAP_FILE="ssg-almalinux8-xccdf.xml"
     else
-      SCAP_FILE="ssg-almalinux9-ds.xml"
+      SCAP_FILE="ssg-almalinux${MAJOR_VERSION}-ds.xml"
     fi
 
     sudo dnf install -y openscap openscap-utils scap-security-guide
