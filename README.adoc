@@ -6,7 +6,9 @@ image::logo/horizontal.png[Ubuntu Hardening]
 A quick way to make a Ubuntu server a bit more secure.
 
 NOTE: Read the code and do not run this script without first testing in a
-non-operational environment. The code is *not* idempotent, use the https://github.com/konstruktoid/ansible-role-hardening[Ansible role] in instead.
+non-operational environment. The code is *not* idempotent and no longer actively maintained.
+If you want to harden your Ubuntu system in a more idempotent and maintainable way
+use the https://github.com/konstruktoid/ansible-collection-hardening[Ansible collection] instead.
 
 Use the newly installed and configured system as a reference,
 or golden, image. Use that image as a baseline installation media and ensure
